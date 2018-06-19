@@ -16,26 +16,26 @@ MaxCompute Studio 在 IntelliJ 的基础上提供了以下的功能界面：
     -   **表详情视图（Table Details View）**：提供表、视图等资源的详情显示和示例数据（Sample Data）。
 -   **作业浏览器（Job Explorer）：**浏览、搜索 MaxCompute 的历史作业信息。
 
-    -   **作业详情视图（Job Details View）：**显示作业的运行详细信息，包括执行计划和每个执行任务的详细信息，[logview 工具](https://help.aliyun.com/document_detail/34632.html) 能够显示的全部信息。
+    -   **作业详情视图（Job Details View）：**显示作业的运行详细信息，包括执行计划和每个执行任务的详细信息， [logview工具](https://www.alibabacloud.com/help/doc-detail/34632.htm)能够显示的全部信息。
 
     -   **作业输出视图（Job Output View）：**显示正在运行的作业的输出信息。
 
     -   **作业结果视图（Job Result View）**：显示 `SELECT` 作业的输出结果。
 
--   **MaxCompute 控制台（MaxCompute Console）**：集成了 [MaxCompute 客户端](cn.zh-CN/工具及下载/客户端.md)，可以输入和执行 MaxCompute 客户端命令。
+-   **MaxCompute 控制台（MaxCompute Console）**：集成了 [MaxCompute 客户端](intl.zh-CN/工具及下载/客户端.md)，可以输入和执行 MaxCompute 客户端命令。
 
 
 ## 连接 MaxCompute 项目空间 {#section_z5b_dvx_5db .section}
 
-Studio 的大部分功能需要您首先 [创建项目空间连接](cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)。建立项目空间连接后，即可在 **项目空间浏览器** 中查看相关的数据结构和资源信息。Studio 会自动为每一个项目空间连接建立一个本地的元数据备份，以提高对 MaxCompute 元数据的访问频率和降低延时。
+Studio 的大部分功能需要您首先 [创建项目空间连接](intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)。建立项目空间连接后，即可在 **项目空间浏览器** 中查看相关的数据结构和资源信息。Studio 会自动为每一个项目空间连接建立一个本地的元数据备份，以提高对 MaxCompute 元数据的访问频率和降低延时。
 
 **说明：** 
 
 -   您通过 Studio 完成的编辑 SQL 脚本、提交作业、查看 Job 信息、打开 MaxCompute 控制台等功能，都需要指定作为目标的项目连接，因此首先建立一个 MaxCompute 项目空间的连接是非常必要的。
 
--   如果您想了解 MaxCompute 项目空间的相关概念，请参见 [项目空间](../cn.zh-CN/产品简介/基本概念/项目空间.md)。
+-   如果您想了解 MaxCompute 项目空间的相关概念，请参见 [项目空间](../../../../intl.zh-CN/产品简介/基本概念/项目空间.md)。
 
--   如果您想了解在 Studio 中管理项目空间的更多详情，请参见 [项目空间连接](cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)。
+-   如果您想了解在 Studio 中管理项目空间的更多详情，请参见 [项目空间连接](intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)。
 
 
 ## 管理数据 {#section_bvb_dvx_5db .section}
@@ -44,7 +44,7 @@ Studio 的大部分功能需要您首先 [创建项目空间连接](cn.zh-CN/工
 
 您双击某个数据表，即可打开 **表详情视图**，查看数据表的元信息、表结构和示例数据。如果您没有项目空间的相应权限，Studio 会提示对应的错误信息。
 
-Studio 集成了 [MaxCompute Tunnel](../cn.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md) 工具，可以支持本地数据的上传和下载，更多详情请参见 [导入并导出数据](cn.zh-CN/工具及下载/MaxCompute Studio/管理数据和资源/导入导出数据.md)。
+Studio 集成了 [MaxCompute Tunnel](../../../../intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md) 工具，可以支持本地数据的上传和下载，更多详情请参见 [导入并导出数据](intl.zh-CN/工具及下载/MaxCompute Studio/管理数据和资源/导入导出数据.md)。
 
 ## 编写 SQL 脚本 {#section_cvb_dvx_5db .section}
 
@@ -58,7 +58,7 @@ Studio 集成了 [MaxCompute Tunnel](../cn.zh-CN/用户指南/数据上传下载
 
 3.  导航至**File** \> **New** \> **MaxCompute Script** 或者右击菜单**New** \> **MaxCompute Script** ，即可创建一个 MaxCompute SQL 脚本文件。
 
-4.  **说明：** 创建 MaxCompute SQL 脚本时，Studio 会提示您选择一个关联的 MaxCompute 项目空间，您也可以通过 SQL 编辑器上的工具条最右侧的 **项目空间选取器** 进行更改，编辑器会根据 SQL 脚本关联的项目空间对 SQL 语句自动进行元数据（比如表结构等）的检查并汇报错误，提交运行时也会发送到关联的项目空间执行。更多详情请参见 [编写 SQL 脚本](cn.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/编写SQL脚本.md)。
+4.  **说明：** 创建 MaxCompute SQL 脚本时，Studio 会提示您选择一个关联的 MaxCompute 项目空间，您也可以通过 SQL 编辑器上的工具条最右侧的 **项目空间选取器** 进行更改，编辑器会根据 SQL 脚本关联的项目空间对 SQL 语句自动进行元数据（比如表结构等）的检查并汇报错误，提交运行时也会发送到关联的项目空间执行。更多详情请参见 [编写 SQL 脚本](intl.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/编写SQL脚本.md)。
 
 
 ## SQL 代码智能提示 {#section_gvb_dvx_5db .section}
@@ -99,11 +99,11 @@ Studio 提供的 SQL 编辑器可以随着您写入的代码，智能提示 SQL 
 
 ## 开发 MapReduce 和 UDF {#section_pvb_dvx_5db .section}
 
-Studio 还支持 [MapReduce](cn.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发MapReduce.md) 和[Java UDF](cn.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md) 的开发。
+Studio 还支持 [MapReduce](intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发MapReduce.md) 和[Java UDF](intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md) 的开发。
 
 ## 连接 MaxCompute 客户端 {#section_qvb_dvx_5db .section}
 
-Studio 集成了最新版本的 MaxCompute [客户端](cn.zh-CN/工具及下载/客户端.md)，您也可以在 Studio 的[配置页面](cn.zh-CN/工具及下载/MaxCompute Studio/配置选项/配置 MaxCompute Studio.md)中指定本地已经安装好的 MaxCompute 客户端路径。
+Studio 集成了最新版本的 MaxCompute [客户端](intl.zh-CN/工具及下载/客户端.md)，您也可以在 Studio 的[配置页面](intl.zh-CN/工具及下载/MaxCompute Studio/配置选项/配置 MaxCompute Studio.md)中指定本地已经安装好的 MaxCompute 客户端路径。
 
 您在 **项目空间浏览器** 中选定一个项目空间，右击菜单选择 **Open n Console** 即可打开 MaxCompute 控制台 窗口。
 
@@ -111,5 +111,5 @@ Studio 集成了最新版本的 MaxCompute [客户端](cn.zh-CN/工具及下载/
 
 ## 后续步骤 {#section_svb_dvx_5db .section}
 
-现在，您已经学习了 MaxCompute Studio 的功能界面和常用的应用场景，您可以继续学习下一个教程。在该教程中您将学习如何安装 MaxCompute Studio。详情请参见 [安装 IntelliJ IDEA](cn.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md)。
+现在，您已经学习了 MaxCompute Studio 的功能界面和常用的应用场景，您可以继续学习下一个教程。在该教程中您将学习如何安装 MaxCompute Studio。详情请参见 [安装 IntelliJ IDEA](intl.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md)。
 

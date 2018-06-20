@@ -12,7 +12,7 @@ MaxCompute主要服务于批量结构化数据的存储和计算，可以提供�
 
 ## MaxCompute视频简介 {#section_vsm_bfx_d2b .section}
 
-  
+    
 
 ## MaxCompute学习路径 {#section_learningpath .section}
 

@@ -31,11 +31,11 @@ MaxCompute SQL允许数据类型之间的转换，类型转换方式包括**显�
 
 ## 分区表 {#section_m1n_qfl_vdb .section}
 
-MaxCompute SQL支持分区表。指定分区表会对您带来诸多便利，例如提高SQL运行效率、减少计费等。关于分区的详情请参见[基本概念\>分区](../cn.zh-CN/产品简介/基本概念/分区.md)。
+MaxCompute SQL支持分区表。指定分区表会对您带来诸多便利，例如提高SQL运行效率、减少计费等。关于分区的详情请参见[基本概念\>分区](../../../../cn.zh-CN/产品简介/基本概念/分区.md)。
 
 ## UNION ALL {#section_n1n_qfl_vdb .section}
 
-参与[UNION ALL](cn.zh-CN/用户指南/SQL/INSERT操作.md)运算的所有列的数据类型、列个数、列名称必须完全一致，否则会报异常。
+参与UNION ALL运算的所有列的数据类型、列个数、列名称必须完全一致，否则会报异常。
 
 ## Select Transform {#section_zpn_xfl_vdb .section}
 

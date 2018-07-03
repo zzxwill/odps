@@ -1,13 +1,13 @@
 # Join示例 {#concept_awd_xdh_vdb .concept}
 
-MaxCompute MapReduce 框架自身并不支持 Join 逻辑，但您可以在自己的 Map/Reduce 函数中实现数据的 Join，当然这需要您做一些额外的工作。
+MaxCompute MapReduce框架自身并不支持Join逻辑，但您可以在自己的Map/Reduce函数中实现数据的Join，当然这需要您做一些额外的工作。
 
-假设需要 Join 两张表 mr\_Join\_src1\(key bigint, value string\) 和 mr\_Join\_src2\(key bigint, value string\)，输出表是 mr\_Join\_out\(key bigint, value1 string, value2 string\)，其中 value1 是 mr\_Join\_src1 的 value 值，value2 是 mr\_Join\_src2 的 value 值。
+假设需要Join两张表mr\_Join\_src1\(key bigint, value string\) 和mr\_Join\_src2\(key bigint, value string\)，输出表是 mr\_Join\_out\(key bigint, value1 string, value2 string\)，其中value1是mr\_Join\_src1的value值，value2是 mr\_Join\_src2的value 值。
 
 ## 测试准备 {#section_e3n_syg_vdb .section}
 
-1.  准备好测试程序的 Jar 包，假设名字为 mapreduce-examples.jar，本地存放路径为data\\resources。
-2.  准备好 Join 的测试表和资源。
+1.  准备好测试程序的Jar包，假设名字为mapreduce-examples.jar，本地存放路径为data\\resources。
+2.  准备好Join的测试表和资源。
     -   创建测试表。
 
         ```
@@ -22,21 +22,21 @@ MaxCompute MapReduce 框架自身并不支持 Join 逻辑，但您可以在自�
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  使用 tunnel 导入数据。
+3.  使用tunnel导入数据。
 
     ```
     tunnel upload data1 mr_Join_src1;
     tunnel upload data2 mr_Join_src2;
     ```
 
-    导入 mr\_Join\_src1 数据的内容，如下所示：
+    导入mr\_Join\_src1数据的内容，如下所示：
 
     ```
      1,hello
      2,odps
     ```
 
-    导入 mr\_Join\_src2 数据的内容，如下所示：
+    导入mr\_Join\_src2数据的内容，如下所示：
 
     ```
     1,odps
@@ -47,7 +47,7 @@ MaxCompute MapReduce 框架自身并不支持 Join 逻辑，但您可以在自�
 
 ## 测试步骤 {#section_rlv_bzg_vdb .section}
 
-在 odpscmd 中执行 Join，如下所示：
+在odpscmd中执行Join，如下所示：
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
@@ -56,7 +56,7 @@ com.aliyun.odps.mapred.open.example.Join mr_Join_src1 mr_Join_src2 mr_Join_out;
 
 ## 预期结果 {#section_hzz_dzg_vdb .section}
 
-作业成功结束后，输出表 mr\_Join\_out 中的内容，如下所示：
+作业成功结束后，输出表mr\_Join\_out中的内容，如下所示：
 
 ```
 +------------+------------+------------+
@@ -119,17 +119,22 @@ com.aliyun.odps.mapred.open.example.Join mr_Join_src1 mr_Join_src2 mr_Join_out;
         public void setup(TaskContext context) throws IOException {
           result = context.createOutputRecord();
         }
+        // reduce函数每次的输入会是key相同的所有record
         @Override
         public void reduce(Record key, Iterator<Record> values, TaskContext context)
             throws IOException {
           long k = key.getBigint(0);
           List<Object[]> leftValues = new ArrayList<Object[]>();
+          // 由于设置了outputKeySortColumn是key + tag组合，这样可以保证reduce函数的输入record中，left表的record数据在前面
           while (values.hasNext()) {
             Record value = values.next();
             long tag = (Long) key.get(1);
+            // 左表的数据会先缓存到内存中
             if (tag == 0) {
               leftValues.add(value.toArray().clone());
             } else {
+              // 碰到右表的数据，会与所有左表的数据进行join输出，此时左表的数据已经全部在内存里了
+         // 这个实现只是一个功能展示，性能比较低，不建议用于实际生产
               for (Object[] leftValue : leftValues) {
                 int index = 0;
                 result.set(index++, k);

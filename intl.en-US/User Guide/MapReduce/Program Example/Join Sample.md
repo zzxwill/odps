@@ -1,13 +1,13 @@
 # Join Sample {#concept_awd_xdh_vdb .concept}
 
-MaxCompute MapReduce framework does not support JOIN, however, you can implement data join in your Map/Reduce function.
+The maxcompute mapreduce framework does not support join logic on its own, however, you can implement the join of the data in your own map/reduce function, of course, this requires you to do some extra work.
 
-Assume that table mr\_join\_src1\(key bigint, value string\) must be joined with mr\_join\_src2\(key bigint, value string\). The output table is mr\_join\_out \(key bigint, value1 string, value2 string\). value1 is value in mr\_join\_src1 and value2 is value in mr\_join\_src2.
+Suppose you need to join two tables \(Key bigint, value string\) and key bigint, value string\), the output table is chain bigint \(value1 string, value2 string \), where value1 is the value of the scanner, and value2 is the value of the scanner.
 
-## Preparation {#section_e3n_syg_vdb .section}
+## Testing Preparation {#section_e3n_syg_vdb .section}
 
-1.  Prepare the JAR package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path is data\\resources.
-2.  Prepare tables and resources for testing the JOIN operation.
+1.  Prepare the jar package for the test program, assuming the name is maid and the local storage path is data \\ resources.
+2.  Prepare tables and resources for testing the Join operation.
     -   Create tables.
 
         ```
@@ -22,21 +22,21 @@ Assume that table mr\_join\_src1\(key bigint, value string\) must be joined with
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  Run tunnel to  import data.
+3.  Run tunnel to import data.
 
     ```
     tunnel upload data1 mr_Join_src1;
     tunnel upload data2 mr_Join_src2;
     ```
 
-    The data imported into  the mr\_join\_src1 table is as follows:
+    Import the contents of the maid data as follows:
 
     ```
      1,hello
      2,odps
     ```
 
-    The data imported into the mr\_join\_src2 table is as follows:
+    Import the contents of the maid data as follows:
 
     ```
     1,odps
@@ -45,25 +45,25 @@ Assume that table mr\_join\_src1\(key bigint, value string\) must be joined with
     ```
 
 
-## Procedure {#section_rlv_bzg_vdb .section}
+## Test procedure: {#section_rlv_bzg_vdb .section}
 
-Run Join in odpscmd.
+Join in odpscmd as follows:
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
 com.aliyun.odps.mapred.open.example.Join mr_Join_src1 mr_Join_src2 mr_Join_out;
 ```
 
-## Result {#section_hzz_dzg_vdb .section}
+## Expected Results {#section_hzz_dzg_vdb .section}
 
-The output table mr\_join\_out contains the following content:
+After the job has completed successfully, the contents of the table maid are output, as follows:
 
 ```
-
++------------+------------+------------+
 | key | value1 | value2 |
-
++------------+------------+------------+
 | 1 | hello | odps | 
-
++------------+------------+------------+
 ```
 
 ## Sample code {#section_jgb_gzg_vdb .section}
@@ -85,11 +85,11 @@ The output table mr\_join\_out contains the following content:
     import com.aliyun.odps.mapred.utils.InputUtils;
     import com.aliyun.odps.mapred.utils.OutputUtils;
     import com.aliyun.odps.mapred.utils.SchemaUtils;
-    
+    /**
      * Join, mr_Join_src1/mr_Join_src2(key bigint, value string), mr_Join_out(key
      * bigint, value1 string, value2 string)
-      
-     
+     * 
+     */
     public class Join {
       public static final Log LOG = LogFactory.getLog(Join.class);
       public static class JoinMapper extends MapperBase {
@@ -97,59 +97,64 @@ The output table mr\_join\_out contains the following content:
         private Record mapvalue;
         private long tag;
         @Override
-        public void setup(TaskContext context) throws IOException {
+        public void setup(TaskContext context) throws IOException{
           mapkey = context.createMapOutputKeyRecord();
           mapvalue = context.createMapOutputValueRecord();
-          tag = context.getInputTableInfo().getLabel().equals("left") ? 0 : 1;
-        
+          tag = context.getInputTableInfo().getLabel().equals("left") ? 0: 1;
+        }
         @Override
-        public void map(long key, Record record, TaskContext context)
+        public void map(long key,Record record, TaskContext context)
             throws IOException {
-          mapkey.set(0, record.get(0));
-          mapkey.set(1, tag);
-          for (int i = 1; i < record.getColumnCount(); i++) {
-            mapvalue.set(i - 1, record.get(i));
-          
-          context.write(mapkey, mapvalue);
-        
-      
+          mapkey.set(0,record.get(0));
+          mapkey.set(1,tag);
+          for (int i = 1; i< record.getColumnCount();i++) {
+            mapvalue.set(i -1, record.get(i));
+          }
+          context.write(mapkey,mapvalue);
+        }
+      }
       public static class JoinReducer extends ReducerBase {
         private Record result = null;
         @Override
-        public void setup(TaskContext context) throws IOException {
+        public void setup(TaskContext context) throws IOException{
           result = context.createOutputRecord();
-        
+        }
+        // Reduce function all records for each input will be the same key
         @Override
-        public void reduce(Record key, Iterator<Record> values, TaskContext context)
+        public void reduce(Record key,Iterator<Record>values,TaskContext context)
             throws IOException {
           long k = key.getBigint(0);
           List<Object[]> leftValues = new ArrayList<Object[]>();
-          while (values.hasNext()) {
+          // Is a key + tag combination because it is set up, this ensures that record data in the left table is in front of the input record for the reduce function.
+          while(values.hasNext()) {
             Record value = values.next();
-            long tag = (Long) key.get(1);
+            long tag = (Long)key.get(1);
+            // The data for the left table is first cached into memory
             if (tag == 0) {
               leftValues.add(value.toArray().clone());
-            } else {
-              for (Object[] leftValue : leftValues) {
+            }else {
+              // The data that touches the right table is output by a join with all the data on the left table, the data for the left table is all in memory.
+              // This implementation is just a functional display with relatively low performance and is not recommended for practical production.
+              for (Object[] leftValue :leftValues) {
                 int index = 0;
-                result.set(index++, k);
-                for (int i = 0; i < leftValue.length; i++) {
-                  result.set(index++, leftValue[i]);
-                
-                for (int i = 0; i < value.getColumnCount(); i++) {
-                  result.set(index++, value.get(i));
-                
+                result.set(index++,k);
+                for (int i = 0;i<leftValue.length;i++) {
+                  result.set(index++,leftValue[i]);
+                }
+                for (int i = 0;i< value.getColumnCount();i++) {
+                  result.set(index++,value.get(i));
+                }
                 context.write(result);
-              
-            
-          
-        
-      
+              }
+            }
+          }
+        }
+      }
       public static void main(String[] args) throws Exception {
         if (args.length ! = 3) {
           System.err.println("Usage: Join <input table1> <input table2> <out>");
           System.exit(2);
-        
+        }
         JobConf job = new JobConf();
         job.setMapperClass(JoinMapper.class);
         job.setReducerClass(JoinReducer.class);
@@ -162,9 +167,9 @@ The output table mr\_join\_out contains the following content:
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).label("left").build(), job);
         InputUtils.addTable(TableInfo.builder().tableName(args[1]).label("right").build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[2]).build(), job);
-        JobClient.runJob(job);
-      
-    
+        Jobclient. runjob (job );
+      }
+    }
 
 ```
 

@@ -16,7 +16,7 @@ MaxCompute主要服务于批量结构化数据的存储和计算，可以提供�
 
 ## MaxCompute学习路径 {#section_learningpath .section}
 
-您可以通过[MaxCompute学习路径](https://help.aliyun.com/learn/learningpath/maxcompute.html?spm=5176.7944453.751670.1.277c52dfrBdS6s)快速了解 MaxCompute的相关概念、基础操作、进阶操作等。
+您可以通过[MaxCompute学习路径](https://help.aliyun.com/learn/learningpath/maxcompute.html?spm=5176.7944453.751670.1.277c52dfrBdS6s)快速了解MaxCompute的相关概念、基础操作、进阶操作等。
 
 ## 产品优势 {#section_ufc_wrv_tdb .section}
 

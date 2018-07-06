@@ -28,7 +28,7 @@ MaxCompute 提供的 SDK 包整体信息，如下表所示：
 
 ## MaxCompute {#section_i25_f5b_wdb .section}
 
-MaxCompute SDK 的入口，您可通过此类来获取项目空间下的所有对象集合，包括：[Projects](../cn.zh-CN/产品简介/基本概念/项目空间.md)，[Tables](../cn.zh-CN/产品简介/基本概念/表.md)，[Resources](../cn.zh-CN/产品简介/基本概念/资源.md)，[Functions](../cn.zh-CN/产品简介/基本概念/函数.md)，[Instances](../cn.zh-CN/产品简介/基本概念/任务实例.md)。
+MaxCompute SDK 的入口，您可通过此类来获取项目空间下的所有对象集合，包括：[Projects](../../../../cn.zh-CN/产品简介/基本概念/项目空间.md)，[Tables](../../../../cn.zh-CN/产品简介/基本概念/表.md)，[Resources](../../../../cn.zh-CN/产品简介/基本概念/资源.md)，[Functions](../../../../cn.zh-CN/产品简介/基本概念/函数.md)，[Instances](../../../../cn.zh-CN/产品简介/基本概念/任务实例.md)。
 
 **说明：** MaxCompute 原名 ODPS，因此在现有的 SDK 版本中，入口类仍命名为 ODPS。
 

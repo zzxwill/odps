@@ -4,7 +4,7 @@
 
 The [Client](../../../../intl.en-US/Tools and Downloads/Client.md) provides [Tunnel](intl.en-US/User Guide/Data upload and download/Tunnel commands.md) commands for you to use the functions of the original Dship tool.
 
-Tunnel commands are mainly used to upload data or download data. They provide the following functions:
+Tunnel commands are mainly used to upload data or download data.
 
 -   Upload: Supports file or directory\(level-one\) uploading. Data can only be uploaded to a single table or table partition each time. For partitioned tables, the destination partition must be specified.
 
@@ -32,7 +32,7 @@ Tunnel commands are mainly used to upload data or download data. They provide th
 
     ```
     tunnel show history -n 5;
-    --Displays details for the last five data upload/download commands.
+    -- Displays details for the last five data upload/download commands.
     tunnel show log;
     --Displays the log for the last data upload/download.
     ```
@@ -45,9 +45,13 @@ Tunnel commands are mainly used to upload data or download data. They provide th
     ```
 
 
+## Tunnel upload and download limits {#section_an5_42t_j2b .section}
+
+Tunnel command does not support uploading and downloading data of the Array, Map, and Struct types.
+
 ## Use of Tunnel commands {#section_g2l_1wf_vdb .section}
 
-Tunnel commands allows you to obtain help information using the Help subcommand on the client. Each command and selection supports short command format:
+Tunnel commands allows you to obtain help information using the Help subcommand on the client. Each command and selection supports short command format.
 
 ```
 odps@ project_name>tunnel help;
@@ -63,7 +67,7 @@ Available subcommands:
 tunnel is a command for uploading data to / downloading data from MaxCompute.
 ```
 
-**Parameters:**
+**Parameter description:**
 
 -   upload: Uploads data to a MaxCompute table.
 -   download: Downloads data from a MaxCompute table.
@@ -89,7 +93,7 @@ usage: tunnel upload [options] <path> <[project.]table[/partition]>
  -dbr,-discard-bad-records <ARG> specify discard bad records
                                      action(true|false), default false
  -dfp,-date-format-pattern <ARG> specify date format pattern, default
-                                     yyyy-MM-dd HH:mm:ss
+                                     yyyy-MM-dd HH:mm:ss; 
  -fd,-field-delimiter <ARG> specify field delimiter, support
                                      unicode, eg \u0001. default ","
  -h,-header <ARG> if local file should have table
@@ -112,25 +116,25 @@ usage: tunnel upload [options] <path> <[project.]table[/partition]>
     -threads <ARG> number of threads, default 1
  -tz,-time-zone <ARG> time zone, default local timezone:
                                      Asia/Shanghai
-Example:
+For example:
     tunnel upload log.txt test_project.test_table/p1="b1",p2="b2"
 ```
 
-**Parameters:**
+**Parameter:**
 
 -   -acp: Determines if the operation automatically creates the destination partition if it does not exist. This one is disabled by default.
--   -bs: Specifies the size of each data block uploaded using Tunnel. Default value: 100 MiB \(MiB=1024\*1024 B\).
+-   -bs: Specifies the size of each data block uploaded using Tunnel. Default value: 100MiB\(1MiB=1024\*1024B\) .
 -   -c: Specifies the local data file encoding. Default value: UTF-8.  When not set, the encoding of the downloaded source data is used by default.
 -   -cp: Determines whether the local file is compressed before being uploaded, reducing traffic usage. This one is enabled by default.
 -   -dbr: Determines whether to ignore corrupted data \(such as extra or missing columns and mismatched column data types\).
     -   If this value is true, all data not satisfying table definitions is ignored.
     -   When the parameter is set to false, the system displays error messages in case of corrupted data, but the raw data in the destination table is not contaminated.
--   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss.
+-   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss. If you want to specify the time format to the level of milliseconds, you can use tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'.
 -   -fd: Specifies the column delimiter of the local data file. The default value is comma.
 -   -h: Determines whether the data file contains the header. If it is set to true, Dship skips the header and starts uploading from the second row.
 -   -mbr: By default, if more than 1,000 rows of corrupted data uploaded, the upload is terminated. This parameter allows you to adjust the tolerated volume of corrupted data.
 -   -ni: Specifies the NULL data identifier. Default value: “ “\(blank string\).
--   -rd: Specifies the row delimiter of the local data file. Default value: \\r\\n.
+-   -rd: Specifies the row delimiter of the local data file. Default value: \\r\\n. 
 -   -s: Determines whether to scan the local data file. Default value: false.
     -   If set to true, the system scans the data first, and then imports the data if the format is correct.
     -   If set to false, the system imports the data directly without scanning.
@@ -149,7 +153,7 @@ CREATE TABLE IF NOT EXISTS sale_detail(
       shop_name STRING,
       customer_id STRING,
       total_price DOUBLE)
-PARTITIONED BY (sale_date STRING, region STRING);
+PARTITIONED BY (sale_date STRING,region STRING);
 ```
 
 -   To add a partition:
@@ -171,7 +175,7 @@ PARTITIONED BY (sale_date STRING, region STRING);
 -   To import data:
 
     ```
-    odps@ project_name>tunnel u d:\data.txt sale_detail/sale_date=201312, region=hangzhou -s false
+    odps@ project_name>tunnel u d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false
     Upload session: 201506101639224880870a002ec60c
     Start upload:d:\data.txt
     Total bytes:41 Split input to 1 blocks
@@ -204,7 +208,7 @@ odps@ project_name>tunnel help show;
 usage: tunnel show history [options]
               show session information
  -n,-number <ARG> lines
-Example:
+For example:
     tunnel show history -n 5
     tunnel show log
 ```
@@ -231,7 +235,7 @@ odps@ project_name>tunnel help resume;
 usage: tunnel resume [session_id] [-force]
               resume an upload session
  -f,-force force resume
-Example:
+For example:
     tunnel resume
 ```
 
@@ -346,7 +350,7 @@ usage: tunnel download [options] instance://<[project/]instance_id> <path>
     -threads <ARG> number of threads, default 1
  -tz,-time-zone <ARG> time zone, default local timezone:
                                    Asia/Shanghai
-Example:
+For example:
     tunnel download test_project.test_table/p1="b1",p2="b2" log.txt
     tunnel download instance://test_project/test_instance log.txt
 ```
@@ -365,7 +369,7 @@ Example:
     **Note:** `-h=true` and `threads>1`cannot be used together.
 
 -   -limit: Specifies the number of files to download.
--   -ni: Specifies the NULL data identifier. Default value: “ “\(blank string\).
+-   -ni: Specifies the NULL data identifier. Default value: “  “\(blank string\).
 -   -rd: Specifies the row delimiter of the local data file. Default value: \\r\\n.
 -   -sd: Sets the session directory.
 -   -te: Specifies the tunnel endpoint.
@@ -401,18 +405,26 @@ odps@ project_name>tunnel help purge;
 usage: tunnel purge [n]
               force session history to be purged.([n] days before, default
               3 days)
-Example:
+For example:
     tunnel purge 5
 ```
 
 **Data types**:
 
-|Type|Description|
-|:---|:----------|
-|STRING|String type data. The length cannot exceed 8 MB.|
-|BOOLEN|Only the following values are supported for uploading: true, false, 0, and 1. Only the values true/false \(not case-sensitive\) are supported for downloading.|
+| Type|Description|
+|:----|:----------|
+|STRING|String type data. The length cannot exceed 8MB.|
+|BOOLEN|Upload values are only supported for true, false, 0, and 1. Only the values true/false \(not case-sensitive\) are supported for downloading.|
 |BIGINT|Value range: \[-9223372036854775807, 9223372036854775807\].|
-|DOUBLE|1. Supports 16 significant digits. 2. Supports expression in scientific notation for uploading. 3.Support only numerical expression for downloading. 4. Maximum value: 1.7976931348623157E308. 5. Minimum value: 4.9E-324. 6. Positive infinity: Infinity. 7. Negative infinity: -Infinity.|
+|DOUBLE| -   16-bit valid
+-   Uploads support expression in scientific notation.
+-   Support only numerical expression for downloading.
+-   Max value: 1.7976931348623157E308.
+-   Min value: 4.9E-324.
+-   Positive infinity: Infinity.
+-   Negative infinity: -Infinity.
+
+ |
 |DATETIME|By default, Datetime data supports the UTC+8 time zone for data uploading. You can use the command to specify the format pattern for the date in your data.|
 
 If you upload DATETIME type data, you must specify the time and date format. For more information on specific formats, see SimpleDateFormat.
@@ -432,7 +444,7 @@ tunnel upload log.txt test_table -dfp "yyyy-MM-dd HH:mm:ss"
 **Null**: All data types can be Null.
 
 -   By default, a blank string indicates a Null value.
--   The parameter -null-indicatorcan be used at the command line to specify the Null string.
+-   The parameter -null-indicator can be used at the command line to specify the Null string.
 
 ```
 tunnel upload log.txt test_table -ni "NULL"
@@ -444,7 +456,7 @@ tunnel upload log.txt test_table -ni "NULL"
 tunnel upload log.txt test_table -c "gbk"
 ```
 
-**Delimiter**: The Tunnel commands allow support custom file delimiters. The row delimiter is ‘-record-delimiter’, and the column delimiter is ‘-field-delimiter’.
+**Delimiter**: The Tunnel commands allow support custom file delimiters. The row delimiter is ‘-record-delimiter’, and the column delimiter is -field-delimiter.
 
 Description:
 

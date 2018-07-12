@@ -43,19 +43,16 @@ You can use the set command to set MaxCompute or a user-defined system variables
 
 ```
 --Set commands supported by MaxCompute SQL and Mapreduce (new version)
-set odps.sql.allow.fullscan=false/true  --Set whether to allow a full table scan on a partitioned table. True means allow, and false means not allow.
+set odps.sql.allow.fullscan=  --Set whether to allow a full table scan on a partitioned table. True means allow, and false means not allow.
 set odps.stage.mapper.mem=   --Set the memory size of each map worker. Unit is M and default value is 1024M.
 set odps.stage.reducer.mem= --Set the memory size for each reduce worker in the unit of M. The default value is 1,024M.
 set odps.stage.joiner.mem=   --Set the memory size of each join worker. Unit is M and default value is 1024M.
-set odps.stage.mem=
-    --Set the memory size of all workers in MaxCompute specified job. The priority is lower than preceding three set key. Unit is M and no default value.
-set odps.stage.mapper.split.size=
-    -- Modify the input data quantity of each map worker; that is the size of input file burst.
-    -- Thus control the worker number of each map stage. Unit is M and the default value is 256M.
-set odps.stage.reducer.num= --Modify the worker number of each reduce stage and no default value.
-set odps.stage.joiner.num= --Modify the worker number of each join stage and no default value.
-set odps.stage.num=   --Modify the worker concurrency of all stages in MaxCompute specified job. The priority is lower than preceding three set key and no default value.
-set odps.sql.type.system.odps2=true/false;  --The default value is false. You must set true when there are new data types such as TINYINT, SMALLINT, INT, FLOAT, VARCHAR, TIMESTAMP, and BINARY in SQL statement.
+set odps.stage.mem =    --Set the memory size of all workers in MaxCompute specified job. The priority is lower than preceding three set key. Unit is M and no default value.
+set odps.stage.mapper.split.size=   -- Modify the input data quantity of each map worker; that is the size of input file burst. Thus control the worker number of each map stage. Unit is M and the default value is 256M.
+set odps.stage.reducer.num=    --Modify the worker number of each reduce stage and no default value.
+set odps.stage.joiner.num=    --Modify the worker number of each join stage and no default value.
+set odps.stage.num=    --Modify the worker concurrency of all stages in MaxCompute specified job. The priority is lower than preceding three set key and no default value.
+set odps.sql.type.system.odps2=    --The default value is false. You must set true when there are new data types such as TINYINT, SMALLINT, INT, FLOAT, VARCHAR, TIMESTAMP, and BINARY in SQL statement.
 ```
 
 ## Show Flags {#section_ft4_jff_vdb .section}
@@ -106,7 +103,7 @@ setproject odps.sql.allow.fullscan = true;
 |odps.instance.remain.days|ProjectOwner|How long the instance information is retained.|3~30|
 |READ\_TABLE\_MAX\_ROW|ProjectOwner|The number of data entries returned by running the Select statement in the client.|1~10000|
 
-**Take odps.security.ip.whitelist as an example:**
+**Take odps.security.ip.whitelist as an example**
 
 MaxCompute supports IP whitelist of the project level.
 
@@ -114,6 +111,7 @@ MaxCompute supports IP whitelist of the project level.
 
 -   With IP whitelist configured, only the IP \(console IP or IP of exit where SDK is located\) in the whitelist can access this project.
 -   After setting the IP white list, you need to wait five minutes before it takes effect.
+-   If in case of incorrect operation you have shield yourself, open a ticket to contact Alibaba Cloud technical support team.
 
 You can type three formats for the IP list in the whitelist.
 

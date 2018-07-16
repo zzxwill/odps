@@ -21,10 +21,10 @@ The error code format is `ODPS-MMCCCCX`.
 
 For a list of errors related to SQL Task, MapReduce Task, and Tunnel Task commonly used by MaxCompute, see:
 
--   [MaxCompute SQL Common errors for MaxCompute SQL Task](reseller.en-US/Error Code Appendix/SQL Common Errors.md)
+-   [MaxCompute SQL Common errors for MaxCompute SQL Task](intl.en-US/Error Code Appendix/SQL Common Errors.md)
 
--   [MaxCompute MapReduce Common errors for MaxCompute MapReduce Task](reseller.en-US/Error Code Appendix/MapReduce Common Errors.md)
+-   [MaxCompute MapReduce Common errors for MaxCompute MapReduce Task](intl.en-US/Error Code Appendix/MapReduce Common Errors.md)
 
--   [MaxCompute Tunnel Common errors for MaxCompute Tunnel Task](reseller.en-US/Error Code Appendix/Tunnel Common Errors.md)
+-   [MaxCompute Tunnel Common errors for MaxCompute Tunnel Task](intl.en-US/Error Code Appendix/Tunnel Common Errors.md)
 
 

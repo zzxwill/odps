@@ -6,9 +6,9 @@ This article provides examples to illustrate how to download the MaxCompute SQL 
 
 You can use one of the following methods to export the SQL statement execution results:
 
--   If the data volume is small, use [SQL Task](../../../../intl.en-US/User Guide/SDK/Java SDK.md) to list all query results.
+-   If the data volume is small, use [SQL Task](../../../../reseller.en-US/User Guide/SDK/Java SDK.md) to list all query results.
 
--   If you want to export the results of a specific table or partition, use  [Tunnel](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md).
+-   If you want to export the results of a specific table or partition, use  [Tunnel](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md).
 
 -   If the SQL statements are complex, use Tunnel and SQL Task in combination.
 
@@ -19,17 +19,17 @@ You can use one of the following methods to export the SQL statement execution r
 
 ## Use SQL Task to export data {#section_pyd_ntc_5db .section}
 
-[SQL Task](../../../../intl.en-US/User Guide/SDK/Java SDK.md) is  an interface of MaxCompute that the SDK can call directly to run SQL statements and return results conveniently.
+[SQL Task](../../../../reseller.en-US/User Guide/SDK/Java SDK.md) is  an interface of MaxCompute that the SDK can call directly to run SQL statements and return results conveniently.
 
-`SQLTask.getResult(i);`  returns a list which can be iterated cyclically to obtain the complete SQL computing results.  This method has a defect. For more information, see [Other operations](../../../../intl.en-US/User Guide/Common commands/Other Operations.md) for the description of `SetProject READ_TABLE_MAX_ROW`.
+`SQLTask.getResult(i);`  returns a list which can be iterated cyclically to obtain the complete SQL computing results.  This method has a defect. For more information, see [Other Operations](../../../../reseller.en-US/User Guide/Common commands/Other Operations.md) for the description of `SetProject READ_TABLE_MAX_ROW`.
 
 Currently, you can adjust the maximum number of data records that the SELECT statement returns to the client up to **10,000**.  If you run the SELECT statement on a client or use SQL Task,  the query results are appended with Limit N. Limit N does not apply to the CREATE TABLE XX AS SELECT statement or in the case that the results  are solidified in a specific table using INSERT INTO/OVERWRITE TABLE.
 
 ## Use Tunnel to export data {#section_ryd_ntc_5db .section}
 
-If the query results to be exported are the full content of a table or a partition, you can use Tunnel to export the results. For more information, see [Command line tool](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md)  and  [Tunnel SDK](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) which is compiled based on SDK.
+If the query results to be exported are the full content of a table or a partition, you can use Tunnel to export the results. For more information, see [Command line tool](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md)  and  [Tunnel SDK](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) which is compiled based on SDK.
 
-An example is provided to illustrate how to export data by using the Tunnel command line. You can compile the Tunnel SDK only when data cannot be exported using some command lines. For more information, see  [Batch data tunnel overview](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
+An example is provided to illustrate how to export data by using the Tunnel command line. You can compile the Tunnel SDK only when data cannot be exported using some command lines. For more information, see  [Batch data tunnel overview](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 
 ```
 

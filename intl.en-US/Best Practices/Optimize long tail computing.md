@@ -14,7 +14,7 @@ When the key of a JOIN statement has a large amount of data, a long tail occurs.
 
 You can solve the problem in three steps:
 
--   Verify that one or both of the tables are not small tables. If one table is large and the other small, you can use the MAPJOIN statement to cache the small table. For the syntax and relevant description, see [SELECT operation](../../../../dita-oss-bucket/SP_76/DNODPS1898901/EN-US_TP_11992.dita). If the job is a MapReduce job, you can use the resource table function to cache the small table.
+-   Verify that one or both of the tables are not small tables. If one table is large and the other small, you can use the MAPJOIN statement to cache the small table. For the syntax and relevant description, see [SELECT operation](../../../../reseller.en-US/User Guide/SQL/SELECT operation.md). If the job is a MapReduce job, you can use the resource table function to cache the small table.
 
 -   If both tables are relatively large, reduce duplicated data as much as possible.
 
@@ -34,7 +34,7 @@ You can solve the problem in either of the following ways:
 -   Rewrite the SQL statement and add random numbers to split the long key. For example:
 
     ```
-    Select   Key,Count(*)  As  Cnt  From  TableName  Group  By  Key;
+    Select Key,Count(*) As Cnt From TableName Group By Key;
     ```
 
     Provided that the Combiner is skipped, data is shuffled from the M node to the R node. Then, the R node performs the COUNT operation. The execution plan is M \> R. If you want to redistribute work to the key with the long tail, modify the statement as follows:

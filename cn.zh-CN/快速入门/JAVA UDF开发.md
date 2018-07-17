@@ -14,15 +14,15 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
 通常情况下，JAVA UDF的开发可以通过以下几种方式：
 
--   使用[MaxCompute Studio完成JAVA UDF开发整个流程](../cn.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md)。
--   使用[Eclipse插件开发和调试JAVA UDF](../cn.zh-CN/工具及下载/Eclipse开发插件/UDF开发插件介绍.md)，导出Jar包，然后通过命令或者DataWorks[添加资源](../cn.zh-CN/用户指南/常用命令/资源操作.md)后再[注册函数](../cn.zh-CN/用户指南/常用命令/函数操作.md)。
+-   使用[MaxCompute Studio完成JAVA UDF开发整个流程](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md)。
+-   使用[Eclipse插件开发和调试JAVA UDF](../../../../intl.zh-CN/工具及下载/Eclipse开发插件/UDF开发插件介绍.md)，导出Jar包，然后通过命令或者DataWorks[添加资源](../../../../intl.zh-CN/用户指南/常用命令/资源操作.md)后再[注册函数](../../../../intl.zh-CN/用户指南/常用命令/函数操作.md)。
 
 本文中会分别给出UDF、UDAF、UDTF的代码示例，并通过两种方式给出开发UDF完整流程步骤示例（UDAF、UDTF操作步骤与UDF操作步骤一样）。
 
 **说明：** 
 
--   关于自定义函数注册和注销、查看函数列表的相关命令语句请参见[函数操作](../cn.zh-CN/用户指南/常用命令/函数操作.md)。
--   Java和MaxCompute的数据类型对应关系，请参见[参数与返回值类型](../cn.zh-CN/用户指南/SQL/UDF/Java UDF.md)。
+-   关于自定义函数注册和注销、查看函数列表的相关命令语句请参见[函数操作](../../../../intl.zh-CN/用户指南/常用命令/函数操作.md)。
+-   Java和MaxCompute的数据类型对应关系，请参见[参数与返回值类型](../../../../intl.zh-CN/用户指南/SQL/UDF/Java UDF.md)。
 
 ## UDF示例 {#section_q5g_1zy_5db .section}
 
@@ -31,7 +31,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 -   **使用MaxCompute Studio开发**
     1.  **准备工具环境**。
 
-        这里假设已经完成环境准备，包括[安装Studio](../cn.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md)并在Studio上[创建MaxCompute项目链接](../cn.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)以及[创建MaxCompute Java Module](../cn.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建 MaxCompute Java Module.md)。
+        这里假设已经完成环境准备，包括[安装Studio](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md)并在Studio上[创建MaxCompute项目链接](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)以及[创建MaxCompute Java Module](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建 MaxCompute Java Module.md)。
 
     2.  **编写代码**。
 
@@ -52,7 +52,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
         }
         ```
 
-        **说明：** 若需本地调试java udf，请参见[开发和调试UDF](../cn.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md)
+        **说明：** 若需本地调试java udf，请参见[开发和调试UDF](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/开发和调试UDF.md)
 
     3.  **注册MaxCompute UDF**。
 
@@ -68,12 +68,12 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/1575_zh-CN.png)
 
-        **说明：** Studio中编写SQL脚本请参见[编写SQL脚本](../cn.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/编写SQL脚本.md)。
+        **说明：** Studio中编写SQL脚本请参见[编写SQL脚本](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/编写SQL脚本.md)。
 
 -   **使用Eclipse插件开发**
     1.  **创建工程**
 
-        此处假设已经在Eclipse插件创建好一个MaxCompute（原名ODPS）工程，详情请参见[创建MaxCompute工程](../cn.zh-CN/工具及下载/Eclipse开发插件/创建 MaxCompute 工程.md)。
+        此处假设已经在Eclipse插件创建好一个MaxCompute（原名ODPS）工程，详情请参见[创建MaxCompute工程](../../../../intl.zh-CN/工具及下载/Eclipse开发插件/创建 MaxCompute 工程.md)。
 
     2.  **编写代码**
 
@@ -95,13 +95,13 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         **说明：** 
 
-        -   更详细的开发调试代码的介绍请参见[UDF开发插件介绍](../cn.zh-CN/工具及下载/Eclipse开发插件/UDF开发插件介绍.md)。
-        -   SDK的使用信息请参见[UDF SDK](../cn.zh-CN/用户指南/SQL/UDF/UDF概述.md) 。
+        -   更详细的开发调试代码的介绍请参见[UDF开发插件介绍](../../../../intl.zh-CN/工具及下载/Eclipse开发插件/UDF开发插件介绍.md)。
+        -   SDK的使用信息请参见[UDF SDK](../../../../intl.zh-CN/用户指南/SQL/UDF/UDF概述.md) 。
     3.  **添加资源**
 
         在运行UDF之前，必须指定引用的UDF代码。代码通过资源的形式添加到MaxCompute中。Java UDF必须被打成Jar包，以Jar资源添加到MaxCompute中，UDF框架会自动加载Jar包，运行用户自定义的UDF。
 
-        **说明：** MaxCompute MapReduce也用到了资源这一特有概念，[MapReduce](../cn.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)文档中对资源的使用也有阐述。
+        **说明：** MaxCompute MapReduce也用到了资源这一特有概念，[MapReduce](../../../../intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)文档中对资源的使用也有阐述。
 
         执行如下命令：
 
@@ -132,7 +132,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
 ## UDAF示例 {#section_zvj_3bz_5db .section}
 
-UDAF的注册方式与UDF基本相同，使用方式与内建函数中的[聚合函数](../cn.zh-CN/用户指南/SQL/内建函数/聚合函数.md)相同。计算平均值的UDAF的代码示例，如下所示：
+UDAF的注册方式与UDF基本相同，使用方式与内建函数中的[聚合函数](../../../../intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)相同。计算平均值的UDAF的代码示例，如下所示：
 
 ```
 
@@ -199,5 +199,5 @@ forward(t, b);
 }
 ```
 
-MaxCompute提供了很多内建函数来满足您的计算需求，同时您还可以通过创建自定义函数来满足不同的计算需求。详情请参见[创建自定义函数](https://help.aliyun.com/document_detail/30270.html)。
+MaxCompute提供了很多内建函数来满足您的计算需求，同时您还可以通过创建自定义函数来满足不同的计算需求。详情请参见[创建自定义函数](https://www.alibabacloud.com/help/doc-detail/30270.html)。
 

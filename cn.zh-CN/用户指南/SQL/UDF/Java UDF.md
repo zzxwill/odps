@@ -9,11 +9,11 @@ MaxCompute2.0 版本升级后，Java UDF 支持的数据类型从原来的 Bigin
 -   Java UDF 使用新基本类型的方法，如下所示：
     -   UDTF 通过 @Resolve 注解来获取 signature，如：`@Resolve("smallint->varchar(10)")`。
     -   UDF 通过反射分析 evaluate 来获取 signature，此时 MaxCompute 内置类型与 Java 类型符合一一映射关系。
-    -   UDAF暂时还不支持新数据类型。
--   JAVA UDF 使用复杂类型的方法，如下所示：
+    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如 @Resolve\("smallint-\>varchar\(10\)"\)。
+-   Java UDF 使用复杂类型的方法，如下所示：
     -   UDTF 通过 @Resolve annotation 来指定 sinature，如：`@Resolve("array<string>,struct<a1:bigint,b1:string>,string->map<string,bigint>,struct<b1:bigint>")`。
     -   UDF 通过 evaluate 方法的 signature 来映射 UDF 的输入输出类型，此时参考 MaxCompute 类型与 Java 类型的映射关系。其中 array 对应 java.util.List，map 对应 java.util.Map，struct 对应 com.aliyun.odps.data.Struct。
-    -   UDAF暂时还不支持。
+    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如 @Resolve\("smallint-\>varchar\(10\)"\)。
 
         **说明：** 
 
@@ -57,18 +57,47 @@ UDF 的示例如下：
 
 ```
 package org.alidata.odps.udf.examples; 
-import com.aliyun.odps.udf.UDF; 
+  import com.aliyun.odps.udf.UDF; 
 
-public final class Lower extends UDF 
-{ public String evaluate(String s) { 
-if (s == null) { return null; } 
-return s.toLowerCase(); } 
+public final class Lower extends UDF { 
+  public String evaluate(String s) { 
+    if (s == null) { 
+        return null; 
+    } 
+        return s.toLowerCase(); 
+  } 
 }
 ```
 
 可以通过实现`void setup(ExecutionContext ctx)`和`void close()`来分别实现 UDF 的初始化和结束代码。
 
-UDF 的使用方式与 MaxCompute SQL 中普通的内建函数相同，详情请参见 [内建函数](cn.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
+UDF 的使用方式与 MaxCompute SQL 中普通的内建函数相同，详情请参见 [内建函数](intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
+
+## 其他 UDF 示例 {#section_kb5_v44_k2b .section}
+
+如以下代码，定义了一个有三个 overloads 的 UDF，其中第一个用了 array 作为参数，第二个用了 map 作为参数，第三个用了 struct。由于第三个 overloads 用了 struct 作为参数或者返回值，因此要求必须要对 UDF class 打上`@Resolve` annotation，来指定 struct 的具体类型。
+
+```
+@Resolve("struct,string->string") 
+public class UdfArray extends UDF { 
+  public String evaluate(List vals, Long len) { 
+    return vals.get(len.intValue()); 
+  } 
+  public String evaluate(Map map, String key) { 
+    return map.get(key); 
+  } 
+  public String evaluate(Struct struct, String key) { 
+  return struct.getFieldValue("a") + key;
+ } 
+}
+```
+
+用户可以直接将复杂类型传入 UDF 中：
+
+```
+create function my_index as 'UdfArray' using 'myjar.jar'; 
+select id, my_index(array('red', 'yellow', 'green'), colorOrdinal) as color_name from co
+```
 
 ## UDAF {#section_vdy_4kf_vdb .section}
 
@@ -110,7 +139,7 @@ public abstract class Aggregator implements ContextFunction {
 
 ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/1855_zh-CN.jpg)
 
-在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](cn.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
+在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
 UDAF 的计算过程分为两个阶段：
 
@@ -183,8 +212,8 @@ public class AggrAvg extends Aggregator {
 **说明：** 
 
 -   Writable 的 readFields 方法， 由于partial的writable对象是重用的，同一个对象的readFields方法会被调用多次。该方法期望每次调用的时候重置整个对象，如果对象中包含collection，需要清空。
--   UDAF 在 SQL 中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](cn.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
--   关于如何运行 UDTF 的方法与 UDF 类似，详情请参见 [运行 UDF](../cn.zh-CN/快速入门/JAVA UDF开发.md)。
+-   UDAF 在 SQL 中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
+-   关于如何运行 UDTF 的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
 
 ## UDTF {#section_a4t_34f_vdb .section}
 
@@ -201,25 +230,25 @@ UDTF 的程序示例，如下所示：
 
 ```
 package org.alidata.odps.udtf.examples;
-     import com.aliyun.odps.udf.UDTF;
-     import com.aliyun.odps.udf.UDTFCollector;
-     import com.aliyun.odps.udf.annotation.Resolve;
-     import com.aliyun.odps.udf.UDFException;
-     // TODO define input and output types, e.g., "string,string->string,bigint".
-     @Resolve("string,bigint->string,bigint")
-     public class MyUDTF extends UDTF {
-       @Override
-       public void process(Object[] args) throws UDFException {
-         String a = (String) args[0];
-         Long b = (Long) args[1];
-         for (String t: a.split("\\s+")) {
-           forward(t, b);
-         }
+import com.aliyun.odps.udf.UDTF;
+import com.aliyun.odps.udf.UDTFCollector;
+import com.aliyun.odps.udf.annotation.Resolve;
+import com.aliyun.odps.udf.UDFException;
+// TODO define input and output types, e.g., "string,string->string,bigint".
+   @Resolve("string,bigint->string,bigint")
+   public class MyUDTF extends UDTF {
+     @Override
+     public void process(Object[] args) throws UDFException {
+       String a = (String) args[0];
+       Long b = (Long) args[1];
+       for (String t: a.split("\\s+")) {
+         forward(t, b);
        }
      }
+   }
 ```
 
-**说明：** 以上只是程序示例，关于如何在 MaxCompute 中运行 UDTF 的方法与 UDF 类似，详情请参见：[运行 UDF](../cn.zh-CN/快速入门/JAVA UDF开发.md)。
+**说明：** 以上只是程序示例，关于如何在 MaxCompute 中运行 UDTF 的方法与 UDF 类似，详情请参见：[运行 UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
 
 在 SQL 中可以这样使用这个 UDTF，假设在 MaxCompute 上创建 UDTF 时注册函数名为 user\_udtf：
 
@@ -257,12 +286,8 @@ UDTF 在 SQL 中的常用方式如下：
 
 ```
 select user_udtf(col0, col1, col2) as (c0, c1) from my_table; 
-      select user_udtf(col0, col1, col2) as (c0, c1) from 
-          (select * from my_table distribute by key sort by key) t;
-      select reduce_udtf(col0, col1, col2) as (c0, c1) from 
-          (select col0, col1, col2 from 
-              (select map_udtf(a0, a1, a2, a3) as (col0, col1, col2) from my_table) t1 
-           distribute by col0 sort by col0, col1) t2;
+select user_udtf(col0, col1, col2) as (c0, c1) from (select * from my_table distribute by key sort by key) t;
+select reduce_udtf(col0, col1, col2) as (c0, c1) from (select col0, col1, col2 from (select map_udtf(a0, a1, a2, a3) as (col0, col1, col2) from my_table) t1 distribute by col0 sort by col0, col1) t2;
 ```
 
 但使用 UDTF 有如下使用限制：
@@ -288,37 +313,37 @@ select user_udtf(col0, col1, col2) as (c0, c1) from my_table;
 
 ## 其他 UDTF 示例 {#section_h4k_ppf_vdb .section}
 
-在 UDTF 中，您可以读取 MaxCompute 的 [资源](../cn.zh-CN/产品简介/基本概念/资源.md)。利用 UDTF 读取 MaxCompute 资源的示例，如下所示：
+在 UDTF 中，您可以读取 MaxCompute 的 [资源](../../../../intl.zh-CN/产品简介/基本概念/资源.md)。利用 UDTF 读取 MaxCompute 资源的示例，如下所示：
 
 1.  编写 UDTF 程序，编译成功后导出 jar 包（udtfexample1.jar）。
 
     ```
     package com.aliyun.odps.examples.udf;
-     import java.io.BufferedReader;
-     import java.io.IOException;
-     import java.io.InputStream;
-     import java.io.InputStreamReader;
-     import java.util.Iterator;
-     import com.aliyun.odps.udf.ExecutionContext;
-     import com.aliyun.odps.udf.UDFException;
-     import com.aliyun.odps.udf.UDTF;
-     import com.aliyun.odps.udf.annotation.Resolve;
-     /**
+    import java.io.BufferedReader;
+    import java.io.IOException;
+    import java.io.InputStream;
+    import java.io.InputStreamReader;
+    import java.util.Iterator;
+    import com.aliyun.odps.udf.ExecutionContext;
+    import com.aliyun.odps.udf.UDFException;
+    import com.aliyun.odps.udf.UDTF;
+    import com.aliyun.odps.udf.annotation.Resolve;
+    /**
      * project: example_project 
      * table: wc_in2 
      * partitions: p2=1,p1=2 
      * columns: colc,colb
      */
-     @Resolve("string,string->string,bigint,string")
-     public class UDTFResource extends UDTF {
-     ExecutionContext ctx;
-     long fileResourceLineCount;
-     long tableResource1RecordCount;
-     long tableResource2RecordCount;
-     @Override
-     public void setup(ExecutionContext ctx) throws UDFException {
-     this.ctx = ctx;
-     try {
+    @Resolve("string,string->string,bigint,string")
+    public class UDTFResource extends UDTF {
+      ExecutionContext ctx;
+      long fileResourceLineCount;
+      long tableResource1RecordCount;
+      long tableResource2RecordCount;
+      @Override
+      public void setup(ExecutionContext ctx) throws UDFException {
+      this.ctx = ctx;
+      try {
        InputStream in = ctx.readResourceFileAsStream("file_resource.txt");
        BufferedReader br = new BufferedReader(new InputStreamReader(in));
        String line;
@@ -343,13 +368,13 @@ select user_udtf(col0, col1, col2) as (c0, c1) from my_table;
        throw new UDFException(e);
      }
     }
-    @Override
-    public void process(Object[] args) throws UDFException {
-     String a = (String) args[0];
-     long b = args[1] == null ? 0 : ((String) args[1]).length();
-     forward(a, b, "fileResourceLineCount=" + fileResourceLineCount + "|tableResource1RecordCount="
+       @Override
+       public void process(Object[] args) throws UDFException {
+         String a = (String) args[0];
+         long b = args[1] == null ? 0 : ((String) args[1]).length();
+         forward(a, b, "fileResourceLineCount=" + fileResourceLineCount + "|tableResource1RecordCount="
          + tableResource1RecordCount + "|tableResource2RecordCount=" + tableResource2RecordCount);
-    }
+        }
     }
     ```
 
@@ -485,5 +510,5 @@ select hive_collect(4y,5y,6y) from dual;
 
 -   MaxCompute的add jar命令会永久地在project中创建一个resource，所以创建udf时需要指定jar包，无法自动将所有jar包加入classpath。
 -   在使用兼容的hive UDF的时候，需要在sql前加set语句`set odps.sql.hive.compatible=true;`语句，set语句和sql语句一起提交执行。
--   在使用兼容的hive UDF时，还要注意MaxCompute的[JAVA沙箱](cn.zh-CN/用户指南/MapReduce/Java沙箱.md)限制。
+-   在使用兼容的hive UDF时，还要注意MaxCompute的[JAVA沙箱](intl.zh-CN/用户指南/Java沙箱.md)限制。
 

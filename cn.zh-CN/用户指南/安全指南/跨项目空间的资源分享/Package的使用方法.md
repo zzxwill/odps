@@ -113,7 +113,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 
 ## 场景示例 {#section_hx1_3l1_wdb .section}
 
-场景描述：Jack是项目空间prj1的管理员。John是项目空间prj2的管理员。由于业务需要， Jack希望将其项目空间prj1中的某些资源\(比如datamining.jar及sampletable表\)分享给John的项目空间prj2。 如果项目空间prj2的用户Bob需要访问这些资源，那么prj2管理员可以通过ACL自主授权，无需Jack参与。
+场景描述：Jack是项目空间prj1的管理员。John是项目空间prj2的管理员。由于业务需要， Jack希望将其项目空间prj1中的某些资源\(比如datamining.jar及sampletable表\)分享给John的项目空间prj2。 如果项目空间prj2的用户Bob需要访问这些资源，那么管理员John可以通过ACL给Bob自主授权，无需Jack参与。
 
 操作步骤：
 
@@ -127,7 +127,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
         allow project prj2 to install package datamining; --将package分享给项目空间prj2
     ```
 
-2.  项目空间prj2管理员Bob在项目空间prj2中安装package。
+2.  项目空间prj2管理员Jhon在项目空间prj2中安装package。
 
     ```
         use prj2;
@@ -135,7 +135,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
         describe package prj1.datamining; --查看package中的资源列表
     ```
 
-3.  Bob对package进行自主授权。
+3.  Jhon对package给Bob进行自主授权。
 
     ```
         use prj2;

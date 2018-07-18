@@ -9,11 +9,20 @@ MaxCompute2.0 版本升级后，Java UDF 支持的数据类型从原来的 Bigin
 -   Java UDF 使用新基本类型的方法，如下所示：
     -   UDTF 通过 @Resolve 注解来获取 signature，如：`@Resolve("smallint->varchar(10)")`。
     -   UDF 通过反射分析 evaluate 来获取 signature，此时 MaxCompute 内置类型与 Java 类型符合一一映射关系。
-    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如 @Resolve\("smallint-\>varchar\(10\)"\)。
+    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如：
+
+        ```
+        @Resolve("smallint->varchar(10)")。
+        ```
+
 -   Java UDF 使用复杂类型的方法，如下所示：
     -   UDTF 通过 @Resolve annotation 来指定 sinature，如：`@Resolve("array<string>,struct<a1:bigint,b1:string>,string->map<string,bigint>,struct<b1:bigint>")`。
     -   UDF 通过 evaluate 方法的 signature 来映射 UDF 的输入输出类型，此时参考 MaxCompute 类型与 Java 类型的映射关系。其中 array 对应 java.util.List，map 对应 java.util.Map，struct 对应 com.aliyun.odps.data.Struct。
-    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如 @Resolve\("smallint-\>varchar\(10\)"\)。
+    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如：
+
+        ```
+        @Resolve("smallint->varchar(10)")。
+        ```
 
         **说明：** 
 

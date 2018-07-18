@@ -2,7 +2,7 @@
 
 ## Background and purposes {#section_r1d_cyd_5db .section}
 
-[Partition tables](../../../../dita-oss-bucket/SP_76/DNODPS1892969/EN-US_TP_11922.dita) of MaxCompute  refer to the partition spaces specified during table creation. This refers certain fields in the table as partition columns.  When using data, if you mention the name of the partition you want to access, you can only read data from the corresponding partition. This eliminates need to scan the whole table, helping improve processing efficiency and reduce costs.
+[Partition tables](../../../../reseller.en-US/Product Introduction/Definition/Partition.md) of MaxCompute  refer to the partition spaces specified during table creation. This refers certain fields in the table as partition columns.  When using data, if you mention the name of the partition you want to access, you can only read data from the corresponding partition. This eliminates need to scan the whole table, helping improve processing efficiency and reduce costs.
 
 Partition pruning is to specify the filtering conditions for partition columns so that only part of partition data  in the table is read during SQL execution. This prevents data errors and resource waste caused by full table scan. Partition pruning seems simple, but actually partition failure often occurs. This article uses examples to introduce how to solve common problems.
 
@@ -21,8 +21,8 @@ from test_part_cut
 where ds= bi_week_dim('20150102');
 
 --bi_week_dim is a user defined function. The return format is (year,sequential number of the week).
---If the date is normal, the system checks whether the date belongs to weeks of the input year when taking Thursday as the start day of a week. For example, if 20140101 is input, 2013,52 is returned because January 1, 2014 is Wednesday and considered as the last week of 2013.  If 20150101 is input, 2015,1 is returned.
---If 20151231 is input, because December 31, 2015 is Thursday and is in the same week as January 1, 2016, 2016,1 is returned.
+--If the date is normal, the system checks whether the date belongs to weeks of the input year when taking Thursday as the start day of a week. For example, if 20140101 is input, 2013,52 is returned because January 1, 2014 is Wednesday and considered as the last week of 2013.  If 20150101 is input ,  2015,1 is returned.
+--If 20151231 is input, because December 31, 2015 is Thursday and is in the same week as January 1, 2016 ,  2016,1 is returned.
 ```
 
 The returned result of bi\_week\_dim\(‘20150102’\) is 2015,1 and does not conform to the partition values of the test\_part\_cut table. Generally, we think that the preceding SQL statements  do not read any partition, but, actually, **the SQL statements read all partitions in the test\_part\_cut table**. The following figure shows the LogView:
@@ -73,7 +73,7 @@ You can run the explain command and view SQL execution plans to check whether pa
 
 ## Analysis on scenarios of failed partition pruning {#section_ebd_cyd_5db .section}
 
-Partition pruning sometimes fails when custom functions or part of system functions are used,  and may also fail in the Where clause when the Join clause for joining is used.  These two scenarios are explained in the following examples.
+Partition pruning sometimes fails when custom functions or part of system functions are used,  and may also fail in the Where clause when the Join clause for joining is used.  These two scenarios are explained in the following examples.  
 
 **Failed partition pruning caused by custom functions**
 

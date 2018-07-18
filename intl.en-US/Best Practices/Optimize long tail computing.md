@@ -34,13 +34,12 @@ You can solve the problem in either of the following ways:
 -   Rewrite the SQL statement and add random numbers to split the long key. For example:
 
     ```
-    Select Key,Count(*) As Cnt From TableName Group By Key;
+    SELECT Key,COUNT(*) AS Cnt FROM TableName GROUP BY Key;
     ```
 
     Provided that the Combiner is skipped, data is shuffled from the M node to the R node. Then, the R node performs the COUNT operation. The execution plan is M \> R. If you want to redistribute work to the key with the long tail, modify the statement as follows:
 
     ```
-    
     -- Assume that the key with the long tail is KEY001.
     SELECT a.Key
       , SUM(a.Cnt) AS Cnt
@@ -79,7 +78,6 @@ When a long tail occurs in a Distinct statement, the key splitting method does n
 **Solution**
 
 ```
-
 --Original SQL statement, with the null UID skipped
 SELECT COUNT(uid) AS Pv
     , COUNT(DISTINCT uid) AS Uv
@@ -89,7 +87,6 @@ FROM UserLog;
 Rewrite the statement as follows:
 
 ```
-
 SELECT SUM(PV) AS Pv
     , COUNT(*) AS UV
 FROM (
@@ -128,7 +125,6 @@ The Combiner only supports optimization for Map. You must make sure that the res
 In addition to the Local Combiner, you can use the optimization method provided by MaxCompute to remove long tails. For example, the following content \(+N backups\) is logged during the task running process:
 
 ```
-
 M1_Stg1_job0:0/521/521[100%] M2_Stg1_job0:0/1/1[100%] J9_1_2_Stg5_job0:0/523/523[100%] J3_1_2_Stg1_job0:0/523/523[100%] R6_3_9_Stg2_job0:1/1046/1047[100%] 
 M1_Stg1_job0:0/521/521[100%] M2_Stg1_job0:0/1/1[100%] J9_1_2_Stg5_job0:0/523/523[100%] J3_1_2_Stg1_job0:0/523/523[100%] R6_3_9_Stg2_job0:1/1046/1047[100%] 
 M1_Stg1_job0:0/521/521[100%] M2_Stg1_job0:0/1/1[100%] J9_1_2_Stg5_job0:0/523/523[100%] J3_1_2_Stg1_job0:0/523/523[100%] R6_3_9_Stg2_job0:1/1046/1047(+1 backups)[100%] 

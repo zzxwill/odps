@@ -14,7 +14,7 @@
 
 -   [DataWorks](https://data.aliyun.com/product/ide?) 可以方便地帮您运行 SQL，[同步数据](https://www.alibabacloud.com/help/doc-detail/47677.htm)，并有定时调度，配置任务依赖的功能。
 
--   开源工具 **DataX** 可帮助您方便地把 MaxCompute 中的数据导出到目标数据源，详情请参见 [DataX概述](https://www.alibabacloud.com/help/doc-detail/28291.htm)。
+-   开源工具 **DataX** 可帮助您方便地把 MaxCompute 中的数据导出到目标数据源，详情请参见 [DataX概述](DataX概述https://help.aliyun.com/document_detail/28291.html)。
 
 
 ## SQLTask 方式导出 {#section_pyd_ntc_5db .section}
@@ -32,7 +32,6 @@
 在此提供一个 Tunnel 命令行导出数据的简单示例，Tunnel SDK 的编写是在有一些命令行没办法支持的情况下才需要考虑，详情请参见 [批量数据通道概述](../../../../intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
 
 ```
-
 tunnel d wc_out c:\wc_out.dat;
 2016-12-16 19:32:08 - new session: 201612161932082d3c9b0a012f68e7 total lines: 3
 2016-12-16 19:32:08 - file [0]: [0, 3), c:\wc_out.dat
@@ -49,7 +48,6 @@ download OK
 代码实现的示例如下：
 
 ```
-
 private static final String accessId = "userAccessId";
 private static final String accessKey = "userAccessKey";
 private static final String endPoint = "http://service.odps.aliyun.com/api";
@@ -153,7 +151,6 @@ return odps;
 4.  工作流调度配置完成后（可以直接使用默认配置），保存并提交工作流，然后单击 **测试运行**。查看数据同步的运行日志，如下所示：
 
     ```
-    
     2016-12-17 23:43:46.394 [job-15598025] INFO JobContainer - 
     任务启动时刻 : 2016-12-17 23:43:34
     任务结束时刻 : 2016-12-17 23:43:46

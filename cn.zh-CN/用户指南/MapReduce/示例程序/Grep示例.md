@@ -182,12 +182,14 @@ com.aliyun.odps.mapred.open.example.Grep mr_src mr_grep_tmp mr_grep_out hello;
         grepJob.setMapOutputValueSchema(SchemaUtils.fromString("count:bigint"));
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), grepJob);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), grepJob);
+        // 设置grepJob的grep的正则表达式
         grepJob.set("mapred.mapper.regex", args[3]);
         if (args.length == 5) {
           grepJob.set("mapred.mapper.regex.group", args[4]);
         }
         @SuppressWarnings("unused")
         RunningJob rjGrep = JobClient.runJob(grepJob);
+        // grepJob的输出作为sortJob的输入
         JobConf sortJob = new JobConf();
         sortJob.setMapperClass(InverseMapper.class);
         sortJob.setReducerClass(IdentityReducer.class);

@@ -4,26 +4,23 @@ MaxCompute Studio is a big data integrated development environment \(IDE\) tool 
 
 ## Basic user interface {#section_u5b_dvx_5db .section}
 
-MaxCompute Studio is a plug-in on the IntelliJ IDEA platform, which shares basic development interfaces with IntelliJ IDEA. For more information about the IntelliJ IDEA interfaces, see the [Interface operation guide](https://www.jetbrains.com/help/idea/2016.3/guided-tour-around-the-user-interface.html).
+MaxCompute Studio is a plug-in on the IntelliJ IDEA platform, which shares basic development interfaces with IntelliJ IDEA. For more information about the IntelliJ IDEA interfaces, see [the Interface operation guide](https://www.jetbrains.com/help/idea/2016.3/guided-tour-around-the-user-interface.html).
 
-Based on the IntelliJ IDEA interfaces, MaxCompute Studio provides the following functional interfaces:
+Based on the IntelliJ IDEA interfaces, MaxCompute Studio provides the following functional interfaces.
 
 -   **SQL Editor**: Provides features such as SQL syntax highlighting, code complementing, real-time error prompting, local compilation, and job submission.
 
-    -   **Compiler View**: Displays locally compiled prompts and error messages, and locates the code in the editor.
+    Compiler View: Displays locally compiled prompts and error messages, and locates the code in the editor.
+
 -   **Project Explorer**: Connects to a MaxCompute project, and browses table structures, custom functions, and resource files in the project.
 
-    -   **Table Details View**: Displays details and sample data of tables, views, and other resources.
+    Table Details View: Displays details and sample data of tables, views, and other resources.
+
 -   **Job Explorer**: Browses and searches for historical jobs of MaxCompute.
-
-    -   **Job Details View**: Displays running details of a job, including the execution plan and details of each execution task, that is, all information displayed using the [Logview](https://www.alibabacloud.com/help/doc-detail/34632.htm) tool.
-
-    -   **Job Output View**: Displays output information of a running job.
-
-    -   **Job Result View**: Displays the output result of the `SELECT` job.
-
--   **MaxCompute Console**: Integrates the MaxCompute client, on which [MaxCompute client](intl.en-US/Tools and Downloads/Client.md) commands can be input and executed.
-
+    -   Job Details View: Displays running details of a job, including the execution plan and details of each execution task.
+    -   Job Output View: Displays output information of a running job.
+    -   Job Result View: Displays the output result of the SELECT job.
+-   **MaxCompute Console**: Integrates the [MaxCompute client](intl.en-US/Tools and Downloads/Client.md), on which MaxCompute client commands can be input and executed.
 
 ## Connect to MaxCompute project {#section_z5b_dvx_5db .section}
 
@@ -32,11 +29,8 @@ Before using most features of MaxCompute Studio, you must [Create a project conn
 **Note:** 
 
 -   You must specify the target project connection to modify SQL scripts, submit jobs, view job information, open the MaxCompute console, and implement other functions using MaxCompute Studio. Therefore, creating a connection to the MaxCompute project is necessary.
-
--   For more information about MaxCompute projects, see [Project](../../../../intl.en-US/Product Introduction/Definition/Project.md).
-
+-   For more information about MaxCompute projects, see [Project](../../../../intl.en-US/Product Introduction/Definition/Projects.md).
 -   For more information about project management using MaxCompute Studio, see [Project space connection management](intl.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md).
-
 
 ## Manage data {#section_bvb_dvx_5db .section}
 
@@ -46,19 +40,15 @@ You can double-click a data table to open the **Table Details View** and view me
 
 MaxCompute Studio integrates [MaxCompute Tunnel](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md) and supports local data upload and download. For more information, see [Import and export data](intl.en-US/Tools and Downloads/MaxCompute Studio/Manage data and resources/Import and export data.md).
 
-## Compile an SQL script {#section_cvb_dvx_5db .section}
+## Write SQL scripts {#section_cvb_dvx_5db .section}
 
-You can compile a MaxCompute SQL script on MaxCompute Studio.
+You can easily compile a MaxCompute SQL script on MaxCompute Studio.
 
-**Procedure**
-
-1.  Open MaxCompute Studio and select**File** \> **New** \> **Project** or **File** \> **New** \> **Module…**.
-
+1.  Open MaxCompute Studio and select **File** \> **New** \> **Project** or **File** \> **New** \> **Module…**.
 2.  Create a MaxCompute Studio project or module.
+3.  Select **File** \> **New** \> **MaxCompute Script** or right-click the menu and select **New** \> **MaxCompute Script** , to create a maxcompute SQL script file.
 
-3.  Select**File** \> **New** \> **MaxCompute Script** or right-click the menu and select**New** \> **MaxCompute Script** , to create a maxcompute SQL script file.
-
-4.  **Note:** When a MaxCompute SQL script is created, MaxCompute Studio prompts you to select an associated MaxCompute project. You can also modify the associated project using the **project selector** on the right of the toolbar on the SQL editor. The editor automatically checks metadata \(such as the table structure\) and reports errors of an SQL statement based on the project associated with the SQL script. The editor also sends the SQL statement to the associated project for execution when it submits the SQL statement for running. For more information, see Compile an [SQL script](intl.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Write SQL scripts.md).
+    **Note:** When a MaxCompute SQL script is created, MaxCompute Studio prompts you to select an associated MaxCompute project. You can also modify the associated project using the **project selector** on the right of the toolbar on the SQL editor. The editor automatically checks metadata \(such as the table structure\) and reports errors of an SQL statement based on the project associated with the SQL script. The editor also sends the SQL statement to the associated project for execution when it submits the SQL statement for running. For more information, see [Compile an SQL script](intl.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Write SQL scripts.md).
 
 
 ## SQL code intelligent prompt {#section_gvb_dvx_5db .section}
@@ -73,15 +63,16 @@ By using the code complementing function, MaxCompute Studio prompts you the name
 
 ## Compile and submit a job {#section_jvb_dvx_5db .section}
 
-**Compile a job**
+-   Compile a job
 
-Click the ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1435_en-US.png) icon icon on the toolbar of the SQL editor to locally compile an SQL script. If syntax or semantic errors occur, the editor reports it.
+    Click the ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/6004_en-US.png) icon on the toolbar of the SQL editor to locally compile an SQL script. If syntax or semantic errors occur, the editor reports it.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1436_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1436_en-US.png)
 
-**Submit a job**
+-   Submit a job
 
-Click the editor\_icon\_run icon on the toolbar of the SQL editor ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1437_en-US.png) to submit an SQL script to the queue of the project specified by MaxCompute.
+    Click the ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1437_en-US.png) icon on the toolbar of the SQL editor to submit an SQL script to the queue of the project specified by MaxCompute.
+
 
 ## View history jobs {#section_nvb_dvx_5db .section}
 
@@ -91,11 +82,11 @@ Open **Job Explorer** to view recently executed jobs in the specified project.
 
 ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1438_en-US.png)
 
-Double-click a job to view the job details. as shown in the following figure:
+Double-click a job to view the job details. as shown in the following figure.
 
 ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1439_en-US.png)
 
-If you have the Log view URL of a job, you can select **MaxCompute** \> **Open Logview**from the menu to go to the details page of the job.
+If you have the Log view URL of a job, you can select **MaxCompute** \> **Open Logview** from the menu to go to the details page of the job.
 
 ## Develop a MapReduce program and UDF program {#section_pvb_dvx_5db .section}
 
@@ -103,9 +94,9 @@ MaxCompute Studio also allows you to develop [MapReduce](intl.en-US/Tools and Do
 
 ## Connect to a MaxCompute client {#section_qvb_dvx_5db .section}
 
-MaxCompute Studio is integrated with the MaxCompute [Client](intl.en-US/Tools and Downloads/Client.md) of the latest version. Alternatively, you can specify the path of the locally installed MaxCompute client on the [Configuration page of MaxCompute Studio.](intl.en-US/Tools and Downloads/MaxCompute Studio/Configure options/Configure MaxCompute Studio.md)
+MaxCompute Studio is integrated with the [MaxCompute Client](intl.en-US/Tools and Downloads/Client.md) of the latest version. Alternatively, you can specify the path of the locally installed MaxCompute client on the [Configuration page](intl.en-US/Tools and Downloads/MaxCompute Studio/Configure options/Configure MaxCompute Studio.md) of MaxCompute Studio.
 
-On the **Project Explorer**, right-click a project and select Open Console to open the MaxCompute Console window.
+On the **Project Explorer**, right-click a project and select **Open in Console** to open the MaxCompute Console window.
 
 ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12114/1440_en-US.png)
 

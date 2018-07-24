@@ -6,33 +6,32 @@ This article provides examples to illustrate how to download the MaxCompute SQL 
 
 You can use one of the following methods to export the SQL statement execution results:
 
--   If the data volume is small, use [SQL Task](../../../../reseller.en-US/User Guide/SDK/Java SDK.md) to list all query results.
+-   If the data volume is small, use [SQL Task](../../../../intl.en-US/User Guide/SDK/Java SDK.md) to list all query results.
 
--   If you want to export the results of a specific table or partition, use  [Tunnel](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md).
+-   If you want to export the results of a specific table or partition, use  [Tunnel](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md).
 
 -   If the SQL statements are complex, use Tunnel and SQL Task in combination.
 
 -   [DataWorks](https://data.aliyun.com/product/ide?) allows you to conveniently run SQL statements and [Synchronize data](https://www.alibabacloud.com/help/doc-detail/47677.htm). It supports regular scheduling and task dependency configuration.
 
--   The open source tool **DataX** allows you to export data from your MaxCompute instance to the target data source with ease. For more information, see [DataX overview](https://www.alibabacloud.com/help/doc-detail/28291.htm).
+-   The open source tool **DataX** allows you to export data from your MaxCompute instance to the target data source with ease. For more information, see [DataX overview](DataX overviewhttps://help.aliyun.com/document_detail/28291.html).
 
 
 ## Use SQL Task to export data {#section_pyd_ntc_5db .section}
 
-[SQL Task](../../../../reseller.en-US/User Guide/SDK/Java SDK.md) is  an interface of MaxCompute that the SDK can call directly to run SQL statements and return results conveniently.
+[SQL Task](../../../../intl.en-US/User Guide/SDK/Java SDK.md) is  an interface of MaxCompute that the SDK can call directly to run SQL statements and return results conveniently.
 
-`SQLTask.getResult(i);`  returns a list which can be iterated cyclically to obtain the complete SQL computing results.  This method has a defect. For more information, see [Other Operations](../../../../reseller.en-US/User Guide/Common commands/Other Operations.md) for the description of `SetProject READ_TABLE_MAX_ROW`.
+`SQLTask.getResult(i);`  returns a list which can be iterated cyclically to obtain the complete SQL computing results.  This method has a defect. For more information, see [Other Operations](../../../../intl.en-US/User Guide/Common commands/Other operations.md) for the description of `SetProject READ_TABLE_MAX_ROW`.
 
 Currently, you can adjust the maximum number of data records that the SELECT statement returns to the client up to **10,000**.  If you run the SELECT statement on a client or use SQL Task,  the query results are appended with Limit N. Limit N does not apply to the CREATE TABLE XX AS SELECT statement or in the case that the results  are solidified in a specific table using INSERT INTO/OVERWRITE TABLE.
 
 ## Use Tunnel to export data {#section_ryd_ntc_5db .section}
 
-If the query results to be exported are the full content of a table or a partition, you can use Tunnel to export the results. For more information, see [Command line tool](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md)  and  [Tunnel SDK](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) which is compiled based on SDK.
+If the query results to be exported are the full content of a table or a partition, you can use Tunnel to export the results. For more information, see [Command line tool](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md)  and  [Tunnel SDK](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) which is compiled based on SDK.
 
-An example is provided to illustrate how to export data by using the Tunnel command line. You can compile the Tunnel SDK only when data cannot be exported using some command lines. For more information, see  [Batch data tunnel overview](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
+An example is provided to illustrate how to export data by using the Tunnel command line. You can compile the Tunnel SDK only when data cannot be exported using some command lines. For more information, see  [Batch data tunnel overview](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 
 ```
-
 tunnel d wc_out c:\wc_out.dat;
 2016-12-16 19:32:08 - new session: 201612161932082d3c9b0a012f68e7 total lines: 3
 2016-12-16 19:32:08 - file [0]: [0, 3), c:\wc_out.dat
@@ -49,7 +48,6 @@ SQL Task cannot export more than 10,000 records,  whereas Tunnel can.  You can
 The sample code is as follows:
 
 ```
-
 private static final String accessId = "userAccessId";
 private static final String accessKey = "userAccessKey";
 private static final String endPoint = "http://service.odps.aliyun.com/api";
@@ -153,7 +151,6 @@ An example is provided to illustrate how to use Data IDE to run SQL statements a
 4.  After workflow scheduling is configured, save and submit the workflow. Click **Test Run**.  If you do not configure workflow scheduling, you can use the default scheduling configuration directly.  View the running log on data synchronization as as in the following figure.
 
     ```
-    
     2016-12-17 23:43:46.394 [job-15598025] INFO JobContainer - 
     Task start time : 2016-12-17 23:43:34
     Task end time : 2016-12-17 23:43:46

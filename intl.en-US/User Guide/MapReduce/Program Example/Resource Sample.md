@@ -2,7 +2,7 @@
 
 ## Preparation {#section_e3n_syg_vdb .section}
 
-1.  Prepare the jar package of test program. Suppose that the package is named “mapreduce-examples.jar”, The local storage path is data\\resources.
+1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
 2.  Prepare the test table and resource.
     -   Create the tables:
 
@@ -33,16 +33,16 @@ jar -resources mapreduce-examples.jar,import.txt -classpath data\resources\mapre
 com.aliyun.odps.mapred.open.example.Upload import.txt mr_upload_src;
 ```
 
-## Result {#section_hzz_dzg_vdb .section}
+## Expected Results {#section_hzz_dzg_vdb .section}
 
 The content in the output table “mr\_upload\_src” is as follows:
 
 ```
-
++------------+------------+
 | key | value |
-
++------------+------------+
 | 1000 | odps |
-
++------------+------------+
 ```
 
 ## Sample code {#section_jgb_gzg_vdb .section}
@@ -61,16 +61,16 @@ The content in the output table “mr\_upload\_src” is as follows:
     import com.aliyun.odps.mapred.utils.InputUtils;
     import com.aliyun.odps.mapred.utils.OutputUtils;
     import com.aliyun.odps.mapred.utils.SchemaUtils;
-    
+    /**
      * Upload
-     
+     *
      * Import data from text file into table
-     
-     
+     *
+     **/
     public class Upload {
       public static class UploadMapper extends MapperBase {
         @Override
-        public void setup(TaskContext context) throws IOException {
+        public void setup(TaskContext context) throws IOException{
           Record record = context.createOutputRecord();
           StringBuilder importdata = new StringBuilder();
           BufferedInputStream bufferedInput = null;
@@ -82,42 +82,44 @@ The content in the output table “mr\_upload\_src” is as follows:
             while ((bytesRead = bufferedInput.read(buffer)) ! = -1) {
               String chunk = new String(buffer, 0, bytesRead);
               importdata.append(chunk);
-            
+            }
             String lines[] = importdata.toString().split("\n");
             for (int i = 0; i < lines.length; i++) {
               String[] ss = lines[i].split(",");
               record.set(0, Long.parseLong(ss[0].trim()));
               record.set(1, ss[1].trim());
               context.write(record);
-            
+            }
           } catch (FileNotFoundException ex) {
             throw new IOException(ex);
           } catch (IOException ex) {
             throw new IOException(ex);
           } finally {
-          
-        
+          }
+        }
         @Override
         public void map(long recordNum, Record record, TaskContext context)
-            throws IOException {
-        
-      
+            Throws ioexception {
+        }
+      }
       public static void main(String[] args) throws Exception {
         if (args.length ! = 2) {
-        System.err.println("Usage: Upload <import_txt> <out_table>");
+          System.err.println("Usage: Upload <import_txt> <out_table>");
           System.exit(2);
-        
+        }
         JobConf job = new JobConf();
         job.setMapperClass(UploadMapper.class);
+        // Set the Resource Name, which can be obtained from jobconf in the map
         job.set("import.filename", args[0]);
+        // Maponly job needs to explicitly set reducer number to 0
         job.setNumReduceTasks(0);
         job.setMapOutputKeySchema(SchemaUtils.fromString("key:bigint"));
         job.setMapOutputValueSchema(SchemaUtils.fromString("value:string"));
         InputUtils.addTable(TableInfo.builder().tableName("mr_empty").build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
-        JobClient.runJob(job);
-      
-    
+        Jobclient. runjob (job );
+      }
+    }
 
 ```
 

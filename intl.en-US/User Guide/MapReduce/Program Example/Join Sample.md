@@ -4,16 +4,16 @@ The maxcompute mapreduce framework does not support join logic on its own, howev
 
 Suppose you need to join two tables \(Key bigint, value string\) and key bigint, value string\), the output table is chain bigint \(value1 string, value2 string \), where value1 is the value of the scanner, and value2 is the value of the scanner.
 
-## Testing Preparation {#section_e3n_syg_vdb .section}
+## Preparation {#section_e3n_syg_vdb .section}
 
 1.  Prepare the jar package for the test program, assuming the name is maid and the local storage path is data \\ resources.
-2.  Prepare tables and resources for testing the Join operation.
+2.  \(2\) Prepare tables and resources for testing the Join operation.
     -   Create tables.
 
         ```
         create table mr_Join_src1(key bigint, value string);
         create table mr_Join_src2(key bigint, value string);
-        create table mr_Join_out(key bigint, value1 string, value2 string);
+        create table mr_Join_out(key bigint, value1 string,value2 string);
         ```
 
     -   Add resources.
@@ -22,7 +22,7 @@ Suppose you need to join two tables \(Key bigint, value string\) and key bigint,
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  Run tunnel to import data.
+3.  \(3\) Run tunnel to import data.
 
     ```
     tunnel upload data1 mr_Join_src1;
@@ -32,22 +32,22 @@ Suppose you need to join two tables \(Key bigint, value string\) and key bigint,
     Import the contents of the maid data as follows:
 
     ```
-     1,hello
-     2,odps
+     1, hello
+     2, ODPS
     ```
 
     Import the contents of the maid data as follows:
 
     ```
-    1,odps
+    1, ODPS
     3,hello
-    4,odps
+    4, ODPS
     ```
 
 
 ## Test procedure: {#section_rlv_bzg_vdb .section}
 
-Join in odpscmd as follows:
+Join in odpscmd as follows:-
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
@@ -76,7 +76,7 @@ After the job has completed successfully, the contents of the table maid are out
     import java.util.List;
     import org.apache.commons.logging.Log;
     import org.apache.commons.logging.LogFactory;
-    import com.aliyun.odps.data.Record;
+    Import com. aliyun. ODPS. Data. record;-
     import com.aliyun.odps.data.TableInfo;
     import com.aliyun.odps.mapred.JobClient;
     import com.aliyun.odps.mapred.MapperBase;
@@ -104,7 +104,7 @@ After the job has completed successfully, the contents of the table maid are out
         }
         @Override
         public void map(long key,Record record, TaskContext context)
-            throws IOException {
+            Throws ioexception {
           mapkey.set(0,record.get(0));
           mapkey.set(1,tag);
           for (int i = 1; i< record.getColumnCount();i++) {
@@ -122,7 +122,7 @@ After the job has completed successfully, the contents of the table maid are out
         // Reduce function all records for each input will be the same key
         @Override
         public void reduce(Record key,Iterator<Record>values,TaskContext context)
-            throws IOException {
+            Throws ioexception {
           long k = key.getBigint(0);
           List<Object[]> leftValues = new ArrayList<Object[]>();
           // Is a key + tag combination because it is set up, this ensures that record data in the left table is in front of the input record for the reduce function.
@@ -134,7 +134,7 @@ After the job has completed successfully, the contents of the table maid are out
               leftValues.add(value.toArray().clone());
             }else {
               // The data that touches the right table is output by a join with all the data on the left table, the data for the left table is all in memory.
-              // This implementation is just a functional display with relatively low performance and is not recommended for practical production.
+// This implementation is just a functional display with relatively low performance and is not recommended for practical production.
               for (Object[] leftValue :leftValues) {
                 int index = 0;
                 result.set(index++,k);

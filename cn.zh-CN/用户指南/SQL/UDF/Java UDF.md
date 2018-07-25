@@ -9,20 +9,11 @@ MaxCompute2.0 版本升级后，Java UDF 支持的数据类型从原来的 Bigin
 -   Java UDF 使用新基本类型的方法，如下所示：
     -   UDTF 通过 @Resolve 注解来获取 signature，如：`@Resolve("smallint->varchar(10)")`。
     -   UDF 通过反射分析 evaluate 来获取 signature，此时 MaxCompute 内置类型与 Java 类型符合一一映射关系。
-    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如：
-
-        ```
-        @Resolve("smallint->varchar(10)")。
-        ```
-
+    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如：`@Resolve("smallint->varchar(10)")`。
 -   Java UDF 使用复杂类型的方法，如下所示：
     -   UDTF 通过 @Resolve annotation 来指定 sinature，如：`@Resolve("array<string>,struct<a1:bigint,b1:string>,string->map<string,bigint>,struct<b1:bigint>")`。
     -   UDF 通过 evaluate 方法的 signature 来映射 UDF 的输入输出类型，此时参考 MaxCompute 类型与 Java 类型的映射关系。其中 array 对应 java.util.List，map 对应 java.util.Map，struct 对应 com.aliyun.odps.data.Struct。
-    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如：
-
-        ```
-        @Resolve("smallint->varchar(10)")。
-        ```
+    -   UDAF通过 @Resolve 注解来获取 signature，MaxCompute2.0支持在注解中使用新类型，如： `@Resolve("smallint->varchar(10)")`。
 
         **说明：** 
 
@@ -444,9 +435,9 @@ create function my_index as 'UdfArray' using 'myjar.jar';
 select id, my_index(array('red', 'yellow', 'green'), colorOrdinal) as color_name from colors;
 ```
 
-## hive udf兼容示例 {#section_why_mqf_vdb .section}
+## HIVE UDF兼容示例 {#section_why_mqf_vdb .section}
 
-MaxCompute 2.0支持了Hive风格的UDF，有部分的hive UDF、UDTF可以直接在MaxCompute上使用。
+MaxCompute 2.0支持了Hive风格的UDF，有部分的HIVE UDF、UDTF可以直接在MaxCompute上使用。
 
 **说明：** 目前支持兼容的Hive版本为2.1.0; 对应Hadoop版本为2.7.2。UDF如果是在其他版本的Hive/Hadoop开发的，可能需要使用此Hive/Hadoop版本重新编译。
 
@@ -490,7 +481,7 @@ public class Collect extends GenericUDF {
 }
 ```
 
-**说明：** 对应hive udf的使用请参考：
+**说明：** 对应HIVE UDF的使用请参考：
 
 -   [https://cwiki.apache.org/confluence/display/Hive/HivePlugins](https://cwiki.apache.org/confluence/display/Hive/HivePlugins)
 -   [https://cwiki.apache.org/confluence/display/Hive/DeveloperGuide+UDTF](https://cwiki.apache.org/confluence/display/Hive/DeveloperGuide+UDTF)
@@ -518,6 +509,6 @@ select hive_collect(4y,5y,6y) from dual;
 使用兼容hive的udf需要注意：
 
 -   MaxCompute的add jar命令会永久地在project中创建一个resource，所以创建udf时需要指定jar包，无法自动将所有jar包加入classpath。
--   在使用兼容的hive UDF的时候，需要在sql前加set语句`set odps.sql.hive.compatible=true;`语句，set语句和sql语句一起提交执行。
--   在使用兼容的hive UDF时，还要注意MaxCompute的[JAVA沙箱](intl.zh-CN/用户指南/Java沙箱.md)限制。
+-   在使用兼容的HIVE UDF的时候，需要在sql前加set语句`set odps.sql.hive.compatible=true;`语句，set语句和sql语句一起提交执行。
+-   在使用兼容的HIVE UDF时，还要注意MaxCompute的[JAVA沙箱](intl.zh-CN/用户指南/Java沙箱.md)限制。
 

@@ -49,6 +49,8 @@ Tunnel commands are mainly used to upload data or download data.
 
 Tunnel command does not support uploading and downloading data of the Array, Map, and Struct types.
 
+Each session has a 24-hour life cycle on the server. It can be used within 24 hours after being created, and can be shared among processes or threads. The block ID of each session must be unique.
+
 ## Use of Tunnel commands {#section_g2l_1wf_vdb .section}
 
 Tunnel commands allows you to obtain help information using the Help subcommand on the client. Each command and selection supports short command format.
@@ -67,7 +69,7 @@ Available subcommands:
 tunnel is a command for uploading data to / downloading data from MaxCompute.
 ```
 
-**Parameter description:**
+**Parameters information:**
 
 -   upload: Uploads data to a MaxCompute table.
 -   download: Downloads data from a MaxCompute table.
@@ -120,7 +122,7 @@ For example:
     tunnel upload log.txt test_project.test_table/p1="b1",p2="b2"
 ```
 
-**Parameter:**
+**Parameters information:**
 
 -   -acp: Determines if the operation automatically creates the destination partition if it does not exist. This one is disabled by default.
 -   -bs: Specifies the size of each data block uploaded using Tunnel. Default value: 100MiB\(1MiB=1024\*1024B\) .
@@ -129,7 +131,7 @@ For example:
 -   -dbr: Determines whether to ignore corrupted data \(such as extra or missing columns and mismatched column data types\).
     -   If this value is true, all data not satisfying table definitions is ignored.
     -   When the parameter is set to false, the system displays error messages in case of corrupted data, but the raw data in the destination table is not contaminated.
--   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss. If you want to specify the time format to the level of milliseconds, you can use tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'.
+-   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss. If you want to specify the time format to the level of milliseconds, you can use tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS',for details of DateTime data types, please refer to [../../../../dita-oss-bucket/SP\_76/DNODPS1892969/EN-US\_TP\_11923.md\#](../../../../intl.en-US/Product Introduction/Definition/Data types.md#).
 -   -fd: Specifies the column delimiter of the local data file. The default value is comma.
 -   -h: Determines whether the data file contains the header. If it is set to true, Dship skips the header and starts uploading from the second row.
 -   -mbr: By default, if more than 1,000 rows of corrupted data uploaded, the upload is terminated. This parameter allows you to adjust the tolerated volume of corrupted data.
@@ -144,7 +146,7 @@ For example:
 -   -threads: Specifies the number of threads. Default value: 1.
 -   -tz: Specifies the time zone. The default value is the local time zone: Asia/Shanghai.
 
-**For example:**
+**Examples:**
 
 -   To create a destination table:
 
@@ -217,7 +219,7 @@ For example:
 
 -n: Specifies the number of rows to display.
 
-**For example:**
+**Examples:**
 
 ```
 odps@ project_name>tunnel show history;
@@ -239,7 +241,7 @@ For example:
     tunnel resume
 ```
 
-**For example:**
+**Examples:**
 
 Modify the data.txt file as follows:
 
@@ -355,7 +357,7 @@ For example:
     tunnel download instance://test_project/test_instance log.txt
 ```
 
-**Parameter description:**
+**Parameters information:**
 
 -   -c: Specifies the local data file encoding. Default value: UTF-8.
 -   -ci: Specifies the column index \(starts from 0\) for downloading. Separate multiple entries with commas\(,\).
@@ -376,7 +378,7 @@ For example:
 -   -threads: Specifies the number of threads. Default value: 1.
 -   -tz: Specifies the time zone. The default value is the local time zone: Asia/Shanghai.
 
-**For example:**
+**Examples:**
 
 To download data to the result.txt:
 
@@ -411,8 +413,8 @@ For example:
 
 **Data types**:
 
-| Type|Description|
-|:----|:----------|
+| Type|Required?|
+|:----|:--------|
 |STRING|String type data. The length cannot exceed 8MB.|
 |BOOLEN|Upload values are only supported for true, false, 0, and 1. Only the values true/false \(not case-sensitive\) are supported for downloading.|
 |BIGINT|Value range: \[-9223372036854775807, 9223372036854775807\].|
@@ -435,7 +437,7 @@ If you upload DATETIME type data, you must specify the time and date format. For
 "MM/dd/yyyy": data format "09/01/2014"
 ```
 
-**For example:**
+**Examples:**
 
 ```
 tunnel upload log.txt test_table -dfp "yyyy-MM-dd HH:mm:ss"
@@ -464,7 +466,7 @@ Description:
 -   A column delimiter cannot contain the row delimiter.
 -   Only the follow escape character delimiters are supported at the command line: \\r, \\n, and \\t.
 
-**For example:**
+**Examples:**
 
 ```
 tunnel upload log.txt test_table -fd "||" -rd "\r\n"

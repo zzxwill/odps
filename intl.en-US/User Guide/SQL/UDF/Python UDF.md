@@ -2,6 +2,8 @@
 
 The Maxcompute UDF consists of UDF, UDAF, and UDTF functions, this article focuses on how to implement these three functions through Python.
 
+The current international terminal version of maxcompute does not yet support Python udfs.
+
 ## RESTRICTED ENVIRONMENT {#section_gwg_3ff_xdb .section}
 
 The Python version of MaxCompute UDF is 2.7 and executes user code in sandbox mode; that is, the code is executed in a restricted environment.
@@ -51,14 +53,14 @@ In addition, not all modules are available in the Python standard library, and m
     -   \_struct
     -   strop
     -   time
-    -   unicodedata
+    -   unicodedat
     -   \_weakref
     -   cPickle
 -   Some modules have limited functionality. For example, the sandbox limits the degree to which user code can write data to the standard output and the standard error output; that is,  `sys.stdout/sys.stderr`  can write 20 KB at most; otherwise, the excessive characters will be ignored.
 
 ## Third-party Libraries {#section_lrw_zff_xdb .section}
 
-Common third-party libraries are installed in the operating environment to supplement the standard library. The supported third-party libraries also include **numpy** .
+Common third-party libraries are installed in the operating environment to supplement the standard library. The supported third-party libraries also include **numpy**.
 
 **Note:** The use of third-party libraries is also subject to 'prohibit local', 'network I/O', and other restrictions. Therefore, APIs that have such functions are also prohibited in a third-party library.
 
@@ -99,8 +101,8 @@ The '-> doubles' # parameter is empty and the return value is double
 
 At the query semantic parsing stage, unqualified signatures will be checked out, and an error is returned. The execution would then be banned. During execution, the UDF parameter will be passed to the user as the type specified by the function signature. The type of the user returned value must be consistent with the type specified by the function signature; otherwise, an error is returned. MaxCompute The SQL data type corresponds to the Python type as follows:
 
-|ODPS SQL type|Bigint|String|Double|Boolean|Datetime|
-|:------------|:-----|:-----|:-----|:------|:-------|
+|ODPS SQL type|Bigint|String|Double|Boolean |Datetime|
+|:------------|:-----|:-----|:-----|:-------|:-------|
 |Python Type|int|str|float|bool|int|
 
 **Note:** 
@@ -175,7 +177,7 @@ class Average(BaseUDAF):
 Examples of UDTF are:
 
 ```
-# coding: UTF-8
+#coding:utf-8
 # explode. py
 
  
@@ -229,7 +231,7 @@ Python UDF can reference resource files through the ‘odps.distcache’ module.
         return self.kv.get(arg)
     ```
 
--   odps.distcache.get\_cache\_table\(resource\_name\)
+-   odps.distcache.get\_cache\_table\(resource\_name\):
 
     -   Returns the contents of the specified resource table. resource\_name: ‘str’ type, corresponding to the existing resource table name in the current project. If the resource name is invalid or has no responding resources, return an error.
     -   Returned value: returned value is ‘generator’ type. The caller obtain the table content through traversal. Each traversal has a record stored in the table in the form of a tuple.
@@ -241,7 +243,7 @@ Python UDF can reference resource files through the ‘odps.distcache’ module.
     
     @ attenuate ('-> string ')
     class DistCacheTableExample(object):
-        def __init__(self):
+        def __init__(self):-
              self.records = list(get_cache_table('udf_test'))
             self.counter = 0
             self.ln = len(self.records)

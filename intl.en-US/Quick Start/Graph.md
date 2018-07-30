@@ -2,7 +2,7 @@
 
 This article uses the[SSSP Algorithm](../../../../intl.en-US/User Guide/Graph/Examples/SSSP.md) in an example to show how to submit Graph jobs.
 
-Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is similar to submitting a job using [MapReduce](../../../../intl.en-US/User Guide/MapReduce/Function Introduction/Command.md). Maven users can search `odps-sdk-graph` from [Maven Library](http://search.maven.org/) to get the Java SDK \(available in different versions\). The related configuration information is as follows:
+Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is similar to submitting a job using [MapReduce](../../../../intl.en-US/User Guide/MapReduce/Function Introduction/Command.md). Maven users can search `odps-sdk-graph` from [Maven Library](http://search.maven.org/) to get the Java
 
 ```
 <dependency>
@@ -15,14 +15,14 @@ Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is 
 ## Procedure {#section_esm_lc2_vdb .section}
 
 1.  Enter the console and run odpscmd.
-2.  Create Input Table and Output Table and select the target cluster.
+2.  Create input and output tables
 
     ```
     create table sssp_in (v bigint, es string);
     create table sssp_out (v bigint, l bigint);
     ```
 
-    For the statement used to create a table, see [SQL Create](../../../../intl.en-US/User Guide/SQL/DDL SQL.md).
+    See creating more statements for tables[../../../../dita-oss-bucket/SP\_76/DNODPS1898901/EN-US\_TP\_13396.md\#](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
 
 3.  Upload Data.
 
@@ -48,7 +48,7 @@ Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is 
 
     **Note:** You only need to package the SSSP code. You do not need to package the SDK in odps-graph-example-sssp.jar.
 
-5.  Add JAR package.
+5.  Add Jar package.
 
     ```
     add jar $LOCAL_JAR_PATH/odps-graph-example-sssp.jar
@@ -62,7 +62,7 @@ Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is 
     jar -libjars odps-graph-example-sssp.jar -classpath $LOCAL_JAR_PATH/odps-graph-example-sssp.jar com.aliyun.odps.graph.example.SSSP 1 sssp_in sssp_out;
     ```
 
-    Jar command is used to run MaxCompute Graph. Its use is consistent with [MapReduce](../../../../intl.en-US/User Guide/MapReduce/Function Introduction/Command.md).
+    The jar command is used to run MaxCompute Graph jobs in the same way as the command for running [MapReduce](../../../../intl.en-US/User Guide/MapReduce/Function Introduction/Command.md) jobs.
 
     When Graph job is running, the corresponding instance ID, execution schedule and result summary are printed on the command line
 

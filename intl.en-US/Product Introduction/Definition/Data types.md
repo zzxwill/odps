@@ -2,9 +2,9 @@
 
 ## Basic data types {#section_b53_rbb_5db .section}
 
-supported by MaxCompute2.0 are listed in the following table. Columns in a MaxCompute table must be any of the listed types. New types include TINYINT, SMALLINT, INT,  FLOAT, VARCHAR, TIMESTAMP, and BINARY data type.
+supported by MaxCompute2.0 are listed in the following table. Columns in a MaxCompute table must be any of the listed types. New types include TINYINT, SMALLINT, INT,  FLOAT, VARCHAR, TIMESTAMP, and BINARY data type.The details are as follows:
 
-**Note:** If data type such as TINYINT, SMALLINT,  INT, FLOAT, VARCHAR, TIMESTAMP, or BINARY are involved when running an SQL command, the set command `set  odps.sql.type.system.odps2=true;` must be added before the SQL command. 
+**Note:** If data type such as TINYINT, SMALLINT,  INT, FLOAT, VARCHAR, TIMESTAMP, or BINARY are involved when running an SQL command, the set command `set odps.sql.type.system.odps2=true;` must be added before the SQL command. 
 
 The set command and SQL command are then submitted simultaneously. If INT type is involved, 
 
@@ -18,7 +18,7 @@ and the set command is not added, the INT type is converted to BIGINT, which is 
 |BIGINT|No|100000000000L, -1L|64 bit signed shaping, the range is \(-2\) of the 63 power to 2 of the 63 power minus 1.|
 |FLOAT|Yes |None|32-bit binary floating point|
 |DOUBLE|No|3.1415926 1E+7|64-bit binary floating point|
-|DECIMAL|No|3.5BD， 99999999999.9999999BD|Decimal precision number type, shaping part range \(-10\) to the 36th power plus 1 to the 36th power of 10 minus 1, decimal part accurate to the \(-18\) power of 10|
+|DECIMAL|No|3.5BD， 99999999999.9999999BD|Decimal precision number type, shaping part range \(-10\)∧36 plus 1 to 10∧36 reduce 1, decimal part accurate to 10∧\(-18\)|
 |VARCHAR|Yes |None \(Note2\)|Variable-length character type, n is the length, and the range is 1 to 65535.|
 |STRING|No|“abc”,’bcd’,”alibaba” ‘inc’ \(Note3\)|A single string length can be up to 8M|
 |BINARY|Yes |None|Binary data type, a single string length can be up to 8M|
@@ -43,7 +43,7 @@ All data types in the preceding table can be NULL.
 
 -   NOTE 2: VARCHAR constants can be expressed by STRING constants of implicit transformation.
 -   NOTE 3: STRING constants support connections, for example, `abc``xyz` is parsed as `abcxyz`, and different parts can be written on different lines.
--   NOTE 4: The time value displayed by the current query does not contain milliseconds. The tunnel command specifies the time format through`-dfp`, and can be specified in milliseconds, such as`tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'`, for more information about tunnel commands, refer to [tunnel command actions](../../../../dita-oss-bucket/SP_76/DNODPS1898901/EN-US_TP_11968.dita).
+-   NOTE 4: The time value displayed by the current query does not contain milliseconds. The tunnel command specifies the time format through`-dfp`, and can be specified in milliseconds, such as`tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'`, for more information about tunnel commands, refer to[Tunnel commands](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md#).
 
 MaxCompute2.0 supports the complex data types listed in the following table.
 

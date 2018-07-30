@@ -1,8 +1,8 @@
 # Demo: Modify incompatible SQL {#concept_tt2_l3d_5db .concept}
 
-The MaxCompute development team has completed the grayscale upgrade of MaxCompute 2.0 recently.   The new version fully embraces open source ecosystems, supports more languages and functions, and enables faster operation. It also implements more rigorous syntax inspection,  so that errors may be returned for some less rigorous syntax cases that can run normally in the earlier editor.
+The MaxCompute development team has completed   the grayscale upgrade of MaxCompute 2.0 recently. The new version fully embraces open source ecosystems, supports more languages and functions, and enables faster operation. It also implements more rigorous syntax inspection,  so that errors may be returned for some less rigorous syntax cases that can run normally in the earlier editor.
 
-To enable smooth grayscale upgrade of MaxCompute 2.0, the MaxCompute framework supports rollback. If a task of MaxCompute 2.0 fails,  it is executed in MaxCompute 1.0.  The rollback increases the E2E latency of the task. We recommend that you set `set odps.sql.planner.mode=lot;` to manually disable the rollback function before submitting jobs,  to avoid the impact resulting from the changes made to the MaxCompute rollback policy.
+To enable smooth grayscale upgrade of MaxCompute 2.0, the MaxCompute framework supports rollback. If a task of MaxCompute 2.0 fails,  it will be executed in MaxCompute 1.0.  The rollback increases the E2E latency of the task. We recommend that you set `set odps.sql.planner.mode=lot;` to manually disable the rollback function before submitting jobs,  to avoid the impact resulting from the changes made to the MaxCompute rollback policy.
 
 The MaxCompute team notifies the owners of problematic tasks by email or DingTalk based on the online rollback condition. Modify your SQL tasks immediately; otherwise, the tasks may fail.  Check the following errors against your tasks  to avoid task failure in case of missed notifications.
 
@@ -12,7 +12,7 @@ The following lists the syntaxes for which MaxCompute 2.0 may return errors.
 
 **SELECT \* … GROUP BY… syntax is problematic.**
 
-In the earlier version of MaxCompute, `select * from group by  key` is supported even when the columns that match \* are not included in the GROUP BY key. Compatible with Hive, MaxCompute 2.0 prohibits this syntax unless the GROUP BY  list is a column in all source tables.  For example:
+In the earlier version of MaxCompute, `select * from group by  key` is supported even when the columns that match \* are not included in the GROUP BY key. Compatible with Hive, MaxCompute 2.0 prohibits this syntax unless the GROUP BY  list is a column in all source tables.  Examples:
 
 Scenario 1: **The GROUP BY key does not include all columns**.
 
@@ -36,7 +36,7 @@ SELECT DISTINCT key FROM t;
 
 Scenario 2: **The GROUP BY key includes all columns**.
 
-Syntax that is not recommended:
+Not recommended syntax:
 
 ```
 SELECT * FROM t GROUP BY key, value; -- t has columns key and value
@@ -71,7 +71,7 @@ Error message:
 ```
 
 FAILED: ODPS-0130161:[1,19] Parse exception - unexpected escape sequence: 01
-ODPS-0130161:[1,38] Parse exception - unexpected escape sequence: 0001
+ODPS-0130161:[1,38] Parse exception - unexpected escape sequence: 0001-
 ```
 
 Correct syntax:
@@ -108,7 +108,7 @@ CREATE TABLE t (a BIGINT, b BIGINT);
 
 **The data on both sides of the equal sign of a Join condition belongs to the String and Double types.**
 
-In the old version of MaxCompute, the String and Double type data is converted to the Bigint type at the cost of precision. 1.1 = “1” in a Join condition is considered as equal.   Compatible with Hive, MaxCompute 2.0 converts the String and Double type data to the Double type.
+In the old version of MaxCompute, the String and Double type data is converted to the Bigint type at the cost of precision. 1.1 = “1” in a Join condition is considered as equal  But compatible with Hive, MaxCompute 2.0 converts the String and Double type data to the Double type.
 
 Syntax that is not recommended:
 
@@ -134,7 +134,7 @@ You can also convert the data as needed.
 
 **Window functions reference other aliases in the select list of the same level.**
 
-For example:
+Examples:
 
 With rn absent from t1, the incorrect syntax is as follows:
 
@@ -157,7 +157,7 @@ Correct syntax:
 
 SELECT row_number() OVER (PARTITION BY c1 ORDER BY rn) rn2
 FROM
-
+(
 SELECT c1, row_number() OVER (PARTITION BY c1 ORDER BY c1) rn
 FROM t1
 ) tmp;
@@ -189,7 +189,7 @@ select * from dual;
 
 ## agg.having.ref.prev.agg.alias {#section_ysv_p3d_5db .section}
 
-**The select list is preceded by an aggregate function alias when HAVING exists. ** For example:
+**The select list is preceded by an aggregate function alias when HAVING exists. ** Examples:
 
 Incorrect syntax:
 
@@ -218,7 +218,7 @@ Correct syntax:
 
 SELECT cnt, s, s/cnt avg
 FROM
-
+(
 SELECT count(c1) cnt,
 sum(c1) s
 FROM t1
@@ -231,7 +231,7 @@ HAVING count(c1) > 1
 
 **ORDER BY is not followed by the LIMIT statement.**
 
-By default, MaxCompute requires that ORDER BY be followed by the LIMIT statement to limit the number of data records. Because ORDER BY is used for full data sorting, the execution performance is low without the LIMIT statement.  For example:
+By default, MaxCompute requires that ORDER BY be followed by the LIMIT statement to limit the number of data records. Because ORDER BY is used for full data sorting, the execution performance is low without the LIMIT statement.  Examples:
 
 Incorrect syntax:
 
@@ -280,7 +280,7 @@ In the earlier version of MaxCompute, an alias is auto generated for every expre
 
 In MaxCompute 2.0, a warning is given for use of auto generated aliases, but due to breadth of involvement such use is not prohibited for the moment.
 
-In some cases, known changes are made to the alias generation rules in the different versions of MaxCompute. Some online jobs depend on the auto generated aliases. Queries may fail when MaxCompute  performs version upgrade or rollback. If you have such problems, modify queries and explicitly specify the alias of the column of interest.  For example:
+In some cases, known changes are made to the alias generation rules in the different versions of MaxCompute. Some online jobs depend on the auto generated aliases. Queries may fail when MaxCompute  performs version upgrade or rollback. If you have such problems, modify queries and explicitly specify the alias of the column of interest.  Examples:
 
 Not recommended syntax:
 
@@ -298,7 +298,7 @@ SELECT c FROM (SELECT count(*) c FROM dual) t;
 
 **Non-Boolean filter conditions are used.**
 
-MaxCompute prohibits the implicit conversion between the Boolean type and other data types. However, the earlier version of MaxCompute allows the use of Bigint type  filter conditions in some cases.  MaxCompute 2.0 prohibits the use of Bigint type filter conditions. If your scripts have Bigint type filter conditions, modify them promptly.  For example:
+MaxCompute prohibits the implicit conversion between the Boolean type and other data types. However, the earlier version of MaxCompute allows the use of Bigint type  filter conditions in some cases.  MaxCompute 2.0 prohibits the use of Bigint type filter conditions. If your scripts have Bigint type filter conditions, modify them promptly.  Examples:
 
 Incorrect syntax:
 
@@ -322,7 +322,7 @@ select id, count(*) from dual group by id having id <> 0;
 
 **The GROUP BY, CLUSTER BY, DISTRIBUTE BY, and SORT BY statements reference columns with conflicting names.**
 
-In the old version of MaxCompute, by default, the system selects the last column of the select list as the operation object. MaxCompute 2.0 reports an error in this case. Make relevant modification timely.  For example:
+In the old version of MaxCompute, by default, the system selects the last column of the select list as the operation object. MaxCompute 2.0 reports an error in this case. Make relevant modification timely.  Examples:
 
 Incorrect syntax:
 
@@ -353,7 +353,7 @@ In the earlier version of MaxCompute, no error is returned when two partition ke
 Incorrect syntax:
 
 ```
-insert overwrite table partition (ds = '1', ds = '2'）select ... 
+insert overwrite table partition (ds = '1', ds = '2'）select ... ;
 ```
 
 In fact, ds = ‘1’ is ignored during execution.
@@ -361,7 +361,7 @@ In fact, ds = ‘1’ is ignored during execution.
 Correct syntax:
 
 ```
-insert overwrite table partition (ds = '2'）select ... 
+insert overwrite table partition (ds = '2'）select ... ;
 ```
 
 Incorrect syntax:
@@ -475,7 +475,7 @@ In Task M1_Stg1:
 
 The IF and Divide functions are retained. During execution, the first parameter of IF is set to “false”, and the expression of the second parameter Divide  is not evaluated. Division by zero is normal.
 
-MaxCompute 2.0 supports division constant folding. An error is returned.  For example:
+MaxCompute 2.0 supports division constant folding. An error is returned.  As shown in the following:
 
 Incorrect syntax:
 
@@ -558,7 +558,7 @@ The earlier version of MaxCompute supports Multi-way Join optimization. Multiple
 ```
 
 EXPLAIN
-SELECT t1.
+SELECT t1. *
 FROM t1 JOIN t2 ON t1.c1 = t2.c1
 JOIN t3 ON t1.c1 = t3.c1;
 ```
@@ -591,7 +591,7 @@ The earlier version of MaxCompute still keeps the physical execution plan when M
 ```
 
 EXPLAIN
-SELECT /*+mapjoin(t1)*/ t1.
+SELECT /*+mapjoin(t1)*/ t1. *
 FROM t1 JOIN t2 ON t1.c1 = t2.c1
 JOIN t3 ON t1.c1 = t3.c1;
 ```
@@ -618,19 +618,19 @@ We recommend that you remove MapJoin Hint and use Multi-way Join.
 
 ## wm\_concat.first.argument.const {#section_rvv_p3d_5db .section}
 
-According to the [Aggregate function](../../../../dita-oss-bucket/SP_76/DNODPS1898901/EN-US_TP_11999.dita) document,  the first parameter of WM\_CONCAT must be a constant. The old version of MaxCompute does not have strict check standards. For example, when the source table has no data,  no error is returned even if the first parameter of WM\_CONCAT is ColumnReference.
+According to the [Aggregate function](../../../../intl.en-US/User Guide/SQL/Builtin Function/Aggregate function.md) document,  the first parameter of WM\_CONCAT must be a constant. The old version of MaxCompute does not have strict check standards. For example, when the source table has no data,  no error is returned even if the first parameter of WM\_CONCAT is ColumnReference.
 
 ```
 
-Function declaration:
+The function statement is as follows:
 string wm_concat(string separator, string str)
-Parameter description:
+Description of parameters:
 Separator: String-type constant.  Constants of other types or non-constants can cause exceptions.
 ```
 
-MaxCompute 2.0 checks the validity of parameters during the planning phase. An error is returned if the first parameter of WM\_CONCAT is not a constant.  For example:
+MaxCompute 2.0 checks the validity of parameters during the planning phase. An error is returned if the first parameter of WM\_CONCAT is not a constant.  Examples:
 
-Incorrect syntax:
+Incorrect syntax:-
 
 ```
 SELECT wm_concat(value, ',') FROM src GROUP BY value;
@@ -653,7 +653,7 @@ ALTER TABLE srcpt ADD PARTITION (pt='pt1');
 ALTER TABLE srcpt ADD PARTITION (pt='pt2');
 ```
 
-For the preceding SQL statements, the constants of the IN INT type in the pt columns of the String type are converted to the Double type for comparison.  Even if odps.sql.udf.strict.mode  is set to “true” in the project, the old version of MaxCompute does not return an error and it filters out all pt columns, whereas in MaxCompute 2.0,  an error is returned.  For example:
+For the preceding SQL statements, the constants of the IN INT type in the pt columns of the String type are converted to the Double type for comparison.  Even if odps.sql.udf.strict.mode  is set to “true” in the project, the old version of MaxCompute does not return an error and it filters out all pt columns, whereas in MaxCompute 2.0,  an error is returned.  Examples:
 
 Incorrect syntax:
 
@@ -701,7 +701,7 @@ is converted to:
 INSERT OVERWRITE TABLE srcpt PARTITION(pt='pt1') SELECT id FROM dual;
 ```
 
-If the specified partition value is invalid \(for example, ‘$\{bizdate\}’ is used\), MaxCompute 2.0 returns an error during syntax check. For more information,  see [MaxCompute  partition value definition](../../../../dita-oss-bucket/SP_76/DNODPS1898901/EN-US_TP_11990.dita).
+If the specified partition value is invalid \(for example, ‘$\{bizdate\}’ is used\), MaxCompute 2.0 returns an error during syntax check. For more information,  For more information, see [Partition](../../../../intl.en-US/Product Introduction/Definition/Partition.md#).
 
 Incorrect syntax:
 
@@ -723,7 +723,7 @@ In the earlier version of MaxCompute, with LIMIT 0, no results are returned by t
 
 In the standard SQL IN operation, if the value list contains a null value, the returned value may be “null” or “true”, but cannot be “false”.  For example, 1 in \(null, 1, 2, 3\) is “true”,  whereas 1 in \(null, 2, 3\) is “null”, and null in \(null, 1, 2, 3\) is “null”.  Likewise, for the NOT IN operation,  if the value list contains a null value, the returned value may be “false” or “null”, but cannot be “true”.
 
-MaxCompute 2.0 performs processing with a standard behavior. If you receive a notification on this problem, check your queries to determine  whether the subqueries in the IN operation have a null value and whether the related behavior meets your expectation. If not, make relevant changes.  For example:
+MaxCompute 2.0 performs processing with a standard behavior. If you receive a notification on this problem, check your queries to determine  whether the subqueries in the IN operation have a null value and whether the related behavior meets your expectation. If not, make relevant changes.  Examples:
 
 ```
 select * from t where c not in (select accepted from c_list);

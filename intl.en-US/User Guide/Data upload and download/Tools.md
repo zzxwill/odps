@@ -14,7 +14,7 @@ The MaxCompute platform supports a wide range of tools. The source code for most
 
     -   For information about console installation and basic usage, see [Client introduction](../../../../intl.en-US/Tools and Downloads/Client.md).
     -   Based on the [Batch data](intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) tunnel SDK, the client provides built-in Tunnel commands for data uploading and data downloading. For more information, see [Basic Tunnel command usage](intl.en-US/User Guide/Data upload and download/Tunnel commands.md).
-    **Note:** This is an open-source [GitHub project](https://github.com/aliyun/aliyun-odps-console).
+    **Note:** This is an open-source [aliyun-odps-console](https://github.com/aliyun/aliyun-odps-console).
 
 -   **DTS**
 
@@ -29,13 +29,13 @@ The MaxCompute platform supports a wide range of tools. The source code for most
 
     As a tool developed based on the Sqoop 1.4.6 community, Sqoop provides enhanced MaxCompute support with the ability to import and export data from MySQL and other relational databases to MaxCompute tables. Data in HDFS/Hive can also be imported to MaxCompute tables.
 
-    **Note:** This is an open-source [GitHub project](https://github.com/aliyun/aliyun-maxcompute-data-collectors).
+    **Note:** This is an open-source [aliyun-maxcompute-data-collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors).
 
 -   **Kettle**
 
     Kettle is an open-source ETL tool based on Java which can run on Windows, Unix, or Linux. It provides graphic interfaces for you to easily define data transmission topology using drag-and-drop components.
 
-    **Note:** This is an open-source [GitHub project](https://github.com/aliyun/aliyun-maxcompute-data-collectors?spm=a2c4g.11186623.2.15.oSXp9R).
+    **Note:** This is an open-source [aliyun-maxcompute-data-collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors?spm=a2c4g.11186623.2.15.oSXp9R).
 
 -   **Flume**
 
@@ -43,7 +43,7 @@ The MaxCompute platform supports a wide range of tools. The source code for most
 
     The DataHub Sink plug-in of Apache Flume allows you to upload log data to DataHub in real time and archive the data in MaxCompute tables.
 
-    **Note:** This is an open-source [GitHub project](https://github.com/aliyun/aliyun-maxcompute-data-collectors?spm=a2c4g.11186623.2.17.oSXp9R).
+    **Note:** This is an open-source [aliyun-maxcompute-data-collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors?spm=a2c4g.11186623.2.17.oSXp9R).
 
 -   **Fluentd**
 
@@ -61,6 +61,6 @@ The MaxCompute platform supports a wide range of tools. The source code for most
 
     The DataHub plug-in of OGG allows you to incrementally synchronize Oracle database data to DataHub in real time and archive the data in MaxCompute tables.
 
-    **Note:** This is an open-source [GitHub project](https://github.com/aliyun/aliyun-maxcompute-data-collectors?spm=a2c4g.11186623.2.21.oSXp9R).
+    **Note:** This is an open-source [aliyun-maxcompute-data-collectors](https://github.com/aliyun/aliyun-maxcompute-data-collectors?spm=a2c4g.11186623.2.21.oSXp9R).
 
 

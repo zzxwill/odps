@@ -15,5 +15,5 @@ The lifecycle of a MaxCompute table or partition is measured from the last updat
 -   You can set the lifecycle of tables, but not of partitions.  The lifecycle of a table can be specified during table creation.
 -   If no lifecycle is specified, the table, or partition cannot be automatically recycled by MaxCompute.
 
-For more information on specifying or modifying lifecycles during table creation, and modifying a table’s LastDataModifiedTime, see [DDL documentation](../../../../intl.en-US/User Guide/SQL/DDL SQL.md).
+For more information on specifying or modifying lifecycles during table creation, and modifying a table’s LastDataModifiedTime, see [Table Operations](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
 

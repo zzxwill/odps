@@ -2,16 +2,16 @@
 
 ## Preparation {#section_e3n_syg_vdb .section}
 
-1.  Prepare the JAR package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path is data\\resources.
+1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
 2.  Prepare tables and resources for testing the SORT operation.
-    -   Create tables.
+    -   Create tables:
 
         ```
         create table ss_in(key bigint, value bigint);
         create table ss_out(key bigint, value bigint);
         ```
 
-    -   Add resources.
+    -   Add resources:
 
         ```
         add jar data\resources\mapreduce-examples.jar -f;
@@ -23,7 +23,7 @@
     tunnel upload data ss_in;
     ```
 
-    The contents of data file imported into the table ss\_in:
+    The contents of data file the table ss\_in:
 
     ```
      2,1
@@ -41,18 +41,18 @@ jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-exampl
 com.aliyun.odps.mapred.open.example.Sort ss_in ss_out;
 ```
 
-## Result {#section_hzz_dzg_vdb .section}
+## Expected Results {#section_hzz_dzg_vdb .section}
 
 The content of output table ss\_out is as follows:
 
 ```
-
++------------+------------+
 | key | value |
-
++------------+------------+
 | 1 | 1 |
 | 2 | 1 |
 | 3 | 1 |
-
++------------+------------+
 ```
 
 ## Sample code {#section_jgb_gzg_vdb .section}
@@ -71,51 +71,53 @@ The content of output table ss\_out is as follows:
     import com.aliyun.odps.mapred.utils.InputUtils;
     import com.aliyun.odps.mapred.utils.OutputUtils;
     import com.aliyun.odps.mapred.utils.SchemaUtils;
-    
+    /**
      * This is the trivial map/reduce program that does absolutely nothing other
      * than use the framework to fragment and sort the input values.
-     
-     
+     *
+     **/
     public class Sort {
       static int printUsage() {
         System.out.println("sort <input> <output>");
         return -1;
-      
-      
+      }
+      /**
        * Implements the identity function, mapping record's first two columns to
        * outputs.
-       
+       **/
       public static class IdentityMapper extends MapperBase {
         private Record key;
         private Record value;
         @Override
-        public void setup(TaskContext context) throws IOException {
+        public void setup(TaskContext context) throws IOException{
           key = context.createMapOutputKeyRecord();
           value = context.createMapOutputValueRecord();
-        
+        }
         @Override
         public void map(long recordNum, Record record, TaskContext context)
-            throws IOException {
-          Key. set (new object [] {(long) record. get (0 )});
+            Throws IOException {
+          Key.set (new object [] {(long) record.get (0 )});
           value.set(new Object[] { (Long) record.get(1) });
           context.write(key, value);
-        
-      
-      
+        }
+      }
+      /**
        * The main driver for sort program. Invoke this method to submit the
        * map/reduce job.
-       
+       *
        * @throws IOException
        * When there is communication problems with the job tracker.
-       
+       **/
       public static void main(String[] args) throws Exception {
         JobConf jobConf = new JobConf();
         jobConf.setMapperClass(IdentityMapper.class);
         jobConf.setReducerClass(IdentityReducer.class);
+        // For global order, the number of reducers is set to 1, all the data will be concentrated on a reducer.
+        // Can be used only for small volumes of data, which need to be considered in other ways, such as terasort.
         jobConf.setNumReduceTasks(1);
-        Jobconf. setmapoutputkeyschema schemautils schemeiutils. fromstring ("key: bigint "));
+        Jobconf.setmapoutputkeyschema schemautils schemeiutils.fromstring ("key: bigint "));
         jobConf.setMapOutputValueSchema(SchemaUtils.fromString("value:bigint"));
-        Inpututils. addtable (tableinfo. builder (). tablename (ARGs [0]). build (), jobconf );
+        InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), jobConf);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), jobConf);
         Date starttime = new date ();
         System.out.println("Job started: " + startTime);
@@ -123,9 +125,9 @@ The content of output table ss\_out is as follows:
         Date end_time = new Date();
         System.out.println("Job ended: " + end_time);
         System.out.println("The job took "
-            + (end_time.getTime() - startTime.getTime()) / 1000 + " seconds.")
-      
-    
+            + (end_time.getTime() - startTime.getTime()) / 1000 + " seconds.") ;
+      }
+    }
 
 ```
 

@@ -148,9 +148,12 @@ com.aliyun.odps.mapred.open.example.WordCountPipeline wc_in wc_out;
             .setOutputValueSchema(
                     new Column[] { new Column("count", OdpsType.BIGINT)})
             .addReducer(IdentityReducer.class).createPipeline();
+        // 将pipeline的设置到jobconf中，如果需要设置combiner，是通过jobconf来设置
         job.setPipeline(pipeline);
+        // 设置输入输出表
         job.addInput(TableInfo.builder().tableName(args[0]).build());
         job.addOutput(TableInfo.builder().tableName(args[1]).build());
+        // 作业提交并等待结束
         job.submit();
         job.waitForCompletion();
         System.exit(job.isSuccessful() == true ? 0 : 1);

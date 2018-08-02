@@ -73,6 +73,7 @@ com.aliyun.odps.mapred.open.example.MapOnly wc_in wc_out map
         @Override
         public void setup(TaskContext context) throws IOException {
           boolean is = context.getJobConf().getBoolean("option.mapper.setup", false);
+          // Main函数在jobconf里设置了option.mapper.setup为true，才会执行下面的逻辑
           if (is) {
             Record result = context.createOutputRecord();
             result.set(0, "setup");
@@ -83,6 +84,7 @@ com.aliyun.odps.mapred.open.example.MapOnly wc_in wc_out map
         @Override
         public void map(long key, Record record, TaskContext context) throws IOException {
           boolean is = context.getJobConf().getBoolean("option.mapper.map", false);
+          // Main函数在jobconf里设置了option.mapper.map为true，才会执行下面的逻辑
           if (is) {
             Record result = context.createOutputRecord();
             result.set(0, record.get(0));
@@ -93,6 +95,7 @@ com.aliyun.odps.mapred.open.example.MapOnly wc_in wc_out map
         @Override
         public void cleanup(TaskContext context) throws IOException {
           boolean is = context.getJobConf().getBoolean("option.mapper.cleanup", false);
+          // Main函数在jobconf里设置了option.mapper.cleanup为true，才会执行下面的逻辑
           if (is) {
             Record result = context.createOutputRecord();
             result.set(0, "cleanup");
@@ -108,11 +111,14 @@ com.aliyun.odps.mapred.open.example.MapOnly wc_in wc_out map
         }
         JobConf job = new JobConf();
         job.setMapperClass(MapperClass.class);
+        // 对于MapOnly的作业，必须显式设置reducer的个数为0
         job.setNumReduceTasks(0);
+        // 设置输入输出的表信息
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
         if (args.length == 3) {
           String options = new String(args[2]);
+        // jobconf中可以设置自定义的key,value值，在mapper中通过context的getJobConf可以获取到相关的设置
           if (options.contains("setup")) {
             job.setBoolean("option.mapper.setup", true);
           }

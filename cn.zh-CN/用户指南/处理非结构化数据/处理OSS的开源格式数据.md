@@ -8,22 +8,21 @@
 
 ## 创建External Table {#section_bxs_hsv_ydb .section}
 
-MaxCompute非结构化数据框架通过External Table与各种数据的关联，关联OSS上开源格式数据的External Table建表的DDL语句格式如下：
+MaxCompute非结构化数据框架通过External Table与各种数据的关联，关联OSS上开源格式数据的External Table建表的DDL语句格式如下所示。
 
 ```
 DROP TABLE [IF EXISTS] <external_table>;
 CREATE EXTERNAL TABLE [IF NOT EXISTS] <external_table>
 (<column schemas>)
 [PARTITIONED BY (partition column schemas)]
-[ROW FORMAT SERDE '<serde class>']
+[ROW FORMAT SERDE '<serde class>'
+  [WITH SERDEPROPERTIES ('odps.properties.rolearn'='${roleran}' [,'name2'='value2',...])]
+]
 STORED AS <file format>
-[WITH SERDEPROPERTIES (  'odps.properties.rolearn'='${roleran}'
- [,'name2'='value2',...]
- ) ]
 LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 ```
 
-**说明：** 该语法格式与Hive的语法相当接近，但需注意以下问题：
+**说明：** 该语法格式与Hive的语法相当接近，但需注意以下问题。
 
 -   STORED AS关键字，在该语法格式中不是[普通非结构化外表](cn.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md)用的STORED BY关键字，这是目前在读取开源兼容数据时独有的。
 
@@ -35,7 +34,7 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 
     若不用STS模式，则无需指定该属性，直接在Location传入明文AccessKeyId和AccessKeySecret。
 
--   Location若关联OSS需使用明文AK，写法如下：
+-   Location若关联OSS需使用明文AK，写法如下所示。
 
     ```
     LOCATION 'oss://${accessKeyId}:${accessKeySecret}@${endpoint}/${bucket}/${userPath}/'
@@ -44,7 +43,7 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 
 ## 关联OSS的PARQUET数据示例 {#section_spx_ttv_ydb .section}
 
-假设有一些PARQUET文件存放在一个OSS路径上，每个文件都是PARQUET格式，存放的schema为16列（4列BigInt、4列Double和8列String）的数据，建表DDL语句如下所示：
+假设有一些PARQUET文件存放在一个OSS路径上，每个文件都是PARQUET格式，存放的schema为16列（4列Bigint、4列Double和8列String）的数据，建表DDL语句如下所示。
 
 ```
 CREATE EXTERNAL TABLE tpch_lineitem_parquet
@@ -72,7 +71,7 @@ LOCATION 'oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.c
 
 ## 关联OSS的TEXTFILE数据分区表示例 {#section_gvy_15v_ydb .section}
 
-如果数据是每行以JSON格式，存储成OSS上TEXTFILE文件，同时数据在OSS通过多个目录组织，这时可以使用MaxCompute分区表和数据关联，建表DDL语句如下所示：
+如果数据是每行以JSON格式，存储成OSS上TEXTFILE文件，同时数据在OSS通过多个目录组织，这时可以使用MaxCompute分区表和数据关联，建表DDL语句如下所示。
 
 ```
 CREATE EXTERNAL TABLE tpch_lineitem_textfile
@@ -100,7 +99,7 @@ STORED AS TEXTFILE
 LOCATION 'oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.com/bucket/text_data/';
 ```
 
-如果OSS表目录下面的子目录是以Partition Name方式组织，示例如下：
+如果OSS表目录下面的子目录是以Partition Name方式组织，示例如下。
 
 ```
 oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.com/bucket/text_data/ds=20170102/'
@@ -108,14 +107,14 @@ oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.com/bucket/
 ...
 ```
 
-则可以使用以下DDL语句ADD PARTITION：
+则可以使用以下DDL语句ADD PARTITION。
 
 ```
 ALTER TABLE tpch_lineitem_textfile ADD PARTITION(ds="20170102");
 ALTER TABLE tpch_lineitem_textfile ADD PARTITION(ds="20170103");
 ```
 
-如果OSS分区目录不是按这种方式组织，或者根本不在表目录下，示例如下：
+如果OSS分区目录不是按这种方式组织，或者根本不在表目录下，示例如下。
 
 ```
 oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.com/bucket/text_data_20170102/;
@@ -123,7 +122,7 @@ oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.com/bucket/
 ...
 ```
 
-则可以使用以下DDL语句ADD PARTITION：
+则可以使用以下DDL语句ADD PARTITION。
 
 ```
 ALTER TABLE tpch_lineitem_textfile ADD PARTITION(ds="20170102")
@@ -139,24 +138,21 @@ LOCATION 'oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.c
 
 -   **直接读取以及处理OSS的开源数据**
 
-    创建数据外表进行关联后，直接对外表就可以进行与普通MaxCompute表一样的操作，如下所示：
+    创建数据外表进行关联后，直接对外表就可以进行与普通MaxCompute表一样的操作，如下所示。
 
     ```
-    SELECT l_returnflag,
-    l_linestatus,
+    SELECT l_returnflag, l_linestatus,
     SUM(l_extendedprice*(1-l_discount)) AS sum_disc_price,
     AVG(l_quantity) AS avg_qty,
     COUNT(*) AS count_order
     FROM tpch_lineitem_parquet
     WHERE l_shipdate <= '1998-09-02'
-    GROUP BY
-    l_returnflag,
-    l_linestatus;
+    GROUP BY l_returnflag, l_linestatus;
     ```
 
     外表tpch\_lineitem\_parquet被当作一个普通的内部表一样使用，不同在于MaxCompute内部计算引擎是直接从OSS读取对应的PARQUET数据进行处理。
 
-    前文创建的关联textfile的外部分区表tpch\_lineitem\_textfile，因为使用了`ROW FORMAT` + `STORED AS`，需要手动设置flag（只使用STORED AS，odps.sql.hive.compatible默认为TRUE），再进行读取，否则会有报错：
+    前文创建的关联textfile的外部分区表tpch\_lineitem\_textfile，因为使用了`ROW FORMAT` + `STORED AS`，需要手动设置flag（只使用STORED AS，odps.sql.hive.compatible默认为TRUE），再进行读取，否则会有报错。
 
     ```
     SELECT * FROM tpch_lineitem_textfile LIMIT 1;
@@ -180,23 +176,20 @@ LOCATION 'oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.c
 
     ```
     CREATE TABLE tpch_lineitem_internal LIKE tpch_lineitem_parquet;
-    INSERT OVERWRITE TABLE tpch_lineitem_internal
+    INSERT OVERWRITE TABLE tpch_lineitem_internal;
     SELECT * FROM tpch_lineitem_parquet;
     ```
 
-    接下来直接对内部表进行同样的操作：
+    接下来直接对内部表进行同样的操作。
 
     ```
-    SELECT l_returnflag,
-        l_linestatus,
-        SUM(l_extendedprice*(1-l_discount)) AS sum_disc_price,
-        AVG(l_quantity) AS avg_qty,
-        COUNT(*) AS count_order
+    SELECT l_returnflag, l_linestatus,
+    SUM(l_extendedprice*(1-l_discount)) AS sum_disc_price,
+    AVG(l_quantity) AS avg_qty,
+    COUNT(*) AS count_order
     FROM tpch_lineitem_internal
     WHERE l_shipdate <= '1998-09-02'
-    GROUP BY
-        l_returnflag,
-        l_linestatus;
+    GROUP BY l_returnflag, l_linestatus;
     ```
 
     通过此方式将数据先导入MaxCompute系统进行存储，对同样数据进行计算处理会更高效。

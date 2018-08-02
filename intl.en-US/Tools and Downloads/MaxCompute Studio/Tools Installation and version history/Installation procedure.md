@@ -24,14 +24,14 @@ MaxCompute Studio The MaxCompute Studio plugin has been opened for all users on 
 
 **Procedure**
 
-1.  Open the plugin configuration page on IntelliJ IDEA. \(If you are a Windows/Linux user, choose ** File** \> ** \> Settings** \> ** \> Plugins.** If you are a macOS user,** choose IntelliJ IDEA \> ** \> **Preferences \>** \> ** Plugins** .\)
-2.  Click **Browse repositories…** and  search for `MaxCompute  Studio`.
+1.  Open the plugin configuration page on IntelliJ IDEA. \(If you are a Windows/Linux user, choose ** File** \> **Settings** \> ** \> Plugins.** If you are a macOS user,** choose IntelliJ IDEA** \> **Preferences** \> ** Plugins** \).
+2.  Click **Browse repositories…** and search for `MaxCompute  Studio`.
 
 3.  On the MaxCompute Studio plugin page, click **Install**.
 
 4.  After the installation is confirmed, restart IntelliJ IDEA to complete installation.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1555_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381555_en-US.png)
 
 
 ## Local installation {#section_vzv_n5y_5db .section}
@@ -44,38 +44,38 @@ MaxCompute Studio MaxCompute Studio can also be installed in a local environment
 
 2.  Run IntelliJ IDEA.
 
-    -   If you access IntelliJ IDEA for the first time, a welcome page is displayed. Click **Configure** and select **Plugins** from the  shortcut menu, as shown in the following figure.
+    -   If you access IntelliJ IDEA for the first time, a welcome page is displayed. Click **Configure** and select  **Plugins** from the shortcut menu, as shown in the following figure.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1556_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381556_en-US.png)
 
-    -   If you have accessed IntelliJ IDEA before, choose  **File \> ** \> **Settings \> ** \> **Plugins to ** enter the same page, as shown in the following figure.
+    -   If you have accessed IntelliJ IDEA before, choose  ** File** \> **Settings** \> **Plugins to ** enter the same page, as shown in the following figure.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1557_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381557_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1558_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381558_en-US.png)
 
 3.  On the Plugins page, click  **Install plugin from disk…**,  as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1559_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381559_en-US.png)
 
 4.  In the displayed window, click the gray icon before a directory for navigation, find the plugin file, select it, and click **OK**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1561_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381561_en-US.png)
 
 5.  Return to the Plugins page and click **OK** to install the local plugin.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1562_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381562_en-US.png)
 
 6.  After the installation is complete, a dialog box is displayed, prompting you to restart IntelliJ IDEA. Click **Restart**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1563_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381563_en-US.png)
 
 7.  After IntelliJ IDEA is restarted, the page is displayed as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/1564_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381564_en-US.png)
 
 
 ## Next step {#section_g1w_n5y_5db .section}
 
-Now, you know how to install the MaxCompute Studio plugin. Continue to the next tutorial.  In the tutorial, you will learn how to configure a MaxCompute project  connection to manage data and resources.  For more information, see [Create a MaxCompute  project connection](EN-US_TP_12119.dita).
+Now, you know how to install the MaxCompute Studio plugin. Continue to the next tutorial.  In the tutorial, you will learn how to configure a MaxCompute project  connection to manage data and resources.  For more information, see [Create a MaxCompute  project connection](intl.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md).
 

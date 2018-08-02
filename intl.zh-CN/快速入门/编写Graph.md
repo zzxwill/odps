@@ -22,7 +22,7 @@
     create table sssp_out (v bigint, l bigint);
     ```
 
-    创建表的更多语句请参见[DDL语句](../../../../intl.zh-CN/用户指南/SQL/DDL语句.md)。
+    创建表的更多语句请参见[表操作](../../../../intl.zh-CN/用户指南/SQL/DDL语句/表操作.md#)。
 
 3.  上传数据。
 
@@ -51,7 +51,7 @@
 5.  添加Jar资源。
 
     ```
-    add jar $LOCAL_JAR_PATH/odps-graph-example-sssp.jar
+    add jar $LOCAL_JAR_PATH/odps-graph-example-sssp.jar;
     ```
 
     **说明：** 创建资源的介绍请参见[资源操作](../../../../intl.zh-CN/用户指南/常用命令/资源操作.md)。

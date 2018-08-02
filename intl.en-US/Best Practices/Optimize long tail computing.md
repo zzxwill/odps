@@ -4,40 +4,42 @@ Long tail is a common and difficult problem in distributed computing. The worklo
 
 To address this problem, you can distribute a piece of task to multiple workers for execution, rather than designate a worker to run the heaviest task. This article describes how to address typical cases of long tail.
 
-## JOIN long tail {#section_zxf_5vd_5db .section}
+## Join long tail {#section_zxf_5vd_5db .section}
 
-**Cause**
+**Cause**:
 
-When the key of a JOIN statement has a large amount of data, a long tail occurs.
+When the Key of a Join statement has a large amount of data, a long tail occurs.
 
-**Solution**
+**Solution**:
 
 You can solve the problem in three steps:
 
--   Verify that one or both of the tables are not small tables. If one table is large and the other small, you can use the MAPJOIN statement to cache the small table. For the syntax and relevant description, see [SELECT operation](../../../../reseller.en-US/User Guide/SQL/SELECT operation.md). If the job is a MapReduce job, you can use the resource table function to cache the small table.
+-   Verify that one or both of the tables are not small tables. If one table is large and the other small, you can use the mapjoin statement to cache the small table. For the syntax and relevant description, see [Introduction to the SELECT Syntax](../../../../intl.en-US/User Guide/SQL/Select Operation/Introduction to the SELECT Syntax.md#). If the job is a MapReduce job, you can use the resource table function to cache the small table.
 
 -   If both tables are relatively large, reduce duplicated data as much as possible.
 
 -   If the problem persists, consider service optimization to avoid the calculation of Cartesian product on the two keys with a large data volume.
+
+-   Small table leftjoin large table, odps direct leftjoin is slow. At this point, you can first small the table and the large table mapjoin, so that you can get the intersection between the small table and the big table, and this intermediate table must not be greater than the large table \(as long as there is not a large key tilt not very large \). The small table then performs a lettjoin with this intermediate table, and the effect is equal to the larger table of the small leftjoin.
 
 
 ## Group By long tail {#section_byf_5vd_5db .section}
 
 **Cause**
 
-When a key of the Group By statement has a large amount of computations, a long tail occurs.
+When a Key of the Group By statement has a large amount of computations, a long tail occurs.
 
-**Solution**
+**Solution**:
 
 You can solve the problem in either of the following ways:
 
--   Rewrite the SQL statement and add random numbers to split the long key. For example:
+-   Rewrite the SQL statement and add random numbers to split the long key. As shown in the following:
 
     ```
     SELECT Key,COUNT(*) AS Cnt FROM TableName GROUP BY Key;
     ```
 
-    Provided that the Combiner is skipped, data is shuffled from the M node to the R node. Then, the R node performs the COUNT operation. The execution plan is M \> R. If you want to redistribute work to the key with the long tail, modify the statement as follows:
+    Provided that the Combiner is skipped, data is shuffled from the M node to the R node. Then, the R node performs the Count operation. The execution plan is M \> R. If you want to redistribute work to the key with the long tail, modify the statement as follows:
 
     ```
     -- Assume that the key with the long tail is KEY001.
@@ -65,7 +67,7 @@ You can solve the problem in either of the following ways:
 -   Set system parameters as follows:
 
     ```
-    set odps.sql.groupby.skewindata=true。
+    set odps.sql.groupby.skewindata=true.
     ```
 
     Parameter setting is a universal optimization method, but the results are not satisfying because this method does not consider specific services. You can rewrite the SQL statement in a more efficient manner based on the actual data.
@@ -73,9 +75,9 @@ You can solve the problem in either of the following ways:
 
 ## Distinct long tail {#section_myf_5vd_5db .section}
 
-When a long tail occurs in a Distinct statement, the key splitting method does not apply. You can consider other methods.
+When a long tail occurs in a Distinct statement, the Key splitting method does not apply. You can consider other methods.
 
-**Solution**
+**Solution**:
 
 ```
 --Original SQL statement, with the null UID skipped
@@ -101,14 +103,14 @@ The Distinct statement is rewritten to a Count statement to relieve the computin
 
 ## Long tail of a dynamic partition {#section_tyf_5vd_5db .section}
 
-**Cause**
+**Cause**:
 
 -   To sort the data of small files, the dynamic partition function starts a Reduce task in the final stage of execution. A long tail occurs when the data written by the dynamic partition function is skewed.
 
 -   Misuse of the dynamic partition function often results in long tails.
 
 
-**Solution**
+**Solution**:
 
 If the target partition for data write is determined, you can specify this partition during the Insert operation, instead of using the dynamic partition function.
 
@@ -135,9 +137,9 @@ There total number of Reducers is 1,047, of which 1,046 are complete. The last o
 
 ## Remove long tails using service optimization {#section_yyf_5vd_5db .section}
 
-The preceding optimization methods cannot solve all problems. You can analyze your services to find a better solution.
+The preceding optimization methods cannot solve all problems. You can analyze your services to find a better solution,the example is as follows:
 
--   A large amount of noisy data may exist in reality. For example, you want to check the behavior data in the access record of each user by visitor ID. You must remove crawler data first, even though crawlers become increasingly difficult to identify; otherwise, the crawler data may easily cause a long tail during the calculation process. A similar case is when you associate data by a specific ID, you must check whether the field for association is null.
+-   A large amount of noisy data may exist in reality. For example, you want to check the behavior data in the access record of each user by visitor ID. You must remove crawler data first, even though crawlers become increasingly difficult to identify; otherwise, the crawler data may easily cause a long tail during the calculation process. A similar case is when you associate data by a specific xxid, you must check whether the field for association is null.
 
 -   Special services exist.  For example, ISV operation records differ greatly from common user records in terms of data volume and behavior. You can use a special method to analyze and handle the ISV operation records for major accounts independently.
 

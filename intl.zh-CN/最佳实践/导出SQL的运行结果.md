@@ -6,30 +6,30 @@
 
 您可以通过以下几种方法导出SQL的运行结果：
 
--   如果数据比较少，可以直接用[SQL Task](../../../../intl.zh-CN/用户指南/SDK/Java SDK.md)得到全部的查询结果。
+-   如果数据比较少，可以直接用[SQL Task](../../../../cn.zh-CN/用户指南/SDK/Java SDK.md)得到全部的查询结果。
 
--   如果只是想导出某个表或者分区，可以用 [Tunnel](../../../../intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md)直接导出数据。
+-   如果只是想导出某个表或者分区，可以用 [Tunnel](../../../../cn.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md)直接导出数据。
 
 -   如果 SQL 比较复杂，需要 Tunnel 和 SQL 相互配合才行。
 
--   [DataWorks](https://data.aliyun.com/product/ide?) 可以方便地帮您运行 SQL，[同步数据](https://www.alibabacloud.com/help/doc-detail/47677.htm)，并有定时调度，配置任务依赖的功能。
+-   [DataWorks](https://data.aliyun.com/product/ide?) 可以方便地帮您运行 SQL，[同步数据](https://help.aliyun.com/document_detail/47677.html)，并有定时调度，配置任务依赖的功能。
 
--   开源工具 **DataX** 可帮助您方便地把 MaxCompute 中的数据导出到目标数据源，详情请参见 [DataX概述](DataX概述https://help.aliyun.com/document_detail/28291.html)。
+-   开源工具 **DataX** 可帮助您方便地把 MaxCompute 中的数据导出到目标数据源，详情请参见 [DataX 概述](https://help.aliyun.com/document_detail/28291.html)。
 
 
 ## SQLTask 方式导出 {#section_pyd_ntc_5db .section}
 
-[SQL Task](../../../../intl.zh-CN/用户指南/SDK/Java SDK.md) 是 SDK 直接调用 MaxCompute SQL 的接口，能很方便地运行 SQL 并获得其返回结果。
+[SQL Task](../../../../cn.zh-CN/用户指南/SDK/Java SDK.md) 是 SDK 直接调用 MaxCompute SQL 的接口，能很方便地运行 SQL 并获得其返回结果。
 
-从文档可以看到，`SQLTask.getResult(i);` 返回的是一个 List，可以循环迭代这个 List，获得完整的 SQL 计算返回结果。不过此方法有个缺陷，详情请参见 [其他操作](../../../../intl.zh-CN/用户指南/常用命令/其他操作.md)中提到的`SetProject READ_TABLE_MAX_ROW`功能。
+从文档可以看到，`SQLTask.getResult(i);` 返回的是一个 List，可以循环迭代这个 List，获得完整的 SQL 计算返回结果。不过此方法有个缺陷，详情请参见 [其他操作](../../../../cn.zh-CN/用户指南/常用命令/其他操作.md)中提到的`SetProject READ_TABLE_MAX_ROW`功能。
 
 目前 Select 语句返回给客户端的数据条数最大可以调整到 **1万**。也就是说如果在客户端上（包括 SQLTask）直接 Select，那相当于查询结果上最后加了个 Limit N（如果是 CREATE TABLE XX AS SELECT 或者用 INSERT INTO/OVERWRITE TABLE 把结果固化到具体的表里就没关系）。
 
 ## Tunnel 方式导出 {#section_ryd_ntc_5db .section}
 
-如果您需要导出的查询结果是某张表的全部内容（或者是具体的某个分区的全部内容），可以通过 Tunnel 来实现，详情请参见 [命令行工具](../../../../intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md) 和基于 SDK 编写的 [Tunnel SDK](../../../../intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
+如果您需要导出的查询结果是某张表的全部内容（或者是具体的某个分区的全部内容），可以通过 Tunnel 来实现，详情请参见 [命令行工具](../../../../cn.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md) 和基于 SDK 编写的 [Tunnel SDK](../../../../cn.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
 
-在此提供一个 Tunnel 命令行导出数据的简单示例，Tunnel SDK 的编写是在有一些命令行没办法支持的情况下才需要考虑，详情请参见 [批量数据通道概述](../../../../intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
+在此提供一个 Tunnel 命令行导出数据的简单示例，Tunnel SDK 的编写是在有一些命令行没办法支持的情况下才需要考虑，详情请参见 [批量数据通道概述](../../../../cn.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
 
 ```
 tunnel d wc_out c:\wc_out.dat;
@@ -124,7 +124,7 @@ return odps;
 
 前面介绍的方式解决了数据下载后保存的问题，但是没解决数据的生成以及两个步骤之间的调度依赖的问题。
 
-[数加·DataWorks](https://data.aliyun.com/product/ide?) 可以运行 SQL、[配置数据同步任务](https://www.alibabacloud.com/help/doc-detail/30269.htm)，还可以设置自动 [周期性运行](https://www.alibabacloud.com/help/doc-detail/50130.htm) 和 [多任务之间依赖](https://www.alibabacloud.com/help/doc-detail/50130.htm)，彻底解决了前面的烦恼。
+[数加·DataWorks](https://data.aliyun.com/product/ide?) 可以运行 SQL、[配置数据同步任务](https://help.aliyun.com/document_detail/30269.html)，还可以设置自动 [周期性运行](https://help.aliyun.com/document_detail/50130.html) 和 [多任务之间依赖](https://help.aliyun.com/document_detail/50130.html)，彻底解决了前面的烦恼。
 
 接下来将用一个简单示例，为您介绍如何通过大数据开发套件运行 SQL 并配置数据同步任务，以完成数据生成和导出需求。
 
@@ -132,19 +132,31 @@ return odps;
 
 1.  创建一个工作流，工作流里创建一个 SQL 节点和一个数据同步节点，并将两个节点连线配置成依赖关系，SQL 节点作为数据产出的节点，数据同步节点作为数据导出节点。
 
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12158/15332094481131_zh-CN.png)
+
 2.  配置 SQL 节点。
 
     **说明：** SQL 这里的创建表要先执行一次再去配置同步（否则表都没有，同步任务没办法配置）。
+
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12158/15332094481133_zh-CN.png)
 
 3.  配置数据同步任务。
 
     1.  选择来源。
 
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12158/15332094481138_zh-CN.png)
+
     2.  选择目标。
+
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12158/15332094481139_zh-CN.png)
 
     3.  字段映射。
 
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12158/15332094481145_zh-CN.png)
+
     4.  通道控制。
+
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12158/15332094481146_zh-CN.png)
 
     5.  预览保存。
 
@@ -162,5 +174,7 @@ return odps;
     ```
 
 5.  输入 SQL 语句查看数据同步的结果，如下图所示：
+
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12158/15332094481148_zh-CN.png)
 
 

@@ -65,9 +65,9 @@ You can authorize permissions in the following two ways:
 
         **Note:** On the upper-right corner, click the avatar to open the Billing Management page, and then check the account UID.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15326689122844_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15332690352844_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15326689122845_en-US.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15332690352845_en-US.jpg)
 
     3.  Edit this role’s authorization policy AliyunODPSRolePolicy:
 

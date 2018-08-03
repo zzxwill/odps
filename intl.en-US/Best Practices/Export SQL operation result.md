@@ -12,22 +12,22 @@ You can use one of the following methods to export the SQL statement execution r
 
 -   If the SQL statements are complex, use Tunnel and SQL Task in combination.
 
--   [DataWorks](https://data.aliyun.com/product/ide?) allows you to conveniently run SQL statements and [Synchronize data](https://www.alibabacloud.com/help/doc-detail/47677.htm). It supports regular scheduling and task dependency configuration.
+-   [DataWorks](https://data.aliyun.com/product/ide?) allows you to conveniently run SQL statements and [Synchronize data](https://www.alibabacloud.com/help/doc-detail/47677.htm). It supports regular scheduling and task dependency configuration.DatadataDatadependency
 
--   The open source tool **DataX** allows you to export data from your MaxCompute instance to the target data source with ease. For more information, see [DataX overview](DataX overviewhttps://help.aliyun.com/document_detail/28291.html).
+-   The Open Source Tool **DataX**helps you easily export data from maxcompute to the target data source.
 
 
 ## Use SQL Task to export data {#section_pyd_ntc_5db .section}
 
-[SQL Task](../../../../intl.en-US/User Guide/SDK/Java SDK.md) is  an interface of MaxCompute that the SDK can call directly to run SQL statements and return results conveniently.
+[SQL Task](../../../../intl.en-US/User Guide/SDK/Java SDK.md) is the interface where the SDK calls maxcompute SQL directly, you can easily run SQL and get its return results.
 
-`SQLTask.getResult(i);`  returns a list which can be iterated cyclically to obtain the complete SQL computing results.  This method has a defect. For more information, see [Other Operations](../../../../intl.en-US/User Guide/Common commands/Other operations.md) for the description of `SetProject READ_TABLE_MAX_ROW`.
+`SQLTask.getResult(i);` returns a list which can be iterated cyclically to obtain the complete SQL computing results. However, there is a flaw in this method. For more information, see the `SetProject READ_TABLE_MAX_ROW` maid feature mentioned in [other actions](../../../../intl.en-US/User Guide/Common commands/Other operations.md).
 
-Currently, you can adjust the maximum number of data records that the SELECT statement returns to the client up to **10,000**.  If you run the SELECT statement on a client or use SQL Task,  the query results are appended with Limit N. Limit N does not apply to the CREATE TABLE XX AS SELECT statement or in the case that the results  are solidified in a specific table using INSERT INTO/OVERWRITE TABLE.
+Currently, you can adjust the maximum number of data records that the SELECT statement returns to the client up to **10,000**.  If you run the SELECT statement on a client or using SQL Task, the query results are appended with Limit N. Limit N does not apply to the CREATE TABLE XX AS SELECT statement or in the case that the results are solidified in a specific table through INSERT INTO/OVERWRITE TABLE.
 
 ## Use Tunnel to export data {#section_ryd_ntc_5db .section}
 
-If the query results to be exported are the full content of a table or a partition, you can use Tunnel to export the results. For more information, see [Command line tool](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md)  and  [Tunnel SDK](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) which is compiled based on SDK.
+If you need to export a query that results in the entire contents of a table \(or a specific partition\) all of the content \), you can do this through tunnel, see  [command-line](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md) tools for details, and the [tunnel SDK](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) written based on the SDK.
 
 An example is provided to illustrate how to export data by using the Tunnel command line. You can compile the Tunnel SDK only when data cannot be exported using some command lines. For more information, see  [Batch data tunnel overview](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 
@@ -43,7 +43,7 @@ download OK
 
 ## Use SQL Task and Tunnel to export data {#section_vyd_ntc_5db .section}
 
-SQL Task cannot export more than 10,000 records,  whereas Tunnel can.  You can use them in combination to export data.
+SQL Task cannot export more than 10,000 records, whereas Tunnel can. You can use them in combination You can use them in combination to export data.
 
 The sample code is as follows:
 
@@ -126,28 +126,21 @@ Using the preceding method, you can save the downloaded data. Other methods are 
 
 [DataWorks](https://data.aliyun.com/product/ide?) allows you to [Configure a data synchronization task](https://www.alibabacloud.com/help/doc-detail/30269.htm) and configure [Periodic running](https://www.alibabacloud.com/help/doc-detail/50130.htm) and [Dependency among multiple tasks](https://www.alibabacloud.com/help/doc-detail/50130.htm) to complete the process from data creation to storage.
 
-An example is provided to illustrate how to use Data IDE to run SQL statements and configure a data synchronization task to  create and export data.
+An example is provided to illustrate how to use Data IDE to run SQL statements and configure a data synchronization task to create and export data.
 
 **Procedure**
 
-1.  Create a workflow with an SQL node and a data synchronization node. Connect the two nodes and configure an inter-node dependency, with the SQL node as the data  production node and the data synchronization node as the data export node.
-
+1.  Create a workflow with an SQL node and a data synchronization node. Connect the two nodes and configure an inter-node dependency, with the SQL node as the data production node and the data synchronization node as the data export node.
 2.  Configure the SQL node.
 
     **Note:** Run an SQL statement to create a table before you configure synchronization. If no table exists, the synchronization task cannot be configured.
 
 3.  Perform the following to configure the data synchronization task.
-
     1.  Select a Source.
-
     2.  Select a Target.
-
     3.  Map fields.
-
     4.  Control the tunnel.
-
     5.  Preview and Save.
-
 4.  After workflow scheduling is configured, save and submit the workflow. Click **Test Run**.  If you do not configure workflow scheduling, you can use the default scheduling configuration directly.  View the running log on data synchronization as as in the following figure.
 
     ```
@@ -155,7 +148,7 @@ An example is provided to illustrate how to use Data IDE to run SQL statements a
     Task start time : 2016-12-17 23:43:34
     Task end time : 2016-12-17 23:43:46
     Total task time : 11s
-    Average data per task : 31.36 KB/s
+    Average data per task : 31.36 KB/s-
     Write speed : 1,668 rec/s
     Read records : 16,689
     Failed read-write attempts : 0

@@ -8,12 +8,12 @@ This document introduces how[EN-US\_TP\_12074.md\#](intl.en-US/User Guide/Handle
 
 Both TableStore and MaxCompute have their own type systems. Both Table Store and MaxCompute have their own data type systems. When you process Table Store data in MaxCompute, the data type associations are as follow:
 
-|MaxCompute Type|TableStore Type  |
+|MaxCompute Type|TableStore Type  |
 |:--------------|:----------------|
 |STRING|STRING|
 |BIGINT|INTEGER|
-|DOUBLE|DOUBLE|
-|BOOLEAN|BOOLEAN|
+|DOUBLE|Double|
+|BOOLEAN|Boolean|
 |BINARY|BINARY|
 
 ## Authorization with STS Mode {#section_spx_rrb_wdb .section}
@@ -65,9 +65,9 @@ You can authorize permissions in the following two ways:
 
         **Note:** On the upper-right corner, click the avatar to open the Billing Management page, and then check the account UID.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15332690352844_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15332881362844_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15332690352845_en-US.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15332881362845_en-US.jpg)
 
     3.  Edit this role’s authorization policy AliyunODPSRolePolicy:
 

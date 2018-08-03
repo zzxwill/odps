@@ -1,12 +1,12 @@
 # 快速掌握SQL写法 {#concept_jxd_4qw_5db .concept}
 
-本文通过课程实践的方式，为您介绍 MaxCompute SQL，让您快速掌握 SQL 的写法，并清楚 MaxCompute SQL 和标准 SQL 的区别，请结合 [MaxCompute SQL 基础文档](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md) 进行阅读。
+本文通过课程实践的方式，为您介绍MaxCompute SQL，让您快速掌握SQL的写法，并清楚MaxCompute SQL和标准SQL的区别，请结合 [MaxCompute SQL 基础文档](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md) 进行阅读。
 
 ## 数据集准备 {#section_cxt_3rw_5db .section}
 
-这里选择大家比较熟悉的 Emp/Dept 表做为数据集。为方便大家操作，特提供相关的 MaxCompute 建表语句和数据文件（[emp 表数据文件](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1489374509403/emp%E6%95%B0%E6%8D%AE.txt)，[dept 表数据文件](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1488265664915/dept%E8%A1%A8%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6.txt)），您可自行在 MaxCompute 项目上创建表并上传数据。
+这里选择大家比较熟悉的Emp/Dept表做为数据集。为方便大家操作，特提供相关的 MaxCompute建表语句和数据文件（[emp表数据文件](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1489374509403/emp%E6%95%B0%E6%8D%AE.txt)，[dept表数据文件](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1488265664915/dept%E8%A1%A8%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6.txt)），您可自行在MaxCompute项目上创建表并上传数据。
 
-创建 emp 表的 DDL 语句，如下所示：
+创建emp表的DDL语句，如下所示：
 
 ```
 
@@ -33,26 +33,26 @@ CREATE TABLE IF NOT EXISTS dept (
 
 ## SQL操作 {#section_hcy_nvw_5db .section}
 
-**初学 SQL 常遇到的问题点**
+**初学SQL常遇到的问题点**
 
--   使用 Group by，那么 Select 的部分要么是分组项，要么就得是聚合函数。
+-   使用Group by，那么Select的部分要么是分组项，要么就得是聚合函数。
 
--   Order by 后面必须加 Limit n。
+-   Order by后面必须加Limit n。
 
--   Select 表达式中不能用子查询，可以改写为 Join。
+-   Select表达式中不能用子查询，可以改写为Join。
 
--   Join 不支持笛卡尔积，以及 MapJoin 的用法和使用场景。
+-   Join不支持笛卡尔积，以及MapJoin的用法和使用场景。
 
--   Union all 需要改成子查询的格式。
+-   Union all需要改成子查询的格式。
 
--   In/Not in 语句对应的子查询只能有一列，而且返回的行数不能超过 1000，否则也需要改成 Join。
+-   In/Not in语句对应的子查询只能有一列，而且返回的行数不能超过1000，否则也需要改成Join。
 
 
-**编写 SQL 进行解题**
+**编写SQL进行解题**
 
 **题目一：列出至少有一个员工的所有部门。**
 
-为了避免数据量太大的情况下导致 **常遇问题点** 中的第 6 点，您需要使用 Join 进行改写。如下所示：
+为了避免数据量太大的情况下导致 **常遇问题点** 中的第6点，您需要使用Join 进行改写。如下所示：
 
 ```
 
@@ -65,9 +65,9 @@ JOIN (
 ON d.deptno = e.no;
 ```
 
-**题目二：列出薪金比 SMITH 多的所有员工。**
+**题目二：列出薪金比SMITH多的所有员工。**
 
-MapJoin 的典型场景，如下所示：
+MapJoin的典型场景，如下所示：
 
 ```
 
@@ -96,7 +96,7 @@ LEFT OUTER JOIN emp b
 ON b.empno = a.mgr;
 ```
 
-**题目四：列出最低薪金大于 1500 的各种工作。**
+**题目四：列出最低薪金大于1500的各种工作。**
 
 Having 的用法，如下所示：
 
@@ -122,7 +122,7 @@ FROM `emp`
 GROUP BY `DEPTNO`;
 ```
 
-**题目六： 列出每个部门的薪水前3名的人员的姓名以及他们的名次（Top n 的需求非常常见）。**
+**题目六： 列出每个部门的薪水前3名的人员的姓名以及他们的名次（Top n的需求非常常见）。**
 
 SQL 语句如下所示：
 
@@ -139,9 +139,9 @@ FROM (
 WHERE emp1.nums < 4;
 ```
 
-**题目七： 用一个 SQL 写出每个部门的人数、CLERK（办事员）的人数占该部门总人数占比**。
+**题目七： 用一个SQL写出每个部门的人数、CLERK（办事员）的人数占该部门总人数占比**。
 
-SQL 语句如下所示：
+SQL语句如下所示：
 
 ```
 

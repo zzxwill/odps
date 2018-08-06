@@ -1,6 +1,6 @@
 # Create/View/Delete a table {#concept_rkk_kcy_5db .concept}
 
-You can use MaxCompute services once they are added to a project, and granted the corresponding privileges. Because the operation objects of MaxCompute \(input and output\) are performed on tables, you must create tables and partitions before processing data.-
+You can use MaxCompute services once they are added to a project, and granted the corresponding privileges. Because the operation objects of MaxCompute \(input and output\) are performed on tables, you must create tables and partitions before processing data.
 
 You can create or delete tables using the following methods:
 
@@ -39,7 +39,7 @@ Command descriptions:
     **Note:** 
 
     -   For more information about creating a table, see[Table Operations](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
-    -   For more information about the partition operation, see [Add/Remove Partition](https://www.alibabacloud.com/help/zh/doc-detail/73771.htm).
+    -   For more information about the partition operation, see [Add/Remove Partition](https://www.alibabacloud.com/help/doc-detail/73771.html).
     -   For more information about the lifecycle operation, see [Modify Lifecycle for a Table](../../../../intl.en-US/User Guide/SQL/DDL SQL/Lifecycle of table.md#).
 
 The following example shows how to create a table:

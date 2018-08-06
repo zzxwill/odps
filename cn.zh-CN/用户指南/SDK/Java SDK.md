@@ -109,7 +109,7 @@ run 接口返回 Instance 实例，通过 Instance 获取 SQL 的运行状态及
 
 ```
 
-**说明：** 如果您想创建表，需要通过 SQLTask 接口，而不是 Table 接口。您需要将[表操作](intl.zh-CN/用户指南/SQL/DDL语句/表操作.md#)的语句传入 SQLTask。
+**说明：** 如果您想创建表，需要通过 SQLTask 接口，而不是 Table 接口。您需要将[表操作](intl.zh-CN/用户指南/SQL/DDL语句/表操作.md#)的语句传入SQLTask。
 
 ## Instances {#section_xtz_s5b_wdb .section}
 

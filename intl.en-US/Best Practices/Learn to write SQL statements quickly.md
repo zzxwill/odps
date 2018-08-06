@@ -1,10 +1,10 @@
 # Learn to write SQL statements quickly {#concept_jxd_4qw_5db .concept}
 
-Using practical examples, this document introduces MaxCompute SQL and helps you understand how to write SQL statements and what is the difference between MaxCompute SQL and standard SQL. Read this article with   [MaxCompute SQL Basic Documentation](../../../../reseller.en-US/User Guide/SQL/SQL Summary.md) for better understanding.
+This article introduces you to maxcompute SQL through the way of course practice, allows you to quickly understand how SQL is written, and you know the difference between maxcompute SQL and standard SQL, please read in conjunction with the [MaxCompute SQL base documentation](../../../../intl.en-US/User Guide/SQL/SQL Summary.md).
 
 ## Prepare a dataset {#section_cxt_3rw_5db .section}
 
-In the example the Emp/Dept table is used as the dataset. For your convenience, we provide related MaxCompute table creation statements and data files \([emp table data files](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1489374509403/emp%E6%95%B0%E6%8D%AE.txt) and [dept table data files](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1488265664915/dept%E8%A1%A8%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6.txt)\).   You can create tables on the MaxCompute projects and upload data.
+In the example the Emp/Dept table is used as the dataset. For the convenience of everybody's operation, provides the relevant maxcompute build table statements and data files \([emp table data files](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1489374509403/emp%E6%95%B0%E6%8D%AE.txt), [dept table data file](http://docs-aliyun.cn-hangzhou.oss.aliyun-inc.com/assets/attach/51009/cn_zh/1488265664915/dept%E8%A1%A8%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6.txt)\), where you can create a table and upload the data yourself on the maxcompute project.
 
 The DDL statements for creating an emp table are as follows:
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS dept (
 
 **Example 1: List all departments that have at least one employee.**
 
-To avoid the sixth point in   **Notes for SQL beginners** caused by large data volumes, you must use the Join clause for rewriting.  For example:
+To avoid a situation where the amount of data is too large, you often encounter 6th points in the **problem point** , you need to override using join. For example:
 
 ```
 
@@ -62,25 +62,25 @@ JOIN (
     SELECT the DISTINCT deptno AS no
     FROM emp
 ) e
-on d. deptno = e. no;
+on d.deptno = e.no;
 ```
 
-**Example 2: List all employees  who have higher salaries than Smith.**
+**Example 2: List all employees who have higher salaries than Smith.**
 
-This example is a typical scenario of MapJoin,  as shown in the following code:
+This example is a typical scenario of MapJoin, as shown in the following code:
 
 ```
 
 SELECT /*+ MapJoin(a) */ e.empno
-    , e. ename
-    , e. sal
-FROM emp E
+    , e.ename
+    , e.sal
+FROM emp e
 JOIN (
     SELECT MAX(sal) AS sal
     FROM 'emp'
     WHERE `ENAME` = 'SMITH'
 ) a
-ON e. sal> a. sal;
+ON e.sal> a.sal;
 ```
 
 **Example 3: List the name and the immediate superior’s name of all employees.**
@@ -89,16 +89,16 @@ Use non-equi join, as shown in the following code:
 
 ```
 
-SELECT a. ename
-    , b. ename
-FROM emp A
+SELECT a.ename
+    , b.ename
+FROM emp a
 LEFT OUTER JOIN emp b
-ON b. empno = a. mgr;
+ON b.empno = a.mgr;
 ```
 
-**Example 4: List all jobs of which salaries are higher  than 1500 yuan.**
+**Example 4: List all jobs of which salaries are higher than 1500 yuan.**
 
-Use Having,  as shown in the following code:
+Use Having, as shown in the following code:
 
 ```
 
@@ -124,7 +124,7 @@ GROUP BY 'DEPTNO';
 
 **Example 6: List the names of first three employees who have the highest salaries and their ranks \(Top n is frequently used\).**
 
-The SQL  statements are as follows:
+The SQL statements are as follows:
 
 ```
 
@@ -139,9 +139,9 @@ FROM (
 WHERE emp1.nums < 4;
 ```
 
-**Example 7:  Use the SQL program to list the number of employees and the ratio** of clerks of each department.
+**Title 7: write down the number of people in each department in one SQL, clerk \(clerk\) the total number of people in the department accounted**.
 
-The SQL  statements are as follows:
+The SQL statement is as follows:
 
 ```
 

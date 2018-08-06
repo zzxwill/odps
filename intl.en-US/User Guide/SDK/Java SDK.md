@@ -2,7 +2,7 @@
 
 This article will introduce more commonly used MaxCompute core interfaces for you. For more details, please refer to [SDK Java Doc](http://repo.aliyun.com/java-sdk-doc/).
 
-You can configure the version of the new SDK through maven management. The configuration information of Maven is as follows\(The latest version can be searched for odps-sdk-core at any time at [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5). Obtain）:
+You can configure the version of the new SDK through maven management. The configuration information of Maven is as follows\(The latest version can be searched for odps-sdk-core at any time at [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5).
 
 ```
 <dependency>
@@ -48,7 +48,7 @@ User can construct MaxCompute object by inputting the AliyunAccount  instance. 
 
 ## Projects {#section_eg4_k5b_wdb .section}
 
-It is the set of all projects in MaxCompute.  The element of this set is  Projects. The code example is shown as follows:
+It is the set of all projects in MaxCompute. The element of this set is  Projects. The code example is shown as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -70,7 +70,7 @@ It refers to the description of project and corresponding project, and can be ac
 
 It refers to an interface to run and process SQL task.  SQL can run directly through the interface ‘run’.\(**Note: only one SQL statement can be submitted at a time.**\)
 
-The interface ‘run’ returns Instance. The running status and result of SQL can be acquired through ‘Instance’.  An example is as follows:
+The run interface returns the Instance instance and obtains the SQL running status and result through Instance.  An example is as follows:
 
 ```
     import java.util.List;
@@ -109,11 +109,11 @@ The interface ‘run’ returns Instance. The running status and result of SQL c
 
 ```
 
-**Note:** To create a table, you can use SQLTask interface instead of the interface Table.  You must introduce the statement of  [CREATE TABLE](intl.en-US/User Guide/SQL/DDL SQL.md) into SQLTask.
+**Note:** To create a table, you can use SQLTask interface instead of the interface Table. You must introduce the statement of [EN-US\_TP\_13396.md\#](intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#) into SQLTask.
 
 ## Instances {#section_xtz_s5b_wdb .section}
 
-This class refers to the set of all \(instances\) in MaxCompute and the element of this set is Instance。 The code example is shown as follows:
+This class refers to the set of all \(instances\) in MaxCompute and the element of this set is Instance. The code example is shown as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -257,7 +257,7 @@ Table resource creation example:
 
 ## Functions {#section_b4d_lvb_wdb .section}
 
-This class refers to the set of all functions in MaxCompute.  The element of this set is  Function. An example is as follows:
+This class refers to the set of all functions in MaxCompute. The element of this set is  Function. An example is as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");

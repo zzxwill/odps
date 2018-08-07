@@ -65,9 +65,9 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 
         **说明：** 您可单击右上角的登录账号，进入账号管理页面查看云账号的UID。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336069322844_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336071092844_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336069322845_zh-CN.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336071092845_zh-CN.jpg)
 
     3.  编辑该角色的授权策略AliyunODPSRolePolicy，如下所示：
 

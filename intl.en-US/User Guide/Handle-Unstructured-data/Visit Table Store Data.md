@@ -4,7 +4,7 @@ Table Store is a NoSQL database service that built on Alibaba Cloud’s Apsara d
 
 MaxCompute and Table Store are two independent big data computing and storage services. Therefore, these two services must ensure that the network between them is open.  When MaxCompute’s public cloud service accesses data stored in Table Store, we recommend that you use Table Store’s **private network** address, usually a host name suffixed ‘ots-internal.aliyuncs.com’, for example tablestore://odps-ots-dev.cn-shanghai.ots-internal.aliyuncs.com.
 
-This document introduces how to[access OSS](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md#)to import data from Table Store to the MaxCompute computing environment. This allows seamless connections between multiple data sources.
+This document introduces how to [access OSS](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md#) to import data from Table Store to the MaxCompute computing environment. This allows seamless connections between multiple data sources.
 
 Both TableStore and MaxCompute have their own type systems. Both Table Store and MaxCompute have their own data type systems. When you process Table Store data in MaxCompute, the data type associations are as follow:
 
@@ -65,9 +65,9 @@ You can authorize permissions in the following two ways:
 
         **Note:** On the upper-right corner, click the avatar to open the Billing Management page, and then check the account UID.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336069342844_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336071072844_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336069342845_en-US.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15336071072845_en-US.jpg)
 
     3.  Edit this role’s authorization policy AliyunODPSRolePolicy:
 

@@ -109,7 +109,7 @@ The run interface returns the Instance instance and obtains the SQL running stat
 
 ```
 
-**Note:** To create a table, you can use SQLTask interface instead of the interface Table. You must introduce the statement of [EN-US\_TP\_12074.md\#](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md#) into SQLTask.
+**Note:** To create a table, you can use SQLTask interface instead of the interface Table. You must introduce the statement of [Table Operation](intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#) into SQLTask.
 
 ## Instances {#section_xtz_s5b_wdb .section}
 

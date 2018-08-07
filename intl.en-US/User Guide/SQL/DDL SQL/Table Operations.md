@@ -34,7 +34,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 -   Currently, 60,000 partitions are allowed in a table, and the partition hierarchy cannot exceed 6 levels.
 -   The comment content is the effective string which length does not exceed 1024 bytes.
 -   Lifecycle indicates the lifecycle of the table, unit: days..  The statement create table like does not copy the lifecycle attribute from source table.
--   For more information about external tables, see[Access OSS](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md#).
+-   For more information about external tables, see [Access OSS](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md#).
 
 **For example:**
 

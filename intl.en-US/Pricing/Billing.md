@@ -69,8 +69,8 @@ The billing of a SQL task is calculated as follows.
 
 The current ：
 
-|price for | a |
-|:---------|:--|
+|Item |Price |
+|:----|:-----|
 |SQL task | 0.0438 USD/GB.|
 
 -   **Data Input Size**: The actual size of the data that an SQL statement scans. Most SQL statements have partition filtering and column pruning, so this value is generally less than the source table data size.
@@ -126,7 +126,7 @@ The preceding SQL includes 4 keywords \(one DISTINCT, one COUNT, one GROUP BY, a
 
 Pay-As-You-Go for MapReduce
 
-In December 19, 2017, MaxCompute began charging for MapReduce tasks. The billing of a MapReduce computing task is calculated as follows.
+In December 19, 2017, MaxCompute began charging for MapReduce\(MR\) tasks. The billing of a MR task is calculated as follows.
 
 ```
 Computing Cost of One MR task = TotalTime x MR Price(USD)
@@ -134,8 +134,8 @@ Computing Cost of One MR task = TotalTime x MR Price(USD)
 
 The current：
 
-|price for |Price|
-|:---------|:----|
+|Item |Price|
+|:----|:----|
 |MR price| 0.0690 USD/Hour/Task.|
 
 The calculating time for one successful MR task is: Execution time \(hours\) × Number of cores that task calls
@@ -150,7 +150,7 @@ After the MR task is finished, MaxCompute sends its metering information to the 
 
 -   The calculating time does not include the time waiting for execution.
 
--   If you purchased the MaxCompute Subscription service, you can use MR computing tasks for free within the range of the services you purchased. No additional fee is charged.
+-   If you purchased the MaxCompute Subscription service, you can use MR tasks for free within the range of the services you purchased. No additional fee is charged.
 
 
 **Subscription \(CU cost\)**
@@ -173,9 +173,9 @@ Download Cost from Extranet/time = Downloaded Data Volume x Download Price
 
 The specific price is as follows:
 
-|The current |USD/GB|
-|:-----------|:-----|
-|price for data download is |0.1166 USD/GB.|
+|Item |Price|
+|:----|:----|
+|Data download|0.1166 USD/GB.|
 
 **Note:** 
 

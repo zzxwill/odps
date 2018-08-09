@@ -67,7 +67,7 @@ The billing of a SQL task is calculated as follows.
  Computing Cost of One SQL = DataInputSize x SQLComplexity x SQL Price
 ```
 
-The current ：
+The price is as follows:
 
 |Item |Price |
 |:----|:-----|
@@ -126,17 +126,17 @@ The preceding SQL includes 4 keywords \(one DISTINCT, one COUNT, one GROUP BY, a
 
 Pay-As-You-Go for MapReduce
 
-In December 19, 2017, MaxCompute began charging for MapReduce\(MR\) tasks. The billing of a MR task is calculated as follows.
+In December 19, 2017, MaxCompute began charging for MapReduce \(MR\) tasks. The billing of a MR task is calculated as follows.
 
 ```
 Computing Cost of One MR task = TotalTime x MR Price(USD)
 ```
 
-The current：
+The price is as follows:
 
 |Item |Price|
 |:----|:----|
-|MR price| 0.0690 USD/Hour/Task.|
+|MR task| 0.0690 USD/Hour/Task.|
 
 The calculating time for one successful MR task is: Execution time \(hours\) × Number of cores that task calls
 
@@ -171,7 +171,7 @@ You can download data from the extranet through the MaxCompute Tunnel.  The bil
 Download Cost from Extranet/time = Downloaded Data Volume x Download Price
 ```
 
-The specific price is as follows:
+The price is as follows:
 
 |Item |Price|
 |:----|:----|

@@ -13,14 +13,14 @@ SHOW P [-all];
 
 **Action:**
 
-The information of instances created by current users is displayed.
+Displays the information about the instances created by the current users.
 
 **Parameters information is as follows:**
 
--   startdate、enddate：returns the information about the instances during specified period \(from startdate to enddate\). The following format must be met: yyyy-mm-dd, precision to the day.  The parameters are optional. If the parameters are left unspecified, instances submitted within three days are returned.
--    number： Specify the number of instance to be showed.In accordance with the time scheduling, return N \(number\) instances nearest to the current time.  If it is not specified, all instances that meet the requirements are shown. In chronological order, the specified number of instances most recently preceding the current time are returned. 
--   -all：The information of all instances meeting requirements is returned. Note: The user executing the command needs to have list permission for the project.
--   The output items: Include StartTime \(the time accurate to seconds\), RunTime \(s\), Status \(including Waiting, Success, Failed, Running, Cancelled, and Suspended\).
+-   startdate、enddate: Returns the instance information during the specified period \(from startdate to enddate\) in the yyyy-mm-dd format and the unit is ‘day’. The parameters are optional. If the parameters are not specified, instances submitted within three days are returned by default.
+-    number: Specifies the number of instances to be displayed. Based on the scheduled time, return N \(number\) instances nearest to the current time. If it is not specified, all instances that meet the requirements are shown.
+-   -all: The information of all instances that meet requirements is returned. To execute the command, the user must have the 'list' permission  for the project.
+-   The output items: Include StartTime \(the time accurate to seconds\), RunTime \(s\) and Status \(including Waiting, Success, Failed, Running, Cancelled, and Suspended\).
 
 **InstanceID and corresponding SQL are as following:**
 
@@ -31,7 +31,7 @@ StartTime RunTime Status InstanceID Query
 ...    ...    ...    ...    ...    ......
 ```
 
-**Six kinds of instance status are possible:**
+**The probable status of an instance is as follows:**
 
 -   Running
 -   Success
@@ -54,7 +54,7 @@ status <instance_id>; -- instance_id: the unique identifier of an instance, to s
 **Action:**
 
 -   Query the status of specified instance, such as Success, Failed, Running, and Cancelled.
--   If this instance is not created by current user, exception is returned.
+-   If this instance is not created by the current user, exception is returned.
 
 **Examples:**
 
@@ -77,11 +77,11 @@ Query the status of an instance which ID is 20131225123xxxxxxxxxxxxxxx, and the 
 
 **Action:**
 
-Permission requirements: the user is project owner or administrator role.
+Permission requirements: The user must be a project owner or administrator.
 
-top instance: the job information of the current account that is running in the project is displayed, including ISNTANCEID, Owner, Type, StartTime, Progress, Status, Priority, RuntimeUsage \(CPU/MEM\), TotalUsage \(CPU/MEM\), QueueingInfo \(POS/LEN\) and so on.
+top instance: Displays tthe job information of the current account that is running in the project. It  is displayed, includesding ISNTANCEID , Owner, Type, StartTime, Progress, Status, Priority, RuntimeUsage \(CPU/MEM\), TotalUsage \(CPU/MEM\), QueueingInfo \(POS/LEN\) and so on.
 
-top instance-all :returns all currently executing jobs in the current project.
+top instance-all : Returns all jobs that are currently being executed in the current project.
 
 **Examples:**
 
@@ -101,7 +101,7 @@ kill <instance_id>; -- instance_id: The unique identifier of an instance,  whic
 
 **Action:**
 
-Stop specified instance. Instance status must be Running.
+Stop specified instance. The instance must be in the Running status.
 
 **Examples:**
 
@@ -114,11 +114,11 @@ Stop the instance which ID is 20131225123xxxxxxxxxxxxxxx.
 **Note:** 
 
 -   The commands from the preceding example run in MaxCompute client.
--   This is an asynchronous process. It does not mean that the distributed task has stopped after the system accepts the request and returns result. To check whether the instance is deleted, use the status command.
+-   This is an asynchronous process. It does not mean that the distributed task has stopped after the system accepts the request and returns the result. You can check whether the instance is deleted by using the status command.
 
 ## Desc Instance {#section_a1l_fz2_vdb .section}
 
-**The command format is as folllows:**
+**The command format is as follows.**
 
 ```
 desc instance <instance_id>; -- instance_id: The unique identifier of an instance.
@@ -141,7 +141,7 @@ console_select_query_task_1436956481295 Success
 Query select * from mj_test;
 ```
 
-Query all the job information related to the instance which ID is 20150715xxxxxxxxxxxxxxx.
+Query all the job information related to the instance whose ID is 20150715xxxxxxxxxxxxxxx.
 
 **Note:** The commands from the preceding example run in MaxCompute client.
 
@@ -155,7 +155,7 @@ wait <instance_id>;  -- instance_id: The unique identifier of an instance.
 
 **Action:**
 
-Get running task information, including logs according to instance ID, and logview link. You can view task details by accessing logview link.
+Get running task information, including logs based on the instance ID and a logview link. View task details by accessing the logview link.
 
 **Examples:**
 

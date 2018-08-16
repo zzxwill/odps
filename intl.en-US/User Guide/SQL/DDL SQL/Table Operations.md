@@ -18,10 +18,10 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
  LIKE existing_table_name
 ```
 
-**Notes:**
+**Consider the following points:**
 
--   When a table is created, an error is returned if the same name table exists without specifying the if not exists option. If the option is specified, no matter whether a same name table exists and even if the source table structure and the target table structure are inconsistent, all return successfully. The Meta information of the existing table does not change.
--   The table name and column name are both case insensitive. The table name and column name cannot have special characters. It can only begin with a letter and include a-z, A-Z, digits, and underline\_. The name length cannot exceed 128 bytes.
+-   When a table is created, an error is returned if the same name table exists without specifying the "if not exists" option. If the option is specified, no matter whether a same name table exists and even if the source table structure and the target table structure are inconsistent, all return successfully. The Meta information of the existing table does not change.
+-   Both the table name and column name are case insensitive and cannot have special characters. It must begin with a letter and can include a-z, A-Z, digits, and underscores \(\_\). The name length cannot exceed 128 bytes.
 -   1200 column definitions are allowed in a table.
 -   The data types support Bigint、Double、Boolean、Datetime、Decimal and String, MaxCompute2.0 extends many [data types](../../../../intl.en-US/Product Introduction/Definition/Data types.md).
 
@@ -29,11 +29,11 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 
 -   Use Partitioned by to specify the [partition](../../../../intl.en-US/Product Introduction/Definition/Partition.md) and now Tinyint、Smallint、 Int、 Bigint、Varchar and String are supported.
 
-    The partition value cannot have a double byte characters \(such as Chinese\), and must begin with a letter a-z or A-Z, followed by letter or number. The name length cannot exceed 128 bytes.  Allowed characters including: space, colon\(:\), underlined symbol \(\_\), \($\), \(\#\), point \(.\), exclamation point \(!\) and ’@’. Other characters are taken as undefined characters, such as \(\\t\), \(\\n\), \(/\) and so on. If using partition fields in a partition table, a full table scan is not needed when adding a partition, updating data in a partition and reading data in a partition, to improve the processing efficiency.
+    The partition value cannot have a double byte characters \(for example, Chinese\), and must begin with an uppercase or a lowercase letter, followed by letter or a number. The name length cannot exceed 128 bytes. Special characters can be used, which include space, colon \(:\), underscore \(\_\), dollar sign \($\), pound sign \(\#\), period \(.\), exclamation point \(!\), and ’@’. Other characters such as \(\\t\), \(\\n\), \(/\), and so on are considered as undefined characters. When using partition fields in a partition table, to improve the processing efficiency, a full table scan is not needed to add, update, and read the data in a partition.
 
 -   Currently, 60,000 partitions are allowed in a table, and the partition hierarchy cannot exceed 6 levels.
--   The comment content is the effective string which length does not exceed 1024 bytes.
--   Lifecycle indicates the lifecycle of the table, unit: days..  The statement create table like does not copy the lifecycle attribute from source table.
+-   The comment content is the effective string and its length must not exceed 1024 bytes
+-   Lifecycle indicates the lifecycle of the table, the unit is ‘days’. The statement create table like does not copy the lifecycle attribute from source table
 -   For more information about external tables, see [Access OSS](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md#).
 
 **For example:**
@@ -60,9 +60,9 @@ select * from sale_detail;
 
 If the table sale\_detail has data, the example mentioned preceding copies all data of sale\_detail into the table sale\_detail\_ctas1.
 
-**Note:** sale\_detail is a partitioned table, while the table created by the statement `create table … as select …` does not copy the partition attribute. The partition column of source table becomes a general column of object table. That is to say, sale\_detail\_ctas1 is a non-partition table with 5 columns.
+**Note:** sale\_detail is a partitioned table, while the table created by the statement `create table … as select …` does not copy the partition attribute. The partition column of source table becomes a general column of object table. In other words, sale\_detail\_ctas1 is a non-partition table with 5 columns.
 
-In the statement `‘create table … as select…` if using a constant as a column value in Select clause, it is suggested specify the column name, such as:
+In the statement `create table … as select…` if using a constant as a column value in Select clause, it is suggested specify the column name, such as:
 
 ```
 create table sale_detail_ctas2 as
@@ -74,7 +74,7 @@ create table sale_detail_ctas2 as
         from sale_detail;
 ```
 
-If the column name is not specified, the statement is as shown below:
+If the column name is not specified, the statement is as shown as follows:
 
 ```
 create table sale_detail_ctas3 as
@@ -86,15 +86,15 @@ create table sale_detail_ctas3 as
         from sale_detail;
 ```
 
-Then the forth column and fifth column of created table sale\_detail\_ctas3 become system generated names, like `_c3`, `_c4`. 
+Then the forth column and fifth column of the created table sale\_detail\_ctas3 become system generated names, like `_c3`, `_c4`. 
 
-To make the destination table has the same structure as the source table, try to use `create  table … like’` statement, such as:
+To let the destination table have the same structure as the source table, try to use `create  table … like’` statement, such as:
 
 ```
 create table sale_detail_like like sale_detail;
 ```
 
-Now the table structure of `sale_detail_like` is exactly the same as `sale_detail`. Except the life cycle, attributes, such as the column name, column comment, and table comment, of the two tables are the same. But the data in `sale_detail` cannot be copied into the table `sale_detail_like`.
+Now the table structure of `sale_detail_like` is exactly the same as `sale_detail`. Except the life cycle, attributes including the column name, column comment, and table comment, of the two tables are the same. But the data in `sale_detail` cannot be copied into the table `sale_detail_like`.
 
 ## View table information {#section_cm5_mv1_wdb .section}
 
@@ -157,7 +157,7 @@ desc extended <table_name>; --View external table information.
     OK
     ```
 
--   To view the info of the preceding table sale\_detail\_like, run the following statement:
+-   To view the infomation of the preceding table sale\_detail\_like, run the following statement:
 
     ```
     desc sale_detail_like
@@ -208,9 +208,9 @@ desc extended <table_name>; --View external table information.
     ```
 
 
-In the this example, we can see that the attributes of sale\_detail\_like coincide with that of sale\_detail, except lifecycle. For more information, see [Describe Table](intl.en-US/User Guide/Common commands/Table Operations.md).
+In preceding example, we can see that the attributes of sale\_detail\_like coincide with that of sale\_detail, except for the lifecycle. For more information, see [Describe Table](intl.en-US/User Guide/Common commands/Table Operations.md).
 
-Check the information of sale\_detail\_ctas1, you can find that sale\_date and region are only normal columns, not partitions of the table.
+Check the information of sale\_detail\_ctas1, you can find that sale\_date and region are only normal columns and not partitions of the table.
 
 ## Drop a table {#section_xvw_1w1_wdb .section}
 
@@ -223,7 +223,7 @@ DROP TABLE [IF EXISTS] table_name;
 **Note:** 
 
 -   If the option \[if exists\] is not specified and the table does not exist, exception returns.  If this option is specified, no matter whether the table exists or not, all return success.
--   Data in OSS is not deleted when you delete external tables.
+-   Data in OSS is not deleted when the external tables are deleted.
 
 **For example:**
 
@@ -245,8 +245,8 @@ ALTER TABLE table_name RENAME TO new_table_name;
 
 **Note:** 
 
--   Rename operation is to update the table name, but not to modify the data in table.
--   If the table which has the same name with new\_table\_name has already existed, error may occur.
+-   Rename operation is used to update the table name only and not the data in the table.
+-   If the new\_table\_name is duplicated an error may occur.
 -   If the table table\_name does not exist, error may occur.
 
 **For example:**
@@ -266,8 +266,8 @@ ALTER TABLE table_name SET COMMENT 'tbl comment';
 
 **Note:** 
 
--   The table table\_name must have existed.
--   The acceptable max comment length is 1024 bytes.
+-   The table table\_name must exists.
+-   The comment length must not exceed 1024 bytes.
 
 **For example:**
 
@@ -290,11 +290,11 @@ ALTER TABLE table_name TOUCH;
 **Note:** 
 
 -   If the table table\_name does not exist, an error is returned.
--   This operation changes the value of LastDataModifiedTime of a table and now MaxCompute considers the table data has changed and corresponding lifecycle calculation begins again.
+-   This operation changes the value of LastDataModifiedTime of a table and this is when MaxCompute identifies change in the table data and then begins the corresponding lifecycle calculation.
 
 ## Empty data from a non-partitioned table {#section_zpx_1z1_wdb .section}
 
-Empty the data in specified non-partition table, This command does not support partition table.  For the partition table, you can use `ALTER TABLE table_name DROP PARTITION` to clear the data in partition.
+Empty the data in specified non-partition table, This command does not support partition table.  For the partition table, use `ALTER TABLE table_name DROP PARTITION` to clear the data in partition.
 
 **Command format:**
 

@@ -12,13 +12,13 @@ FROM from_statement;
 
 -   Insert syntax of MaxCompute is different from MySQL or Oracle Insert syntax. The keyword table must be added following insert overwrite|into, instead of using tablename directly.
 -   When the target table for Insert is a partitioned table, expressions such as functions are not allowed in `[PARTITION (partcol1=val1, partcol2=val2 …)]` .
--   Currently, INSERT OVERWRITE does not support to insert columns. You can use INSERT INTO instead.
+-   Currently, INSERT OVERWRITE does not support inserting columns. You can use INSERT INTO instead.
 
-Insert overwrite/into is used to save calculation results into a destination table.
+Insert overwrite/into saves calculation results into a destination table.
 
-The difference between insert into and insert overwrite is that insert into inserts added data into the table or partition, while insert overwrite clears source data from the table or partition before inserting data in it.
+The difference between insert into and insert overwrite is that insert into inserts added data into the table or partition, while insert overwrite clears source data from the table or partition before inserting the data in it.
 
-While processing data through MaxCompute SQL, insert overwrite/into is the most common statement, which can save the calculation result into a table, providing for the next calculation.  For example, use the following statements to calculate the sale detail of different regions from the table sale\_detail:
+While processing data through MaxCompute SQL, insert overwrite/into is the most common statement. It can save the calculation result into a table, needed for the subsequent calculation.  For example, use the following statements to calculate the sale detail of different regions from the table sale\_detail:
 
 ```
 create table sale_detail_insert like sale_detail;
@@ -27,7 +27,7 @@ insert overwrite table sale_detail_insert partition (sale_date='2013', region='c
 select shop_name, customer_id, total_price from sale_detail;
 ```
 
-**Note:** The correspondence between source table and destination table depends on the column sequence in select clause, not the column name correspondence between two tables. The following statement is still legal:
+**Note:** The correspondence between source table and destination table depends on the column sequence in select clause, not the column name correspondence between the two tables. The following statement is still valid:
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
@@ -40,7 +40,7 @@ select customer_id, shop_name, total_price from sale_detail;
     -- Inserts data in sale_detail.shop_name into sale_detail_insert.customer_id.
 ```
 
-To insert data into a partition, the partition column cannot appear in Select list.
+To insert data into a partition, the partition column cannot appear in the Select list.
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
@@ -48,7 +48,7 @@ insert overwrite table sale_detail_insert partition (sale_date='2013', region='c
     -- Returns an error. The items sale_date and region are partition columns, which cannot appear in the INSERT statement of static partitions.
 ```
 
-At the same time, the value of the partition can only be a constant and expressions cannot appear. The following statements are invalid:
+Simultaneously, the value of the partition can only be a constant and expressions cannot appear. The following statements are invalid:
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date=datepart('2016-09-18 01:10:00', 'yyyy') , region='china')

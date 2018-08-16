@@ -4,15 +4,15 @@
 
 |Operator|Description|
 |:-------|:----------|
-|A=B| If A or B is NULL, NULL is returned. If A is equal to B, TRUE is returned. Otherwise, FALSE is returned.|
-|A<\>B|If expression A or expression B is NULL, return NULL. TRUE if expression A is not equal to expression B otherwise FALSE.|
-|A<B|If A or B is NULL, NULL is returned. If A is less than B, TRUE is returned. Otherwise, FALSE is returned.|
-|A<=B|If A or B is NULL, NULL is returned. If A is not greater than B, TRUE is returned. Otherwise, FALSE is returned.|
-|A\>B|If A or B is NULL, NULL is returned. If A is greater than B, TRUE is returned. Otherwise, FALSE is returned.|
+|A=B| If A or B is NULL, NULL is returned. If A is equal to B, TRUE is returned; otherwise FALSE is returned.|
+|A<\>B|If A or B is NULL, NULL is returned. If A is not equal to B, TRUE is returned; otherwise FALSE is returned.|
+|A<B|If A or B is NULL, NULL is returned. If A is less than B, TRUE is returned; otherwise FALSE is returned.|
+|A<=B|If A or B is NULL, NULL is returned. If A is not greater than B, TRUE is returned; otherwise FALSE is returned.|
+|A\>B|If A or B is NULL, NULL is returned. If A is greater than B, TRUE is returned; otherwise FALSE is returned.|
 |A\>=B|If A or B is NULL, NULL is returned; if A is not less than B, TRUE is returned; otherwise, FALSE is returned.|
-|A IS NULL|If A is NULL, TRUE is returned. Otherwise, FALSE is returned.|
-|A IS NOT NULL|If expression A is NULL, return TRUE. Otherwise, return FALSE.|
-|A LIKE B|If expression A or expression B is NULL, return NULL. TRUE if String A matches the SQL simple regular expression B, otherwise FALSE. The \( %\)character in B matches an arbitrary number of characters and the \(\_\) character in B matches any character in A. To match \(%\) or\_'\), use by the escape characters '\(%'\)' and \(\_'\).```
+|A IS NULL|If A is NULL, TRUE is returned; otherwise, FALSE is returned.|
+|A IS NOT NULL|If A is NULL, TRUE is returned; otherwise FALSE is returned.|
+|A LIKE B|If A or B is NULL, NULL is returned. If String A matches the SQL simple regular B TRUE is returned; otherwise FALSE is returned. The \( %\) character in B matches an arbitrary number of characters and the \(\_\) character in B matches any character in A. To match \(%\) or\_'\), use by the escape characters '\(%'\)' and \(\_'\).```
 ‘aaa’ like‘a_’= TRUE 
 ‘aaa’ like‘a%’ = TRUE
 ‘aaa’ like‘aab’= FALSE 
@@ -21,8 +21,8 @@
 ```
 
 |
-|A RLIKE B|A is a string, and B is a string constant regular expression. TRUE if any substring of A matches the Java regular expression B, otherwise FALSE. If expression B is empty, report error and exit. NULL if expression A or B is NULL.|
-|A IN B|B is a set. If expression A is NULL, return NULL. If expression A is in expression B, return TRUE, otherwise return FALSE. If expression B has only one element NULL, that is, A IN \(NULL\), return NULL. If expression B contains NULL element, take NULL as the type of other elements in B set. B must be a constant and at least has one element; all types must be consistent.|
+|A RLIKE B|A is a string, and B is a string constant regular expression. If any substring of A matches the Java regular expression B, TRUE is returned; otherwise FALSE is returned. If expression B is empty, report error and exit. If expression A or B is NULL, NULL is returned.|
+|A IN B|B is a set. If expression A is NULL, NULL is returned. If expression A is in expression B, TRUE is returned; otherwise FALSE is returned. If expression B has only one element NULL, that is, A IN \(NULL\), return NULL. If expression B contains NULL element, take NULL as the type of other elements in B set. B must be a constant and at least has one element; all types must be consistent.|
 |BETWEEN AND|The expression is `A [NOT] BETWEEN B AND C`. Empty if A, B, or C is empty. True if A is larger than or equal to B and less than or equal to C; otherwise false.|
 
 The common usage:
@@ -49,21 +49,21 @@ abs(0.9999999999 - 1.0000000000) < 0.000000001
 **Note:** 
 
 -   ABS is a built-in function provided by MaxCompute to take absolute value. For more information, see [ABS](intl.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
--   In general, the Double type in MaxCompute can retain 14 valid digits.
+-   In general, the Double type in MaxCompute can retain 14-bit decimal.
 
 ## Arithmetic Operators {#section_ycc_chl_vdb .section}
 
 |Operator|Description|
 |:-------|:----------|
-|A + B|If expression A or B is NULL, return NULL; otherwise return the result of A+B.|
-|A – B|If expression A or B is NULL, return NULL; otherwise return the result of subtracting B from A.|
-|A \* B|If expression A or B is NULL, return NULL; otherwise return the result of multiplying A and B.|
-|A / B|If expression A or B is NULL, return NULL; otherwise return the result of A/ B. If Expression A and B are bigint types, the result is double type.|
-|A % B|If expression A or B is NULL, return NULL; otherwise return the reminder resulting from dividing A by B.|
-|+A|Still return A.|
-|-A|If expression A is NULL, return NULL; otherwise return –A.|
+|A + B|If expression A or B is NULL, NULL is returned; otherwise the result of A+B is returned.|
+|A – B|If expression A or B is NULL, NULL is returned; otherwise the result of A – B is returned.|
+|A \* B|If expression A or B is NULL, NULL is returned; otherwise result of A \* B is returned.|
+|A / B|If expression A or B is NULL, NULL is returned; otherwise the result of A / B is returned. If Expression A and B are bigint types, the result is double type.|
+|A % B|If expression A or B is NULL, NULL is returned; otherwise the reminder result from dividing A by B is returned.|
+|+A|Result A is returned.|
+|-A|If expression A is NULL, NULL is returned; otherwise –A is returned.|
 
-The common usage:
+The common use:
 
 ```
 select age+10, age-10, age%10, -age, age*age, age/10 from user;
@@ -71,9 +71,9 @@ select age+10, age-10, age%10, -age, age*age, age/10 from user;
 
 **Note:** 
 
--   Only String, Bigint, and Double could be involved in arithmetic operation, Datetime type and Boolean type are not allowed participating in arithmetic operation.
--   Before involved in operation, the type String will be converted to Double by implicit type conversion.
--   If Bigint and Double are both involved in arithmetic operation, the type Bigint will be converted to Double by implicit type conversion.
+-   You can only use String, Bigint, and Double to perform arithmetic operations. \(Using Datetime type and Boolean type is restricted.\)
+-   Before you begin these operations, the type String is converted into Double by implicit type conversion.
+-   If Bigint and Double both are involved in arithmetic operation, the type Bigint is converted into Double by implicit type conversion.
 -   When A and B are Bigint types, the return result of A/B will be a Double type. For other arithmetic operations, the return value is also a Bigint type.
 
 ## Bitwise Operators { .section}

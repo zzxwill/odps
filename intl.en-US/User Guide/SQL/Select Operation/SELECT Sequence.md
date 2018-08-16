@@ -1,6 +1,6 @@
 # SELECT Sequence {#concept_jsv_mkb_wdb .concept}
 
-The actual logic execution sequence of SELECT statements written in compliance with the preceding SELECT syntax is different from the standard writing sequence. See the following:
+The actual logic execution sequence of SELECT statements written in compliance with the preceding SELECT syntax are different from the standard writing sequence. See the following example:
 
 ```
 SELECT key, max(value) FROM src t WHERE value > 0 GROUP BY key HAVING sum(value) > 100 ORDER BY key LIMIT 100;

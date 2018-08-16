@@ -11,10 +11,10 @@ partition_spec:(partition_col1 = partition_col_value1, partition_col2 = partiton
 
 **Note:** 
 
--   Only creating partitions are supported and creating partition columns are not supported.
--   If the same name partition has already existed and the option \[if not exists\] is not specified, return exception.
--   Currently, the maximum number of partitions supported in a single table in MaxCompute is 60,000.
--   For tables that have multi-level partitions, to add a new partition, all partition values must be specified.
+-   · Only ‘creating partitions’ are supported wherein, ‘creating partition columns’ are not supported.
+-   · If the same name partition has already existed and the option \[if not exists\] is not specified, an exception returns.
+-   · Currently, the maximum number of partitions supported in a single MaxCompute table is 60,000.
+-   · For tables that have multi-level partitions, to add a new partition, all partition values must be specified.
 
 **Example: **
 
@@ -40,7 +40,7 @@ ALTER TABLE TABLE_NAME DROP [IF EXISTS] PARTITION partition_spec;
 partition_spec:(partition_col1 = partition_col_value1, partition_col2 = partiton_col_value2, ...)
 ```
 
-**Note:** If the partition does not exist and the option \[if exists\] is not specified, then an error is indicated.
+**Note:** If the partition does not exist and the option \[if exists\] is not specified, then an error returns.
 
 **Example: **
 
@@ -59,7 +59,7 @@ alter table sale_detail drop if exists partition(sale_date='201312',region='hang
 ALTER TABLE table_name ADD COLUMNS (col_name1 type1, col_name2 type2...)
 ```
 
-**Note:** You cannot specify order for the new column. By default, the new column is located in the last column.
+**Note:** You cannot specify order for a new column. By default, a new column is placed in the last column.
 
 ## Modify column name {#section_k3x_qbb_wdb .section}
 
@@ -71,8 +71,8 @@ ALTER TABLE table_name CHANGE COLUMN old_col_name RENAME TO new_col_name;
 
 **Note:** 
 
--   Column ‘old\_col\_name’ must be an existing column.
--   There cannot be a column named ‘new\_col\_name’ in a table.
+-   Column ‘old\_col\_name’ refers to an existing column.
+-   A column named ‘new\_col\_name’ cannot exist in the table.
 
 ## Alter Column/Partition Comment {#section_ugq_pcb_wdb .section}
 
@@ -95,8 +95,8 @@ ALTER TABLE table_name CHANGE COLUMN old_col_name new_col_name column_type COMME
 **Note:** 
 
 -   Column ‘old\_col\_name’ must be an existing column.
--   There cannot be a column named ‘new\_col\_name’ in a table.
--   The maximum comment content is 1024 bytes.
+-   A column named ‘new\_col\_name’ cannot exist in the table.
+-   The content of the comment cannot exceed 1024 bytes.
 
 ## Modify LastDataModifiedTime of table/partition {#section_mnj_5cb_wdb .section}
 
@@ -110,9 +110,9 @@ ALTER TABLE table_name TOUCH PARTITION(partition_col='partition_col_value', ...)
 
 **Note:** 
 
--   If ‘table\_name’ or ‘partition\_col’ does not exist, return an error.
--   If the specified partition\_col\_value does not exist, return an error.
--   This operation changes the value of ‘LastDataModifiedTime’ in a table and now MaxCompute considers the data of table or partition has changed and the lifecycle calculation begins again.
+-   If ‘table\_name’ or ‘partition\_col’ does not exist, an error returns.
+-   If the specified partition\_col\_value does not exist, an error returns.
+-   This operation changes the value of ‘LastDataModifiedTime’ in the table and now MaxCompute determines whether the data of the table or partition has changed and the lifecycle calculation begins again.
 
 ## Modify partition value {#section_lrr_ycb_wdb .section}
 

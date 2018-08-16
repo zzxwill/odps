@@ -38,9 +38,9 @@ Currently, MaxCompute supports both IN SUBQUERY and CORRELATED conditions. 
 SELECT * from mytable1 where id in (select id from mytable2 where value = mytable1.value);
 ```
 
-`“where value = mytable1.value” in the subquery is a CORRELATED condition. `MaxCompute of early versions reports errors for such expressions that reference source tables both in subqueries and in outer queries.  **MaxCompute supports such expressions now**. In fact, such filtering conditions are  part of the ON condition in SEMI JOIN.
+`where value = mytable1.value` in the subquery is a CORRELATED condition. MaxCompute of early versions reports errors for such expressions that reference source tables both in subqueries and in outer queries.  **MaxCompute supports such expressions now**. In fact, such filtering conditions are a part of the ON condition in SEMI JOIN.
 
-NOT IN SUBQUERY is similar to LEFT ANTI JOIN. However, they have a significant difference. 
+NOT IN SUBQUERY is similar to LEFT ANTI JOIN. However, they have one significant difference. 
 
 **For example**:
 
@@ -72,7 +72,7 @@ If ds is a partition column, `select dt from sales_date` separately  starts a j
 
 ## EXISTS SUBQUERY/NOT EXISTS SUBQUERY {#section_hq5_q5b_wdb .section}
 
-In an EXISTS SUBQUERY, when at least one data row exists in the subquery, TRUE is returned; otherwise, FALSE is returned.  NOT EXISTS subquery is on the contrary.
+In an EXISTS SUBQUERY, when at least one data row exists in the subquery, TRUE is returned; otherwise, FALSE is returned. NOT EXISTS subquery is completely opposite of this.
 
 Currently, MaxCompute supports only subqueries including the correlated WHERE conditions.  EXISTS SUBQUERY/NOT EXISTS SUBQUERY is implemented by converting to LEFT SEMI  JOIN or LEFT ANTI JOIN.
 

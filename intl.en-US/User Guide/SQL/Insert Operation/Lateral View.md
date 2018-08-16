@@ -10,9 +10,9 @@ lateralView: LATERAL VIEW [OUTER] udtf(expression) tableAlias AS columnAlias (',
 
 Notes:
 
--   Lateral view is typically encapsulated with UDTF such as split, explode, and so on.It can split one row of data into multiple rows and then aggregate them.
+-   Lateral view is typically encapsulated with UDTF including split, explode, and so on.It can split one row of data into multiple rows and then aggregate them.
 -   Lateral view first calls UDTF for each row of the original table, then split a row into one or more rows.Finally,Lateral view aggregate the rows to generate a virtual table that supports alias.
--   Lateral view outer: when the table function does not output any rows, the corresponding Input rows remain in the Lateral View results, and all table function output lists are null.
+-   Lateral view outer: When the table function does not output any rows, the corresponding Input rows remain in the Lateral View results, and all table function output lists are null.
 
 Example:
 
@@ -23,7 +23,7 @@ Suppose we have a table called "pageAds" which has two columns of data.The first
 |“front\_page”|\[1, 2, 3\]|
 |“contact\_page”|\[3, 4, 5\]|
 
-The requirement is to count the number of times that all AD IDs appeared.The implementation process is as follows.
+The requirement is to count the number of times all AD IDs have appeared. The implementation process is as follows.
 
 1.  Split the AD IDs as follows:
 
@@ -32,7 +32,7 @@ The requirement is to count the number of times that all AD IDs appeared.The imp
      FROM pageAds LATERAL VIEW explode(adid_list) adTable AS adid;
     ```
 
-    The execution results are as follows:
+    The execution result is as follows:
 
     |string pageid|int adid|
     |:------------|:-------|
@@ -97,7 +97,7 @@ The following table is an example:
         LATERAL VIEW explode(col2) myTable2 AS myCol2;
     ```
 
-    Result:
+    Result is as follows:
 
     |int myCol1|string myCol2|
     |:---------|:------------|

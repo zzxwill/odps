@@ -16,8 +16,8 @@ CREATE [OR REPLACE] VIEW [IF NOT EXISTS] view_name
 -   To create a view, you must have ‘read’ privilege on the table referenced by view.
 -   Views can only contain one valid ‘select’ statement.
 -   Other views can be referenced by a view, but this view cannot reference itself. Circular reference is not supported.
--   It is not allowed writing data into a view, such as: using ‘insert into’ or ‘insert overwrite’ to operate view.
--   After a view was created, maybe it is not able to be accessed if the referenced table is altered, such as deleting referenced table.  You must maintain corresponding relationship between referenced tables and views.
+-   Writing the data into a view is not allowed, such as, using ‘insert into’ or ‘insert overwrite’ to operate view
+-   After a view was created,it may be inaccessable if the referenced table is altered, such as deleting a referenced table.  You must maintain corresponding relationship between referenced tables and views.
 -   If the option ‘if not exists’ is not specified and the view has already existed, using ‘create view’ causes abnormality.  If this situation occurs, use ‘create or replace view’ to recreate a view.  After reconstruction, the privileges keep unchanged.
 
 **Example:**

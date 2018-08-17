@@ -1,16 +1,16 @@
 # Date Functions {#concept_akb_2c2_5db .concept}
 
-MaxCompute SQL provides the necessary functions to operate datetime types.
+This article explains various functions that MaxCompute SQL offers to operate datetime types.
 
 ## DATEADD {#section_qjz_lrl_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 datetime dateadd(datetime date, bigint delta, string datepart)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Modify the value of date according to a specified unit ‘datepart’ and specified scope ‘delta’.
 
@@ -18,23 +18,23 @@ Modify the value of date according to a specified unit ‘datepart’ and specif
 
 -   date: Datetime type, value of date.  If the input is string type, it is converted to ‘datetime’ type by implicit conversion. If it is another type, an exception is indicated.
 -   delta: Bigint type, date scope to be modified.  If the input is ‘string’ type or ‘double’ type, it is converted to ‘bigint’ type by implicit conversion. If it is another data type, exception occurs.  If ‘delta’ is greater than zero, do ‘add’ operation, otherwise do ‘minus’ operation.
--   datepart: a String type constant. T his field value follows ‘string’ and ‘datetime’ type conversion agreement, that is, ‘yyyy’ indicates year; ‘mm’ indicates month… 
+-   datepart: a String type constant. This field value follows ‘string’ and ‘datetime’ type conversion agreement, where, ‘yyyy’ indicates year; ‘mm’ indicates month.
 
-    See Conversion between [String type and Datetime type](intl.en-US/User Guide/SQL/SQL Summary.md).  In addition, the extensional date format is also supported: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.  If it is not a constant or unsupported format or other data type, an exception is indicated.
+    See Conversion between [String type and Datetime type](reseller.en-US/User Guide/SQL/SQL Summary.md).  In addition, the extensional date format is also supported: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.  If it is not a constant or unsupported format or other data type, an exception is indicated.
 
 
 **Return value:**
 
-Datetime type.  If any input is NULL, return NULL.
+Datetime type. If any input is NULL, return NULL.
 
 **Note:** 
 
 -   While increasing or decreasing ‘delta’ according to specified unit, it causes the carry or back space for higher unit. Day, month, hour, minute, second are calculated by 10 hexadecimal, 12 hexadecimal, 24 hexadecimal, 60 hexadecimal, 60 hexadecimal respectively.
 -   If the unit of ‘delta’ is month, the calculation rule is shown as follows: 
 
-    if the month part of ‘datetime’ does not cause the spillover of day after adding ‘delta’, then keep the day unchangeable, otherwise the day value is set to the last day of the result month.
+    If the month part of ‘datetime’ does not cause the spillover of day after adding ‘delta’, then do not change the day, else the day value is set to the last day of the result month.
 
--   The value of ‘datepart’ follows ‘string’ and ‘datetime’ type conversion agreement, that is, ‘yyyy’ indicates year; ‘mm’ indicates month…If no special description exists, related datetime built-in functions all follow this agreement.  And if no special instructions, the part of all datetime built-in functions also supports extended date format: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.
+-   The value of ‘datepart’ follows ‘string’ and ‘datetime’ type conversion agreement, that is, ‘yyyy’ indicates year; ‘mm’ indicates month and so on. If no special description exists, related datetime built-in functions follow this agreement. Moreover, if no special instructions, the part of all datetime built-in functions supports extended date format: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.
 
 **For example**:
 
@@ -52,9 +52,9 @@ If trans_date = 2005-01-29 00:00:00, dateadd(transdate, 1, 'mm') = 2005-02-28 00
  If trans_date = 2005-03-30 00:00:00, dateadd(transdate, -1, 'mm') = 2005-02-28 00:00:00
 ```
 
-**Note:** Here the value of trans\_date is only used as an example. This simple expression is often used to present the datetime in this file.
+**Note:** Here the value of trans\_date used only as an example. This simple expression is often used to present the datetime in this file.
 
-In MaxCompute  SQL, the datetime type has no direct constant representation, the following usage is wrong:
+In MaxCompute SQL, the datetime type has no direct constant representation, the following usage is wrong:
 
 ```
 select dateadd(2005-03-30 00:00:00, -1, 'mm') from tbl1;
@@ -69,20 +69,20 @@ select dateadd(cast("2005-03-30 00:00:00" as datetime), -1, 'mm') from tbl1;
 
 ## DATEDIFF {#section_xl2_nsl_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 bigint datediff(datetime date1, datetime date2, string datepart)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Calculate the difference between two datetime date1 and date2 in specified time unit ‘datepart’.
 
 **Parameter description**:
 
 -   datet1, date2: Datetime type, minuend, meiosis. If the input is ‘string’, it is converted to ‘datetime’ by implicit conversion. If it is another data type, an exception indicated.
--   datepart: a String type constant.  The extensional date format is supported. . If ‘datepart’ does not meet the specified format or is other data type, it causes an exception
+-   datepart: a String type constant. The extensional date format is supported. If ‘datepart’ does not meet the specified format or is other data type, an exception is indicated.
 
 **Return value**:
 
@@ -109,22 +109,22 @@ datediff(to_date('2018-06-04 19:33:23.250', 'yyyy-MM-dd hh:mi:ss.ff3'),to_date('
 
 ## DATEPART {#section_am4_xtl_vdb .section}
 
-The command format is as follows:
+Command format:
 
 ```
 bigint datepart(datetime date, string datepart)
 ```
 
-**The command description is as follows**:
+**Command format**:
 
-Extract the value of specified time unit ’datepart’ in ‘date’.
+Extracts the value of the specified time unit ’datepart’ in ‘date’.
 
-**Parameter description**：:
+**Parameter description**:
 
 **Return value**:
 
 -   date: Datetime type. If the input is ‘string’ type, it is converted to ‘datetime’ type. If it is another data type, an exception is indicated.
--   datepart: String type constant. The extensional date format is supported. If ‘datepart’ does not meet the specified format or is other data type, it causes exception.
+-   datepart: String type constant. The extensional date format is supported. If ‘datepart’ does not meet the specified format or is other data type, an exception is indicated.
 
 Returns the Bigint type. If any input is NULL, return NULL.
 
@@ -137,7 +137,7 @@ datepart('2013-06-08 01:10:00', 'mm') = 6
 
 ## DATETRUNC {#section_zbr_d5l_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 datetime datetrunc (datetime date, string datepart)
@@ -150,7 +150,7 @@ Return the remained date value after the specified time unit ‘datepart’ has 
 **Parameter description:**：
 
 -   date: Datetime type. If the input is ‘string’ type, it is converted to ‘datetime’ type. If it is another data type, an exception indicated.
--   datepart: String type constant. The extensional date format is supported.  If ‘datepart’ does not meet the specified format or is other data type, it causes an exception.
+-   datepart: String type constant. The extensional date format is supported.  If ‘datepart’ does not meet the specified format or is other data type, an exception is indicated.
 
 **Return value**:
 
@@ -166,13 +166,13 @@ datetrunc('2011-12-07 16:28:46', 'DD') = 2011-12-07 00:00:00
 
 ## FROM\_UNIXTIME {#section_yzv_j5l_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 datetime from_unixtime(bigint unixtime)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Convert the numeric UNIX time value ‘unixtime’ to datetime value.
 
@@ -192,13 +192,13 @@ from_unixtime(123456789) = 1973-11-30 05:33:09
 
 ## GETDATE {#section_o4p_45l_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 datetime getdate()
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Get present system time.  Use UTC+8 as MaxCompute standard time.
 
@@ -210,20 +210,20 @@ Datetime type, return present date and time.
 
 ## ISDATE {#section_rzl_s5l_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 boolean isdate(string date, string format)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
-Judge whether a date string can be converted to a datetime value according to corresponding format string. If the conversion is successful, return TRUE, otherwise return FALSE.
+Determines whether a date string can be converted to a datetime value according to corresponding format string. If the conversion is successful, return TRUE, otherwise return FALSE.
 
 **Parameter description**:
 
--   date: date value of String format. If the input is ‘bigint’, or ‘double’ or ‘datetime’, it is be converted to ‘string’ type. If it is another data type, an exception reported.
--   format: a String type constant. The extensional date format is not supported.  If redundant  format strings appear in ‘format’, then get the datatime value corresponding to the first format string, other strings are taken as separators.  For example,  isdate \(‘1234-yyyy’, ‘yyyy-yyyy’\) returns ‘TRUE’.
+-   date: date value of String format. If the input is ‘bigint’, or ‘double’ or ‘datetime’, it is be converted to ‘string’ type. If it is another data type, an exception is indicated.
+-   format: a String type constant. The extensional date format is not supported.  If redundant format strings appear in ‘format’, then get the datatime value corresponding to the first format string, other strings are taken as separators.  For example,  isdate \(‘1234-yyyy’, ‘yyyy-yyyy’\) returns ‘TRUE’.
 
 **Return value**:
 
@@ -231,13 +231,13 @@ Boolean type. If any parameter is NULL, return NULL.
 
 ## LASTDAY {#section_vhk_w2m_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 datetime lastday(datetime date)
 ```
 
-**The command description is as follows**:
+**Command format**:
 
 Get the last day in the same month of the date, intercepted to day and the ‘hh:mm:ss’ part is ‘00:00:00’.
 
@@ -251,22 +251,22 @@ Datetime type. If the input is NULL, return NULL.
 
 ## TO\_DATE {#section_b3z_1fm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 datetime to_date(string date, string format)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Convert a string ‘date’ to the datetime value according to a specified format.
 
 **Parameter description**:
 
--   date: String type, date value to be converted. If the input is ‘bigint’, or ‘double’ or ‘datetime’, it is converted to ‘string’ type by implicit conversion. If it is another data type or null, an exception indicated.
+-   date: String type, date value to be converted. If the input is ‘bigint’, or ‘double’ or ‘datetime’, it is converted to ‘string’ type by implicit conversion. If it is another data type or null, an exception is indicated.
 -   format: String type constant, date format.  If it is not a constant or is other data type, the exception is caused.  The field ‘format’ does not support extensional format and other characters are ignored as invalid characters in analysis process. 
 
-    The parameter format contains ‘yyyy’ at least; otherwise the expecion is caused. If redundant format strings appear in format, then get the datatime value corresponding to the first format string, other strings are taken as separators.  For example, `to_date (‘1234-2234’, ‘yyyy-yyyy’)`  returns ‘1234-01-01 00:00:00’.
+    The parameter format contains ‘yyyy’ at least; otherwise the expecion is indicated. If redundant format strings appear in format, then get the datatime value corresponding to the first format string, other strings are taken as separators.  For example, `to_date (‘1234-2234’, ‘yyyy-yyyy’)`  returns ‘1234-01-01 00:00:00’.
 
 
 **Return value**:
@@ -289,20 +289,20 @@ to_date('2010-24-01', 'yyyy')
 
 ## TO\_CHAR {#section_a2d_rfm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 string to_char(datetime date, string format)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Convert the ‘date’ of datetime type to a string according to a specified format.
 
 **Parameter description**:
 
 -   date: Datetime type, the date value to be converted. If the input is ‘string’ type, it is converted to ‘datetime’ type by implicit conversion. If it is another data type, an exception indicated.
--   format: String type constant.  If it is not a constant or is other data type, the exception is caused.  In ‘format’, the date format part is replaced with the corresponding data and other characters are output directly.
+-   format: String type constant.  If it is not a constant or is other data type, the exception is indicated.  In ‘format’, the date format part is replaced with the corresponding data and other characters are output directly.
 
 **Return value**: 
 
@@ -318,17 +318,17 @@ to_char('2010-24-01', 'yyyy') -- Format is not compatible and exception is throw
 to_char('2008718', 'yyyymmdd') -- Format is not compatible and exception is thrown.
 ```
 
-See [TO\_CHAR](intl.en-US/User Guide/SQL/Builtin Function/String Functions.md) for conversion from other types to string type.
+See [TO\_CHAR](reseller.en-US/User Guide/SQL/Builtin Function/String Functions.md) for conversion from other types to string type.
 
 ## UNIX\_TIMESTAMP {#section_k4r_zfm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 bigint unix_timestamp(datetime date)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Convert the date of Datetime type to UNIX format date of Bigint type.
 
@@ -342,13 +342,13 @@ Bigint type, it indicates UNIX format date value. If ‘date’ is NULL, return 
 
 ## WEEKDAY {#section_g41_2gm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 bigint weekday(datetime date)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
  Return the nth day of present week corresponding to the date.
 
@@ -358,25 +358,25 @@ date: Datetime type. If the input is ‘string’ type, it is converted to ‘da
 
 **Return value**:
 
-Bigint type. If the input parameter is NULL, return NULL.  Monday is the first day of a week and the return value is 0. Days are in ascending order starting at 0. If the day is Sunday, then return 6.
+Bigint type. If the input parameter is NULL, return NULL.  Monday is the first day of a week and the return value is 0. Days are in ascending order starting from 0. If the day is Sunday, then return is 6.
 
 ## WEEKOFYEAR {#section_rjv_hgm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 bigint weekofyear(datetime date)
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Return the nth week of a year which the date is included in.  Monday is taken as the first day of a week.
 
-**Note:** About whether this week belongs to this year, or the next year, it depends on which year \(4 days or more\)  most of the time of this week belongs to.
+**Note:** Whether this week belongs to this year, or the next year, it depends on which year \(4 days or more\)  most of the time of this week belongs to.
 
 **Parameter description**:
 
-date: Datetime type. If the input is ‘string’ type, it is converted to ‘datetime’ type and then involved in operation. If it is another date type, an exception indicated.
+date: Datetime type. If the input is ‘string’ type, it is converted to ‘datetime’ type and then involved in operation. If it is another date type, an exception is indicated.
 
 **Return value**:
 
@@ -401,7 +401,7 @@ Result:
 
 ## Maxcomputerte2.0 New Extended Mathematical Functions {#section_kj2_zhm_vdb .section}
 
-With the upgrade to MaxCompute 2.0, some new date functions are added to the product.  If the functions are used to design a new data type compatible with the Hive mode, you must add the following two set statements before the SQL statement of the new functions:
+With the upgraded version of MaxCompute 2.0, some new date functions are added to the product.  If the functions are used to design a new data type compatible with the Hive mode, you must add the following two set statements before the SQL statement of the new functions:
 
 ```
 set odps.sql.type.system.odps2=true;--Enable the new type.
@@ -418,15 +418,15 @@ The new extended functions are described as follows.
 
 ## YEAR {#section_gb4_g3m_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT year(string date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the YEAR function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the year of a date.
 
@@ -451,15 +451,15 @@ year(null) Returns an exception
 
 ## QUARTER {#section_ckz_m3m_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT quarter(datetime/timestamp/string date )
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the QUARTER function,add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the quarter of a date, range: 1–4.
 
@@ -480,15 +480,15 @@ quarter('1970-11-12') = 4
 
 ## MONTH {#section_atw_s3m_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT month(string date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the MONTH function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the month of a date.
 
@@ -509,15 +509,15 @@ month('20140901') = null
 
 ## DAY {#section_lt5_w3m_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT day(string date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the day of a date.
 
@@ -538,15 +538,15 @@ day('20140901') = null
 
 ## DAYOFMONTH {#section_k4p_fjm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT dayofmonth(date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the DAYOFMONTH function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the day of a date.
 
@@ -569,15 +569,15 @@ dayofmonth('20140901') = null
 
 ## HOUR {#section_lrl_jjm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT hour(string date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the HOUR function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the hour of a date.
 
@@ -599,15 +599,15 @@ hour('20140901120000')=null
 
 ## MINUTE {#section_o15_mjm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT minute(string date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the MINUTE function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the minute of a date.
 
@@ -629,15 +629,15 @@ minute('20140901120000') = null
 
 ## SECOND {#section_ylr_pjm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 INT second(string date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the SECOND function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the second of a date.
 
@@ -659,15 +659,15 @@ second('20140901123045') = null
 
 ## CURRENT\_TIMESTAMP {#section_r1r_sjm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 timestamp current_timestamp()
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the CURRENT\_TIMESTAMP function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the current timestamp as a Timestamp-type value. The value is not fixed.
 
@@ -683,15 +683,15 @@ select current_timestamp() from dual;--Returns '2017-08-03 11:50:30.661'
 
 ## ADD\_MONTHS {#section_psn_vjm_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 string add_months(string startdate, int nummonths)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the ADD\_MONTHS function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the date given by startdate plus the nummonths value.
 
@@ -715,15 +715,15 @@ add_months('20170214',3) = null
 
 ## LAST\_DAY {#section_idn_1km_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 string last_day(string date)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the LAST\_DAY function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the date of the last day of the month that contains the given date.
 
@@ -745,15 +745,15 @@ last_day('20170304') = null
 
 ## NEXT\_DAY {#section_eqf_2km_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 string next_day(string startdate, string week)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the NEXT\_DAY function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the first date larger than the specified startdate that matches the day of the week given by the week parameter. It is the date of a specific day in the next week.
 
@@ -776,15 +776,15 @@ Next_day ('20170801 ', 'tu') = NULL
 
 ## MONTHS\_BETWEEN {#section_cbq_4km_vdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 double months_between(datetime/timestamp/string date1, datetime/timestamp/string date2)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the MONTHS\_BETWEEN function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
-**The command description is as follows**:
+**Command description**:
 
 Returns the number of months between date1 and date2.
 

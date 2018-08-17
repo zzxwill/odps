@@ -58,5 +58,5 @@ insert overwrite table srcp partition (p='abc')
 select * from d union all select * from e;
 ```
 
-After rewriting, the subquery corresponding to a can be rewritten only once, and reused subsequently.  The WITH clause in the CTE can specify multiple subqueries that can be repeatedly used like variables in the entire statement.  Besides being reused, subqueries do not have to be repeatedly nested.
+After rewriting, the subquery corresponding to "a" only need to be rewritten once, and then can be reused subsequently.  The WITH clause in the CTE specifies multiple subqueries that can be repeatedly used like variables in the entire statement.  Besides being reused, subqueries do not have to be repeatedly nested.
 

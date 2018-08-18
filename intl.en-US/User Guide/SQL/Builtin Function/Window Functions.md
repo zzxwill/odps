@@ -1,22 +1,22 @@
 # Window Functions {#concept_nyb_ftl_vdb .concept}
 
-In MaxCompute  SQL, window function can be used to analyze and process work flexibly. Window function can only appear in ‘select’ clause. You are not allowed to use nested window function and aggregate function in window function. It cannot be used with the same level aggregation function together.
+In MaxCompute SQL, window functions help in analyzing and processing the workflow flexibly. Window function can only appear in the ‘select’ clause. However using both the nested window function and aggregate function in window function is not allowed. Also, it cannot be used at the same level as that of the aggregation function together.
 
-**Currently, in a MaxCompute SQL statement, you can use up to five window functions.**
+**Currently, in a MaxCompute SQL statement, you can use five window functions.**
 
-Window Function Syntax:
+Window function syntax:
 
 ```
 window_func() over (partition by [col1,col2…]
 [order by [col1[asc|desc], col2[asc|desc]…]] windowing_clause)
 ```
 
--   partition  by is used to specify open window columns.  The rows of which partitioned columns have the same values are considered in the same window. Currently, a window can contain at most 100,000,000 rows data \( exceeding 5,000,000 rows are not advised though\) ; otherwise, an error is reported at runtime.
--   The clause order by is used to specify how the data is ordered in a window.
--   In windowing\_clause part, you can use rows to specify window open way. Two ways are as follows:
+-   partition  by specifies open window columns. The rows of which partitioned columns have the same values are considered in the same window. Currently, a window can contain at most 100,000,000 rows data. We recommend that the rows must not exceed 5,000,000, otherwise, an error is reported at runtime.
+-   The clause order by specifies how the data is ordered in a window.
+-   In windowing\_clause part, use rows to specify window open way. The two methods are as follows:
     -   Rows between x preceding|following and y  preceding|following, which indicates the window range is from rows x preceding /following to rows y preceding/following.
-    -   Rows x preceding|following: the window range is from rows x preceding /following to present row.
-    -   ‘x’, ‘y’ must be an integer constant that is greater than or equal to 0 and corresponding value range is 0~10000. If the value is 0, it indicates the present row.   You can use rows method to specify window range on condition that you have specified ‘order by’ clause.
+    -   Rows x preceding|following: the window range is from rows x preceding /following to the present row.
+    -   ‘x’, ‘y’ must be an integer constant that is greater than or equal to 0 and corresponding value range is 0~10000. If the value is 0, it indicates the present row. Use the rows method to specify window range on condition that you have specified ‘order by’ clause for.
 
 **Note:** Not all window functions can be specified window open way using rows. The window functions support this usage include AVG, count, Max, min, StdDev, sum.
 
@@ -31,23 +31,23 @@ Bigint count([distinct] expr) over(partition by [col1, col2…]
 
 **Usage**:
 
-Calculate the total number of retrieved rows.
+Calculates the total number of retrieved rows.
 
 **Parameter description**:
 
--   expr: any data type. When it is NULL, this row is not involved in count.  If the ‘distinct’ keyword is specified, it indicates taking the unique count value.
--   partition by \[col1, col2…\]: Specify the columns to use window function.
--   order by col1 \[asc|desc\], col2\[asc|desc\]: if ‘order by’ clause is not specified,  return the count vale of ‘expr’ in current window. If ‘order by’ clause is specified, the return result is ordered according to specified sequence and the value is a cumulative count value from start row to current row in current window.
+-   expr: Any data type. When it is NULL, this row is not counted. If the ‘distinct’ keyword is specified, it indicates using the unique count value.
+-   partition by \[col1, col2…\]: Specifies the columns to use window function.
+-   order by col1 \[asc|desc\], col2\[asc|desc\]: If ‘order by’ clause is not specified,  return the count vale of ‘expr’ in the current window. If ‘order by’ clause is specified, the return result is ordered according to the specified sequence and the value is a cumulative count value from start row to the current row in the current window.
 
 **Return value**:
 
 Bigint type.
 
-**Note:** If the keyword ‘distinct’ has been specified, the ‘order by’ clause cannot be used.
+**Note:** If the keyword ‘distinct’ is specified, the ‘order by’ clause cannot be used.
 
 **Example**:
 
-Suppose that the table ‘test\_src’ is existent and the column ‘user\_id’ of bigint type exists in this table.
+Thethe table ‘test\_src’ already exists and the column ‘user\_id’ of bigint type exists in this table.
 
 ```
 select user_id,
@@ -62,7 +62,7 @@ select user_id,
     | 2 | 1 |
     | 3 | 1 |
     
-    -- the ‘order by’ clause is not specified, return the count value of user_id in current window.
+    -- the ‘order by’ clause is not specified, return the count value of user_id in the current window.
     select user_id,
         count(user_id) over (partition by user_id order by user_id) as count
     from test_src;
@@ -75,7 +75,7 @@ select user_id,
     | 2 | 1 |
     | 3 | 1 |
     
-    -- The ‘order by’ clause is specified and return a cumulative count value from start row to current row in current window.
+    -- The ‘order by’ clause is specified and return a cumulative count value from start row to current row in the current window.
 ```
 
 ## AVG {#section_p53_fwz_vdb .section}
@@ -89,23 +89,23 @@ avg([distinct] expr) over(partition by [col1, col2…]
 
 **Usage**:
 
-Calculate the average.
+Calculates the average.
 
 **Parameter description**:
 
--   distinct: if the keyword ‘distinct’ is specified, it indicates taking average of unique value.
+-   distinct: if the keyword ‘distinct’ is specified, it indicates taking average of the unique value.
 -   expr: Double type. 
-    -   If the input is ‘string’ type or ‘bigint’ type, it is converted to ‘double’ type by implicit conversion and involved in operation. If it is another data type, an exception indicated. 
-    -   If this value is NULL, this row is not involved in the calculation. 
-    -   If the data type is Boolean, it is not allowed to be involved in the calculation.
--   partition by \[col1, col2...\]: specified columns to use window function.
--   order by col1\[asc|desc\], col2\[asc|desc\]:  if ‘order by’ clause is not specified, return the average of all values in current window. If ‘order by’ clause is specified, the return result is ordered according to specified sequence and returns the cumulative average from the start row to current row in current window.
+    -   If the input is ‘string’ type or ‘bigint’ type, it is converted to ‘double’ type by implicit conversion and involved in the operation. If it is another data type, an exception is thrown.
+    -   If this value is NULL, then this row is not counted in the calculation.
+    -   If the data type is Boolean, then this row is excluded from the calculation.
+-   partition by \[col1, col2...\]: Specified the olumns to use window function.
+-   order by col1\[asc|desc\], col2\[asc|desc\]: If ‘order by’ clause is not specified, return the average of all values in the current window. If ‘order by’ clause is specified, the return result is ordered according to the specified sequence and returns the cumulative average from start row to current row in the current window.
 
 **Return value**:
 
 Double type.
 
-**Note:** If the keyword ‘distinct’ has been specified, the ‘order by’ clause cannot be used.
+**Note:** If the keyword ‘distinct’ isn specified, the ‘order by’ clause cannot be used.
 
 ## MAX {#section_qkf_ywz_vdb .section}
 
@@ -118,19 +118,19 @@ max([distinct] expr) over(partition by [col1, col2…]
 
 **Usage**:
 
-Calculate the maximum value.
+Calculates the maximum value.
 
 **Parameter description**:
 
--   expr: Any types expect ‘Boolean’. If the value is NULL, this row is not involved in the calculation.  If the keyword ‘distinct’ is specified, it indicates taking the max value of unique value.
--   partition by \[col1, col2…\]: specified columns to use window function.
--   order by \[col1\[asc|desc\], col2\[asc|desc:  if ‘order by’ clause is not specified, return the maximum value in current window.  If ‘order by’ clause is specified, the return result is ordered according to specified sequence and return the maximum value from start row to current row in current window.
+-   expr: Any types expect ‘Boolean’. If the value is NULL, this row is not involved in the calculation.  If the keyword ‘distinct’ is specified, it indicates taking the max value of the unique value.
+-   partition by \[col1, col2…\]: Specifies columns to use window function.
+-   order by \[col1\[asc|desc\], col2\[asc|desc: If ‘order by’ clause is not specified, return the maximum value in the current window.  If ‘order by’ clause is specified, the return result is ordered according to the specified sequence and return the maximum value from start row to current row in the current window.
 
 **Return value**:
 
-the same type with ‘expr’.
+Same as the ‘expr’ type..
 
-**Note:** If the keyword ‘distinct’ has been specified, the ‘order by’ clause cannot be used.
+**Note:** If the keyword ‘distinct’ is specified, the ‘order by’ clause cannot be used.
 
 ## MIN {#section_mvt_3xz_vdb .section}
 
@@ -143,19 +143,19 @@ min([distinct] expr) over(partition by [col1, col2…]
 
 **Usage**:
 
-Calculate the minimum value of the column.
+Calculates the minimum value of the column.
 
 **Parameter description**:
 
--   expr: Any types expect ‘Boolean’. If the value is NULL, this row is not involved in the calculation.  If the keyword ‘distinct’ is specified, it indicates taking the minimum value of a unique value.
--   partition by \[col1, col2…\]: specified columns to use window function.
--   order by \[col1\[asc|desc\], col2\[asc|desc:  if ‘order by’ clause is not specified, return the minimum value in current window.  If ‘order by’ clause is specified, the return result is ordered according to specified sequence and return the minimum value from start row to current row in current window.
+-   exprAny types except ‘Boolean’. If the value is NULL, this row is not counted in the calculation. If the keyword ‘distinct’ is specified, it indicates using the minimum value of a unique value.
+-   partition by \[col1, col2…\]: Specifies columns to use window function.
+-   order by \[col1\[asc|desc\], col2\[asc|desc: If ‘order by’ clause is not specified, return the minimum value in the current window.  If ‘order by’ clause is specified, the return result is ordered according to the specified sequence and return the minimum value from start row to current row in the current window.
 
 **Return value**:
 
 the same type with ‘expr’.
 
-**Note:** If the keyword ‘distinct’ has been specified, the ‘order by’ clause cannot be used.
+**Note:** If the keyword ‘distinct’ is specified, the ‘order by’ clause cannot be used.
 
 ## MEDIAN {#section_ebx_txz_vdb .section}
 
@@ -168,15 +168,15 @@ Decimal median(Decimal number1,number2...) over(partition by [col1,col2…])
 
 **Usage**:
 
-Calculate the median.
+Calculates the median.
 
 **Parameter description**:
 
 -   number1,number1…: 1 to 255 digits of a Double or Decimal type.
     -   When the input value is a String type or a Bigint type, the operation is performed after the implicit conversion to a Double type, and other types throw exceptions.
     -   Return NULL when the input value is null.
-    -   When the input value is a Double type, it will be converted to the Array of Double by default .
--   partition by \[col1, col2…\]: specified columns to use window function.
+    -   When the input value is a Double type, it converts to the Array of Double by default .
+-   partition by \[col1, col2…\]: Specifies columns to use window function.
 
 **Return value**:
 
@@ -195,16 +195,16 @@ Decimal stddev([distinct] expr) over(partition by [col1, col2…]
 
 **Usage**:
 
-Calculation population standard deviation.
+Calculates population standard deviation.
 
 **Parameter description**:
 
 -   expr: Double type.
-    -    If the input is ‘string’ or ‘bigint’ type, it is converted to ‘double’ type and involved in operation. If it is another data type, an exception is indicated. 
-    -   If the input value is ‘NULL’, this row is ignored. 
-    -   If the keyword ‘distinct’ is specified, it indicates calculating the population standard deviation of unique value.
--   partition by \[col1, col2..\]: specified columns to use window function.
--   order by col1\[asc|desc\], col2\[asc|desc\]:  if ‘order by’ clause is not specified, return the population standard deviation in current window.  If ‘order by’ clause is specified, the return result is ordered according to specified sequence and return the population standard deviation from start row to current row in current window.
+    -    If the input is ‘string’ or ‘bigint’ type, it is converted to ‘double’ type and is counted in the operation. If it is another data type, an exception is thrown. 
+    -   If the input value is ‘NULL’, this row is excluded. 
+    -   If the keyword ‘distinct’ is specified, it indicates calculating the population standard deviation of the unique value.
+-   partition by \[col1, col2..\]: Specifies columns to use window function.
+-   order by col1\[asc|desc\], col2\[asc|desc\]: If ‘order by’ clause is not specified, return the population standard deviation in the current window.  If ‘order by’ clause is specified, the return result is ordered according to the specified sequence and return the population standard deviation from start row to current row in the current window.
 
 **Return value**:
 
@@ -218,8 +218,9 @@ select window, seq, stddev_pop('1\01') over (partition by window order by seq) f
 
 **Note:** 
 
--   If the keyword ‘distinct’ has been specified, the ‘order by’ clause cannot be used.
--   Stddev function also has an alias function named stddev\_pop, whose usage is the same as stddev.
+-   If the keyword ‘distinct’ is specified, the ‘order by’ clause cannot be used.
+-   Stddev\_pop is an alias function of stddev function and its usage is the same as that of stddev
+
 
 ## STDDEV\_SAMP {#section_skf_2zz_vdb .section}
 
@@ -239,17 +240,17 @@ Calculate sample standard deviation.
 **Parameter description**:
 
 -   Expr: Double type. 
-    -   If the input is ‘string’ or ‘bigint’ type, it is converted to ‘double’ type and involved in operation. If it is another data type, an exception is indicated. 
-    -   If the input value is NULL, this row is ignored. 
-    -   If the keyword ‘distinct’ is specified, it indicates calculating the sample standard deviation of unique value.
--   partition by \[col1, col2..\]: specified columns to use window function.
--   Order by col1\[asc|desc\], col2\[asc|desc\]:  if ‘order by’ clause is not specified, return the sample standard deviation in current window.  If ‘order by’ clause is specified, the return result is ordered according to specified sequence and return the sample standard deviation from start row to current row in current window.
+    -   If the input is ‘string’ or ‘bigint’ type, it is converted to ‘double’ type and counted in the operation. If it is another data type, an exception is indicated. 
+    -   If the input value is NULL, this row is excluded. 
+    -   If the keyword ‘distinct’ is specified, it indicates calculating the sample standard deviation of the unique value.
+-   partition by \[col1, col2..\]: Specifies columns to use window function.
+-   Order by col1\[asc|desc\], col2\[asc|desc\]: If ‘order by’ clause is not specified, return the sample standard deviation in the current window.  If ‘order by’ clause is specified, the return result is ordered according to the specified sequence and return the sample standard deviation from start row to current row in the current window.
 
 **Return value**:
 
 When the input is ‘decimal’ type, return ‘decimal’; otherwise, return ‘double’.
 
-**Note:** If the keyword ‘distinct’ has been specified, the ‘order by’ clause cannot be used.
+**Note:** If the keyword ‘distinct’ is specified, the ‘order by’ clause cannot be used.
 
 ## SUM {#section_ggy_vzz_vdb .section}
 
@@ -262,16 +263,16 @@ sum([distinct] expr) over(partition by [col1, col2…]
 
 **Usage**:
 
-Calculate the sum of elements.
+Calculates the sum of elements.
 
 **Parameter description**:
 
 -   Expr: Double type. 
-    -   If the input is ‘string’ or ‘bigint’ type, it is converted to ‘double’ type and involved in operation. If it is another data type, an exception is indicated. 
-    -   If the input value is NULL, ignore this row. 
-    -   If the keyword ‘distinct’ is specified, it indicates calculating the sum of unique value.
--   Partition by \[col1, col2..\]: specified columns to use window function.
--   Order by col1\[asc|desc\], col2\[asc|desc\]:  if ‘order by’ clause is not specified, return the sum in current window.  If ‘order by’ clause is specified, the return result is ordered according to specified sequence and return the sum from start row to current row in current window.
+    -   If the input is ‘string’ or ‘bigint’ type, it is converted to ‘double’ type and counted in the operation. If it is another data type, an exception is indicated. 
+    -   If the input value is NULL, this row is excluded. 
+    -   If the keyword ‘distinct’ is specified, it indicates calculating the sum of the unique value.
+-   Partition by \[col1, col2..\]: Specifies columns to use window function.
+-   Order by col1\[asc|desc\], col2\[asc|desc\]: If ‘order by’ clause is not specified, return the sum in the current window.  If ‘order by’ clause is specified, the return result is ordered according to the specified sequence and return the sum from start row to current row in the current window.
 
 **Return value**:
 
@@ -279,7 +280,7 @@ Calculate the sum of elements.
 -   If the input parameter is ‘Decimal’ type, return ‘Decimal’ type. 
 -   If the input parameter is ‘double’ type or ‘string’ type, return ‘double’ type.
 
-**Note:** If the keyword ‘distinct’ has been specified, the ‘order by’ clause cannot be used.
+**Note:** If the keyword ‘distinct’ is specified, the ‘order by’ clause cannot be used.
 
 ## DENSE\_RANK {#section_mj4_k11_wdb .section}
 
@@ -292,12 +293,12 @@ order by [col1[asc|desc], col2[asc|desc]…])
 
 **Usage**:
 
-Calculate dense rank.  The data in the same row of col2 has the same rank.
+Calculates the dense rank. The data in the same row of col2 has the same rank.
 
 **Parameter description**:
 
--   partition by \[col1, col2..\]: specified columns to use window function.
--   order by col1\[asc|desc\], col2\[asc|desc\]: specify the value which the rank is based on.
+-   partition by \[col1, col2..\]: Specifies columns to use window function.
+-   order by col1\[asc|desc\], col2\[asc|desc\]: Specifies the value which the rank is based on.
 
 **Return value**:
 
@@ -305,7 +306,7 @@ Bigint type.
 
 **Example**:
 
-Suppose that data in table ‘emp’ is as follows:
+The data in table ‘emp’ is as follows:
 
 ```
 | empno | ename | job | mgr | hiredate| sal| comm | deptno |
@@ -371,12 +372,12 @@ order by [col1[asc|desc], col2[asc|desc]…])
 
 **Usage**:
 
-Calculate the rank.  The ranking of the same row data with col2 drops.
+Calculates the rank.  The ranking of the same row data with col2 drops.
 
 **Parameter description**:
 
--   Partition by \[col1, col2..\]: specify columns to use window function.
--   Order by col1\[asc|desc\], col2\[asc|desc\]: specify the value which the rank is based on.
+-   Partition by \[col1, col2..\]: Specifies columns to use window function.
+-   Order by col1\[asc|desc\], col2\[asc|desc\]: Specifies the value which the rank is based on.
 
 **Return value**:
 
@@ -384,7 +385,7 @@ Bigint type.
 
 **Example**:
 
-Suppose that data in table ‘emp’ is as follows:
+The data in table ‘emp’ is as follows:
 
 ```
 | empno | ename | job | mgr | hiredate| sal| comm | deptno |
@@ -448,17 +449,17 @@ lag(expr，Bigint offset, default) over(partition by [col1, col2…]
 [order by [col1[asc|desc], col2[asc|desc]…]])
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Take the value of nth row in front of current row in accordance with offset. If the current row number is rn, take the value of the row which row number is rn-offset.
 
 **Parameter description**:
 
--   expr: any type.
--   offset: a Bigint type constant.  If the input is String type or Double type, convert it to Bigint type by implicit conversion. Offset \> 0;
--   default: Define the default value while the specified range of ‘offset’ oversteps the boundary. It is a constant and default is null.
--   partition by \[col1, col2..\]: specify columns to use window function.
--   order by col1\[asc|desc\], col2\[asc|desc\]: specify the order method for return result.
+-   expr: Any type.
+-   offset: A Bigint type constant.  If the input is String type or Double type, convert it to Bigint type by implicit conversion. Offset \> 0;
+-   default: Define the default value while the specified range of ‘offset’ crosses the limit. It is constant and default is null.
+-   partition by \[col1, col2..\]: Specifies columns to use window function.
+-   order by col1\[asc|desc\], col2\[asc|desc\]: Specifies the order method for return result.
 
 **Return Value**:
 
@@ -466,30 +467,30 @@ Returns the same with ‘expr’.
 
 ## LEAD {#section_s5f_jc1_wdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 lead(expr，Bigint offset, default) over(partition by [col1, col2…]
 [order by [col1[asc|desc], col2[asc|desc]…]])
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Take the value of nth row following current row in accordance with offset. If the current row number is rn, take the value of the row which row number is rn+offset.
 
 **Parameter description**:
 
--   expr: any type.
--   offset: a Bigint type constant.  If the input is String, Decimal or Double type, convert it to Bigint type by implicit conversion. Offset \> 0.
--   default: Define the default value while the specified range of offset oversteps the boundary. It is a constant.
--   partition by \[col1, col2..\]: specify columns to use window function.
--   order by col1\[asc|desc\], col2\[asc|desc\]: specify the order method for return result.
+-   expr: Any type.
+-   offset: A Bigint type constant.  If the input is String, Decimal or Double type, convert it to Bigint type by implicit conversion. Offset \> 0.
+-   default: Define the default value while the specified range of offset crosses the limit. It is constant.
+-   partition by \[col1, col2..\]: Specifies columns to use window function.
+-   order by col1\[asc|desc\], col2\[asc|desc\]: Specifies the order method for return result.
 
 **Return Value**:
 
-Returns the same with expr.
+Same as the ‘expr’ type.
 
-**For example**:
+**Example**:
 
 ```
 select c_Double_a,c_String_b,c_int_a,lead(c_int_a,1) over(partition by c_Double_a order by c_String_b) from dual;
@@ -499,21 +500,21 @@ select c_String_in_fact_num,c_String_a,c_int_a,lead(c_int_a) over(partition by c
 
 ## PERCENT\_RANK {#section_lmk_tc1_wdb .section}
 
-The command format is as follows:
+Command format:
 
 ```
 Percent_rank () over (partition by [col1, col2...]
 order by [col1[asc|desc], col2[asc|desc]…])
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Calculate relative ranking of a certain row in a group of data.
 
 **Parameter description**:
 
--   partition by \[col1, col2..\]: specify columns to use window function.
--   order by col1\[asc|desc\], col2\[asc|desc\]: specify the value which the ranking is based on.
+-   partition by \[col1, col2..\]: Specifies columns to use window function.
+-   order by col1\[asc|desc\], col2\[asc|desc\]: Specifies the value based on the ranking.
 
 **Return Value**:
 
@@ -523,29 +524,29 @@ Returns the Double type, value scope is \[0, 1\]. The calculation method of rela
 
 ## ROW\_NUMBER {#section_cm1_cd1_wdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 row_number() over(partition by [col1, col2…]
 order by [col1[asc|desc], col2[asc|desc]…])
 ```
 
-**The command description is as follows**:
+**Command description**:
 
-This function is used to calculate the row number, beginning from 1.
+Calculates the row number, beginning from 1.
 
 **Parameter description**:
 
--   partition by \[col1, col2..\]: specify columns to use window function.
--   order by col1\[asc|desc\], col2\[asc|desc\]: specify the order method for return result.
+-   partition by \[col1, col2..\]: Specifies columns to use window function.
+-   order by col1\[asc|desc\], col2\[asc|desc\]: Specifies the order method for return result.
 
 **Return Value**:
 
 Returns the Bigint type.
 
-**For example**:
+**Example**:
 
-Suppose that data in table emp is as follows:
+The data in table emp is as follows:
 
 ```
 | empno | ename | job | mgr | hiredate| sal| comm | deptno |
@@ -602,30 +603,30 @@ SELECT deptno
 
 ## CLUSTER\_SAMPLE {#section_mst_md1_wdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 boolean cluster_sample([Bigint x, Bigint y])
 over(partition by [col1, col2..])
 ```
 
-**The command description is as follows**:
+**Command description**:
 
-This function is used for Group sampling.
+Used for Group sampling.
 
 **Parameter description**:
 
--   x: a Bigint type constant, x\>=1.  If you specify the parameter y, x indicates dividing a window into x parts.  Otherwise x indicates selecting x rows records in a window \(if x rows are in this window, return value is true\).  If x is NULL, return NULL.
--   y: a Bigint type constant, y\>=1, y<=x.  It indicates selecting y parts records from x parts in a window \(that is to say, if y parts records exist, return value is true\).  If y is NULL, return NULL.
--   partition by \[col1, col2\]: specify columns to use window function.
+-   x: A Bigint type constant, x\>=1.  If you specify the parameter y, x indicates dividing a window into x parts.  Otherwise x indicates selecting x rows records in a window \(if x rows are in this window, return true\).  If x is NULL, return NULL.
+-   y: A Bigint type constant, y\>=1, y<=x.  It indicates selecting y parts records from x parts in a window \(in other words, if y parts records exist, return value is true\).  If y is NULL, return NULL.
+-   partition by \[col1, col2\]: Specifies columns to use window function.
 
 **Return Value**:
 
 Returns the Boolean type.
 
-**For example**:
+**Example**:
 
-If two columns key and value are in the table test\_tbl, key is grouping field. The corresponding values of key have groupa and groupb, the field value indicates value of key. As follows:
+If two columns key and value are in the table test\_tbl, key is grouping field. The corresponding values of key have groupa and groupb, the field value indicates value of key shown as follows:
 
 ```
 
@@ -656,7 +657,7 @@ If two columns key and value are in the table test\_tbl, key is grouping field. 
     
 ```
 
-To select 10% values from each group, the following MaxCompute  SQL is suggested:
+To select 10% values from each group, the following MaxCompute  SQL is recommended:
 
 ```
 Select key, Value
@@ -675,14 +676,14 @@ Select key, Value
 
 ## NTILE {#section_gjj_c21_wdb .section}
 
-**The command format is as follows**:
+**Command format**:
 
 ```
 BIGINT ntile(BIGINT n) over(partition by [col1, col2…]  
 [order by [col1[asc|desc], col2[asc|desc]…]] [windowing_clause]))
 ```
 
-**The command description is as follows**:
+**Command description**:
 
 Used to cut grouped data into N slices in order and return the current slice value, if the slice is uneven, the distribution of the first slice is increased by default.
 
@@ -694,9 +695,9 @@ Return Value:
 
 Returns the bigint type.
 
-The example is as follows:
+Example:
 
-Assume the data in the table EMP is as follows:
+The data in the table EMP is as follows:
 
 ```
 | Empno | ename | job | Mgr | hiredate | Sal | REM | deptno |

@@ -16,21 +16,23 @@ Returns an absolute value.
 
 **Parameter description**:
 
-number: When number is of Type Double, Bigint, or Decimal.
+number: It is any number of Type Double, Bigint, or Decimal.
 
 -   If the input is Bigint and return Bigint.
--   If the input is Double and return Double. 
--   If the input is Decimal and return Decimal. 
+-   If the input is Double, return Double. 
+-   If the input is Decimal, return Decimal. 
 
 If the input is String, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
 
 **Return value**:
 
-Returns the Double, Bigint or Decimal type, which depends on the type of input parameter.  If the input is null, return null.
+The return result depends on the type of input parameter. Example, if the input is null, return null.
 
-**Note:** When the value of input Bigint type is over the maximum value of Bigint, return Double type. In this case, the precision may be lost.
+**Note:** 
 
-**Examples:**
+When the value of input Bigint type exceeds the maximum value of Bigint, return Double type. In this case, the precision may be absent.
+
+**Example:**
 
 ```
 abs(null) = null
@@ -58,7 +60,7 @@ Decimal acos(Decimal number)
 
 **Usage:**
 
-This function is used to calculate the inverse cosine of a specific number.
+Calculates the inverse cosine of a number.
 
 **Parameter description**:
 
@@ -68,7 +70,7 @@ number: Double or Decima type, -1<=number <=1.  If the input is String or Bigin
 
 Returns the Double or Decimal type, the value is between 0 to π. If number is null, return null.
 
-**For example**: 
+**Example**: 
 
 ```
 acos("0.87") = 0.5155940062460905
@@ -86,7 +88,7 @@ Decimal asin(Decimal number)
 
 **Usage:**
 
-This function is used to calculate the inverse sine function of number.
+Calculates the inverse sine function of number.
 
 **Parameter description**:
 
@@ -96,7 +98,7 @@ number: Double or Decima type, -1<=number <=1.  If the input is String or Bigin
 
 Returns the Double or Decimal type, the value is between -π/2 to π/2. If the number is null, return null.
 
-**For example**:
+**Example**:
 
 ```
 asin(1) = 1.5707963267948966
@@ -113,17 +115,17 @@ Double atan(Double number)
 
 **Usage:**
 
-This function is used to calculate the back-cut function of number.
+Calculates the back-cut function of number.
 
 **Parameter description**:
 
-Number: Double type, If the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
+Number: Double type, if the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
 
 **Return value**:
 
 Returns the Double type, the value is between -π/2 to π/2. If the number is null, return null.
 
-**For example**: 
+**Example**: 
 
 ```
 atan(1) = 0.7853981633974483
@@ -151,7 +153,7 @@ value: Double or Decimal type, If the input is String or Bigint, it is converted
 
 Returns the Bigint type. If the number is null, return null.
 
-**For example**:
+**Example**:
 
 ```
 ceil(1.1) = 2
@@ -168,7 +170,7 @@ String conv(String input, Bigint from_base, Bigint to_base)
 
 **Usage:**
 
-This function is Hexadecimal conversion function.
+Converts a number into a Hexadecimal number.
 
 **Parameter description**:
 
@@ -177,9 +179,9 @@ This function is Hexadecimal conversion function.
 
 **Return value**: 
 
-Return the String type.  If the number is null, return null. The conversion process runs at a 64-bit precision. An exception is thrown when overflow occurs. If the input is a negative value \(begin with ‘-’\), an exception is reported.  If the input value is a decimal, it is converted to an integer before hex conversion. The decimal part is left out.
+Returns the String type. If the number is null, return null. The conversion process runs at a 64-bit precision. An exception is thrown when overflow occurs. If the input is a negative value \(begin with ‘-’\), an exception is thrown. If the input value is a decimal, it is converted to an integer before hex conversion. The decimal part is excluded.
 
-**For example**:
+**Example**:
 
 ```
 conv('1100', 2, 10) = '12'
@@ -199,7 +201,7 @@ Decimal cos(Decimal number)
 
 **Usage:**
 
-This function is Cosine function, input is the radian value.
+Input is the radian value.
 
 **Parameter description**:
 
@@ -209,7 +211,7 @@ number: Double or Decimal type. If the input is String, it is converted to Doubl
 
 Returns the Double or Decimal type. If the number is NULL, return NULL.
 
-**For example**: 
+**Example**: 
 
 ```
 cos(3.1415926/2)=2.6794896585028633e-8
@@ -227,7 +229,7 @@ Decimal cosh(Decimal number)
 
 **Usage:**
 
-This function is Hyperbolic cosine function.
+It is the Hyperbolic cosine function
 
 **Parameter description**:
 
@@ -248,7 +250,7 @@ Decimal cot(Decimal number)
 
 **Usage:**
 
-This function is Cotangent function, input is the radian value.
+Inputs the radian value.
 
 **Parameter description**:
 
@@ -269,7 +271,7 @@ Decimal exp(Decimal number)
 
 **Usage:**
 
-This function is Exponential function. 
+It is the Exponential function.
 
 **Return value**:
 
@@ -294,7 +296,7 @@ Bigint floor(Decimal number)
 
 **Usage:**
 
-This function returns the largest integral value not greater than the argument.
+Returns the largest integral value not greater than the argument.
 
 **Parameter description**:
 
@@ -304,7 +306,7 @@ number: Double or Decimal type. If the input is String or Bigint type, it is con
 
 Returns the Bigint type.  If the input is null, return null.
 
-**For example**: 
+**Example**: 
 
 ```
 floor(1.2)=1
@@ -408,7 +410,7 @@ seed: Bigint type, random number seed, to determine starting values of the rando
 
 Returns the Double type.
 
-**For example**:
+**Example**:
 
 ```
 select rand() from dual;
@@ -431,15 +433,17 @@ Four to five homes to the specific decimal point position.
 **Parameter description**:
 
 -   number: Double or Decimal type.  If the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
--   Decimal\_place: A Bigint type constant, four to five homes to the decimal point position. If it is other type, an exception is thrown.  If you omit it, it indicates four to five homes into the single digit. The default value is zero.
+-   Decimal\_place: A Bigint type constant, four to five homes to the decimal point position. If it is other type, an exception is thrown. If you exclude it, it indicates four to five homes into a single digit. The default value is zero
 
 **Return value**:
 
 Returns the Double or Decimal type.  If number or Decimal\_places is null, return null.
 
-**Note:** Decimal\_places can be negative. The negative is counted from decimal point to left and do not keep the decimal part.  If decimal\_places is greater than the length of the integer part, return 0.
+**Note:** 
 
-**For example**:
+Decimal\_places can be negative. The negative is counted from decimal point to the left. Deletethe decimal part. If decimal\_place is greater than the length of the integer part, return 0.
+
+**Example**:
 
 ```
 round(125.315) = 125.0
@@ -465,7 +469,7 @@ Decimal sin(Decimal number)
 
 **Usage:**
 
-This function is used to calculate the sine function of number, the input is the radian value.
+Calculates the sine function of number, the input is the radian value.
 
 **Parameter description**:
 
@@ -486,7 +490,7 @@ Decimal sinh(Decimal number)
 
 **Usage:**
 
-This function is used to calculate the hyperbolic sine function of number.
+Calculates the hyperbolic sine function of number.
 
 **Parameter description**:
 
@@ -507,11 +511,11 @@ Decimal sqrt(Decimal number)
 
 **Usage:**
 
-This function is used to calculate the square root of number.
+Calculates the square root of number.
 
 **Parameter description**:
 
-number: Double or Decimal type, must be greater than zero, if it is less than zero, an exception is caused.   If the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
+number: Double or Decimal type, must be greater than zero, if it is less than zero, an exception occur.   If the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
 
 **Return value**:
 
@@ -528,11 +532,11 @@ Decimal tan(Decimal number)
 
 **Usage:**
 
-This function is used to calculate the tangent function of number, the input is the radian value.
+Calculates the tangent function of the number, the input is the radian value.
 
 **Parameter description**:
 
-number: Double or Decimal type.  If the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
+number: Double or Decimal type. If the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
 
 **Return value**:
 
@@ -549,7 +553,7 @@ Decimal tanh(Decimal number)
 
 **Usage:**
 
-This function is used to calculate the hyperbolic tangent function of number.
+Calculates the hyperbolic tangent function of number.
 
 **Parameter description**:
 
@@ -575,7 +579,7 @@ This function is used to intercept the input number to a specified decimal point
 **Parameter description**:
 
 -   number: Double or Decimal type. If the input is String or Bigint, it is converted to Double by implicit conversion. If the input is another type, an error occurs.
--   Decimal\_places: a Bigint type constant, the decimal point place to intercept the number. Other types are converted to Bigint. If this parameter is omitted, default to intercept to single digit.
+-   Decimal\_places: a Bigint type constant, the decimal point place to intercept the number. Other types are converted to Bigint. If this parameter is excluded, default to intercept to single digit.
 
 **Return value**:
 
@@ -583,11 +587,11 @@ Returns the  Double or Decimal type. If the number or Decimal\_places is NULL, 
 
 **Note:** 
 
--   If the Double type is returned, the display of the returned result may not be as expected, such as `trunc(125.815, 1)` \(this problem exists in any system\).
--   The part to be truncated is supplemented with zero.
--   Decimal\_places can be negative. The negative is truncated from the decimal point to the left and does not keep the decimal part.  If Decimal\_places are greater than the length of the integer, return zero.
+-   If the Double type is returned, the display of the returned result may not be as expected, such as trunc\(125.815, 1\) \(this problem exists in all the systems\).
+-   The part to be truncated is supplemented by zero.
+-   **Decimal\_places** can be negative. The negative is truncated from the decimal point to the left and delete the decimal part. If **Decimal\_places** are greater than the length of the integer, return zero.
 
-**For example**:
+**Example**:
 
 ```
 trunc(125.815) = 125.0
@@ -605,7 +609,7 @@ trunc(123.345, -4) = 0.0
 
 ## Maxcomputerte2.0 New Extended Mathematical Functions {#section_izz_qzm_vdb .section}
 
-With the upgrade to MaxCompute 2.0, some mathematical functions have been added to the product. If a new function uses a new data type, you must add the following set statement before using the new functions SQL statement:
+With the upgrade to MaxCompute 2.0, some mathematical functions have been added to the product. If a new function uses a new data type, add the following set statement before using the new functions SQL statement:
 
 ```
 set odps.sql.type.system.odps2=true;
@@ -622,11 +626,11 @@ Double log2(Double number)
 Double log2(Decimal number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;`  for normal use of the new data type.
+**Note:** Before the SQL statement which uses the LOG2 function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
-This function is used to return the log base 2 of a specific number.
+Returns the log base 2 of a specific number.
 
 **Parameter description**:
 
@@ -653,11 +657,11 @@ Double log10(Double number)
 Double log10(Decimal number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the LOG10 function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
-This function is used to returns the log base 10 of the specific number.
+Returns the log base 10 of the specific number.
 
 **Parameter description**:
 
@@ -683,11 +687,11 @@ log10(8)=0.9030899869919435
 String bin(Bigint number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
-This function is used to returns the binary code expression for the specific number.
+Returns the binary code expression for the specific number.
 
 **Parameter description**:
 
@@ -697,7 +701,7 @@ number: Bigint type.
 
 String type.  If the input is zero, then zero is returned; if the input is null, null is returned.
 
-**For example**:
+**Example**:
 
 ```
 bin(0)='0'
@@ -715,7 +719,7 @@ String hex(String number)
 String hex (binary number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the HEX function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -729,7 +733,7 @@ number: If number is of the Bigint type, the hexadecimal format of the number is
 
 Returns the String type. If the input is zero, then zero is returned; if the input is null, an exception is returned.
 
-**For example**:
+**Example**:
 
 ```
 hex(0)=0
@@ -739,7 +743,7 @@ hex('17')='3137'
 hex(null) results in an exception and returns failed.
 ```
 
-**Note:** When the input parameter is a Binary type, add `set  odps.sql.type.system.odps2=true;`, and submit it with SQL to use the new data type normally.
+**Note:** If the input parameter is a Binary type, add `set  odps.sql.type.system.odps2=true;`, and submit it with SQL to use the new data type normally.
 
 ## UNHEX {#section_k5x_51n_vdb .section}
 
@@ -749,11 +753,11 @@ hex(null) results in an exception and returns failed.
 BINARY unhex(String number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the UNHEX function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
-This function is used to returns the string represented by a given hexadecimal string.
+Returns the string represented by a given hexadecimal string.
 
 **Parameter description**:
 
@@ -763,7 +767,7 @@ number: A hexadecimal string.
 
 Returns the Binary type. If the input is zero, failed is returned. If the input is null, null is returned.
 
-**For example**:
+**Example**:
 
 ```
 Unhex ('616263') = 'abc'
@@ -778,7 +782,7 @@ unhex(616263)='abc'
 Double radians(Double number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the RADIANS function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -792,7 +796,7 @@ number: Double type.
 
 Returns the Double type, if the input is null, null is returned.
 
-**For example**:
+**Example**:
 
 ```
 radians(90)=1.5707963267948966
@@ -809,7 +813,7 @@ Double degrees(Double number)
 Double degrees(Decimal number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -823,7 +827,7 @@ number: Double or Decimal type.
 
 Returns Double data type. If the input is null, null is returned.
 
-**For example**:
+**Example**:
 
 ```
 degrees(1.5707963267948966)=90.0
@@ -840,11 +844,11 @@ Double sign(Double number)
 Double sign(Decimal number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the SIGN function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
-This function is used to takes the sign of the input data. 1.0 indicates positive and -1.0 indicates negative. Otherwise, 0.0 is returned.
+Applies the sign of the input data. 1.0 indicates a positive number and -1.0 indicates a negative number. Otherwise, 0.0 is returned.
 
 **Parameter description**:
 
@@ -854,7 +858,7 @@ number: Double or Decimal type.
 
 Returns Double data type. If the input is 0, 0.0 is returned. If the input is null, null is returned.
 
-**For example**:
+**Example**:
 
 ```
 sign(-2.5)=-1.0
@@ -871,7 +875,7 @@ sign(null)=null
 Double e()
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the E function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -881,7 +885,7 @@ This function is used to return the e value.
 
 Returns the Double type.
 
-**For example**:
+**Example**:
 
 ```
 e()=2.718281828459045
@@ -895,7 +899,7 @@ e()=2.718281828459045
 Double pi()
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the PI function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -905,7 +909,7 @@ This function is used to return the π value.
 
 Returns the Double type.
 
-**For example**:
+**Example**:
 
 ```
 pi()=3.141592653589793
@@ -919,7 +923,7 @@ pi()=3.141592653589793
 Bigint factorial(Int number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the FACTORIAL function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -933,7 +937,7 @@ number: Int-type data, range: \[0 –20\].
 
 Returns the Bigint type, if the input is zero, one is returned. If the input is null or outside the range \[0 –20\], null is returned.
 
-**For example**:
+**Example**:
 
 ```
 factorial(5)=120 --5! = 5*4*3*2*1 = 120
@@ -947,7 +951,7 @@ factorial(5)=120 --5! = 5*4*3*2*1 = 120
 Double cbrt(Double number)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the CBRT function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -961,7 +965,7 @@ number: Double type.
 
 Returns Double data type. If the input is null, null is returned.
 
-**For example**:
+**Example**:
 
 ```
 cbrt(8)=2
@@ -977,11 +981,11 @@ Int shiftleft(Tinyint|Smallint|Int number1, Int number2)
 Bigint shiftleft(Bigint number1, Int number2)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the SHIFTLEFT function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
-This function is used for shifts left by a given number of places \(<<\).
+Shifts to the left by a given number of places \(<<\).
 
 **Parameter description**:
 
@@ -992,7 +996,7 @@ This function is used for shifts left by a given number of places \(<<\).
 
 Returns the Int or Bingint type.
 
-**For example**:
+**Example**:
 
 ```
 shiftleft(1,2)=4  --Shifts the binary value of 1 two places to the left (1<<2,0001 shifted to 0100)
@@ -1008,7 +1012,7 @@ Int shiftright(Tinyint|Smallint|Int number1, Int number2)
 Bigint shiftright(Bigint number1, Int number2)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the SHIFTRIGHT function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **Usage:**
 
@@ -1023,7 +1027,7 @@ This function is used for shifts right by a given number of places \(\>\>\).
 
 Returns the Int or Bigint type.
 
-**For example**:
+**Example**:
 
 ```
 shiftright(4,2)=1 -- Shifts the binary value of 4 two places to the right (4>>2,0100 shifted to 0001)
@@ -1039,7 +1043,7 @@ Int shiftrightunsigned(Tinyint|Smallint|Int number1, Int number2)
 Bigint shiftrightunsigned(Bigint number1, Int number2)
 ```
 
-**Note:** Before the SQL statement that uses the function you should add `set odps.sql.type.system.odps2=true;` for normal use of the new data type.
+**Note:** Before the SQL statement which uses the SHIFTRIGHTUNSIGNED function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 **The command description is as follows**:
 
@@ -1054,7 +1058,7 @@ This function is used for unsigned right shift by a given number of places \(\>\
 
 Returns the Int or Bigint type.
 
-**For example**:
+**Example**:
 
 ```
 shiftrightunsigned(8,2)=2 -- Shifts the unsigned binary value of 8 two places to the right (8>>>2,1000 shifted to 0010)

@@ -1,6 +1,6 @@
 # Aggregate function {#concept_q4j_zrd_5db .concept}
 
-The relation between the input and the output of aggregate functions is a many-to-one relationship; that is, to aggregate multiple input records into an output record. It can be used with the group by clause in SQL.
+The relation between the input and the output of aggregate functions is a many-to-one relationship; that is, to aggregate multiple input records into an output record. Use it with the group by clause in SQL.
 
 ## COUNT {#section_x1k_xq1_wdb .section}
 
@@ -12,20 +12,18 @@ bigint count([distict|all] value)
 
 **Usage:**
 
-This function is used to count the record numbers.
+Counts the record numbers.
 
 **Parameter description**:
 
--   distinct|all: specify whether to remove duplicate records in the count process. The default all is used for counting all records. If the field ‘distinct’ is specified, it indicates taking a unique count value.
-
--   value: any type. If the value is NULL, the corresponding row is not involved in the count. Count \(\*\), returns all rows.
-
+-   distinct|all: Specifies whether to remove duplicate records while counting. The default all counts all records. If the field ‘distinct’ is specified, then a unique count value is used.
+-   value: Any type. If the value is NULL, the corresponding row is not counted. Count \(\*\), returns all rows.
 
 **Return Value**:
 
 Returns the Bigint type.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has the column col1 and the data type is Bigint.
@@ -42,7 +40,7 @@ select count(*) from tbla;  -- value is 3.
 select count(col1) from tbla;  -- value is 2
 ```
 
-The aggregation function can be used with the group by clause. For example, suppose that the table test\_src has two columns, key is a String type, and value is a Double type.
+Use the aggregation function with the group by clause. Example, suppose that the table test\_src has two columns, key is a String type, and value is a Double type.
 
 ```
 -- The data of test_src is shown as follows:
@@ -66,7 +64,7 @@ select key, count(value) as count from test_src group by key;
 +-----+-------+
 | b | 2 |
 +-----+-------+
--- The aggregation function is to do aggregation calculation for the values which has the same key value. The use of other aggregate functions introduced below follows the same rule as above. See this example if necessary.
+-- The aggregation function calculates the aggregate value that has the same key value.The preceding rules apply to the following aggregate functions also.
 ```
 
 ## AVG {#section_oxf_mr1_wdb .section}
@@ -80,17 +78,17 @@ decimal avg(decimal value)
 
 **Usage:**
 
-This function is used to calculate the average value.
+Calculates the average value.
 
 **Parameter description**:
 
-value: Double or Decimal type. If the input is String  or Bigint type, it is converted to Double type by implicit conversion. If it is another data type, an exception is indicated. If this value is NULL, a corresponding row is not involved in the calculation. The input cannot be Boolean type.
+value: Double or Decimal type. If the input is String  or Bigint type, it is converted to Double type by implicit conversion. If it is another data type, an exception is thrown. If this value is NULL, a corresponding row is not counted in the calculation. The input cannot be Boolean type.
 
 **Return value**:
 
 If the input is Decimal type, then return Decimal type. If it is the other valid types, then return Double type.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has a column value and its data type is Bigint.
@@ -120,17 +118,17 @@ max(value)
 
 **Usage:**
 
-This function is used to calculate the maximum value.
+Calculates the maximum value.
 
 **Parameter description**:
 
-value: can be any data type. If the column value is NULL, the corresponding row is not involved in the operation. Values of the Boolean type are excluded from calculation.
+value: Any data type. If the column value is NULL, the corresponding row is not counted in the operation. Values of the Boolean type are excluded from calculation.
 
 **Return value**:
 
-The return value is of the same type as the value type.
+The return value is matchs the value type.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has a column clo1 and its data type is Bigint. 
@@ -156,13 +154,13 @@ MIN(value)
 
 **Usage**:
 
-This function is used to calculate the minimum value of the column.
+Calculates the minimum value of the column.
 
 **Parameter description**:
 
-can be any data type. If the column value is NULL, the corresponding row is not involved in the operation. A Boolean type is not allowed involving in the operation.
+Any data type. If the column value is NULL, the corresponding row is not counted in the operation. A Boolean type is excluded from the operation.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has a column value and its data type is Bigint. 
@@ -189,17 +187,17 @@ decimal median(decimal number)
 
 **Usage**:
 
-This function is used to calculate the median.
+Calculates the median.
 
 **Parameter description**:
 
-number: Double or Decimal type. If the input is String or Bigint type, it is converted to Double type and involved in the operation. If it is another data type, an exception is indicated.
+number: Double or Decimal type. If the input is String or Bigint type, it is converted to Double type and is counted in the operation. If it is another data type, an exception is thrown.
 
 **Return value**:
 
 Returns the Double or Decimal type.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has a column value and its data type is Bigint. 
@@ -230,17 +228,17 @@ decimal stddev(decimal number)
 
 **Usage**:
 
-This function is used to calculate a population standard deviation.
+Calculates a population standard deviation.
 
 **Parameter description**:
 
-number: Double type or Decimal type. If the input is String or Bigint type, it is converted to Double type and involved in operation. If it is another data type, an exception is indicated.
+number: Double type or Decimal type. If the input is String or Bigint type, it is converted to Double type and is counted in operation. If it is another data type, an exception is thrown.
 
 **Return value**:
 
 Returns a Double or Decimal type.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has a column value and its data type is Bigint. 
@@ -271,17 +269,17 @@ decimal stddev_samp(decimal number)
 
 **Usage**:
 
-This function is used to calculate a sample standard deviation.
+Calculates a sample standard deviation.
 
 **Parameter description**:
 
-number: Double type or Decimal type. If the input is String or Bigint type, it is converted to Double type and involved in operation. If it is another data type, an exception is indicated.
+number: Double type or Decimal type. If the input is String or Bigint type, it is converted to Double type and is counted in operation. If it is another data type, an exception is thrown.
 
 **Return value**:
 
 Returns a Double or Decimal type.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has a column value and its data type is Bigint. 
@@ -311,17 +309,17 @@ sum(value)
 
 **Usage**:
 
-This function is used to calculate the sum of elements.
+Calculates the sum of elements.
 
 **Parameter description**:
 
-value: Double, Decimal, or Bigint type. If the input is String type, it is converted to Double type and involved in operation. If the value in the column is NULL, this row is not involved in the calculation. A Boolean type is not allowed to be involved in the calculation.
+value: Double, Decimal, or Bigint type. If the input is String type, it is converted to Double type and counted in operation. If the value in the column is NULL, this row is counted A Boolean type excluded from this calculation.
 
 **Return value**:
 
 If the input parameter is Bigint type, return Bigint type. If the input parameter is Double type or String type, return Double type.
 
-**For example**:
+**Example**:
 
 ```
 -- If the table tbla has a column value and its data type is Bigint. 
@@ -347,14 +345,12 @@ string wm_concat(string separator, string str)
 
 **Usage**:
 
-This function is used to use a specific separator to link the value in str.
+Uses a specific separator to link the value in str.
 
 **Parameter description**:
 
--   Separator: a String type constant. Constants of other types or non-constants can cause exceptions.
-
--   Str: String type. If the input is String type, it is converted to Double type and involved in operation. If it is another data type, an exception is indicated.
-
+-   · Separator: a String type constant. Constants of other types or non-constants can throw exceptions.
+-   Str: String type. If the input is String type, it is converted to Double type and is counted in operation. If it is another data type, an exception is thrown.
 
 **Return value**:
 
@@ -410,5 +406,5 @@ Return ARRAY type.
 
 **Note:** 
 
-Please add `set odps.sql.type.system.odps2=true;` in front of the SQL statement that uses this function and submit it with SQL to use the new data type normally.
+Please add `set odps.sql.type.system.odps2=true;` in front of the SQL statement that uses this function and submit it with SQL to use the new data type function normally.
 

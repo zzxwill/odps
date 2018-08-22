@@ -47,7 +47,7 @@ MapReduce 处理数据过程主要分成 Map 和 Reduce 两个阶段。首先执
 
 假设存在一个文本 a.txt，文本内每行是一个数字，您要统计每个数字出现的次数。文本内的数字称为 Word，数字出现的次数称为 Count。如果 MaxCompute Mapreduce 完成这一功能，需要经历以下流程，如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15326123541922_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15349379161922_zh-CN.jpg)
 
 操作步骤：
 

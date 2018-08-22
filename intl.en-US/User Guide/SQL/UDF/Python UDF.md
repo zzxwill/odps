@@ -1,22 +1,22 @@
 # Python UDF {#concept_pjv_qs2_xdb .concept}
 
-The Maxcompute UDF consists of UDF, UDAF, and UDTF functions, this article focuses on how to implement these three functions through Python.
+The MaxCompute UDF consists of UDF, UDAF, and UDTF functions. This article explains how to implement these three functions through Python.
 
-The current international terminal version of maxcompute does not yet support Python udfs.
+Currently, the international terminal version of MaxCompute does not support Python UDFs.
 
 ## RESTRICTED ENVIRONMENT {#section_gwg_3ff_xdb .section}
 
 The Python version of MaxCompute UDF is 2.7 and executes user code in sandbox mode; that is, the code is executed in a restricted environment.
 
 -   Read and Write local files
--   Promoter Process
+-   Promoter process
 -   Start thread
 -   Use SOCKET to communicate
 -   Other system calls
 
-Because of these restrictions, user-uploaded code must all be implemented by pure Python, and the C extension module is disabled.
+Because of these restrictions, user-uploaded code must be implemented throughj pure Python, and the C extension module is disabled.
 
-In addition, not all modules are available in the Python standard library, and modules that involve these features are disabled. Description of available modules in the standard library:
+In addition, not all modules are available in the Python standard library, and modules that involve these features are disabled. Description of available modules in the standard library are as follows:
 
 -   All modules implemented by pure Python are available.
 -   The following modules are available in C-implemented extended modules.
@@ -56,7 +56,7 @@ In addition, not all modules are available in the Python standard library, and m
     -   unicodedat
     -   \_weakref
     -   cPickle
--   Some modules have limited functionality. For example, the sandbox limits the degree to which user code can write data to the standard output and the standard error output; that is,  `sys.stdout/sys.stderr`  can write 20 KB at most; otherwise, the excessive characters will be ignored.
+-   Some modules have limited functionalities. For example, the sandbox limits the degree to which user code can write data to the standard output and the standard error output; that is,  `sys.stdout/sys.stderr`  can write 20 KB at most; otherwise, the excessive characters will be ignored.
 
 ## Third-party Libraries {#section_lrw_zff_xdb .section}
 
@@ -72,9 +72,9 @@ The parameters and return values are specified as follows:
 @odps.udf.annotate(signature)
 ```
 
-Maxcompute SQL data types that is currently supported by the python UDF  include bigint, String, double, Boolean, and datetime. The SQL statement must determine the parameter type and the return value type for all functions before execution. So for Python, a dynamically-typed language, you need to specify the function signature by adding a decorator to the UDF class.
+MaxCompute SQL data types that are currently supported by the Python UDF include bigint, String, double, Boolean, and datetime. The SQL statement must determine the parameter type and the return value type for all functions before execution. So for Python, a dynamically-typed language, you must specify the function signature by adding a decorator to the UDF class.
 
-The function signature is specified by a string. The syntax is as below:
+The function signature is specified by a string. The syntax is as follows:
 
 ```
 arg_type_list '->' type_list
@@ -87,7 +87,7 @@ type_list: [type_list ','] type
 -   Only the UDTF returned value can be multiple columns, while UDF and UDAF can only return one column.
 -   ‘\*’ represents varargs. By using varargs, UDF/UDTF/UDAF can match any type of parameter.
 
-The legitimate signature example is as follows:
+A valid signature example is as follows:
 
 ```
 The 'bigint, double-> string' # parameter is bigint, double, and the return value is string
@@ -99,7 +99,7 @@ The 'bigint, boolean-> string, datetime '# udtf parameter is bigint, Boolean, th
 The '-> doubles' # parameter is empty and the return value is double
 ```
 
-At the query semantic parsing stage, unqualified signatures will be checked out, and an error is returned. The execution would then be banned. During execution, the UDF parameter will be passed to the user as the type specified by the function signature. The type of the user returned value must be consistent with the type specified by the function signature; otherwise, an error is returned. MaxCompute The SQL data type corresponds to the Python type as follows:
+At the query semantic parsing stage, unqualified signatures are removed, and an error is returned. The execution is then stopped. During execution, the UDF parameter will be passed to the user as the type specified by the function signature. The type of the user returned value must be consistent with the type specified by the function signature; otherwise, an error is returned. MaxCompute SQL data type corresponds to the Python type as follows:
 
 |ODPS SQL type|Bigint|String|Double|Boolean |Datetime|
 |:------------|:-----|:-----|:-----|:-------|:-------|
@@ -114,7 +114,7 @@ In addition, the parameter of odps.udf.int\(value\[, silent=True\]\) has been ad
 
 ## UDF {#section_if4_fhf_xdb .section}
 
-Implementation of the python UDF is very simple, just need to define a new-style  class, and implements the evaluate method. For example:
+Implementation of the Python UDF is very simple. You are required to define a new-style  class, and implements the evaluate method. For example:
 
 ```
  from odps.udf import annotate
@@ -132,11 +132,11 @@ class myplus (object ):
 
 ## UDAF {#section_ilj_mhf_xdb .section}
 
--   class odps.udf.BaseUDAF: inherit this class to implement a Python UDAF.
--   BaseUDAF.new\_buffer\(\): implement this method and return the median ‘buffer’ of the aggregate function. Buffer must be mutable Object \(such as list, dict\), and the size of the buffer should not increase with the amount of data, in the case of limit, Buffer The size after Marshal should not exceed 2 MB.
--   BaseUDAF.iterate\(buffer\[, args, ...\]\): this method aggregates ‘args’ into the median ‘buffer’.
--   BaseUDAF.merge\(buffer, pbuffer\): this method aggregates two median buffers; that is, aggregate  ‘pbuffer merger’ into ‘buffer’.
--   BaseUDAF.terminate\(buffer\): this method converts the median ‘buffer’ into the MaxCompute SQL basic types.
+-   class odps.udf.BaseUDAF: Inherit this class to implement a Python UDAF.
+-   BaseUDAF.new\_buffer\(\): Implement this method and return the median ‘buffer’ of the aggregate function. Buffer must be mutable Object \(such as list, dict\), and the size of the buffer must not increase with the amount of data, in case of limit, Buffer size after Marshal must not exceed 2 MB.
+-   BaseUDAF.iterate\(buffer\[, args, ...\]\): This method aggregates ‘args’ into the median ‘buffer’.
+-   BaseUDAF.merge\(buffer, pbuffer\): This method aggregates two median buffers; that is, aggregate ‘pbuffer merger’ into ‘buffer’.
+-   BaseUDAF.terminate\(buffer\): This method converts the median ‘buffer’ into the MaxCompute SQL basic types.
 
 An example of an average value of UDAF is as follows:
 
@@ -165,14 +165,14 @@ class Average(BaseUDAF):
 
 ## UDTF {#section_ipk_thf_xdb .section}
 
--   class odps.udf.BaseUDTF: the basic class of Python UDTF. Users inherit this class and implement methods such as process, close, etc.
--   BaseUDTF.\_\_init\_\_\(\): the initialization method, the inheritance class, if you implement this method, the base class's initialization method, super\(BaseUDTF, self\).\_\_init\_\_\(\)  must be called at the beginning.
+-   class odps.udf.BaseUDTF: The basic class of Python UDTF. Users inherit this class and implement methods such as process, close, and so on.
+-   BaseUDTF.\_\_init\_\_\(\): The initialization method, the inheritance class, if you implement this method, the base class's initialization method, super\(BaseUDTF, self\).\_\_init\_\_\(\)  must be called in the beginning.
 
-    The init method will only be called once during the entire UDTF lifecycle; that is, before the first record is processed. When the UDTF needs to save the internal state, all states can be initialized in this method.
+    The init method can only be called once during the entire UDTF life cycle; that is, before the first record is processed. When the UDTF must save the internal state, all states can be initialized in this method.
 
--   BaseUDTF. process \(\[args,...\]\): This method by maxcompute The framework calls this method. Each record in SQL calls ‘process’ once accordingly. The parameters of ‘process’ are the specified UDTF input parameters in SQL.
--   BaseUDTF.forward\(\[args, ...\]\): the UDTF output method, which is called by user codes. Each time ‘forward’ is called, a record is output. The parameters of ‘forward’ are the UDTF output parameters specified in SQL.
--   BaseUDTF.close\(\): the termination method of UDTF. This method is called by the MaxCompute SQL framework and only to be called once; that is, after processing the last record.
+-   BaseUDTF. process \(\[args,...\]\): This is one of the MaxCompute methods. The framework calls this method. Each record in SQL calls ‘process’ once accordingly. The parameters of ‘process’ are the specified UDTF input parameters in SQL.
+-   BaseUDTF.forward\(\[args, ...\]\): The UDTF output method, which is called by user codes. Each time ‘forward’ is called, a record is output. The parameters of ‘forward’ are the UDTF output parameters specified in SQL.
+-   BaseUDTF.close\(\): The termination method of UDTF. This method is called by the MaxCompute SQL framework and only to be called once; that is, after processing the last record.
 
 Examples of UDTF are:
 
@@ -198,16 +198,16 @@ class Explode(BaseUDTF):
            self.forward(p)
 ```
 
-**Note:** Python A Python UDTF can also specify the parameter type or returned value type without adding ‘annotate’. In this case, the function can match any input parameter in SQL. The returned value type cannot be deduced, but all output parameters will be considered to be ‘String’ type. So when ‘forward’ is called, all output values must be converted into ‘str’ type.
+**Note:** A Python UDTF can also specify the parameter type or returned value type without adding ‘annotate’. In this case, the function can match any input parameter in SQL. The returned value type cannot be deduced, but all output parameters will be considered to be ‘String’ type. So when ‘forward’ is called, all output values must be converted into ‘str’ type.
 
 ## Referring to resources {#section_bj3_h3f_xdb .section}
 
-Python UDF can reference resource files through the ‘odps.distcache’ module. Currently, referencing file resources and table resources is supported.
+Python UDF can reference resource files through the ‘odps.distcache’ module. Currently, referencing file resources and table resources are supported.
 
 -   odps.distcache.get\_cache\_file\(resource\_name\)
 
-    -   Returns the resource content for the specified name. resource\_name: ‘str’ type, corresponding to the existing resource name in the current project. If the resource name is invalid or has no responding resources, return an error.
-    -   The return value is file-like object The caller is obliged to call the close method to release the open resource file after this object has been used.
+    -   Returns the resource content for the specified name. resource\_name: ‘str’ type, corresponding to the existing resource name in the current project. If the resource name is invalid or has no responding resources, returns an error.
+    -   The return value is file-like object the caller must call the close method to release the open resource file after this object has been used.
     The example of using ‘get\_cache\_file’ is as follows:
 
     ```
@@ -233,8 +233,8 @@ Python UDF can reference resource files through the ‘odps.distcache’ module.
 
 -   odps.distcache.get\_cache\_table\(resource\_name\):
 
-    -   Returns the contents of the specified resource table. resource\_name: ‘str’ type, corresponding to the existing resource table name in the current project. If the resource name is invalid or has no responding resources, return an error.
-    -   Returned value: returned value is ‘generator’ type. The caller obtain the table content through traversal. Each traversal has a record stored in the table in the form of a tuple.
+    -   Returns the contents of the specified resource table. resource\_name: ‘str’ type, corresponding to the existing resource table name in the current project. If the resource name is invalid or has no responding resources, returns an error.
+    -   Returned value: Returned value is a ‘generator’ type. The caller obtains the table content through traversal. Each traversal has a record stored in the table in the form of a tuple.
     The example of using ‘get\_cache\_table’ is as follows:
 
     ```

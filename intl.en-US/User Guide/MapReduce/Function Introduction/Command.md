@@ -26,13 +26,13 @@ For example:
 
     Multiple resources are separated by commas. If you must use span project resources, then add the prefix `PROJECT/resources/`, for example: `-resources otherproject/resources/resfile`. 
 
-    For more information about how to read the resource in the Map/Reduce function, see [Use Resource Example](intl.en-US/User Guide/MapReduce/Program Example/Resource Sample.md).
+    For more information about how to read the resource in the Map/Reduce function, see [Use Resource Example](reseller.en-US/User Guide/MapReduce/Program Example/Resource Sample.md).
 
 -   -classpath < local\_file\_list \>: the classpath used to specify the local JAR package of ‘main’  class \(include relative paths and absolute paths\).
 
     Package names are separated using system default file delimiters. Generally, the delimiter is a semicolon \(;\) in a Windows system and  a comma \(,\) in a Linux system.
 
-    **Note:** In most cases, users generally write the main class and Map/Reduce function in a package, such as [WordCount  Code Example](intl.en-US/User Guide/MapReduce/Program Example/WordCount Sample.md). This means that, in the running period of the example program,  mapreduce-examples.jar appears in ‘-resources’ parameter and ‘-classpath’ parameter,  however, ‘-resources’ references the Map/Reduce function, and runs in a distributed environment,  while  ‘-classpath’ references ‘Main’ class, and runs locally. The specified path of the JAR package is also a local path.
+    **Note:** In most cases, users generally write the main class and Map/Reduce function in a package, such as [WordCount  Code Example](reseller.en-US/User Guide/MapReduce/Program Example/Preparation.md). This means that, in the running period of the example program,  mapreduce-examples.jar appears in ‘-resources’ parameter and ‘-classpath’ parameter,  however, ‘-resources’ references the Map/Reduce function, and runs in a distributed environment,  while  ‘-classpath’ references ‘Main’ class, and runs locally. The specified path of the JAR package is also a local path.
 
 -   -D < prop\_name \>=< prop\_value \> : Multiple Java properties of < mainClass \>  in local mode can be defined.
 -   -l: run MapReduce job in local mode, mainly used for program debugging.
@@ -53,7 +53,7 @@ An example  of a configuration file ‘JobConf’ is as follows:
 
 In the preceding example, the variable ‘import.filename’ is defined and its value is ‘resource.txt’. 
 
-User can get this variable value through the JobConf interface in the MapReduce program. Alternatively, users can also get the value through the JobConf interface in the SDK. For a detailed example, see [Use Resource Example](intl.en-US/User Guide/MapReduce/Program Example/Resource Sample.md).
+User can get this variable value through the JobConf interface in the MapReduce program. Alternatively, users can also get the value through the JobConf interface in the SDK. For a detailed example, see [Use Resource Example](reseller.en-US/User Guide/MapReduce/Program Example/Resource Sample.md).
 
 Example:
 

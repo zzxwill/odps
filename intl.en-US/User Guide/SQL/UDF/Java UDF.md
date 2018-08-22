@@ -1,6 +1,6 @@
 # Java UDF {#concept_mxb_xn2_vdb .concept}
 
-MaxCompute UDF includes three types: UDF, UDAF, and UDTFThis article focuses on how to implement these three functions through Java.
+MaxCompute UDF includes three types: UDF, UDAF, and UDTF. This article focuses on how to implement these three functions through Java.
 
 ## Parameter and return value type {#section_uhs_43f_vdb .section}
 
@@ -137,7 +137,7 @@ The three most important interfaces are ‘iterate’, ‘merge’, and ‘termi
 
 Take ‘achieve average calculation’ as an example and next figure describes the realization logical and computational procedure of this function in MaxCompute UDAF:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15349247771855_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15349266391855_en-US.jpg)
 
 In the preceding figure , the input data is sliced according to a certain size.For more information about slicing, see [MapReduce](reseller.en-US/User Guide/MapReduce/Summary/MapReduce.md)\). The size of each slice is suitable for a worker to complete in the specified time. This slice size must be configured manually by the user.
 

@@ -19,7 +19,7 @@ Displays the information about the instances created by the current users.
 
 -   startdate、enddate: Returns the instance information during the specified period \(from startdate to enddate\) in the yyyy-mm-dd format and the unit is ‘day’. The parameters are optional. If the parameters are not specified, instances submitted within three days are returned by default.
 -    number: Specifies the number of instances to be displayed. Based on the scheduled time, return N \(number\) instances nearest to the current time. If it is not specified, all instances that meet the requirements are shown.
--   -all: The information of all instances that meet requirements is returned. To execute the command, the user must have the 'list' permission  for the project.
+-   -all: The information of all instances that meet requirements is returned. To execute the command, the user must have the 'list' permission  for the project. This command can only return 50 records by default. You can user -limit number to show more record. For example, use `show p -all -limit number 100` to show 100 instance records in the project.
 -   The output items: Include StartTime \(the time accurate to seconds\), RunTime \(s\) and Status \(including Waiting, Success, Failed, Running, Cancelled, and Suspended\).
 
 **InstanceID and corresponding SQL are as following:**
@@ -79,9 +79,9 @@ Query the status of an instance which ID is 20131225123xxxxxxxxxxxxxxx, and the 
 
 Permission requirements: The user must be a project owner or administrator.
 
-top instance: Displays tthe job information of the current account that is running in the project. It  is displayed, includesding ISNTANCEID , Owner, Type, StartTime, Progress, Status, Priority, RuntimeUsage \(CPU/MEM\), TotalUsage \(CPU/MEM\), QueueingInfo \(POS/LEN\) and so on.
+top instance: Displays the job information of the current account that is running in the project. It  is displayed, includesding ISNTANCEID , Owner, Type, StartTime, Progress, Status, Priority, RuntimeUsage \(CPU/MEM\), TotalUsage \(CPU/MEM\), QueueingInfo \(POS/LEN\) and so on.
 
-top instance-all : Returns all jobs that are currently being executed in the current project.
+top instance-all : Returns all jobs that are currently being executed in the current project. This command can only return 50 records by default. You can user -limit number to show more record.
 
 **Examples:**
 

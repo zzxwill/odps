@@ -24,11 +24,11 @@ The overall information of the SDK package provided by MaxCompute is shown in th
 
 ## AliyunAccount {#section_os1_f5b_wdb .section}
 
-AlibabaCloudAccount The primary account created in Alibaba Cloud. It generally has an AccessKey that is comprised of an AccessKeyId. and an AccessKeySecret and which is used to initialize MaxCompute.
+AlibabaCloudAccount. The primary account created in Alibaba Cloud. It generally has an AccessKey that is comprised of an AccessKeyId. and an AccessKeySecret and which is used to initialize MaxCompute.
 
 ## MaxCompute {#section_i25_f5b_wdb .section}
 
-It is the entry of MaxCompute SDK. User can get set of all objects under the project shell by such endpoint, including [Projects](../../../../intl.en-US/Product Introduction/Definition/Projects.md), [Tables](../../../../intl.en-US/Product Introduction/Definition/Table.md), [Resources](../../../../intl.en-US/Product Introduction/Definition/Resource.md), [Functions](../../../../intl.en-US/Product Introduction/Definition/Function.md), and [Instances](../../../../intl.en-US/Product Introduction/Definition/Instance.md).
+It is the entry of MaxCompute SDK. User can get set of all objects under the project shell by such endpoint, including [Projects](../../../../reseller.en-US/Product Introduction/Definition/Projects.md), [Tables](../../../../reseller.en-US/Product Introduction/Definition/Table.md), [Resources](../../../../reseller.en-US/Product Introduction/Definition/Resource.md), [Functions](../../../../reseller.en-US/Product Introduction/Definition/Function.md), and [Instances](../../../../reseller.en-US/Product Introduction/Definition/Instance.md).
 
 **Note:** MaxCompute was formerly called ODPS, so the portal class is still named ODPS in the current SDK version.
 
@@ -109,7 +109,7 @@ The run interface returns the Instance instance and obtains the SQL running stat
 
 ```
 
-**Note:** To create a table, you can use SQLTask interface instead of the interface Table. You must introduce the statement of [Table Operation](intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#) into SQLTask.
+**Note:** To create a table, you can use SQLTask interface instead of the interface Table. You must introduce the statement of [Table Operation](reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#) into SQLTask.
 
 ## Instances {#section_xtz_s5b_wdb .section}
 

@@ -1,67 +1,164 @@
-# Sleep samples {#concept_zjq_s2h_vdb .concept}
+# Pipeline samples {#concept_kss_3zf_vdb .concept}
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
 1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
-2.  Prepare resources for testing the SleepJob operation.
+2.  Prepare tables and resources for testing the the WordCountPipeline operation.
+    -   Create tables:
+
+        ```
+        create table wc_in (key string, value string);
+        create table wc_out(key string, cnt bigint);
+        ```
+
+    -   Add resources:
+
+        ```
+        add jar data\resources\mapreduce-examples.jar -f;
+        ```
+
+3.  Use the tunnel command to import the data:
 
     ```
-    Add jar data \ resources \ mapreduce-examples.jar-f;
+    tunnel upload data wc_in;
+    ```
+
+    The data imported into the wc\_in the table wc\_in is as follows:
+
+    ```
+    hello,odps
     ```
 
 
 ## Procedure {#section_rlv_bzg_vdb .section}
 
-Run Sleep on the odpscmd is as follows:
+Run WordCountPipeline on the odpscmd, as follows:
 
 ```
-  jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar 
-  com.aliyun.odps.mapred.open.example.Sleep 10;
-  jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar 
-  com.aliyun.odps.mapred.open.example.Sleep 100;
+jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
+com.aliyun.odps.mapred.open.example.WordCountPipeline wc_in wc_out;
 ```
 
 ## Expected output {#section_hzz_dzg_vdb .section}
 
-The job runs successfully. The run time of different sleep durations can be compared to determine the effect.
+The content of output table wc\_out  is as follows:
+
+```
++------------+------------+
+| key | cnt |
++------------+------------+
+| hello | 1 |
+| odps | 1 |
++------------+------------+
+```
 
 ## Sample code {#section_jgb_gzg_vdb .section}
 
 ```
-package com.aliyun.odps.mapred.open.example;
-import java.io.IOException;
-import com.aliyun.odps.mapred.JobClient;
-Import com.aliyun.odps.mapred.mapperbase;
-import com.aliyun.odps.mapred.conf.JobConf;
-public class Sleep {
-  private static final String SLEEP_SECS = "sleep.secs";
-  public static class MapperClass extends MapperBase {
-    // Because the data is not entered, the map function is not executed, and the related logic can only be written in setup
-    @Override
-    public void setup(TaskContext context) throws IOException {
-      try {
-        // Get the number of sleep seconds set in jobconf to sleep
-        Thread.sleep(context.getJobConf().getInt(SLEEP_SECS, 1) * 1000);
-      } catch (InterruptedException e) {
-        throw new RuntimeException(e);
+    package com.aliyun.odps.mapred.open.example;
+    import java.io.IOException;
+    Import java. util. iterator;
+    import com.aliyun.odps.Column;
+    import com.aliyun.odps.OdpsException;
+    import com.aliyun.odps.OdpsType;
+    Import com. aliyun. ODPS. Data. record;
+    import com.aliyun.odps.data.TableInfo;
+    import com.aliyun.odps.mapred.Job;
+    import com.aliyun.odps.mapred.MapperBase;
+    import com.aliyun.odps.mapred.ReducerBase;
+    import com.aliyun.odps.pipeline.Pipeline;
+    public class WordCountPipelineTest {
+      public static class TokenizerMapper extends MapperBase {
+        Record word;
+        Record one;
+        @Override
+        public void setup(TaskContext context) throws IOException{
+          word = context.createMapOutputKeyRecord();
+          one = context.createMapOutputValueRecord();
+          one.setBigint(0, 1L);
+        }
+        @Override
+        public void map(long recordNum, Record record, TaskContext context)
+            Throws ioexception {
+          for (int i = 0; i < record.getColumnCount(); i++) {
+            String[] words = record.get(i).toString().split("\\s+");
+            for (String w : words) {
+              word.setString(0, w);
+              context.write(word, one);
+            }
+          }
+        }
+      }
+      public static class SumReducer extends ReducerBase {
+        private Record value;
+        @Override
+        public void setup(TaskContext context) throws IOException{
+          value = context.createOutputValueRecord();
+        }
+        @Override
+        public void reduce(Record key,Iterator<Record>values,TaskContext context)
+            Throws ioexception {
+          Long Count = 0;
+          while(values.hasNext()) {
+            Record val = values.next();
+            count += (Long) val.get(0);
+          }
+          value.set(0, count);
+          context.write(key, value);
+        }
+      }
+      public static class IdentityReducer extends ReducerBase {
+        private Record result;
+        @Override
+        public void setup(TaskContext context) throws IOException{
+          result = context.createOutputRecord();
+        }
+        @Override
+        public void reduce(Record key,Iterator<Record>values,TaskContext context)
+            Throws ioexception {
+          while (values.hasNext()) {
+            result.set(0, key.get(0));
+            result.set(1, values.next().get(0));
+            context.write(result);
+          }
+        }
+      }
+      public static void main(String[] args) throws OdpsException {
+        if (args.length ! = 2) {
+          System.err.println("Usage: WordCountPipeline <in_table> <out_table>");
+          System.exit(2);
+        }
+        Job job = new Job();
+        /***
+         * In the process of constructing pipeline, if you do not specify mapper's OutputKeySortColumns，PartitionColumns，OutputGroupingColumns,
+         * the framework defaults to its OutputKey as the default configuration for the three
+         ***/
+        Pipeline pipeline = Pipeline.builder()
+            . Addmapper (maid. Class)
+            .setOutputKeySchema(
+                    new Column[] { new Column("word", OdpsType.STRING) })
+            .setOutputValueSchema(
+                    new Column[] { new Column("count", OdpsType.BIGINT) })
+            .setOutputKeySortColumns(new String[] { "word" })
+            .setPartitionColumns(new String[] { "word" })
+            .setOutputGroupingColumns(new String[] { "word" })
+            .addReducer(SumReducer.class)
+            .setOutputKeySchema(
+                    new Column[] { new Column("word", OdpsType.STRING) })
+            .setOutputValueSchema(
+                    new Column[] { new Column("count", OdpsType.BIGINT)})
+            .addReducer(IdentityReducer.class).createPipeline();
+        // Set pipeline to jobconf and jobconf if you need to set the assemblyer
+        job.setPipeline(pipeline);
+        //Set table information for Input Output
+        job.addInput(TableInfo.builder().tableName(args[0]).build());
+        job.addOutput(TableInfo.builder().tableName(args[1]).build());
+        // Job submit and wait for end
+        job.submit();
+        job.waitForCompletion();
+        System.exit(job.isSuccessful() == true ? 0 : 1);
       }
     }
-  }
-  public static void main(String[] args) throws Exception {
-    if (args.length ! = 1) {
-      System.err.println("Usage: Sleep <sleep_secs>");
-      System.exit(-1);
-    }
-    JobConf job = new JobConf();
-    job.setMapperClass(MapperClass.class);
-    // This instance is also a maponly, so you need to set the reductor number to 0.
-    job.setNumReduceTasks(0);
-    // Because there is no input table, the number of mapper needs to be specified explicitly by the user
-    job.setNumMapTasks(1);
-    job.set(SLEEP_SECS, args[0]);
-    JobClient.runJob(job);
-  }
-}
 
 ```
 

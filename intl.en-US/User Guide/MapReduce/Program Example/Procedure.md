@@ -1,14 +1,14 @@
-# Pipeline samples {#concept_kss_3zf_vdb .concept}
+# Unique samples {#concept_mzd_52l_vdb .concept}
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
-2.  Prepare tables and resources for testing the the WordCountPipeline operation.
+1.  Prepare the JAR package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
+2.  Prepare tables and resources for testing the Unique operation.
     -   Create tables:
 
         ```
-        create table wc_in (key string, value string);
-        create table wc_out(key string, cnt bigint);
+        create table ss_in(key bigint, value bigint);
+        create table ss_out(key bigint, value bigint);
         ```
 
     -   Add resources:
@@ -17,38 +17,41 @@
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  Use the tunnel command to import the data:
+3.  Use the tunnel command to import the data.
 
     ```
-    tunnel upload data wc_in;
+    tunnel upload data ss_in;
     ```
 
-    The data imported into the wc\_in the table wc\_in is as follows:
+    The contents of data file are imported into the table ss\_in.
 
     ```
-    hello,odps
+     1,1
+     1,1
+     2,2
+     2,2
     ```
 
 
 ## Procedure {#section_rlv_bzg_vdb .section}
 
-Run WordCountPipeline on the odpscmd, as follows:
+Run Unique on the odpscmd, as follows:
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
-com.aliyun.odps.mapred.open.example.WordCountPipeline wc_in wc_out;
+com.aliyun.odps.mapred.open.example.Unique ss_in ss_out key;
 ```
 
 ## Expected output {#section_hzz_dzg_vdb .section}
 
-The content of output table wc\_out  is as follows:
+The content of output table ss\_out is as follows:
 
 ```
 +------------+------------+
-| key | cnt |
+| key | value |
 +------------+------------+
-| hello | 1 |
-| odps | 1 |
+| 1 | 1 |
+| 2 | 2 |
 +------------+------------+
 ```
 
@@ -58,57 +61,47 @@ The content of output table wc\_out  is as follows:
     package com.aliyun.odps.mapred.open.example;
     import java.io.IOException;
     Import java. util. iterator;
-    import com.aliyun.odps.Column;
-    import com.aliyun.odps.OdpsException;
-    import com.aliyun.odps.OdpsType;
     Import com. aliyun. ODPS. Data. record;
     import com.aliyun.odps.data.TableInfo;
-    import com.aliyun.odps.mapred.Job;
+    import com.aliyun.odps.mapred.JobClient;
     import com.aliyun.odps.mapred.MapperBase;
     import com.aliyun.odps.mapred.ReducerBase;
-    import com.aliyun.odps.pipeline.Pipeline;
-    public class WordCountPipelineTest {
-      public static class TokenizerMapper extends MapperBase {
-        Record word;
-        Record one;
+    import com.aliyun.odps.mapred.TaskContext;
+    import com.aliyun.odps.mapred.conf.JobConf;
+    import com.aliyun.odps.mapred.utils.InputUtils;
+    import com.aliyun.odps.mapred.utils.OutputUtils;
+    import com.aliyun.odps.mapred.utils.SchemaUtils;
+    /**
+     * Unique Remove duplicate words
+     *
+     **/
+    public class Unique {
+      public static class OutputSchemaMapper extends MapperBase {
+        private Record key;
+        private Record value;
         @Override
         public void setup(TaskContext context) throws IOException{
-          word = context.createMapOutputKeyRecord();
-          one = context.createMapOutputValueRecord();
-          one.setBigint(0, 1L);
+          key = context.createMapOutputKeyRecord();
+          value = context.createMapOutputValueRecord();
         }
         @Override
         public void map(long recordNum, Record record, TaskContext context)
             Throws ioexception {
-          for (int i = 0; i < record.getColumnCount(); i++) {
-            String[] words = record.get(i).toString().split("\\s+");
-            for (String w : words) {
-              word.setString(0, w);
-              context.write(word, one);
+          long left = 0;
+          long right = 0;
+          if (record.getColumnCount() > 0) {
+            left = (Long) record.get(0);
+            if (record.getColumnCount() > 1) {
+              right = (Long) record.get(1);
             }
+            key.set(new Object[] { (Long) left, (Long) right });
+            value.set(new Object[] { (Long) left, (Long) right });
+            context.write(key, value);
           }
         }
       }
-      public static class SumReducer extends ReducerBase {
-        private Record value;
-        @Override
-        public void setup(TaskContext context) throws IOException{
-          value = context.createOutputValueRecord();
-        }
-        @Override
-        public void reduce(Record key,Iterator<Record>values,TaskContext context)
-            Throws ioexception {
-          Long Count = 0;
-          while(values.hasNext()) {
-            Record val = values.next();
-            count += (Long) val.get(0);
-          }
-          value.set(0, count);
-          context.write(key, value);
-        }
-      }
-      public static class IdentityReducer extends ReducerBase {
-        private Record result;
+      public static class OutputSchemaReducer extends ReducerBase {
+        private Record result = null;
         @Override
         public void setup(TaskContext context) throws IOException{
           result = context.createOutputRecord();
@@ -116,47 +109,76 @@ The content of output table wc\_out  is as follows:
         @Override
         public void reduce(Record key,Iterator<Record>values,TaskContext context)
             Throws ioexception {
-          while (values.hasNext()) {
-            result.set(0, key.get(0));
-            result.set(1, values.next().get(0));
-            context.write(result);
+          result.set(0, key.get(0));
+          while(values.hasNext()) {
+            Record value = values.next();
+            result.set(1, value.get(1));
           }
+          context.write(result);
         }
       }
-      public static void main(String[] args) throws OdpsException {
-        if (args.length ! = 2) {
-          System.err.println("Usage: WordCountPipeline <in_table> <out_table>");
+      public static void main(String[] args) throws Exception {
+        if (args.length > 3 || args.length < 2) {
+          System.err.println("Usage: unique <in> <out> [key|value|all]");
           System.exit(2);
         }
-        Job job = new Job();
-        /***
-         * In the process of constructing pipeline, if you do not specify mapper's OutputKeySortColumns，PartitionColumns，OutputGroupingColumns,
-         * the framework defaults to its OutputKey as the default configuration for the three
-         ***/
-        Pipeline pipeline = Pipeline.builder()
-            . Addmapper (maid. Class)
-            .setOutputKeySchema(
-                    new Column[] { new Column("word", OdpsType.STRING) })
-            .setOutputValueSchema(
-                    new Column[] { new Column("count", OdpsType.BIGINT) })
-            .setOutputKeySortColumns(new String[] { "word" })
-            .setPartitionColumns(new String[] { "word" })
-            .setOutputGroupingColumns(new String[] { "word" })
-            .addReducer(SumReducer.class)
-            .setOutputKeySchema(
-                    new Column[] { new Column("word", OdpsType.STRING) })
-            .setOutputValueSchema(
-                    new Column[] { new Column("count", OdpsType.BIGINT)})
-            .addReducer(IdentityReducer.class).createPipeline();
-        // Set pipeline to jobconf and jobconf if you need to set the assemblyer
-        job.setPipeline(pipeline);
-        //Set table information for Input Output
-        job.addInput(TableInfo.builder().tableName(args[0]).build());
-        job.addOutput(TableInfo.builder().tableName(args[1]).build());
-        // Job submit and wait for end
-        job.submit();
-        job.waitForCompletion();
-        System.exit(job.isSuccessful() == true ? 0 : 1);
+        String ops = "all";
+        if (args.length == 3) {
+          Ops = ARGs [2];
+        }
+        // Reduce input grouping is determined by the settings of the scanner, this parameter if it is not set
+        /Default is mapoutputkeyschema
+        // Key Unique
+        if (ops.equals("key")) {
+          JobConf job = new JobConf();
+          job.setMapperClass(OutputSchemaMapper.class);
+          job.setReducerClass(OutputSchemaReducer.class);
+          job.setMapOutputKeySchema(SchemaUtils.fromString("key:bigint,value:bigint"));
+          job.setMapOutputValueSchema(SchemaUtils.fromString("key:bigint,value:bigint"));
+          job.setPartitionColumns(new String[] { "key" });
+          job.setOutputKeySortColumns(new String[] { "key", "value" });
+          job.setOutputGroupingColumns(new String[] { "key" });
+          job.set("tablename2", args[1]);
+          job.setNumReduceTasks(1);
+          job.setInt("table.counter", 0);
+          InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
+          OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
+          Jobclient. runjob (job );
+        }
+        // Key&Value Unique
+        if (ops.equals("all")) {
+          JobConf job = new JobConf();
+          job.setMapperClass(OutputSchemaMapper.class);
+          job.setReducerClass(OutputSchemaReducer.class);
+          job.setMapOutputKeySchema(SchemaUtils.fromString("key:bigint,value:bigint"));
+          job.setMapOutputValueSchema(SchemaUtils.fromString("key:bigint,value:bigint"));
+          job.setPartitionColumns(new String[] { "key" });
+          job.setOutputKeySortColumns(new String[] { "key", "value" });
+          job.setOutputGroupingColumns(new String[] { "key", "value" });
+          Job. Set ("tablename2", argS [1]);
+          job.setNumReduceTasks(1);
+          job.setInt("table.counter", 0);
+          InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
+          OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
+          Jobclient. runjob (job );
+        }
+        // Value Unique
+        if (ops.equals("value")) {
+          JobConf job = new JobConf();
+          job.setMapperClass(OutputSchemaMapper.class);
+          job.setReducerClass(OutputSchemaReducer.class);
+          job.setMapOutputKeySchema(SchemaUtils.fromString("key:bigint,value:bigint"));
+          job.setMapOutputValueSchema(SchemaUtils.fromString("key:bigint,value:bigint"));
+          job.setPartitionColumns(new String[] { "value" });
+          job.setOutputKeySortColumns(new String[] { "value" });
+          job.setOutputGroupingColumns(new String[] { "value" });
+          job.set("tablename2", args[1]);-
+          job.setNumReduceTasks(1);
+          job.setInt("table.counter", 0);
+          InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
+          OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
+          Jobclient. runjob (job );
+        }
       }
     }
 

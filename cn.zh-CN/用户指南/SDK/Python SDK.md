@@ -204,7 +204,7 @@ False
 >>> writer.close()  # 不要忘记关闭 writer，否则数据可能写入不完全
 ```
 
-同样，向表中写入数据也是对Tunnel API的封装，更多详情请参见[数据上传下载通道](cn.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
+同样，向表中写入数据也是对Tunnel API的封装，更多详情请参见[数据上传下载通道](intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
 
 ## 删除表 {#section_ayt_mzb_wdb .section}
 
@@ -520,7 +520,7 @@ DataFrame API提供了value\_counts方法来快速达到同样的目的。如下
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/2854_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178202854_zh-CN.png)
 
 将年龄分成30组，查看各年龄分布的直方图，如下所示：
 
@@ -528,7 +528,7 @@ ylabel='prefession')
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/2855_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178202855_zh-CN.png)
 
 使用join把这三张表进行联合后，把它保存成一张新的表。如下所示：
 

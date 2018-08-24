@@ -4,9 +4,9 @@ PyODPS is the Python SDK of MaxCompute. It supports basic actions on MaxCompute 
 
 -   For more information about PyODPS, see the [PyODPS community album](https://yq.aliyun.com/album/19).
 
--   Developers are welcome to participate in the ecological development of PyODPS. For more information, see [GitHub document](http://pyodps.readthedocs.io/zh_CN/latest/?spm=a2c4e.11153959.blogcont138752.16.5bec51d32BpKgB).
+-   Developers are invited to participate in the ecological development of PyODPS. For more information, see [GitHub document](http://pyodps.readthedocs.io/zh_CN/latest/?spm=a2c4e.11153959.blogcont138752.16.5bec51d32BpKgB).
 
--   You are welcome to submit the issue and merge request to accelerate PyODPS eco-growth. For more details, see [code](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ).
+-   Developers can also submit the issue and merge request to accelerate PyODPS eco-growth. For more information, see [code](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ).
 
 -   DingTalk technology exchange group: **11701793**
 
@@ -29,7 +29,7 @@ After completing initialization, you can operate tables, resources, and function
 
 ## Project {#section_sc2_nxb_wdb .section}
 
-A project is the basic unit of operation in MaxCompute, which is similar to a database.
+A project is the basic unit of operation in MaxCompute, similar to a database.
 
 Call `get_project` to obtain a project, as shown in the following code:
 
@@ -41,12 +41,12 @@ project = odps.get_project() # Obtain the default project.
 **Note:** 
 
 -   If parameters are not input, use the default project.
--   You can call `exist_project` to check whether a project exists.
+-   You can call `exist_project` to check whether the project exists.
 
 -   A table is a data storage unit of MaxCompute.
 
 
-## Table Actions {#section_mmv_kyb_wdb .section}
+## Table Action {#section_mmv_kyb_wdb .section}
 
 Call `list_tables` to list all tables in the project, as shown in the following code:
 
@@ -94,9 +94,9 @@ False
 
 ```
 
-## Create a table’s schema {#section_hxy_qyb_wdb .section}
+## Create schema for a table {#section_hxy_qyb_wdb .section}
 
-Two initialization methods are provided:
+Two initialization methods are as follows:
 
 -   Initialize through table columns and optional partitions, as shown in the following code:
 
@@ -122,7 +122,7 @@ Two initialization methods are provided:
 
 ## Create a Table {#section_r2m_wyb_wdb .section}
 
-You can use a table schema to create a table, as shown in the following code:
+Use a table schema to create a table, as shown in the following code:
 
 ```
 >>> table = odps.create_table('my_new_table', schema)
@@ -130,7 +130,7 @@ You can use a table schema to create a table, as shown in the following code:
 >>> table = o.create_table('my_new_table', schema, lifecycle=7) # Set the life cycle.
 ```
 
-You can use a **field name  field type** string connected by commas to create a table, as shown in the following code:
+Use a **field name  field type** string connected by commas \(,\) to create a table, as shown in the following code:
 
 ```
 >>> # Create a non-partition table.
@@ -141,7 +141,7 @@ You can use a **field name  field type** string connected by commas to create a
 
 Without related settings, you can use only the BIGINT, DOUBLE, DECIMAL, STRING, DATETIME, BOOLEAN, MAP, and ARRAY types when creating a table.
 
-If your service is on the public cloud, or supports new data types such as TINYINT or STRUCT, you can set `options.sql.use_odps2_extension =  True` to enable the new types, as shown in the following code:
+If your service is on a public cloud, or supports new data types such as TINYINT or STRUCT, you can set `options.sql.use_odps2_extension =  True` to enable the new types, as shown in the following code:
 
 ```
 >>> from odps import options
@@ -166,7 +166,7 @@ Table data can be obtained using three methods:
     >>>     print(record['c_int_a', 'c_double_a']) # Obtain values through multiple fields.
     ```
 
--   Run `open_reader` on a table to open a reader to read data.  You can choose to use the WITH expression:
+-   Run `open_reader` on a table to open a reader to read data.  You can use the WITH expression:
 
     ```
     # Use the with expression.
@@ -204,7 +204,7 @@ A table object can also perform the `open_writer` action to open the writer and 
 >>> writer.close() # You must close the writer. Otherwise, the written data may be incomplete.
 ```
 
-Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
+Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 
 ## Delete a Table {#section_ayt_mzb_wdb .section}
 
@@ -219,7 +219,7 @@ Delete a table as shown in the following code:
 
 -   **Basic operations**
 
-    Traverse all partitions of a table, as shown in the following code:
+    Traverse all partitions of a table as shown in the following code:
 
     ```
     >>> for partition in table.partitions:
@@ -228,13 +228,13 @@ Delete a table as shown in the following code:
     >>>     Traverse list partitions.
     ```
 
-    Check whether a partition exists, as shown in the following code:
+    Check whether a partition exists as shown in the following code:
 
     ```
     >>> table.exist_partition('pt=test,sub=2015')
     ```
 
-    Obtain the partition, as shown in the following code:
+    Obtain the partition as shown in the following code:
 
     ```
     >>> partition = table.get_partition('pt=test')
@@ -260,7 +260,7 @@ Delete a table as shown in the following code:
 
 ## SQL {#section_hhn_xzb_wdb .section}
 
-PyODPS supports MaxCompute SQL query and can directly read the execution result.
+PyODPS supports MaxCompute SQL query and can directly read the execution results.
 
 -   **Run the SQL statements**
 
@@ -304,7 +304,7 @@ PyODPS mainly supports two resource types: file resources and table resources.
 
     **Create a File Resource**
 
-    You can create a file resource by specifying the resource name, file type, and a file-like object \(or a string object\), as shown in the following example:
+    Create a file resource by specifying the resource name, file type, and a file-like object \(or a string object\), as shown in the following example:
 
     ```
     resource = odps.create_resource('test_file_resource', 'file', file_obj=open('/to/path/file')) # Use a file-like object.
@@ -313,7 +313,7 @@ PyODPS mainly supports two resource types: file resources and table resources.
 
     **Read and Modify a File Resource**
 
-    You can call the `open` method for a file resource or call `open_resource` at the MaxCompute entry to open a file resource.  The opened object is a file-like object.  Similar to the `open` method built in Python, file resources also support the open mode.  For example:
+    You can call the `open` method for a file resource or call `open_resource` at the MaxCompute entry to open a file resource. The opened object is a file-like object.Similar to the `open` method built in Python, file resources also support the open mode. For example:
 
     ```
     >>> with resource.open('r') as fp: # Open a resource in read mode.
@@ -340,7 +340,7 @@ PyODPS mainly supports two resource types: file resources and table resources.
     -   `r+`: Read/write mode. You can read and write any content.
     -   `w+`: Similar to `r+`, but file content is cleared first.
     -   `a+`: Similar to `r+`, but content can be added to the end of the file only during writing.
-    In PyODPS, file resources can be opened in binary mode. For example, some compressed files must be opened in binary mode.  `rb` indicates opening a file in binary read mode, and `r+b` indicates opening a file in binary read/write mode.
+    In PyODPS, file resources can be opened in a binary mode. For example, some compressed files must be opened in binary mode.  `rb` indicates opening a file in binary read mode, and `r+b` indicates opening a file in binary read/write mode.
 
 -   **Table Resources**
 
@@ -360,7 +360,7 @@ PyODPS mainly supports two resource types: file resources and table resources.
 
 ## DataFrame {#section_ns3_1bc_wdb .section}
 
-PyODPS provides DataFrame API, which provides interfaces similar to pandas, but can fully utilize computing capability of MaxCompute. For the complete DataFrame document, see [DataFrame](http://pyodps.readthedocs.io/zh_CN/latest/df.html).
+PyODPS offers DataFrame API, which provides interfaces similar to pandas, but can fully utilize computing capability of MaxCompute. For the complete DataFrame document, see [DataFrame](http://pyodps.readthedocs.io/zh_CN/latest/df.html).
 
 The following is an example of DataFrame:
 
@@ -371,9 +371,9 @@ The following is an example of DataFrame:
              project='**your-project**', endpoint='**your-end-point**'))
 ```
 
-Here, movielens  100K is used as an example. Assume that three tables already exist, which are `pyodps_ml_100k_movies` \(movie-related data\), `pyodps_ml_100k_users` \(user-related data\), and `pyodps_ml_100k_ratings` \(rating-related data\).
+Here, movielens 100K is used as an example. Assume that three tables already exist, namely, `pyodps_ml_100k_movies` \(movie-related data\), `pyodps_ml_100k_users` \(user-related data\), and `pyodps_ml_100k_ratings` \(rating-related data\).
 
-You only need to input a Table object to create a DataFrame object.  For example:
+You only need to input a Table object to create a DataFrame object. For example:
 
 ```
 >>> from odps.df import DataFrame
@@ -422,7 +422,7 @@ You can add a filter on the fields if you do not want to view all of them.  For
 |3|4|24|
 |4|5|33|
 
-You can also exclude several fields.  For example:
+You can also exclude several fields. For example:
 
 ```
 >>> users.exclude('zip_code', 'age').head(5)
@@ -436,7 +436,7 @@ You can also exclude several fields.  For example:
 |3|4|M|technician|
 |4|5|F|other|
 
-When excluding some fields, you may want to obtain new columns through computation. For example, add the sex\_bool attribute and set it to True if sex is Male. Otherwise, set it to False.  For example:
+When excluding some fields, you may want to obtain new columns through computation. For example, add the sex\_bool attribute and set it to True if sex is Male. Otherwise, set it to False. For example:
 
 ```
 >>> users.select(users.exclude('zip_code', 'sex'), sex_bool=users.sex == 'M').head(5)
@@ -488,7 +488,7 @@ To divide users by job, obtain the first 10 jobs that have the largest populatio
 |8|executive|32|
 |9|scientist|31|
 
-DataFrame APIs provide the value\_counts method to quickly achieve the same result.  For example:
+DataFrame APIs provide the value\_counts method to quickly achieve the same result. For example:
 
 ```
 >>> users.occupation.value_counts()[:10]
@@ -520,7 +520,7 @@ Use a horizontal bar chart to visualize data, as shown in the following code:
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/2854_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178252854_en-US.png)
 
 Divide ages into 30 groups and view the histogram of age distribution, as shown in the following code:
 
@@ -528,9 +528,9 @@ Divide ages into 30 groups and view the histogram of age distribution, as shown 
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/2855_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178252855_en-US.png)
 
-Use JOIN to join the three tables and save the joined tables as a new table.  For example:
+Use JOIN to join the three tables and save the joined tables as a new table. For example:
 
 ```
 >>> movies = DataFrame(o.get_table('pyodps_ml_100k_movies'))
@@ -557,14 +557,14 @@ odps.Schema {
 }
 ```
 
-Divide ages of 0 to 80 into eight groups, as shown in the following code:
+Divide the age groups between 0 and 80 into eight groups, as shown in the following code:
 
 ```
 >>> labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
 >>> cut_lens = lens[lens, lens.age.cut(range(0, 81, 10), right=False, labels=labels).rename('age group')]
 ```
 
-View the first 10 data records of a single age in a group, as shown in the following code:
+View the first 10 data records of a single age group in a group, as shown in the following code:
 
 ```
 >>> cut_lens['age group', 'age'].distinct()[:10]
@@ -602,9 +602,9 @@ View users’ total rating and average rating of each age group, as shown in the
 
 ## Configuration {#section_bcy_gdc_wdb .section}
 
-PyODPS provides a series of configuration options, which can be obtained through `odps.options`.  The following lists configurable MaxCompute options:
+PyODPS provides a series of configuration options, which can be obtained through `odps.options`. The following lists configurable MaxCompute options:
 
--   **General Configurations**
+-   **General configuration**
 
     |Option|Description|Default value|
     |:-----|:----------|:------------|
@@ -614,7 +614,7 @@ PyODPS provides a series of configuration options, which can be obtained through
     |log\_view\_hours|LogView holding time \(hours\)|24|
     |local\_timezone|Used time zone. True indicates local time, and False indicates UTC. The time zone of pytz can also be used.|1|
     |lifecycle|Life cycles of all tables|None|
-    |temp\_lifecycle|Life cycles of temporary tables|1|
+    |temp\_lifecycle|Life cycles of the temporary tables|1|
     |biz\_id|User ID|None|
     |verbose|Whether to print logs|False|
     |verbose\_log|Log receiver|None|
@@ -629,14 +629,14 @@ PyODPS provides a series of configuration options, which can be obtained through
     |sql.settings|MaxCompute SQL runs global hints|None|
     |sql.use\_odps2\_extension|Enable MaxCompute 2.0 language extension|False|
 
--   **Data Upload/Download Configurations**
+-   **Data Upload/Download configuration**
 
     |Option|Description|Default value|
     |:-----|:----------|:------------|
-    |tunnel.endpoint|Tunnel Endpoint|None|
-    |tunnel.use\_instance\_tunnel|Use Instance Tunnel to obtain the execution result|True|
-    |tunnel.limited\_instance\_tunnel|Limit the number of results obtained by Instance Tunnel|True|
-    |tunnel.string\_as\_binary|Use bytes instead of unicode in the string type|False|
+    |tunnel.endpoint|Tunnel Endpoint.|None|
+    |tunnel.use\_instance\_tunnel|Use Instance Tunnel to obtain the execution result.|True|
+    |tunnel.limited\_instance\_tunnel|Limit the number of results obtained by Instance Tunnel.|True|
+    |tunnel.string\_as\_binary|Use bytes instead of unicode in the string type.|False|
 
 -   **DataFrame Configurations**
 

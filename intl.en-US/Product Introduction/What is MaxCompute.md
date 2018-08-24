@@ -12,8 +12,6 @@ Given these massive data volumes, the limited processing capacity of a single se
 
 ## MaxCompute learning path {#section_learningpath .section}
 
-You can quickly learn about MaxCompute's related concepts, basic operations and advanced operations through [MaxCompute learning path](https://www.alibabacloud.com/getting-started/learningpath/maxcompute).
-
 ## Product advantage {#section_ufc_wrv_tdb .section}
 
 -   **Large-scale computing and storage**
@@ -38,7 +36,7 @@ You can quickly learn about MaxCompute's related concepts, basic operations and 
 -   **Data tunnel**
     -   Supports large volumes of historical data channels
 
-        [TUNNEL](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) provides high concurrency data upload and download services. This service supports the import and export of terabytes or petabytes of data on a daily basis, which is particularly useful for the batch import of full or historical data.   Tunnel Provides you with a Java programming interface, and in the MaxCompute client tool, there are corresponding commands for local file and service data interchange.
+        [TUNNEL](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md) provides high concurrency data upload and download services. This service supports the import and export of terabytes or petabytes of data on a daily basis, which is particularly useful for the batch import of full or historical data.   Tunnel Provides you with a Java programming interface, and in the MaxCompute client tool, there are corresponding commands for local file and service data interchange.
 
     -   Real-time and incremental data channels
 
@@ -56,19 +54,19 @@ You can quickly learn about MaxCompute's related concepts, basic operations and 
 -   MaxCompute SQL syntax differs from Oracle and MySQL, notably, you cannot seamlessly migrate SQL statements of other databases into MaxCompute. 
 -   In terms of usage, MaxCompute SQL can complete queries at the second- to millisecond-level,and can not return results at milliseconds.
 -   The advantage of MaxCompute SQL is low learning cost. You don't need to understand the concept of complex distributed computing. If you have experience in database operations, you can familiarize yourself with MaxCompute SQL quickly.
-    -   [UDF](../../../../intl.en-US/User Guide/SQL/UDF/UDF Summary.md): A user-defined function.
+    -   [UDF](../../../../reseller.en-US/User Guide/SQL/UDF/UDF Summary.md): A user-defined function.
 
-        MaxCompute provides numerous[built-in functions](../../../../intl.en-US/User Guide/SQL/Builtin Function/Date Functions.md)to meet your computing needs, while also supporting the creation of custom functions.
+        MaxCompute provides numerous[built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin Function/Date Functions.md)to meet your computing needs, while also supporting the creation of custom functions.
 
-    -   [MapReduce](../../../../intl.en-US/User Guide/MapReduce/Summary/MapReduce.md): MapReduce is a Java MapReduce programming model provided by MaxCompute. It uses the Java programming interface and is designed to simplify the development process.  However, users are recommended to have a basic understanding of the concept of distribution, and relevant programming experience before using MapReduce. MaxCompute MapReduce provides you with Java programming interface.
-    -   [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md)：Graph in MaxCompute is a processing framework designed for iterative graph computing. Graph computing jobs use graphs to build models. Graphs are composed of vertices and edges. Vertices and edges contain values. After performing iterative graph editing and evolution, you can get the final result. Typical applications include PageRank, SSSP algorithm, and K-Means algorithm.The graph is edited and evolved through an iteration, and the results are finally solved. Typical applications: [PageRank](../../../../intl.en-US/User Guide/Graph/Examples/PageRank.md), [single source shortest distance algorithm](../../../../intl.en-US/User Guide/Graph/Examples/SSSP.md), [K-means clustering algorithm](../../../../intl.en-US/User Guide/Graph/Examples/Kmeans.md), and so on.
+    -   [MapReduce](../../../../reseller.en-US/User Guide/MapReduce/Summary/MapReduce.md): MapReduce is a Java MapReduce programming model provided by MaxCompute. It uses the Java programming interface and is designed to simplify the development process.  However, users are recommended to have a basic understanding of the concept of distribution, and relevant programming experience before using MapReduce. MaxCompute MapReduce provides you with Java programming interface.
+    -   [Graph](../../../../reseller.en-US/User Guide/Graph/Summary.md)：Graph in MaxCompute is a processing framework designed for iterative graph computing. Graph computing jobs use graphs to build models. Graphs are composed of vertices and edges. Vertices and edges contain values. After performing iterative graph editing and evolution, you can get the final result. Typical applications include PageRank, SSSP algorithm, and K-Means algorithm.The graph is edited and evolved through an iteration, and the results are finally solved. Typical applications: [PageRank](../../../../reseller.en-US/User Guide/Graph/Examples/PageRank.md), [single source shortest distance algorithm](../../../../reseller.en-US/User Guide/Graph/Examples/SSSP.md), [K-means clustering algorithm](../../../../reseller.en-US/User Guide/Graph/Examples/Kmeans.md), and so on.
 -   **SDK**
 
-    A convenient toolkit provided for developers. For more information, see [MaxCompute SDK](../../../../intl.en-US/User Guide/SDK/Java SDK.md).
+    A convenient toolkit provided for developers. For more information, see [MaxCompute SDK](../../../../reseller.en-US/User Guide/SDK/Java SDK.md).
 
 -   **Secure**
 
-    Maxcompute offers powerful security services to protect your data, for more information, see the [security guide](../../../../intl.en-US/User Guide/Security/Target Users.md).
+    Maxcompute offers powerful security services to protect your data, for more information, see the [security guide](../../../../reseller.en-US/User Guide/Security/Target Users.md).
 
 
 ## What to do next {#section_akn_wvv_tdb .section}

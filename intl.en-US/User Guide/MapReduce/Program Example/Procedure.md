@@ -1,14 +1,14 @@
-# Secondary Sort samples {#concept_yvc_5hg_vdb .concept}
+# Counter samples {#concept_ipg_qbh_vdb .concept}
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare a JAR package of the test program. Assume the package is named “mapreduce-examples.jar”.The local storage path is data\\resources.
-2.  Prepare tables and resources for testing the SecondarySort operation.
+1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
+2.  Prepare the UserDefinedCounters test table and resource.
     -   Create tables:
 
         ```
-        create table ss_in(key bigint, value bigint);
-        create table ss_out(key bigint, value bigint)
+        create table wc_in (key string, value string);
+        create table wc_out(key string, cnt bigint);
         ```
 
     -   Add resources:
@@ -17,44 +17,49 @@
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  Import the data through tunnel command:
+3.  Use the tunnel command to import the data:
 
     ```
-    tunnel upload data ss_in;
+    tunnel upload data wc_in;
     ```
 
-    The contents of data file  imported into the table “ss\_in” are as follows:
+    The data imported into the wc\_in the table wc\_in, is as follows:
 
     ```
-    1,2
-    2,1
-    1,1
-    2,2
+    hello,odps
     ```
 
 
 ## Procedure {#section_rlv_bzg_vdb .section}
 
-Run SecondarySort on the odpscmd:
+Execute UserDefinedCounters on the odpscmd:
 
 ```
-jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar 
-com.aliyun.odps.mapred.open.example.SecondarySort ss_in ss_out;
+jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
+com.aliyun.odps.mapred.open.example.UserDefinedCounters wc_in wc_out
 ```
 
 ## Expected output {#section_hzz_dzg_vdb .section}
 
-The contents in the output table “ss\_out”  are as follows:
+The output of Counters is as follows:
 
 ```
+Counters: 3
+com.aliyun.odps.mapred.open.example.UserDefinedCounters$MyCounter
+MAP_TASKS=1
+REDUCE_TASKS=1
+TOTAL_TASKS=2
+```
 
-| key | value |
+The content of output table “wc\_out”  is as follows:
 
-| 1 | 1 |
-| 1 | 2 |
-| 2 | 1 |
-| 2 | 2 |
-
+```
++------------+------------+
+| key | cnt |
++------------+------------+
+| hello | 1 |
+| odps | 1 |
++------------+------------+
 ```
 
 ## Sample code {#section_jgb_gzg_vdb .section}
@@ -63,97 +68,95 @@ The contents in the output table “ss\_out”  are as follows:
     package com.aliyun.odps.mapred.open.example;
     import java.io.IOException;
     import java.util.Iterator;
+    import com.aliyun.odps.counter.Counter;
+    import com.aliyun.odps.counter.Counters;
     import com.aliyun.odps.data.Record;
     import com.aliyun.odps.mapred.JobClient;
     import com.aliyun.odps.mapred.MapperBase;
     import com.aliyun.odps.mapred.ReducerBase;
-    import com.aliyun.odps.mapred.TaskContext;
+    import com.aliyun.odps.mapred.RunningJob;
     import com.aliyun.odps.mapred.conf.JobConf;
     import com.aliyun.odps.mapred.utils.SchemaUtils;
     import com.aliyun.odps.mapred.utils.InputUtils;
     import com.aliyun.odps.mapred.utils.OutputUtils;
     import com.aliyun.odps.data.TableInfo;
-    
-      
-     * This is an example ODPS Map/Reduce application. It reads the input table that
-     * must contain two integers per record. The output is sorted by the first and
-     * second number and grouped on the first number.
-     
-     
-    public class SecondarySort {
-      
-       * Read two integers from each line and generate a key, value pair as ((left,
-       * right), right).
-       
-      public static class MapClass extends MapperBase {
-        private Record key;
-        private Record value;
+    /**
+     * 
+     * User Defined Counters
+     *
+     **/
+    public class UserDefinedCounters {
+      enum MyCounter {
+        TOTAL_TASKS, MAP_TASKS, REDUCE_TASKS
+      }
+      public static class TokenizerMapper extends MapperBase {
+        private Record word;
+        private Record one;
         @Override
-        public void setup(TaskContext context) throws IOException {
-          key = context.createMapOutputKeyRecord();
-          value = context.createMapOutputValueRecord();
-        
+        public void setup(TaskContext context) throws IOException{
+          super.setup(context);
+          Counter map_tasks = context.getCounter(MyCounter.MAP_TASKS);
+          Counter total_tasks = context.getCounter(MyCounter.TOTAL_TASKS);
+          map_tasks.increment(1);
+          total_tasks.increment(1);
+          word = context.createMapOutputKeyRecord();
+          one = context.createMapOutputValueRecord();
+          one.set(new Object[] { 1L });
+        }
         @Override
         public void map(long recordNum, Record record, TaskContext context)
-            throws IOException {
-          long left = 0;
-          long right = 0;
-          if (record.getColumnCount() > 0) {
-            left = (Long) record.get(0);
-            if (record.getColumnCount() > 1) {
-              right = (Long) record.get(1);
-            
-            key.set(new Object[] { (Long) left, (Long) right });
-            value.set(new Object[] { (Long) right });
-            context.write(key, value);
-          
-        
-      
-      
-       * A reducer class that just emits the sum of the input values.
-       
-      public static class ReduceClass extends ReducerBase {
+            Throws ioexception {
+          for (int i = 0; i < record.getColumnCount(); i++) {
+            word.set(new Object[] { record.get(i).toString() });
+            context.write(word, one);
+          }
+        }
+      }
+      public static class SumReducer extends ReducerBase {
         private Record result = null;
         @Override
-        public void setup(TaskContext context) throws IOException {
+        public void setup(TaskContext context) throws IOException{
           result = context.createOutputRecord();
-        
+          Counter reduce_tasks = context.getCounter(MyCounter.REDUCE_TASKS);
+          Counter maid = context. getcounter (mycounter );
+          reduce_tasks.increment(1);
+          total_tasks.increment(1);
+        }
         @Override
-        public void reduce(Record key, Iterator<Record> values, TaskContext context)
-            throws IOException {
+        public void reduce(Record key,Iterator<Record>values,TaskContext context)
+            Throws ioexception {
+          Long Count = 0;
+          while(values.hasNext()) {
+            Record val = values.next();
+            count += (Long) val.get(0);
+          }
           result.set(0, key.get(0));
-          while (values.hasNext()) {
-            Record value = values.next();
-            result.set(1, value.get(0));
-            context.write(result);
-          
-        
-      
+          result.set(1, count);
+          context.write(result);
+        }
+      }
       public static void main(String[] args) throws Exception {
         if (args.length ! = 2) {
-        System.err.println("Usage: secondarysrot <in> <out>");
+          System.err
+              .println("Usage: TestUserDefinedCounters <in_table> <out_table>");
           System.exit(2);
-        
+        }
         JobConf job = new JobConf();
-        job.setMapperClass(MapClass.class);
-        job.setReducerClass(ReduceClass.class);
-        // set multiple columns to key
-        // compare first and second parts of the pair
-        job.setOutputKeySortColumns(new String[] { "i1", "i2" });
-        // partition based on the first part of the pair
-        job.setPartitionColumns(new String[] { "i1" });
-        // grouping comparator based on the first part of the pair
-        job.setOutputGroupingColumns(new String[] { "i1" });
-        // the map output is LongPair, Long
-        job.setMapOutputKeySchema(SchemaUtils.fromString("i1:bigint,i2:bigint"));
-        Job. Fig (schemeiutils. fromstring ("i2x: bigint "));
+        job.setMapperClass(TokenizerMapper.class);
+        job.setReducerClass(SumReducer.class);
+        job.setMapOutputKeySchema(SchemaUtils.fromString("word:string"));
+        job.setMapOutputValueSchema(SchemaUtils.fromString("count:bigint"));
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
-        JobClient.runJob(job);
+        RunningJob rJob = JobClient.runJob(job);
+        // After the job has completed successfully, you can get the value of the custom counter inside the job
+        Counters counters = rJob.getCounters();
+        long m = counters.findCounter(MyCounter.MAP_TASKS).getValue();
+        long r = counters.findCounter(MyCounter.REDUCE_TASKS).getValue();
+        long total = counters.findCounter(MyCounter.TOTAL_TASKS).getValue();
         System.exit(0);
-      
-    
-
+      }
+    }
 
 ```
 

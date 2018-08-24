@@ -1,14 +1,15 @@
-# Counter samples {#concept_ipg_qbh_vdb .concept}
+# Grep samples {#concept_j4b_gdh_vdb .concept}
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
-2.  Prepare the UserDefinedCounters test table and resource.
+1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isand the local storage path is data\\resources.
+2.  Prepare tables and resources for testing the Grep operation.
     -   Create tables:
 
         ```
-        create table wc_in (key string, value string);
-        create table wc_out(key string, cnt bigint);
+        create table mr_src(key string, value string);
+        create table mr_grep_tmp (key string, cnt bigint);
+        create table mr_grep_out (key bigint, value string);
         ```
 
     -   Add resources:
@@ -20,45 +21,35 @@
 3.  Use the tunnel command to import the data:
 
     ```
-    tunnel upload data wc_in;
+    tunnel upload data mr_src;
     ```
 
-    The data imported into the wc\_in the table wc\_in, is as follows:
+    The contents of data file imported  into the table “mr\_src”:
 
     ```
-    hello,odps
+     hello,odps
+     hello,world
     ```
 
 
 ## Procedure {#section_rlv_bzg_vdb .section}
 
-Execute UserDefinedCounters on the odpscmd:
+Execute Grep on the odpscmd:
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
-com.aliyun.odps.mapred.open.example.UserDefinedCounters wc_in wc_out
+com.aliyun.odps.mapred.open.example.Grep mr_src mr_grep_tmp mr_grep_out hello;
 ```
 
 ## Expected output {#section_hzz_dzg_vdb .section}
 
-The output of Counters is as follows:
-
-```
-Counters: 3
-com.aliyun.odps.mapred.open.example.UserDefinedCounters$MyCounter
-MAP_TASKS=1
-REDUCE_TASKS=1
-TOTAL_TASKS=2
-```
-
-The content of output table “wc\_out”  is as follows:
+The content of output table “mr\_grep\_out”  is as follows:
 
 ```
 +------------+------------+
-| key | cnt |
+| key | value |
 +------------+------------+
-| hello | 1 |
-| odps | 1 |
+| 2 | hello |
 +------------+------------+
 ```
 
@@ -68,93 +59,148 @@ The content of output table “wc\_out”  is as follows:
     package com.aliyun.odps.mapred.open.example;
     import java.io.IOException;
     import java.util.Iterator;
-    import com.aliyun.odps.counter.Counter;
-    import com.aliyun.odps.counter.Counters;
+    import java.util.regex.Matcher;
+    import java.util.regex.Pattern;
     import com.aliyun.odps.data.Record;
+    import com.aliyun.odps.data.TableInfo;
     import com.aliyun.odps.mapred.JobClient;
+    import com.aliyun.odps.mapred.Mapper;
     import com.aliyun.odps.mapred.MapperBase;
     import com.aliyun.odps.mapred.ReducerBase;
     import com.aliyun.odps.mapred.RunningJob;
+    import com.aliyun.odps.mapred.TaskContext;
     import com.aliyun.odps.mapred.conf.JobConf;
-    import com.aliyun.odps.mapred.utils.SchemaUtils;
     import com.aliyun.odps.mapred.utils.InputUtils;
     import com.aliyun.odps.mapred.utils.OutputUtils;
-    import com.aliyun.odps.data.TableInfo;
+    import com.aliyun.odps.mapred.utils.SchemaUtils;
     /**
-     * 
-     * User Defined Counters
+     *
+     * Extracts matching regexs from input files and counts them.
      *
      **/
-    public class UserDefinedCounters {
-      enum MyCounter {
-        TOTAL_TASKS, MAP_TASKS, REDUCE_TASKS
-      }
-      public static class TokenizerMapper extends MapperBase {
+    public class Grep {
+      /**
+       * RegexMapper
+       **/
+      public class RegexMapper extends MapperBase {
+        private Pattern pattern;
+        private int group;
         private Record word;
         private Record one;
         @Override
         public void setup(TaskContext context) throws IOException{
-          super.setup(context);
-          Counter map_tasks = context.getCounter(MyCounter.MAP_TASKS);
-          Counter total_tasks = context.getCounter(MyCounter.TOTAL_TASKS);
-          map_tasks.increment(1);
-          total_tasks.increment(1);
+          JobConf job = (JobConf) context.getJobConf();
+          pattern = Pattern.compile(job.get("mapred.mapper.regex"));
+          group = job.getInt("mapred.mapper.regex.group", 0);
           word = context.createMapOutputKeyRecord();
           one = context.createMapOutputValueRecord();
           one.set(new Object[] { 1L });
         }
         @Override
-        public void map(long recordNum, Record record, TaskContext context)
-            Throws ioexception {
-          for (int i = 0; i < record.getColumnCount(); i++) {
-            word.set(new Object[] { record.get(i).toString() });
-            context.write(word, one);
+        public void map(long recordNum, Record record, TaskContext context) throws IOException {
+          for (int i = 0; i < record.getColumnCount(); ++i) {
+            String text = record.get(i).toString();
+            Matcher = pattern. matcher (text );
+            while (matcher.find()) {
+              word.set(new Object[] { matcher.group(group) });
+              context.write(word, one);
+            }
           }
         }
       }
-      public static class SumReducer extends ReducerBase {
+      /**
+       * LongSumReducer
+       **/
+      public class LongSumReducer extends ReducerBase {
         private Record result = null;
         @Override
         public void setup(TaskContext context) throws IOException{
           result = context.createOutputRecord();
-          Counter reduce_tasks = context.getCounter(MyCounter.REDUCE_TASKS);
-          Counter maid = context. getcounter (mycounter );
-          reduce_tasks.increment(1);
-          total_tasks.increment(1);
         }
         @Override
-        public void reduce(Record key,Iterator<Record>values,TaskContext context)
-            Throws ioexception {
+        public void reduce(Record key, Iterator<Record> values, TaskContext context) throws IOException {
           Long Count = 0;
           while(values.hasNext()) {
             Record val = values.next();
             count += (Long) val.get(0);
           }
-          result.set(0, key.get(0));
+          result.set(0, key.get(0));-
           result.set(1, count);
           context.write(result);
         }
       }
+      /**
+       * A {@link Mapper} that swaps keys and values.
+       **/
+      public class InverseMapper extends MapperBase {
+        private Record word;
+        private Record count;
+        @Override
+        public void setup(TaskContext context) throws IOException{
+          word = context.createMapOutputValueRecord();
+          count = context.createMapOutputKeyRecord();
+        }
+        /**
+         * The inverse function. Input keys and values are swapped.
+         **/
+        @Override
+        public void map(long recordNum, Record record, TaskContext context) throws IOException {
+          word.set(new Object[] { record.get(0).toString() });
+          count.set(new Object[] { (Long) record.get(1) });
+          context.write(count, word);
+        }
+      }
+      /**
+       * IdentityReducer
+       **/
+      public class IdentityReducer extends ReducerBase {
+        private Record result = null;
+        @Override
+        public void setup(TaskContext context) throws IOException{
+          result = context.createOutputRecord();
+        }
+        /** Writes all keys and values directly to output. **/
+        @Override
+        public void reduce(Record key, Iterator<Record> values, TaskContext context) throws IOException {
+          result.set(0, key.get(0));
+          while(values.hasNext()) {
+            Record val = values.next();
+            result.set(1, val.get(0));
+            context.write(result);
+          }
+        }
+      }
       public static void main(String[] args) throws Exception {
-        if (args.length ! = 2) {
-          System.err
-              .println("Usage: TestUserDefinedCounters <in_table> <out_table>");
+        if (args.length < 4) {
+          System.err.println("Grep <inDir> <tmpDir> <outDir> <regex> [<group>]");
           System.exit(2);
         }
-        JobConf job = new JobConf();
-        job.setMapperClass(TokenizerMapper.class);
-        job.setReducerClass(SumReducer.class);
-        job.setMapOutputKeySchema(SchemaUtils.fromString("word:string"));
-        job.setMapOutputValueSchema(SchemaUtils.fromString("count:bigint"));
-        InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
-        OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
-        RunningJob rJob = JobClient.runJob(job);
-        // After the job has completed successfully, you can get the value of the custom counter inside the job
-        Counters counters = rJob.getCounters();
-        long m = counters.findCounter(MyCounter.MAP_TASKS).getValue();
-        long r = counters.findCounter(MyCounter.REDUCE_TASKS).getValue();
-        long total = counters.findCounter(MyCounter.TOTAL_TASKS).getValue();
-        System.exit(0);
+        JobConf grepJob = new JobConf();
+        grepJob.setMapperClass(RegexMapper.class);
+        grepJob.setReducerClass(LongSumReducer.class);
+        grepJob.setMapOutputKeySchema(SchemaUtils.fromString("word:string"));
+        grepJob.setMapOutputValueSchema(SchemaUtils.fromString("count:bigint"));
+        InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), grepJob);
+        OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), grepJob);
+        // Set the regular expression for grepjob's grep
+        grepJob.set("mapred.mapper.regex", args[3]);
+        if (args.length == 5) {
+          grepJob.set("mapred.mapper.regex.group", args[4]);
+        }
+        @SuppressWarnings("unused")
+        RunningJob rjGrep = JobClient.runJob(grepJob);
+        // Grepjob output as input to sortjob
+        JobConf sortJob = new JobConf();
+        sortJob.setMapperClass(InverseMapper.class);
+        sortJob.setReducerClass(IdentityReducer.class);
+        sortJob.setMapOutputKeySchema(SchemaUtils.fromString("count:bigint"));
+        sortJob.setMapOutputValueSchema(SchemaUtils.fromString("word:string"));-
+        InputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), sortJob);
+        OutputUtils.addTable(TableInfo.builder().tableName(args[2]).build(), sortJob);
+        sortJob.setNumReduceTasks(1); // write a single file
+        sortJob.setOutputKeySortColumns(new String[] { "count" }); 
+        @SuppressWarnings("unused")
+        RunningJob rjSort = JobClient.runJob(sortJob);
       }
     }
 

@@ -29,7 +29,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 下面将为您介绍一个字符小写转换功能的UDF实现示例。
 
 -   **使用MaxCompute Studio开发**
-    1.  **准备工具环境**。
+    1.  **准备工具环境并创建Java Module**。
 
         这里假设已经完成环境准备，包括[安装Studio](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/工具安装与版本信息/安装IntelliJ IDEA.md)并在Studio上[创建MaxCompute项目链接](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)以及[创建MaxCompute Java Module](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建 MaxCompute Java Module.md)。
 
@@ -37,9 +37,9 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         在配置好的Java Module下创建Java文件。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/1573_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314031573_zh-CN.png)
 
-        直接选择MaxCompute java然后name里输入`package名称.文件名`，Kind选择UDF。 然后编辑如下代码：
+        直接选择MaxCompute Java，然后在name一栏里输入`package名称.文件名`，Kind选择UDF。 之后编辑如下代码：
 
         ```
         package <package名称>;
@@ -58,7 +58,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         如下图所示，右键单击UDF的Java文件，选择**Deploy to server**，弹框里选择注册到那个MaxCompute project，输入`function name`，Resource name也可以修改。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/1574_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314031574_zh-CN.png)
 
         填写好后，单击**OK**即可。注册成功后会有提示。
 
@@ -66,22 +66,21 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         打开SQL脚本，执行代码如`select Lower_test(‘ABC’);`结果如下图所示：
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/1575_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314031575_zh-CN.png)
 
         **说明：** Studio中编写SQL脚本请参见[编写SQL脚本](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/编写SQL脚本.md)。
 
 -   **使用Eclipse插件开发**
     1.  **创建工程**
 
-        此处假设已经在Eclipse插件创建好一个MaxCompute（原名ODPS）工程，详情请参见[创建MaxCompute工程](../../../../intl.zh-CN/工具及下载/Eclipse开发插件/创建 MaxCompute 工程.md)。
+        此处假设已经在Eclipse插件创建好一个MaxCompute（原名ODPS）工程，详情请参见[创建MaxCompute工程](../../../../intl.zh-CN/工具及下载/Eclipse开发插件/创建MaxCompute工程.md)。
 
     2.  **编写代码**
 
         按照MaxCompute UDF框架的规定，实现函数功能，并进行编译。示例如下：
 
         ```
-        
-        package org.alidata.odps.udf.examples;
+        package <package名称>;
         import com.aliyun.odps.udf.UDF;
         public final class Lower extends UDF {
         public String evaluate(String s) {
@@ -106,7 +105,6 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
         执行如下命令：
 
         ```
-        
         add jar my_lower.jar;
         -- 如果存在同名的资源请将这个jar包重命名
         -- 并注意修改下面示例命令中相关jar包的名字
@@ -135,7 +133,6 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 UDAF的注册方式与UDF基本相同，使用方式与内建函数中的[聚合函数](../../../../intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)相同。计算平均值的UDAF的代码示例，如下所示：
 
 ```
-
 package org.alidata.odps.udf.examples;
 import com.aliyun.odps.io.LongWritable;
 import com.aliyun.odps.io.Text;
@@ -179,7 +176,6 @@ return arg0;
 UDTF的注册和使用方式与UDF相同。代码示例如下：
 
 ```
-
 package org.alidata.odps.udtf.examples;
 import com.aliyun.odps.udf.UDTF;
 import com.aliyun.odps.udf.UDTFCollector;

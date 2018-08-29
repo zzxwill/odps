@@ -13,7 +13,7 @@ Aggregator 的逻辑分为两部分：
 
 其中在所有 Worker 上执行的操作包括创建初始值及局部聚合，然后将局部聚合结果发送给 AggregatorOwner 所在的 Worker 上。AggregatorOwner 所在的 Worker 上聚合普通 Worker 发送过来的局部聚合对象，得到全局聚合结果，然后判断迭代是否结束。全局聚合的结果会在下一轮超步分发给所有 Worker，供下一轮迭代使用。如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12062/2317_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12062/15355058792317_zh-CN.png)
 
 ## Aggregator 的 API {#section_st2_xdn_vdb .section}
 

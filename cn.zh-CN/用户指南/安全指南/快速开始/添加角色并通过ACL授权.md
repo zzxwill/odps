@@ -2,7 +2,7 @@
 
 场景描述：Jack是项目空间prj1的管理员，有三个新加入的项目组成员：Alice, Bob, Charlie，他们的角色是数据审查员。他们要申请如下权限：查看Table列表，提交作业，读取表userprofile。
 
-对于这个场景的授权，项目空间管理员可以使用基于对象的 [ACL授权](https://www.alibabacloud.com/help/zh/doc-detail/27935.htm) 机制来完成。
+对于这个场景的授权，项目空间管理员可以使用基于对象的 [ACL授权](intl.zh-CN/用户指南/安全指南/授权.md) 机制来完成。
 
 操作方法：
 

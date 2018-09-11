@@ -15,7 +15,7 @@ The data that is stored in MaxCompute, including tables and resources, is billed
 
 MaxCompute records the storage used for each project on an hourly basis. The average storage over the day is then calculated for each project space at the end of each day.
 
-The daily MaxCompute fee is calculated by applying the tiered unit prices in the table below to the average storage used. Up to 1 GB of storage is free each day, while storage used between 1 GB and 100 GB costs 0.0028 USD for each gigabyte and so on. The cost of more than 1 PB of storage will require you to contact us through a job order.
+The daily MaxCompute fee is calculated by applying the tiered unit prices in the table below to the average storage used. Up to 1 GB of storage is free each day, while storage used between 1 GB and 100 GB costs 0.0028 USD for each gigabyte and so on. If you require more than 1 PB of storage per day, you can contact us through a job order to get a quote for the price..
 
 |Less than 1 GB USD/GB/Day|1 GB to 100 GB  USD/GB/Day|100 GB to 1 TB USD/GB/Day|1 TB to 10 TB USD/GB/Day|10 TB to 100 TB USD/GB/Day|100 TB to 1 PB USD/GB/Day|More than 1 PB USD/GB/Day|
 |:------------------------|:-------------------------|:------------------------|:-----------------------|:-------------------------|:------------------------|-------------------------|

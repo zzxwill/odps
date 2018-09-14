@@ -26,15 +26,15 @@ SQL Workbench/J is a widely used free and cross-platform SQL query tool. This to
 
     Select the PostgreSQL driver, connect SQL Workbench/J to the MaxCompute Lightning URL of a project. You must enter the Access Key ID and Access Key Secret of the user.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153631019111161_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911161_en-US.jpg)
 
     Alternatively, you can click Extended Properties and set ssl to true in the displayed dialog box.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153631019211162_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911162_en-US.jpg)
 
 3.  After SQL Workbench/J is connected to MaxCompute Lightning, you can view, query, and analyze the table data in the SQL Workbench/J workspace.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153631019211163_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911163_en-US.jpg)
 
 
 ## psql {#section_fs1_kvk_z2b .section}
@@ -58,7 +58,7 @@ After the command is executed, enter the &lt;userid\> password \(Access Key Secr
 
 Example:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153631019211164_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911164_en-US.jpg)
 
 **Note:** SSL connections are preferred for psql by default.
 
@@ -75,22 +75,31 @@ After logging on to Tableau Desktop, you can create charts for visual analysis.
 1.  Save the following xml content as a postgresql.tdc file.
 
     ```
-    &lt;? xml version='1.0' encoding='utf-8'? >
-    &lt;connection-customization class='postgres' enabled='true' version='8.10'>
-    &lt;vendor name='postgres'/>
-    &lt;driver name='postgres'/>
-    &lt;customizations>
-    &lt;customization name='CAP_CREATE_TEMP_TABLES' value='no' />
-    &lt;customization name='CAP_STORED_PROCEDURE_TEMP_TABLE_FROM_BUFFER' value='no' />
-    &lt;customization name='CAP_CONNECT_STORED_PROCEDURE' value='no' />
-    &lt;customization name='CAP_SELECT_INTO' value='no' />
-    &lt;customization name='CAP_SELECT_TOP_INTO' value='no' />
-    &lt;customization name='CAP_ISOLATION_LEVEL_SERIALIZABLE' value='yes' />
-    &lt;customization name='CAP_SUPPRESS_DISCOVERY_QUERIES' value='yes' />
-    &lt;customization name='CAP_SKIP_CONNECT_VALIDATION' value='yes' />
-    &lt;customization name='SQL_TXN_CAPABLE' value='0' />
-    &lt;/customizations>
-    &lt;/connection-customization>
+    <?xml version='1.0' encoding='utf-8' ?>
+    <connection-customization class='postgres' enabled='true' version='8.10'>
+    <vendor name='postgres'/>
+    <driver name='postgres'/>
+    <customizations>
+    <customization name='CAP_CREATE_TEMP_TABLES' value='no' />
+    <customization name='CAP_STORED_PROCEDURE_TEMP_TABLE_FROM_BUFFER' value='no' />
+    <customization name='CAP_CONNECT_STORED_PROCEDURE' value='no' />
+    <customization name='CAP_SELECT_INTO' value='no' />
+    <customization name='CAP_SELECT_TOP_INTO' value='no' />
+    <customization name='CAP_ISOLATION_LEVEL_SERIALIZABLE' value='yes' />
+    <customization name='CAP_SUPPRESS_DISCOVERY_QUERIES' value='yes' />
+    <customization name='CAP_SKIP_CONNECT_VALIDATION' value='yes' />
+    <customization name='CAP_ODBC_TRANSACTIONS_SUPPRESS_EXPLICIT_COMMIT' value='yes' />
+    <customization name='CAP_ODBC_TRANSACTIONS_SUPPRESS_AUTO_COMMIT' value='yes' />
+    <customization name='CAP_ODBC_REBIND_SKIP_UNBIND' value='yes' />
+    <customization name='CAP_FAST_METADATA' value='no' />
+    <customization name='CAP_ODBC_METADATA_SUPPRESS_SELECT_STAR' value='yes' />
+    <customization name='CAP_ODBC_METADATA_SUPPRESS_EXECUTED_QUERY' value='yes' />
+    <customization name='CAP_ODBC_UNBIND_AUTO' value='yes' />
+    <customization name='SQL_TXN_CAPABLE' value='0' />
+    <customization name='CAP_ODBC_CURSOR_FORWARD_ONLY' value='yes' />
+    <customization name='CAP_ODBC_TRANSACTIONS_COMMIT_INVALIDATES_PREPARED_QUERY' value='yes' />
+    </customizations>
+    </connection-customization>
     ```
 
 2.  Save the file to the \\My Documents\\My Tableau Repository\\Datasources directory. If it is Tableau Server, save it in C:\\ProgramData\\Tableau\\Tableau Server\\data\\tabsvc\\vizqlserver\\Datasources under Windows, and save it in /var/opt/tableau/tableau\_server/data/tabsvc/vizqlserver/Datasources/ under Linux. .

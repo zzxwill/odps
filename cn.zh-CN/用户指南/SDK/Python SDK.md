@@ -3,13 +3,10 @@
 PyODPS是MaxCompute的Python版本的SDK，它提供了对MaxCompute对象的基本操作和DataFrame框架，可以轻松地在MaxCompute上进行数据分析。更多详情请参见[Github项目](https://github.com/aliyun/aliyun-odps-python-sdk)和包括所有接口、类的细节等内容的[详细文档](http://pyodps.readthedocs.org/)。
 
 -   关于PyODPS的更多详情请参见[PyODPS云栖社区专辑](https://yq.aliyun.com/album/19)。
-
+-   如果您想了解更多关于PyODPS的开发内容，请参见[PyODPS开发文档](cn.zh-CN/用户指南/PyODPS/安装指南.md#)。
 -   欢迎各位开发者参与到PyODPS的生态开发中，详情请参见[GitHub文档](http://pyodps.readthedocs.io/zh_CN/latest/?spm=a2c4e.11153959.blogcont138752.16.5bec51d32BpKgB)。
-
 -   欢迎提交issue和merge request，加快PyODPS生态成长，更多详情请参见[代码](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ)。
-
 -   钉钉技术交流群：**11701793**
-
 
 ## 安装 {#section_mj1_jxb_wdb .section}
 
@@ -42,9 +39,7 @@ project = odps.get_project()              # 取到默认项目
 
 -   如果不提供参数，则获取到默认项目空间。
 -   通过`exist_project`，可以查看某个项目空间是否存在。
-
 -   表是MaxCompute的数据存储单元。
-
 
 ## 表操作 {#section_mmv_kyb_wdb .section}
 
@@ -204,7 +199,7 @@ False
 >>> writer.close()  # 不要忘记关闭 writer，否则数据可能写入不完全
 ```
 
-同样，向表中写入数据也是对Tunnel API的封装，更多详情请参见[数据上传下载通道](intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
+同样，向表中写入数据也是对Tunnel API的封装，更多详情请参见[数据上传下载通道](cn.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
 
 ## 删除表 {#section_ayt_mzb_wdb .section}
 
@@ -217,7 +212,7 @@ False
 
 ## 表分区 {#section_vxt_4zb_wdb .section}
 
--   **基本操作**
+-   基本操作
 
     遍历表的全部分区，如下所示：
 
@@ -244,13 +239,13 @@ False
     0
     ```
 
--   **创建分区**
+-   创建分区
 
     ```
     >>> t.create_partition('pt=test', if_not_exists=True) # 不存在的时候才创建
     ```
 
--   **删除分区**
+-   删除分区
 
     ```
     >>> t.delete_partition('pt=test', if_exists=True)  # 存在的时候才删除
@@ -262,7 +257,7 @@ False
 
 PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
 
--   **执行SQL**
+-   执行SQL
 
     ```
     >>> odps.execute_sql('select * from dual')  #  同步的方式执行，会阻塞直到SQL执行完成
@@ -270,7 +265,7 @@ PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
     >>> instance.wait_for_success()  # 阻塞直到完成
     ```
 
--   **读取SQL执行结果**
+-   读取SQL执行结果
 
     运行SQL的instance能够直接执行`open_reader`的操作，一种情况是SQL返回了结构化的数据。
 
@@ -296,13 +291,13 @@ PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
 
 在PyODPS中，主要支持两种资源类型，一种是文件，另一种是表。
 
--   **文件资源**
+-   文件资源
 
     文件资源包括基础的`file`类型、以及`py`、`jar`和`archive`。
 
     **说明：** 在DataWorks中，py格式的文件资源请以file形式上传，详情请参见[Python UDF文档](https://yq.aliyun.com/articles/300307)。
 
-    **创建文件资源**
+    创建文件资源
 
     创建文件资源可以通过给定资源名、文件类型、以及一个file-like的对象（或者是字符串对象）来创建，示例如下：
 
@@ -311,7 +306,7 @@ PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
     resource = odps.create_resource('test_py_resource', 'py', file_obj='import this')  # 使用字符串
     ```
 
-    **读取和修改文件资源**
+    读取和修改文件资源
 
     对文件资源调用`open`方法，或者在MaxCompute入口调用`open_resource`都能打开一个资源， 打开后的对象会是file-like的对象。类似于Python内置的`open`方法，文件资源也支持打开的模式。示例如下：
 
@@ -342,15 +337,15 @@ PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
     -   `a+`：类似于`r+`，但写入时只能写入文件末尾。
     同时，PyODPS中，文件资源支持以二进制模式打开，打开如说一些压缩文件等等就需要以这种模式， 因此`rb`就是指以二进制读模式打开文件，`r+b`是指以二进制读写模式打开。
 
--   **表资源**
+-   表资源
 
-    **创建表资源**
+    创建表资源
 
     ```
     >>> odps.create_resource('test_table_resource', 'table', table_name='my_table', partition='pt=test')
     ```
 
-    **更新表资源**
+    更新表资源
 
     ```
     >>> table_resource = odps.get_resource('test_table_resource')
@@ -520,7 +515,7 @@ DataFrame API提供了value\_counts方法来快速达到同样的目的。如下
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178202854_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15378613292854_zh-CN.png)
 
 将年龄分成30组，查看各年龄分布的直方图，如下所示：
 
@@ -528,7 +523,7 @@ ylabel='prefession')
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178202855_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15378613292855_zh-CN.png)
 
 使用join把这三张表进行联合后，把它保存成一张新的表。如下所示：
 
@@ -604,7 +599,7 @@ odps.Schema {
 
 PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配置的MaxCompute选项，如下所示：
 
--   **通用配置**
+-   通用配置
 
     |选项|说明|默认值|
     |:-|:-|:--|
@@ -629,7 +624,7 @@ PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配
     |sql.settings|ODPS SQL运行全局hints|None|
     |sql.use\_odps2\_extension|启用MaxCompute2.0语言扩展|False|
 
--   **数据上传/下载配置**
+-   数据上传/下载配置
 
     |选项|说明|默认值|
     |:-|:-|:--|
@@ -638,7 +633,7 @@ PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配
     |tunnel.limited\_instance\_tunnel|限制Instance Tunnel获取结果的条数|True|
     |tunnel.string\_as\_binary|在string类型中使用bytes而非unicode|False|
 
--   **DataFrame配置**
+-   DataFrame配置
 
     |选项|说明|默认值|
     |:-|:-|:--|
@@ -651,7 +646,7 @@ PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配
     |df.quote|ODPS SQL后端是否用\`\`来标记字段和表名|True|
     |df.libraries|DataFrame运行使用的第三方库（资源名）|None|
 
--   **PyODPS ML配置**
+-   PyODPS ML配置
 
     |选项|说明|默认值|
     |:-|:-|:--|

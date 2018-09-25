@@ -6,22 +6,29 @@ Once the [MaxCompute Java Module](intl.en-US/Tools and Downloads/MaxCompute Stud
 
 1.  Expand the maxcompute Java Module Directory that you created**src** \> **main** \> **java** \> **new**, navigate to fig, and click **MaxCompute Java**. as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15332883911944_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15378570751944_en-US.png)
 
 2.  Set **Name** and **Kind**, and click **OK**. as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15332883911947_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15378570751947_en-US.png)
 
     -   Name: Specifies the name of the MaxCompute Java Class. If you have not created a package, you can enter packagename.classname to automatically create a package.
-
     -   Kind: Specifies the type. Supported types include custom functions \(UDF/UDAF/UDTF\), MapReduce \(Driver/Mapper/Reducer\), and non-structural development \(StorageHandler/Extractor\).
-
 3.  After the creation is successful, the Java program can be developed, modified, and tested.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15332883911948_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15378570751948_en-US.png)
 
     **Note:** Here's a code template that can be customized in thinkj, which is specific: preference-Editor-file and code templates, then look for the template modifications corresponding to maxcompute in the Code tab.
 
+
+For detailed development steps, see[JAVA UDF development](../../../../intl.en-US/Quick Start/Java UDF Development.md#).
+
+Normally, the development of JAVA UDF can be done in the following ways:
+
+-   Use MaxCompute Studio to complete the whole process of JAVA UDF development.
+-   Use [Develop and debug JAVA UDF using the Eclipse plug-in](intl.en-US/Tools and Downloads/Eclipse Plugins/UDF.md#), export the Jar package, then [Add resources](../../../../intl.en-US/User Guide/Common commands/Resources.md#) through commands or DataWorks, and [Register the function](../../../../intl.en-US/User Guide/Common commands/Functions.md#).
+
+For detailed development steps, see[JAVA UDF Development](../../../../intl.en-US/Quick Start/Java UDF Development.md#).
 
 ## Debug the UDF program {#section_vqx_3cg_vdb .section}
 
@@ -31,26 +38,24 @@ After the UDF program is developed, it can be tested using unit test \(UT\) or l
 
 There are various UT examples in the examples directory and you can refer to them to compile your UT.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15332883911949_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15378570751949_en-US.png)
 
-**Run locally**
+Run locally
 
 During local running of the UDF program, the running data source must be specified. The following two methods are provided to set the test data source:
 
 -   MaxCompute Studio uses the Tunnel Service to automatically download table data of a specific project to the warehouse directory.
-
 -   The mock project and table data are provided. You can see example\_project in warehouse to set it by yourself.
-
 
 **Procedure**
 
 1.  Right-click UDF Class and select **Run UDF class.main\(\)**. The Run Configuration dialog box is displayed. In normal cases, UDF/UDAF/UDTF data is used as columns in tables of a select sub-statement. The MaxCompute project, table, and column need to be configured. \(**The metadata is from the mock project under project explorer and warehouse**.\) Debugging for complex types is also supported, as shown in the following figure:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15332883921950_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15378570751950_en-US.png)
 
 2.  Click **OK**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15332883921951_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15378570761951_en-US.png)
 
     **Note:** 
 
@@ -62,7 +67,7 @@ During local running of the UDF program, the running data source must be specifi
 
 The local warehouse directory is used to store tables \(including meta and data\) or resources for local UDF or MR running. The following figure shows the warehouse directory.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15332883921952_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15378570761952_en-US.png)
 
 **Note:** 
 

@@ -2,8 +2,6 @@
 
 The MaxCompute UDF consists of UDF, UDAF, and UDTF functions. This article explains how to implement these three functions through Python.
 
-Currently, the international terminal version of MaxCompute does not support Python UDFs.
-
 ## RESTRICTED ENVIRONMENT {#section_gwg_3ff_xdb .section}
 
 The Python version of MaxCompute UDF is 2.7 and executes user code in sandbox mode; that is, the code is executed in a restricted environment.

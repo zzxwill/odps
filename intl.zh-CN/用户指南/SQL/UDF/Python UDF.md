@@ -2,8 +2,6 @@
 
 MaxCompute UDF包括UDF、UDAF和UDTF三种函数，本文将重点介绍如何通过Python实现这三种函数。
 
-当前国际站版本的MaxCompute暂时不支持Python UDF。
-
 ## 受限环境 {#section_gwg_3ff_xdb .section}
 
 MaxCompute UDF的Python版本为2.7，并以沙箱模式执行用户代码，即代码是在一个受限的运行环境中执行的，在这个环境中，以下行为会被禁止：

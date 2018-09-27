@@ -1,5 +1,7 @@
 # Package的使用方法 {#concept_vj4_rk1_wdb .concept}
 
+## Package的使用方法 {#section_p5q_211_hfb .section}
+
 Package的使用涉及到两个主体：Package创建者和Package使用者。
 
 -   Package创建者项目空间是资源提供方，它将需要分享的资源及其访问权限进行打包，然后许可Package使用方来安装使用。

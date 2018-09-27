@@ -1,6 +1,8 @@
 # Introduction to the SELECT Syntax {#concept_i1q_lkb_wdb .concept}
 
-**The command format is as follows**:
+## Introduction to the SELECT Syntax {#section_dmz_cb1_hfb .section}
+
+The command format is as follows:
 
 ```
 SELECT [ALL | DISTINCT] select_expr, select_expr, ...
@@ -12,21 +14,21 @@ FROM table_reference
 [LIMIT number]
 ```
 
-**Note the following when using a SELECT statement:**
+**Note:**
 
--   When using SELECT to read data from a table, you can specify the names of the columns to be read, or use an asterisk \(\*\) to represent all columns. A simple SELECT statement is shown as follows:
+-   When using SELECT to read data from the table, specify the names of the columns to be read, or use an asterisk \(\*\) to represent all columns. A simple SELECT statement is shown as follows:
 
     ```
     select * from sale_detail;
     ```
 
-    If you want to read only the shop\_name column in sale\_detail, use the following statement:
+    To read only the shop\_name column in sale\_detail, use the following statement:
 
     ```
     select shop_name from sale_detail;
     ```
 
-    You can use where to specify filtering conditions. For example:
+    Use where to specify filtering conditions. For example:
 
     ```
     select * from sale_detail where shop_name like 'hang%';
@@ -36,9 +38,9 @@ FROM table_reference
 
 -   Full table scan is prohibited when you select a partitioned table.
 
-    For new projects created after January 10, 2018,  20:00 \(UTC+8\) full table scan is not allowed for the partitioned table in the project by default When SQL runs. Partitions to be scanned must be specified in partition conditions, reducing unnecessary SQL I/O, waste of computing resources, and the unnecessary cost. Note: Using the Pay-As-You-Go billing method, the amount of data input is one of the billing parameters.
+    For new projects created after January 10, 2018,  20:00 \(UTC+8\) full table scan is not allowed for the partitioned table in the project by default When SQL runs. Partitions to be scanned must be specified in partition conditions to reduce unnecessary SQL I/O, and computing resources, and the unnecessary cost. Note: Using the Pay-As-You-Go billing method, the amount of data input is one of the billing parameters.
 
-    If the table definition is `t1(c1,c2) partitioned by(ds)`, running the following statement in a new project is forbidden and an error may occur:
+    If the table definition is `t1(c1,c2) partitioned by(ds)`, running the following statement in a new project is restricted and an error may occur:
 
     ```
     Select * from t1 where c1=1;
@@ -47,14 +49,14 @@ FROM table_reference
     --When Join statement is running, if the partition clipping condition is placed in where clause, the partition clipping takes effect. If you put it in on clause, the partition clipping of sub table takes effect, and the main table performs a full table scan.
     ```
 
-    If you perform a full table scan on the partitioned table, you can add a set statement `set odps.sql.allow.fullscan=true;` before the SQL statement that scans the entire table of the partitioned table. The set statement must be submitted along with the SQL statement. Suppose that the sales\_detail table is a partitioned table. Submit the following simple query statements at the same time for a full table scan:
+    If you perform a full table scan on a partitioned table, you can add a set statement `set odps.sql.allow.fullscan=true;` before the SQL statement that scans the entire table of the partitioned table. The set statement must be submitted along with the SQL statement. Suppose that the sales\_detail table is a partitioned table. Submit the following simple query statements at the same time for a full table scan:
 
     ```
     set odps.sql.allow.fullscan=true;
     select * from sale_detail;
     ```
 
-    If the entire project is required to allow full table scanning, the switch can be turned on or off by itself \(true/false\), and the command is as follows:
+    If the entire project is required to allow a full table scan, the switch can be turned on or off by itself \(true/false\), and the command is as follows:
 
     ```
     setproject odps.sql.allow.fullscan=true;
@@ -74,7 +76,7 @@ FROM table_reference
     |like、rlike|The source and pattern parameters of like and rlike can only be of the String type.|
     |in、not in|If a subquery is attached to the in or not in condition, only the values of one column are returned for the subquery, and the returned values cannot exceed 1,000 entries.|
 
-    You can specify a partition scope in the where clause of a Select statement to scan specified partitions of a table instead of the whole table. As follows:
+    You can specify a partition scope in the where clause of a Select statement to scan specified partitions of a table instead of a whole table, shown as follows:
 
     ```
     SELECT sale_detail. * FROM sale_detail WHERE sale_detail.sale_date >= '2008' AND sale_detail.sale_date <= '2014';
@@ -123,9 +125,9 @@ FROM table_reference
 
     These restrictions are imposed because group by operations come before Select operations during SQL parsing. Therefore, group by statements can only accept the columns or expressions of the input table as keys.
 
-    **Note:** For more information about aggregate functions, see [Aggregate Functions](intl.en-US/User Guide/SQL/Builtin Function/Aggregate function.md).
+    **Note:** For more information, see [Aggregate Functions](intl.en-US/User Guide/SQL/Builtin Function/Aggregate function.md).
 
--   order by: Globally sorts all data based on certain columns. To sort records in descending order, you can use the DESC keyword. For global sorting, **order by must be used together with limit**. When order by is used for sorting, NULL is considered to be smaller than any other value. This action is the same as that in MySQL but different from that in Oracle.
+-   order by: Globally sorts all data based on certain columns. To sort records in descending order, use the DESC keyword. For global sorting, **order by must be used together with limit**. When order by is used for sorting, NULL is considered to be smaller than any other value. This action is the same as that in MySQL but different from that in Oracle.
 
     Unlike group by, order by must be followed by the alias of the Select column. If the Select operation is performed on a column and the column alias is not specified, the column name is used as the column alias.
 
@@ -138,7 +140,7 @@ FROM table_reference
     select region as r from sale_detail order by r limit 100;
     ```
 
-    `The number in [limit number]` is a constant to limit the number of output rows. If you want to directly view the result of a Select statement without LIMIT from the screen output, you can view a maximum of 10,000 rows. The upper limit of screen display varies with projects, which can be controlled through the setproject console.
+    The number in `[limit number]` is a constant to limit the number of output rows. If you want to directly view the result of a Select statement without LIMIT from the screen output, you can view a maximum of 10,000 rows. The upper limit of screen display varies with projects, which can be controlled through the setproject console.
 
 -   Distribute by: Performs hash-based sharding on data by values of certain columns. Aliases of Select output columns must be used.
 

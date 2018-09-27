@@ -79,7 +79,7 @@ On the Account configuration option page, follow these steps:
         -   Access Id: Enter the AccessKey ID of your Alibaba Cloud account.
         -   Access Key: Enter the AccessKey Secret of your Alibaba Cloud account.   
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12143/2461_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12143/15380444202461_en-US.png)
 
 4.  Click **OK** to complete addition.  Then, the account will be displayed in the Account list  on the Account configuration option page.
 
@@ -98,4 +98,6 @@ On the Account configuration option page, follow these steps:
 1.  Select the account to be deleted in the Account list.
 2.  Click the pencil icon.
 3.  In the displayed Edit Account window, modify the account information. The content is similar to that in the preceding section Add  Account.
+
+View the opening and connection of MaxCompute Region, see[Endpoints and Data Centers](../../../../reseller.en-US/Prepare/Endpoints and Data Centers.md#).
 

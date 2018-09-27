@@ -79,7 +79,7 @@ Studio 需要通过用户指定的账号访问 MaxCompute 的项目空间和执�
         -   Access Id： 填入用户阿里云账号的 AccessKey ID。
         -   Access Key：填入用户阿里云账号的 AccessKey Secret。
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12143/15380444032461_zh-CN.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12143/15380478552461_zh-CN.png)
 
 4.  点击按钮 **OK** 完成添加。 添加完成后账号会出现在 Account 配置选项页面的 Account 列表里。
 

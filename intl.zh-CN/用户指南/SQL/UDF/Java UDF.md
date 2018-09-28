@@ -43,6 +43,7 @@ MaxCompute 数据类型与 Java 类型的对应关系，如下所示：
 
 **说明：** 
 
+-   在UDF中使用输入或输出参数的类型请务必使用Java Type，否则会报错ODPS-0130071。
 -   Java 中对应的数据类型以及返回值数据类型是对象，首字母请务必大写。
 -   SQL 中的 NULL 值通过 Java 中的 NULL 引用表示，因此 Java primitive type 是不允许使用的，因为无法表示 SQL 中的 NULL 值。
 -   此处 Array 类型对应的 Java 类型是 List，而不是数组。
@@ -72,6 +73,29 @@ public final class Lower extends UDF {
 可以通过实现`void setup(ExecutionContext ctx)`和`void close()`来分别实现 UDF 的初始化和结束代码。
 
 UDF 的使用方式与 MaxCompute SQL 中普通的内建函数相同，详情请参见 [内建函数](intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
+
+新版的MaxCompute支持定义Java UDF时，使用Writable类型作为参数和返回值。下面为MaxCompute类型和Java Writable类型的映射关系。
+
+|MaxCompute Type|Java Writable Type|
+|---------------|------------------|
+|tinyint|ByteWritable|
+|smallint|ShortWritable|
+|int|IntWritable|
+|bigint|LongWritable|
+|float|FloatWritable|
+|double|DoubleWritable|
+|decimal|BigDecimalWritable|
+|boolean|BooleanWritable|
+|string|Text|
+|varchar|VarcharWritable|
+|binary|BytesWritable|
+|datetime|DatetimeWritable|
+|timestamp|TimestampWritable|
+|interval\_year\_month|IntervalYearMonthWritable|
+|interval\_day\_time|IntervalDayTimeWritable|
+|array|暂不支持|
+|map|暂不支持|
+|struct|暂不支持|
 
 ## 其他 UDF 示例 {#section_kb5_v44_k2b .section}
 
@@ -137,7 +161,7 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值 avg 为例，下图简要说明了在 MaxCompute UDAF 中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15349266321855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15381282641855_zh-CN.jpg)
 
 在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
@@ -211,9 +235,9 @@ public class AggrAvg extends Aggregator {
 
 **说明：** 
 
--   Writable 的 readFields 方法， 由于partial的writable对象是重用的，同一个对象的readFields方法会被调用多次。该方法期望每次调用的时候重置整个对象，如果对象中包含collection，需要清空。
 -   UDAF 在 SQL 中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
 -   关于如何运行 UDTF 的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
+-   String对应的Writable类型为Text。
 
 ## UDTF {#section_a4t_34f_vdb .section}
 

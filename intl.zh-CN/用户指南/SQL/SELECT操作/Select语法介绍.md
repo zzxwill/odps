@@ -164,6 +164,6 @@ FROM table_reference
 
 **说明：** 
 
--   order by/sort by/distribute by的key必须是Select语句的输出列，即列的别名。
+-   order by/sort by/distribute by的key必须是Select语句的输出列，即列的别名。列的别名可以为中文。
 -   在MaxCompute SQL解析中， order by/sort by/distribute by是后于Select操作的，因此它们只能接受Select语句的输出列为key。
 

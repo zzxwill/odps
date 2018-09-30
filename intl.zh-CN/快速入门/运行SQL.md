@@ -36,11 +36,11 @@
 
 -   order by必须与limit连用。
 -   sort by前必须加distribute by。
--   order by/sort by/distribute by的key必须是Select语句的输出列，即列的别名。如下所示：
+-   order by/sort by/distribute by的key必须是Select语句的输出列，即列的别名。
 
     ```
-    select col2 as c from tbl order by col2 limit 100 --不可以，order by的key不是select语句的输出列，即列的别名
-      select col2 from tbl order by col2 limit 100; -- 可以，当select语句的输出列没有别名时，使用列名作为别名。
+    select col2 as c from tbl order by col1 limit 100 --不可以，order by的key不是select语句的输出列，即列的别名
+    select col2 from tbl order by col2 limit 100; -- 可以，当select语句的输出列没有别名时，使用列名作为别名。
     ```
 
     之所以有这样的限制，是因为在通常的SQL解析中，order by/sort by/distribute by后于Select操作，因此它们只能接受Select语句的输出列为key。
@@ -117,7 +117,7 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
 
         此时，复制logview的链接并打开webcosole页面，双击执行Join操作的fuxi job，可以看到此时在\[Long-tails\]区域有长尾，表示数据已经倾斜了。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/1560_zh-CN.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15382737231560_zh-CN.PNG)
 
         此时您可通过如下方法进行优化。
 

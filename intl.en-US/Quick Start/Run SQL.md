@@ -16,7 +16,7 @@ This article gives you a brief introduction of the issues that need to be notice
 
 -   MaxCompute SQL does not support transactions, indexes, update/delete operations, and so on. At the same time, the SQL Syntax of MaxCompute is different from that of Oracle and MySQL, so that you cannot seamlessly migrate SQL statements from other databases to MaxCompute.
 -   After you submit a MaxCompute job, it will take several dozen seconds to several minutes to schedule the job. Therefore, MaxCompute is suitable for batch jobs, which processes a massive volume of data. It is not suitable for frontend business systems that must process several thousand or tens of thousands of transactions per second.
--   For a detailed example of SQL operations, see [SQL](../../../../intl.en-US/User Guide/SQL/SQL Summary.md#).
+-   For a detailed example of SQL operations, see [SQL](../../../../intl.en-US/User Guide/SQL/SQL summary.md#).
 
 ## DDL Statement {#section_kdh_cvy_5db .section}
 
@@ -39,7 +39,7 @@ Simple DDL operations include creating tables, adding partitions, viewing tables
 -   The key of ORDER BY/SORT BY/DISTRIBUTE BY must be the output column of SELECT statement, that is, the column alias. An example is shown as follows:
 
     ```
-    select col2 as c from tbl order by col2 limit 100 -- No, the key of ‘order by’ is not the output column (column alias) of Select statement.
+    select col2 as c from tbl order by col1 limit 100 -- No, the key of ‘order by’ is not the output column (column alias) of Select statement.
       select col2 from tbl order by col2 limit 100; -- Yes, use column name as the alases if the output column of Select statement has no alias.
     ```
 
@@ -117,7 +117,7 @@ For more restrictions on MaxCompute SQL, see SQL Restrictions Summary.
 
         Copy the logview link to enter the web console page, and double-click the Fuxi job that runs the Join operation. You can see a long tail in the Long-Tails tab, which indicates that the data has been skewed, as shown in the following figure: 
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/1560_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15382737261560_en-US.PNG)
 
         You can optimize the statement by the following methods:
 

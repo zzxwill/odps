@@ -11,6 +11,9 @@ MaxCompute Studio has the following requirements on the your environment:
 -   JRE 1.8 is installed. \(JRE 1.8 has been bound to the latest IntelliJ IDEA.\)
 -   JDK 1.8 is installed. \(*Optional*: JDK is required if you need to develop and debug Java UDF.\)
 
+    **Note:** The client supports JDK 1.9 from the 0.28.0 version. The previous version only supports JDK 1.8.
+
+
 ## Installation method {#section_qzv_n5y_5db .section}
 
 MaxCompute Studio is a plugin of IntelliJ IDEA, which can be installed using either of the following two methods:
@@ -31,7 +34,7 @@ MaxCompute Studio The MaxCompute Studio plugin has been opened for all users on 
 
 4.  After the installation is confirmed, restart IntelliJ IDEA to complete installation.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381555_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914951555_en-US.png)
 
 
 ## Local installation {#section_vzv_n5y_5db .section}
@@ -46,33 +49,33 @@ MaxCompute Studio MaxCompute Studio can also be installed in a local environment
 
     -   If you access IntelliJ IDEA for the first time, a welcome page is displayed. Click **Configure** and select  **Plugins** from the shortcut menu, as shown in the following figure.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381556_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914951556_en-US.png)
 
     -   If you have accessed IntelliJ IDEA before, choose  ** File** \> **Settings** \> **Plugins to ** enter the same page, as shown in the following figure.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381557_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914961557_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381558_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914961558_en-US.png)
 
 3.  On the Plugins page, click  **Install plugin from disk…**,  as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381559_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914961559_en-US.png)
 
 4.  In the displayed window, click the gray icon before a directory for navigation, find the plugin file, select it, and click **OK**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381561_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914961561_en-US.png)
 
 5.  Return to the Plugins page and click **OK** to install the local plugin.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381562_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914961562_en-US.png)
 
 6.  After the installation is complete, a dialog box is displayed, prompting you to restart IntelliJ IDEA. Click **Restart**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381563_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914961563_en-US.png)
 
 7.  After IntelliJ IDEA is restarted, the page is displayed as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15329326381564_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12117/15390914961564_en-US.png)
 
 
 ## Next step {#section_g1w_n5y_5db .section}

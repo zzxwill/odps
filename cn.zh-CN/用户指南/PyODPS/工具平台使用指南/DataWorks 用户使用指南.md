@@ -4,7 +4,7 @@
 
 在工作流节点中会包含PYODPS节点。新建即可。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21169/153680863511645_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21169/153907640311645_zh-CN.png)
 
 ## ODPS入口 {#section_rfp_skg_cfb .section}
 
@@ -36,6 +36,8 @@ with instance.open_reader() as reader:
 with instance.open_reader(tunnel=True, limit=False) as reader:
     # 这次 open_reader 会走 instance tunnel 接口，且能读取全部数据
 ```
+
+**说明：** 若未打开Instance tunnel导致获取数据格式错误，解决方法请参见[未打开Instance tunnel导致获取数据格式错误](https://help.aliyun.com/knowledge_detail/92806.html)。
 
 ## DataFrame {#section_hlv_plg_cfb .section}
 

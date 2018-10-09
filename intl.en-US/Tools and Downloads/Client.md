@@ -5,9 +5,9 @@ This article describes how to use the basic functions of the MaxCompute using cl
 **Note:** 
 
 -   Do not perform the analysis operation based on the output format of the client.  The output format of the client is not ensured for forward compatibility. Clients of different versions are different in their command formats and behaviors.
-
 -   For more information about basic commands of the client, see [Basic commands](../../../../intl.en-US/User Guide/Common commands/Overview of Common commands.md). 
-
+-   Download [MaxCompute console](http://repo.aliyun.com/download/odpscmd/latest/odpscmd_public.zip)
+-   The client supports JDK 1.9 from the 0.28.0 version, and the previous version can only use JDK 1.8.
 
 After the client is installed and configured, you can use a command line to perform the following operations.
 
@@ -88,9 +88,7 @@ Enter the command at the cursor position \(use a semicolon as a statement termin
 ## Continuous running {#section_hvh_41x_5db .section}
 
 -   When using -e or -f option to run a command, if there are multiple statements, and you want to start running from a middle statement, you can specify the parameter -k, indicating to ignore the previous statements and to start running from the specified position.  When the parameter <= 0 is specified,  the execution starts from the first statement.
-
 -   Each statement separated by a semicolon is considered as a valid statement. The statements which run successfully or fail to run are printed out at runtime.
-
 
 For example, 
 

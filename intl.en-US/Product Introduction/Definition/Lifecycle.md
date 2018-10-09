@@ -4,7 +4,7 @@ The lifecycle of a MaxCompute table or partition is measured from the last updat
 
 -   Lifecycle units: days, positive integers only.
 -   When a lifecycle is specified for a non-partition table, the lifecycle is counted from the last time the table data was modified \(LastDataModifiedTime\). If table data has not been changed, MaxCompute recycles the table automatically without manual operation \(similar to the drop table operation\).
--   When a lifecycle is specified for a non-partition table, the lifecycle is counted from the last time the table data was modified \(LastDataModifiedTime\).  If table data has not been changed, MaxCompute recycles the table automatically without manual operation \(similar to the drop table operation\).
+-   When a lifecycle is specified for a partition table, we will decide whether a partition should be recycled according to each partition's LastDataModifiedTime. Unlike non-partition tables, a partition table will not be deleted even if its last partition has been recycled.
 
     **Note:** 
 
@@ -15,5 +15,5 @@ The lifecycle of a MaxCompute table or partition is measured from the last updat
 -   You can set the lifecycle of tables, but not of partitions.  The lifecycle of a table can be specified during table creation.
 -   If no lifecycle is specified, the table, or partition cannot be automatically recycled by MaxCompute.
 
-For more information on specifying or modifying lifecycles during table creation, and modifying a table’s LastDataModifiedTime, see [Table Operations](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
+For more information on specifying or modifying lifecycles during table creation, and modifying a table’s LastDataModifiedTime, see [Table Operations](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
 

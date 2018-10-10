@@ -57,3 +57,5 @@ odps.Schema {
 }
 ```
 
+**说明：** PyODPS不支持上传外部表\(OSS/OTS\)。
+

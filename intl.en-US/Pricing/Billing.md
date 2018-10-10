@@ -1,13 +1,10 @@
 # Billing {#concept_f32_fpm_xdb .concept}
 
-**Overview:**
+Overview:
 
 -   MaxCompute is billed according to the projects you create and the items you use within each project. 
-
 -   Billable items include the storage, computing resources and data downloads of a project.
-
 -   MaxCompute fees are calculated daily.
-
 
 ## Storage pricing {#section_efw_kpm_xdb .section}
 
@@ -34,24 +31,19 @@ For example, if you store 50 TB data in MaxCompute, the bill is calculated as fo
 **Note:** 
 
 -   Because MaxCompute compresses and stores user data, the bill is based on the capacity size of the data after compresssion. This means the size of the stored data is different from the size of the data as measured by you before storage. The compression ratio is generally about 5.
-
 -   Generally, MaxCompute fees are deducted no more than 6 hours after the daily fee calculation is completed,  and are automatically deducted from the corresponding account balance. 
-
 -   On the MaxCompute console, you can view your consumption details under **Bill Management**.
-
 
 ## Computation pricing {#section_lfw_kpm_xdb .section}
 
 MaxCompute supports two kinds of billing methods.
 
 -   Pay-As-You-Go: Each task is measured according to the input size by job cost.
-
 -   Subscription \(CU cost\): Users can subscribe the usage of a part of the resource in advance. This method is only supported on **Alibaba Cloud DTPlus Platform**.
-
 
 Currently,  MaxCompute supports the following computing task types: SQL, UDF, MapReduce, Graph, and machine learning. Charges apply for SQL \(excluding UDF\) computing tasks and for MapReduce tasks \(charges introduced 2017-12-19\). There are no plans to charge for other types in future. 
 
-**Pay-As-You-Go**
+Pay-As-You-Go
 
 Pay-As-You-Go is for SQL tasks and MapReduce tasks.
 
@@ -76,23 +68,14 @@ The price is as follows.
 -   **Data Input Size**: The actual size of the data that an SQL statement scans. Most SQL statements have partition filtering and column pruning, so this value is generally less than the source table data size.
 
     -   Column pruning: For example, the submitted SQL is `select f1,f2,f3 from t1;`.  Only the data size of three columns \(f1, f2, and f3\) in t1 are charged.
-
     -   Partition filtering: For example, a SQL statement includes  ds\>”20130101”. The “ds” is a partition column. The data size is calculated only according to the read partition, rather than the data of other partitions, and then billed.
-
--   **SQL Complexity**: First, MaxCompute counts keywords in SQL statements, and then converts to SQL complexity.
-
+-   SQL Complexity: First, MaxCompute counts keywords in SQL statements, and then converts to SQL complexity.
     -   SQL keyword number = join Number + group by number + order by number + distinct number + window function number +  max \(insert into Number -1, 1\)
-
     -   SQL complexity calculation:
-
         -   If SQL keyword number is less than or equal to 3, the complexity is 1.
-
         -   If SQL keyword number is less than or equal to 6, the complexity is 1.5.
-
         -   If SQL keyword number is less than or equal to 19, the complexity is 2.
-
         -   If SQL keyword number is greater than or equal to 20, the complexity is 4.
-
 
 The input SQL statement for calculating SQL Complexity is as follows.
 
@@ -120,9 +103,9 @@ The preceding SQL includes 4 keywords \(one DISTINCT, one COUNT, one GROUP BY, a
 **Note:** 
 
 -   The bill invoicing time is usually before 06:00 the next day. After the computing task successfully ends, the system counts the data size and SQL complexity. After the bill is generated, the fee is automatically deducted from your account. If the SQL task is unsuccessful, no fee is deducted.
-
 -   As with storage, SQL computing also calculates and bills the data size after compression.
 
+Since October 31，2018，the appearance function of MaxCompute SQL has started charging. The billing standard used is the cost of one SQL computation = the input data quantity \*SQL complexity \*SQL price. The SQL price is 0.03 yuan /GB/ complexity and the complexity coefficient is 1. All measurements of the day will be collected one-time the next day and will be directly reflected in your account bill.
 
 Pay-As-You-Go for MapReduce
 
@@ -147,13 +130,10 @@ After the MR task is finished, MaxCompute sends its metering information to the 
 **Note:** 
 
 -   You are not charged if a task fails to run.
-
 -   The calculating time does not include the time waiting for execution.
-
 -   If you purchased the MaxCompute Subscription service, you can use MR tasks for free within the range of the services you purchased. No additional fee is charged.
 
-
-**Subscription \(CU cost\)**
+Subscription \(CU cost\)
 
 Payment by subscription is only available on the **Alibaba Cloud DTPlus Platform**.  Subscription allows you to pay an initial fee \(monthly or annually\) for your entire reserved resources. The basic unit of such resources is defined as CU \(Compute  Unit\). One CU includes 1 core CPU and 4 GB of memory.
 
@@ -180,9 +160,6 @@ The price is as follows:
 **Note:** 
 
 -   MaxCompute sends you messages to notify you of the size of your downloads, and to provide you with your download costs the next day.
-
 -   Download data volume refers to the size of an HTTP body for one download request. The HTTP body that carries data uses protobuffer encoding, so it is generally smaller than the original data size, but larger than the data stored in MaxCompute after compression.
-
 -   The different billing methods are applicable to different network environments, such as public networks, classic networks of Alibaba Cloud, or VPC networks. For more information, see Access domains and data centers.  For more information, see [Access domains and data centers](https://www.alibabacloud.com/help/zh/doc-detail/34951.htm).
-
 

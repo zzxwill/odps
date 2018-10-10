@@ -6,17 +6,17 @@
 2.  Go to the MaxCompute homepage and click **Buy Now**. 
 3.  Select the billing method and click **Buy Now**. 
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11943/15391609821383_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11943/15391610951383_en-US.png)
 
     MaxCompute has two payment options: Subscription \(CU cost\) and Pay-As-You-Go. For more information, see [Charge](https://www.alibabacloud.com/help/doc-detail/74873.htm).
 
-4.  Confirm your order and then click **Activate**. 
+4.  Confirm your order and then click **Pay**. 
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11943/15391609821379_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11943/15391610951379_en-US.png)
 
     After the service is successfully activated, the following page is displayed.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11943/15391609821382_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11943/15391610961382_en-US.png)
 
     After activating MaxCompute, you can create a project. For more information, see [Create a project](intl.en-US/Prepare/Create a project.md#).
 

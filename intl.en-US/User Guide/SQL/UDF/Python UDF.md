@@ -128,6 +128,8 @@ class myplus (object ):
 
 **Note:** A Python UDF must have its signature specified through annotate.
 
+Python UDF permissions on the public cloud need to be submitted for work order application, which can be filled out as prompted.
+
 ## UDAF {#section_ilj_mhf_xdb .section}
 
 -   class odps.udf.BaseUDAF: Inherit this class to implement a Python UDAF.

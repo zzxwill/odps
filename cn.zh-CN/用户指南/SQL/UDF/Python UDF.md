@@ -58,7 +58,7 @@ MaxCompute UDF的Python版本为2.7，并以沙箱模式执行用户代码，即
 
 ## 第三方库 {#section_lrw_zff_xdb .section}
 
-运行环境中还安装了除标准库以外比较常用的三方库，做为标准库的补充。支持的三方库还包括**numpy**。
+运行环境中还安装了除标准库以外比较常用的三方库，做为标准库的补充。支持的三方库还包括numpy。
 
 **说明：** 三方库的使用同样受到禁止本地、网络IO或其他在受限环境下的限制，因此三方库中涉及到相关功能的API也是被禁止的。
 
@@ -127,6 +127,8 @@ class MyPlus(object):
 ```
 
 **说明：** Python UDF必须通过annotate指定函数签名。
+
+公共云上的Python UDF使用权限需要提交工单申请开通，申请单可按照提示填写。
 
 ## UDAF {#section_ilj_mhf_xdb .section}
 

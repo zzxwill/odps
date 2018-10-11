@@ -1,6 +1,6 @@
 # Python SDK {#concept_g14_4wb_wdb .concept}
 
-PyODPS is the Python SDK of MaxCompute. It supports basic actions on MaxCompute objects and the DataFrame framework for ease of data analysis on MaxCompute.  For more information, see the [GitHub project](https://github.com/aliyun/aliyun-odps-python-sdk) and the [PyODPS Documentation](http://pyodps.readthedocs.org/) that describes all interfaces and classes.
+PyODPS is the Python SDK of MaxCompute. It supports basic actions on MaxCompute objects and the DataFrame framework for ease of data analysis on MaxCompute. For more information, see the [GitHub project](https://github.com/aliyun/aliyun-odps-python-sdk) and the [PyODPS Documentation](http://pyodps.readthedocs.org/) that describes all interfaces and classes.
 
 -   For more information about PyODPS, see the [PyODPS community album](https://yq.aliyun.com/album/19).
 
@@ -15,7 +15,7 @@ PyODPS is the Python SDK of MaxCompute. It supports basic actions on MaxCompute 
 
 PyODPS supports Python 2.6 and later versions. After installing PIP in the system, you only need to run `pip install  pyodps`. The related dependencies of PyODPS are automatically installed.
 
-## Quick Start {#section_bqy_jxb_wdb .section}
+## Quick start {#section_bqy_jxb_wdb .section}
 
 Log on using your Alibaba Cloud primary account to initialize a MaxCompute entry, as shown in the following code:
 
@@ -46,7 +46,7 @@ project = odps.get_project() # Obtain the default project.
 -   A table is a data storage unit of MaxCompute.
 
 
-## Table Action {#section_mmv_kyb_wdb .section}
+## Table action {#section_mmv_kyb_wdb .section}
 
 Call `list_tables` to list all tables in the project, as shown in the following code:
 
@@ -110,7 +110,7 @@ Two initialization methods are as follows:
     
     ```
 
--   Although it is easier to call `Schema.from_lists` for initialization, annotations of columns and partitions cannot be directly set.
+-   Although it is easier to call `Schema.from_lists` for initialization, annotations of columns and partitions cannot be set directly.
 
     ```
     >>> schema = Schema.from_lists(['num'], ['bigint'], ['pt'], ['string'])
@@ -120,7 +120,7 @@ Two initialization methods are as follows:
     ```
 
 
-## Create a Table {#section_r2m_wyb_wdb .section}
+## Create a table {#section_r2m_wyb_wdb .section}
 
 Use a table schema to create a table, as shown in the following code:
 
@@ -150,7 +150,7 @@ If your service is on a public cloud, or supports new data types such as TINYINT
 
 ```
 
-## Obtain Table Data {#section_cwv_czb_wdb .section}
+## Obtain table data {#section_cwv_czb_wdb .section}
 
 Table data can be obtained using three methods:
 
@@ -166,7 +166,7 @@ Table data can be obtained using three methods:
     >>>     print(record['c_int_a', 'c_double_a']) # Obtain values through multiple fields.
     ```
 
--   Run `open_reader` on a table to open a reader to read data.  You can use the WITH expression:
+-   Run `open_reader` on a table to open a reader to read data. You can use the WITH expression:
 
     ```
     # Use the with expression.
@@ -184,9 +184,11 @@ Table data can be obtained using three methods:
 
 -   Call the Tunnel API to read table data. The `open_reader` action is encapsulated in the Tunnel API.
 
-## Write Data {#section_c5z_jzb_wdb .section}
+## Write data {#section_c5z_jzb_wdb .section}
 
-A table object can also perform the `open_writer` action to open the writer and write data, which is similar to `open_reader`. For example:
+A table object can also perform the `open_writer` action to open the writer and write data, which is similar to `open_reader`.
+
+**Example:**
 
 ```
 >>> # Use the with expression.
@@ -204,9 +206,9 @@ A table object can also perform the `open_writer` action to open the writer and 
 >>> writer.close() # You must close the writer. Otherwise, the written data may be incomplete.
 ```
 
-Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
+Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 
-## Delete a Table {#section_ayt_mzb_wdb .section}
+## Delete a table {#section_ayt_mzb_wdb .section}
 
 Delete a table as shown in the following code:
 
@@ -215,7 +217,7 @@ Delete a table as shown in the following code:
 >>> t.drop() # The drop function can be directly executed if a table object exists.
 ```
 
-## Table Partitioning {#section_vxt_4zb_wdb .section}
+## Table partitioning {#section_vxt_4zb_wdb .section}
 
 -   **Basic operations**
 
@@ -244,13 +246,13 @@ Delete a table as shown in the following code:
     0
     ```
 
--   **Create a Partition**
+-   **Create a partition**
 
     ```
     >>> t.create_partition('pt=test', if_not_exists=True) # Create a partition only when no partition exists.
     ```
 
--   **Delete a Partition**
+-   **Delete a partition**
 
     ```
     >>> t.delete_partition('pt=test', if_exists=True) # Delete a partition only when the partition exists.
@@ -272,7 +274,7 @@ PyODPS supports MaxCompute SQL query and can directly read the execution results
 
 -   **Read the SQL statement execution results**
 
-    The instance that runs the SQL statements can directly perform the `open_reader` action. One scenario is that the SQL statements return structured data, as follows:
+    The instance that runs the SQL statements can directly perform the `open_reader` action. In one scenario, the SQL statements return structured data, as follows:
 
     ```
     >>> with odps.execute_sql('select * from dual').open_reader() as reader:
@@ -281,28 +283,28 @@ PyODPS supports MaxCompute SQL query and can directly read the execution results
     ```
 
 
-Another scenario is that actions that may be performed by SQL, such as `desc`, obtain the raw SQL execution result through the `reader.raw` attribute, as follows:
+In the second scenario, the actions that may be performed by SQL, such as `desc`, obtain the raw SQL execution result through the `reader.raw` attribute, as follows:
 
 ```
 >>> with odps.execute_sql('desc dual').open_reader() as reader:
 >>>     print(reader.raw)
 ```
 
-## Resource {#section_xvk_g1c_wdb .section}
+## Resources {#section_xvk_g1c_wdb .section}
 
 Resources commonly apply to UDF and MapReduce on MaxCompute.
 
-You can use `list_resources` to list all resources and use `exist_resource` to check whether a resource exists.  You can call `delete_resource` to delete resources or directly call the `drop` method for a resource object.
+You can use `list_resources` to list all resources and use `exist_resource` to check whether a resource exists. You can call `delete_resource` to delete resources or directly call the `drop` method for a resource object.
 
 PyODPS mainly supports two resource types: file resources and table resources.
 
--   **File Resources**
+-   **File resources**
 
     File resources include the basic `file` type, and `py`, `jar`, and `archive`.
 
     **Note:** In DataWorks, file resources in the py format must be uploaded as files. For more information, see [Python UDF](https://yq.aliyun.com/articles/300307).
 
-    **Create a File Resource**
+    **Create a file resource**
 
     Create a file resource by specifying the resource name, file type, and a file-like object \(or a string object\), as shown in the following example:
 
@@ -311,9 +313,11 @@ PyODPS mainly supports two resource types: file resources and table resources.
     resource = odps.create_resource('test_py_resource', 'py', file_obj='import this') # Use a string.
     ```
 
-    **Read and Modify a File Resource**
+    **Read and modify a file resource**
 
-    You can call the `open` method for a file resource or call `open_resource` at the MaxCompute entry to open a file resource. The opened object is a file-like object.Similar to the `open` method built in Python, file resources also support the open mode. For example:
+    You can call the `open` method for a file resource or call `open_resource` at the MaxCompute entry to open a file resource. The opened object is a file-like object. Similar to the `open` method built in Python, file resources also support the open mode. 
+
+    **Example:**
 
     ```
     >>> with resource.open('r') as fp: # Open a resource in read mode.
@@ -339,18 +343,18 @@ PyODPS mainly supports two resource types: file resources and table resources.
     -   `a`: Append mode. Content can be added to the end of the file.
     -   `r+`: Read/write mode. You can read and write any content.
     -   `w+`: Similar to `r+`, but file content is cleared first.
-    -   `a+`: Similar to `r+`, but content can be added to the end of the file only during writing.
+    -   `a+`: Similar to `r+`, but content can be added at the end of the file only during writing.
     In PyODPS, file resources can be opened in a binary mode. For example, some compressed files must be opened in binary mode.  `rb` indicates opening a file in binary read mode, and `r+b` indicates opening a file in binary read/write mode.
 
--   **Table Resources**
+-   **Table resources**
 
-    **Create a Table Resource**
+    **Create a table resource**
 
     ```
     >>> odps.create_resource('test_table_resource', 'table', table_name='my_table', partition='pt=test')
     ```
 
-    **Update a Table Resource**
+    **Update a table resource**
 
     ```
     >>> table_resource = odps.get_resource('test_table_resource')
@@ -360,7 +364,7 @@ PyODPS mainly supports two resource types: file resources and table resources.
 
 ## DataFrame {#section_ns3_1bc_wdb .section}
 
-PyODPS offers DataFrame API, which provides interfaces similar to pandas, but can fully utilize computing capability of MaxCompute. For the complete DataFrame document, see [DataFrame](http://pyodps.readthedocs.io/zh_CN/latest/df.html).
+PyODPS offers DataFrame API, which provides interfaces similar to pandas, but can fully utilize computing capability of MaxCompute. For more information, see [DataFrame](http://pyodps.readthedocs.io/zh_CN/latest/df.html).
 
 The following is an example of DataFrame:
 
@@ -389,7 +393,9 @@ View fields of DataFrame and the types of the fields through the dtypes attribut
 >>> users.dtypes
 ```
 
-You can use the head method to obtain the first N data records for data preview.  For example:
+You can use the head method to obtain the first N data records for data preview. 
+
+**Example:**
 
 ```
 >>> users.head(10)
@@ -408,7 +414,9 @@ You can use the head method to obtain the first N data records for data preview.
 |8|9|29|M|student|01002|
 |9|10|53|M|lawyer|90703|
 
-You can add a filter on the fields if you do not want to view all of them.  For example:
+You can add a filter on the fields to view selective fields only.
+
+**Example:**
 
 ```
 >>> users[['user_id', 'age']].head(5)
@@ -422,35 +430,41 @@ You can add a filter on the fields if you do not want to view all of them.  For
 |3|4|24|
 |4|5|33|
 
-You can also exclude several fields. For example:
+You can also exclude several fields.
+
+**Example:**
 
 ```
 >>> users.exclude('zip_code', 'age').head(5)
 ```
 
-|　|user\_id|sex|occupation|
+|　|user\_id|Sex|Occupation|
 |:-|:-------|:--|:---------|
-|0|1|M|technician|
-|1|2|F|other|
-|2|3|M|writer|
-|3|4|M|technician|
-|4|5|F|other|
+|0|1|M|Technician|
+|1|2|F|Other|
+|2|3|M|Writer|
+|3|4|M|Technician|
+|4|5|F|Other|
 
-When excluding some fields, you may want to obtain new columns through computation. For example, add the sex\_bool attribute and set it to True if sex is Male. Otherwise, set it to False. For example:
+If you want to exclude selective fields, and obtain new columns through computation use the code as shown in the following example:
+
+For example, add the sex\_bool attribute and set it to True if sex is Male. Otherwise, set it to False. 
+
+**Example:**
 
 ```
 >>> users.select(users.exclude('zip_code', 'sex'), sex_bool=users.sex == 'M').head(5)
 ```
 
-|　|user\_id|age|occupation|sex\_bool|
+|　|user\_id|Age|Occupation|sex\_bool|
 |:-|:-------|:--|:---------|:--------|
-|0|1|24|technician|True|
-|1|2|53|other|False|
-|2|3|23|writer|True|
-|3|4|24|technician|True|
-|4|5|33|other|False|
+|0|1|24|Technician|True|
+|1|2|53|Other|False|
+|2|3|23|Writer|True|
+|3|4|24|Technician|True|
+|4|5|33|Other|False|
 
-Obtain the number of persons at age of 20 to 25, as shown in the following code:
+Obtain the number of persons between 20 and 25 age group, as shown in the following code:
 
 ```
 >>> users.age.between(20, 25).count().rename('count')
@@ -463,30 +477,32 @@ Obtain the numbers of male and female users, as shown in the following code:
 >>> users.groupby(users.sex).count()
 ```
 
-|　|sex|count|
+|　|Sex|Count|
 |:-|:--|:----|
-|0|F|273|
-|1|M|670|
+|0|Female|273|
+|1|Male|670|
 
-To divide users by job, obtain the first 10 jobs that have the largest population, and sort the jobs in the descending order of population. An example is as follows:
+To divide users by job, obtain the first 10 jobs that have the largest population, and sort the jobs in the descending order of population.
+
+**Example:**
 
 ```
 >>> df = users.groupby('occupation').agg(count=users['occupation'].count())
 >>> df.sort(df['count'], ascending=False)[:10]
 ```
 
-|　|occupation|count|
+|　|Occupation|Count|
 |:-|:---------|:----|
-|0|student|196|
-|1|other|105|
-|2|educator|95|
-|3|administrator|79|
-|4|engineer|67|
-|5|programmer|66|
-|6|librarian|51|
-|7|writer|45|
-|8|executive|32|
-|9|scientist|31|
+|0|Student|196|
+|1|Other|105|
+|2|Educator|95|
+|3|Administrator|79|
+|4|Engineer|67|
+|5|Programmer|66|
+|6|Librarian|51|
+|7|Writer|45|
+|8|Executive|32|
+|9|Scientist|31|
 
 DataFrame APIs provide the value\_counts method to quickly achieve the same result. For example:
 
@@ -494,18 +510,18 @@ DataFrame APIs provide the value\_counts method to quickly achieve the same resu
 >>> users.occupation.value_counts()[:10]
 ```
 
-|　|occupation|count|
+|　|Occupation|Count|
 |:-|:---------|:----|
-|0|student|196|
-|1|other|105|
-|2|educator|95|
-|3|administrator|79|
-|4|engineer|67|
-|5|programmer|66|
-|6|librarian|51|
-|7|writer|45|
-|8|executive|32|
-|9|scientist|31|
+|0|Student|196|
+|1|Other|105|
+|2|Educator|95|
+|3|Administrator|79|
+|4|Engineer|67|
+|5|Programmer|66|
+|6|Librarian|51|
+|7|Writer|45|
+|8|Executive|32|
+|9|Scientist|31|
 
 Show data in a more intuitive graph, as shown in the following code:
 
@@ -520,7 +536,7 @@ Use a horizontal bar chart to visualize data, as shown in the following code:
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178252854_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15392572732854_en-US.png)
 
 Divide ages into 30 groups and view the histogram of age distribution, as shown in the following code:
 
@@ -528,9 +544,11 @@ Divide ages into 30 groups and view the histogram of age distribution, as shown 
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178252855_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15392572732855_en-US.png)
 
-Use JOIN to join the three tables and save the joined tables as a new table. For example:
+Use JOIN to join the three tables and save the joined tables as a new table. 
+
+Example:
 
 ```
 >>> movies = DataFrame(o.get_table('pyodps_ml_100k_movies'))
@@ -570,7 +588,7 @@ View the first 10 data records of a single age group in a group, as shown in the
 >>> cut_lens['age group', 'age'].distinct()[:10]
 ```
 
-|　|Age group|Age|
+|　|Age-group|Age|
 |:-|:--------|:--|
 |0|0-9|7|
 |1|10-19|10|
@@ -589,7 +607,7 @@ View users’ total rating and average rating of each age group, as shown in the
 >>> cut_lens.groupby('age group').agg(cut_lens.rating.count().rename('total rating'), cut_lens.rating.mean().rename('average rating'))
 ```
 
-|　|Age group|Average rating|Total rating|
+|　|Age-group|Average rating|Total rating|
 |:-|:--------|:-------------|:-----------|
 |0|0-9|3.767442|43|
 |1|10-19|3.486126|8181|
@@ -608,26 +626,26 @@ PyODPS provides a series of configuration options, which can be obtained through
 
     |Option|Description|Default value|
     |:-----|:----------|:------------|
-    |end\_point|MaxCompute Endpoint|None|
-    |default\_project|Default Project|None|
-    |log\_view\_host|LogView host name|None|
-    |log\_view\_hours|LogView holding time \(hours\)|24|
+    |end\_point|MaxCompute Endpoint.|None|
+    |default\_project|Default Project.|None|
+    |log\_view\_host|LogView host name.|None|
+    |log\_view\_hours|LogView holding time \(in hours\).|24|
     |local\_timezone|Used time zone. True indicates local time, and False indicates UTC. The time zone of pytz can also be used.|1|
-    |lifecycle|Life cycles of all tables|None|
-    |temp\_lifecycle|Life cycles of the temporary tables|1|
-    |biz\_id|User ID|None|
-    |verbose|Whether to print logs|False|
-    |verbose\_log|Log receiver|None|
-    |chunk\_size|Size of write buffer|1496|
-    |retry\_times|Request retry times|4|
-    |pool\_connections|Number of cached connections in the connection pool|10|
-    |pool\_maxsize|Maximum capacity of the connection pool|10|
-    |connect\_timeout|Connection time-out|5|
-    |read\_timeout|Read time-out|120|
-    |completion\_size|Limit on the number of object complete listing items|10|
-    |notebook\_repr\_widget|Use interactive graphs|True|
-    |sql.settings|MaxCompute SQL runs global hints|None|
-    |sql.use\_odps2\_extension|Enable MaxCompute 2.0 language extension|False|
+    |lifecycle|Life cycles of all tables.|None|
+    |temp\_lifecycle|Life cycles of the temporary tables.|1|
+    |biz\_id|User ID.|None|
+    |verbose|Whether to print logs.|False|
+    |verbose\_log|Log receiver.|None|
+    |chunk\_size|Size of write buffer.|1496|
+    |retry\_times|Request retry times.|4|
+    |pool\_connections|Number of cached connections in the connection pool.|10|
+    |pool\_maxsize|Maximum capacity of the connection pool.|10|
+    |connect\_timeout|Connection time-out.|5|
+    |read\_timeout|Read time-out.|120|
+    |completion\_size|Limit on the number of object complete listing items.|10|
+    |notebook\_repr\_widget|Use interactive graphs.|True|
+    |sql.settings|MaxCompute SQL runs global hints.|None|
+    |sql.use\_odps2\_extension|Enable MaxCompute 2.0 language extension.|False|
 
 -   **Data Upload/Download configuration**
 
@@ -642,21 +660,21 @@ PyODPS provides a series of configuration options, which can be obtained through
 
     |Option|Description|Default value|
     |:-----|:----------|:------------|
-    |interactive|Whether in an interactive environment|Depend on the detection value|
-    |df.analyze|Whether to enable non-MaxCompute built-in functions|True|
-    |df.optimize|Whether to enable DataFrame overall optimization|True|
-    |df.optimizes.pp|Whether to enable DataFrame predicate push optimization|True|
-    |df.optimizes.cp|Whether to enable DataFrame column tailoring optimization|True|
-    |df.optimizes.tunnel|Whether to enable DataFrame tunnel optimization|True|
-    |df.quote|Whether to use \`\` to mark fields and table names at the end of MaxCompute SQL|True|
-    |df.libraries|Third-party library \(resource name\) that is used for DataFrame running|None|
+    |interactive|Whether in an interactive environment.|Depend on the detection value|
+    |df.analyze|Whether to enable non-MaxCompute built-in functions.|True|
+    |df.optimize|Whether to enable DataFrame overall optimization.|True|
+    |df.optimizes.pp|Whether to enable DataFrame predicate push optimization.|True|
+    |df.optimizes.cp|Whether to enable DataFrame column tailoring optimization.|True|
+    |df.optimizes.tunnel|Whether to enable DataFrame tunnel optimization.|True|
+    |df.quote|Whether to use \`\` to mark fields and table names at the end of MaxCompute SQL.|True|
+    |df.libraries|Third-party library \(resource name\) that is used for DataFrame running.|None|
 
 -   **PyODPS ML Configurations**
 
     |Option|Description|Default value|
     |:-----|:----------|:------------|
-    |ml.xflow\_project|Default Xflow project name|algo\_public|
-    |ml.use\_model\_transfer|Whether to use ModelTransfer to obtain the model PMML|True|
-    |ml.model\_volume|Volume name used when ModelTransfer is used|pyodps\_volume|
+    |ml.xflow\_project|Default Xflow project name.|algo\_public|
+    |ml.use\_model\_transfer|Whether to use ModelTransfer to obtain the model PMML.|True|
+    |ml.model\_volume|Volume name used when ModelTransfer is used.|pyodps\_volume|
 
 

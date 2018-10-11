@@ -1,9 +1,9 @@
 # DataFrame概述 {#concept_tpg_yr4_cfb .concept}
 
-PyODPS 提供了 DataFrame API，它提供了类似 pandas 的接口，但是能充分利用 ODPS 的计算能力； 同时能在本地使用同样的接口，用 pandas 进行计算。
+PyODPS提供了DataFrame API，它提供了类似pandas的接口，但是能充分利用ODPS的计算能力； 同时能在本地使用同样的接口，用pandas进行计算。
 
 -   [快速开始](cn.zh-CN/用户指南/PyODPS/DataFrame/快速开始.md#)
--   [创建 DataFrame](cn.zh-CN/用户指南/PyODPS/DataFrame/创建 DataFrame.md#)
+-   [创建DataFrame](cn.zh-CN/用户指南/PyODPS/DataFrame/创建DataFrame.md#)
 -   [Sequence](cn.zh-CN/用户指南/PyODPS/DataFrame/Sequence.md#)
 -   [Collection](cn.zh-CN/用户指南/PyODPS/DataFrame/Collection.md#)
 -   [执行](cn.zh-CN/用户指南/PyODPS/DataFrame/执行.md#)

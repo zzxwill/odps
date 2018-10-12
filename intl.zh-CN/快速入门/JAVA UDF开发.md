@@ -37,7 +37,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         在配置好的Java Module下创建Java文件。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314031573_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157581573_zh-CN.png)
 
         直接选择MaxCompute Java，然后在name一栏里输入`package名称.文件名`，Kind选择UDF。 之后编辑如下代码：
 
@@ -58,7 +58,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         如下图所示，右键单击UDF的Java文件，选择**Deploy to server**，弹框里选择注册到那个MaxCompute project，输入`function name`，Resource name也可以修改。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314031574_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157581574_zh-CN.png)
 
         填写好后，单击**OK**即可。注册成功后会有提示。
 
@@ -66,7 +66,7 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
         打开SQL脚本，执行代码如`select Lower_test(‘ABC’);`结果如下图所示：
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314031575_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157581575_zh-CN.png)
 
         **说明：** Studio中编写SQL脚本请参见[编写SQL脚本](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/编写SQL脚本.md)。
 
@@ -113,14 +113,33 @@ MaxCompute的UDF包括UDF、UDAF和UDTF三种函数。通常情况下，这三�
 
     4.  **注册UDF函数**
 
+        **命令格式如下：**
+
+        ```
+        CREATE FUNCTION AS <package_to_class> USING <resource_list>;
+        ```
+
+        **参数说明：**
+
+        -   **function\_name**：UDF函数名，这个名字就是SQL中引用该函数所使用的名字。
+        -   **package\_to\_class**：如果是Java UDF，这个名字就是从顶层包名一直到实现UDF类名的fully qualified class name。如果是python UDF，这个名字就是python脚本名.类名。并且这个名字必须使用引号。
+        -   **resource\_list**：UDF所用到的资源列表。
+            -   此资源列表必须包括UDF代码所在的资源。
+            -   如果您的代码中通过distributed cache接口读取资源文件，此列表中还要包括UDF所读取的资源文件列表。
+            -   资源列表由多个资源名组成，资源名之间由逗号分隔，且资源列表必须用引号引起来。
+            -   如果需要指定资源所在的project，写法为`<project_name>/resources/<resource_name>`。
         Jar包被上传后，使得MaxCompute有条件自动获取代码并运行。但此时仍然无法使用这个UDF，因为MaxCompute中并没有关于这个UDF的任何信息。因此需要在MaxCompute中注册一个唯一的函数名，并指定这个函数名与哪个jar资源的哪个类对应。
 
         执行如下命令：
 
         ```
-        CREATE FUNCTION test_lower AS org.alidata.odps.udf.examples.Lower USING my_lower.jar;
+        CREATE FUNCTION test_lower AS 'org.alidata.odps.udf.examples.Lower' USING 'my_lower.jar';
         ```
 
+        **说明：** 
+
+        -   与资源文件一样，同名函数只能注册一次。
+        -   一般情况下，您的自建函数无法覆盖系统内建函数。只有项目空间的Owner才有权利覆盖内建函数。如果您使用了覆盖内建函数的自定义函数，在SQL执行结束后，会在Summary中打印出warning信息。
     5.  在SQL中使用此函数进行验证：
 
         ```

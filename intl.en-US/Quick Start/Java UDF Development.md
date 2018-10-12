@@ -15,7 +15,7 @@ Users who use Maven can search odps-sdk-udf in the [Maven Library](http://search
 Currently, JAVA UDF can be developed in the following ways:
 
 -   Using [MaxCompute Studio completes Java UDF development throughout the process](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Develop and debug UDF.md).
--   Use the [develop and debug JAVA UDF with Eclipse plug-ins](../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/UDF.md), export jar packages, then use the command or DataWorks to [add the resource](../../../../reseller.en-US/User Guide/Common commands/Resource.md) and then [register the function](../../../../reseller.en-US/User Guide/Common commands/Functions.md).
+-   Use the [develop and debug JAVA UDF with Eclipse plug-ins](../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/UDF.md), export jar packages, then use the command or DataWorks to [add the resource](../../../../reseller.en-US/User Guide/Common commands/Resources.md) and then [register the function](../../../../reseller.en-US/User Guide/Common commands/Functions.md).
 
 The code examples for UDF, UDAF, udtf are given separately in this article, and the complete process example for developing UDF in two methods will be displayed\(The steps of UDAF, UDTF are the same as that of UDF \).
 
@@ -37,7 +37,7 @@ The following example shows how to develop a UDF to realize character lowercase 
 
         Create a Java file under the configured Java Module.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314171573_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157711573_en-US.png)
 
         Select MaxCompute Java directly and enter the `package name in name text box, file name`.  Select UDF for Kind. Edit the code as following:
 
@@ -58,7 +58,7 @@ The following example shows how to develop a UDF to realize character lowercase 
 
         As shown in the following figure, right-click the UDF's Java file and select **Deploy to server**，select the MaxCompute project to be registered in the dialog box. enter a `function name`. The  resource name also can be modified.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314171574_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157711574_en-US.png)
 
         When all configurations are finished, click **OK**. There are prompts after the registration is successful.
 
@@ -66,9 +66,9 @@ The following example shows how to develop a UDF to realize character lowercase 
 
         Open the SQL script and execute the code such as `select Lower_test(‘ABC’);`. The result is shown in the following figure:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15355314171575_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11953/15393157711575_en-US.png)
 
-        **Note:** To write SQL scripts in Studio, see [writing SQL scripts](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Write SQL scripts.md).
+        **Note:** To write SQL scripts in Studio, see [writing SQL scripts](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Write SQL.md).
 
 -   **Developing using the Eclipse plug-in**
     1.  **Creating a project**
@@ -115,14 +115,33 @@ The following example shows how to develop a UDF to realize character lowercase 
 
     4.  **Register UDF:**
 
+        The format of the command is as follows:
+
+        ```
+        CREATE FUNCTION AS <package_to_class> USING <resource_list>;
+        ```
+
+        **Parameter description：**
+
+        -   **The name of the function\_name**:UDF function is the name used in the function referenced by SQL.
+        -   **Package\_to\_class**: In the case of Java UDF, the name is from the top-level package name to the fully qualified class name that implements the UDF class name. If it is Python UDF, the name is Python script name. Class name. And the name must be quoted.
+        -   **resource\_list**:The list of resources used by UDF.
+            -   This resource list must include the resources in which the UDF code is located.
+            -   If your code reads resource files through the distributed cache interface, the list also includes a list of resource files read by UDF.
+            -   Resource lists consist of multiple resource names separated by commas and must be quoted.
+            -   If you need to specify the project where the resource is located, it is written as <project\_name\>/resources/<resource\_name\>.
         After the JAR package has been uploaded, MaxCompute can obtain a user’s code and run it. Note that, for the UDF to be usable, MaxCompute requires the user to register a unique function name in MaxCompute and specify which function is corresponding to this function name in the Jar resource.
 
         Next, run the command:
 
         ```
-        CREATE FUNCTION test_lower AS org.alidata.odps.udf.examples.Lower USING my_lower.jar;
+        CREATE FUNCTION test_lower AS 'org.alidata.odps.udf.examples.Lower' USING 'my_lower.jar';
         ```
 
+        **Note:** 
+
+        -   Like resource files, the same name function can only be registered once.
+        -   In general, your self built function cannot overwrite the built in function of the system. Only the Owner of the project space has the right to cover the built in function. If you use a custom function that overrides the built-in function, warning information is printed in Summary after SQL execution.
     5.  Use this function in SQL:
 
         ```

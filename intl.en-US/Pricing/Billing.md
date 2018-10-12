@@ -41,7 +41,7 @@ MaxCompute supports two kinds of billing methods.
 -   Pay-As-You-Go: Each task is measured according to the input size by job cost.
 -   Subscription \(CU cost\): Users can subscribe the usage of a part of the resource in advance. This method is only supported on **Alibaba Cloud DTPlus Platform**.
 
-Currently,  MaxCompute supports the following computing task types: SQL, UDF, MapReduce, Graph, and machine learning. Charges apply for SQL \(excluding UDF\) computing tasks and for MapReduce tasks \(charges introduced 2017-12-19\). The use of external tables will also be charged.There are no plans to charge for other types in future. 
+Currently,  MaxCompute supports the following computing task types: SQL, UDF, MapReduce, Graph, and machine learning. Charges apply for SQL \(excluding UDF\) computing tasks and for MapReduce tasks \(charges introduced 2017-12-19\). There are no plans to charge for other types in future. 
 
 Pay-As-You-Go
 

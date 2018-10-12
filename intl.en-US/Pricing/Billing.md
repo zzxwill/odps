@@ -66,7 +66,6 @@ The price is as follows.
 |SQL task | 0.0438 USD/GB.|
 
 -   **Data Input Size**: The actual size of the data that an SQL statement scans. Most SQL statements have partition filtering and column pruning, so this value is generally less than the source table data size.
-
     -   Column pruning: For example, the submitted SQL is `select f1,f2,f3 from t1;`.  Only the data size of three columns \(f1, f2, and f3\) in t1 are charged.
     -   Partition filtering: For example, a SQL statement includes  ds\>”20130101”. The “ds” is a partition column. The data size is calculated only according to the read partition, rather than the data of other partitions, and then billed.
 -   SQL Complexity: First, MaxCompute counts keywords in SQL statements, and then converts to SQL complexity.
@@ -105,7 +104,7 @@ The preceding SQL includes 4 keywords \(one DISTINCT, one COUNT, one GROUP BY, a
 -   The bill invoicing time is usually before 06:00 the next day. After the computing task successfully ends, the system counts the data size and SQL complexity. After the bill is generated, the fee is automatically deducted from your account. If the SQL task is unsuccessful, no fee is deducted.
 -   As with storage, SQL computing also calculates and bills the data size after compression.
 
-Since October 31，2018，the appearance function of MaxCompute SQL has started charging. The billing standard used is the cost of one SQL computation = the input data quantity \*SQL complexity \*SQL price. The SQL price is 0.03 yuan /GB/ complexity and the complexity coefficient is 1. All measurements of the day will be collected one-time the next day and will be directly reflected in your account bill.
+**Note:** When you need to mix the internal and external tables, you will pay separately.
 
 Pay-As-You-Go for MapReduce
 

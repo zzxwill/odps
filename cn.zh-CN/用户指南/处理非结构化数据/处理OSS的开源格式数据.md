@@ -41,6 +41,8 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
     ```
 
 
+OSS外部表，目前不支持公网endpoint。
+
 ## 关联OSS的PARQUET数据示例 {#section_spx_ttv_ydb .section}
 
 假设有一些PARQUET文件存放在一个OSS路径上，每个文件都是PARQUET格式，存放的schema为16列（4列Bigint、4列Double和8列String）的数据，建表DDL语句如下所示。
@@ -152,14 +154,14 @@ LOCATION 'oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.c
 
     外表tpch\_lineitem\_parquet被当作一个普通的内部表一样使用，不同在于MaxCompute内部计算引擎是直接从OSS读取对应的PARQUET数据进行处理。
 
-    前文创建的关联textfile的外部分区表tpch\_lineitem\_textfile，因为使用了`ROW FORMAT` + `STORED AS`，需要手动设置flag（只使用STORED AS，odps.sql.hive.compatible默认为TRUE），再进行读取，否则会有报错。
+    前文创建的关联textfile的外部分区表tpch\_lineitem\_textfile，因为使用了`ROW FORMAT` + `STORED AS`，需要手动设置flag（只使用STORED AS，odps.sql.hive.compatible默认为FALSE），再进行读取，否则会有报错。
 
     ```
     SELECT * FROM tpch_lineitem_textfile LIMIT 1;
     FAILED: ODPS-0123131:User defined function exception - Traceback:
     com.aliyun.odps.udf.UDFException: java.lang.ClassNotFoundException: com.aliyun.odps.hive.wrapper.HiveStorageHandlerWrapper
     --需要手动设置hive兼容flag
-    set odps.sql.hive.compatible=true;
+    set odps.sql.hive.compatible=false;
     SELECT * FROM tpch_lineitem_textfile LIMIT 1;
     +------------+------------+------------+--------------+------------+-----------------+------------+------------+--------------+--------------+------------+--------------+---------------+----------------+------------+-----------+
     | l_orderkey | l_partkey  | l_suppkey  | l_linenumber | l_quantity | l_extendedprice | l_discount | l_tax      | l_returnflag | l_linestatus | l_shipdate | l_commitdate | l_receiptdate | l_shipinstruct | l_shipmode | l_comment |
@@ -169,6 +171,8 @@ LOCATION 'oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.c
     ```
 
     **说明：** 直接使用外表，每次读取数据都需要涉及外部OSS的I/O操作，且MaxCompute系统本身针对内部存储做的许多高性能优化都用不上，如此一来性能上就会有所损失。 因此如果是需要对数据进行反复计算以及对计算的高效性比较敏感的场景，推荐使用下文介绍的用法：先将数据导入MaxCompute内部再进行计算。
+
+    SQL（ create、select、insert等操作）中涉及到这几个复杂数据类型，需在SQL语句前加语句`set odps.sql.type.system.odps2=true;`，执行时set语句和SQL语句一起提交执行。详情请参见[数据类型](../../../../cn.zh-CN/产品简介/基本概念/数据类型.md#)。
 
 -   **将OSS的开源数据导入MaxCompute再进行计算**
 

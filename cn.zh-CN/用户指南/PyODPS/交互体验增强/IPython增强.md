@@ -1,6 +1,6 @@
 # IPython增强 {#concept_ujw_pgg_cfb .concept}
 
-PyODPS 还提供了 IPython 的插件，来更方便得操作 ODPS。
+PyODPS还提供了IPython的插件，来更方便得操作ODPS。
 
 ## IPython增强 {#section_of1_cd1_hfb .section}
 
@@ -53,9 +53,9 @@ odps.Table
 
 ## 对象名补全 {#section_zct_lj4_cfb .section}
 
-PyODPS 拓展了 IPython 原有的代码补全功能，支持在书写 `o.get_xxx` 这样的语句时，自动补全对象名。
+PyODPS拓展了IPython原有的代码补全功能，支持在书写 `o.get_xxx` 这样的语句时，自动补全对象名。
 
-例如，在 IPython 中输入下列语句（<tab\>不是实际输入的字符，而是当所有输入完成后，将光标移动到相应位置， 并按 Tab 键）：
+例如，在IPython中输入下列语句（<tab\>不是实际输入的字符，而是当所有输入完成后，将光标移动到相应位置， 并按 Tab 键）：
 
 ```
 o.get_table(<tab>
@@ -67,20 +67,20 @@ o.get_table(<tab>
 o.get_table('tabl<tab>
 ```
 
-IPython 会自动补全前缀为 tabl 的表。
+IPython会自动补全前缀为tabl的表。
 
-对象名补全也支持补全不同 Project 下的对象名。下列用法都被支持：
+对象名补全也支持补全不同Project下的对象名。下列用法都被支持：
 
 ```
 o.get_table(project='project_name', name='tabl<tab>
 o.get_table('tabl<tab>', project='project_name')
 ```
 
-如果匹配的对象有多个，IPython 会给出一个列表，其最大长度由 `options.completion_size` 给出， 默认为 10。
+如果匹配的对象有多个，IPython会给出一个列表，其最大长度由 `options.completion_size` 给出， 默认为10。
 
 ## SQL命令 {#section_ecl_rj4_cfb .section}
 
-PyODPS 还提供了 SQL 插件，来执行 ODPS SQL。下面是单行 SQL：
+PyODPS还提供了SQL插件，来执行ODPS SQL。下面是单行SQL：
 
 ```
 %sql select * from pyodps_iris limit 5
@@ -145,9 +145,9 @@ In [18]: %set odps.sql.mapper.split.size = 16
 
 这样设置后，后续运行的SQL都会使用这个设置。
 
-## 持久化 pandas DataFrame 到 ODPS 表 {#section_m4k_2k4_cfb .section}
+## 持久化pandas DataFrame到ODPS表 {#section_m4k_2k4_cfb .section}
 
-PyODPS 还提供把 pandas DataFrame 上传到 ODPS 表的命令:
+PyODPS还提供把pandas DataFrame上传到ODPS表的命令:
 
 ```
 import pandas as pd

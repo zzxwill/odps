@@ -41,7 +41,7 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
     ```
 
 
-OSS外部表，目前不支持公网endpoint。
+访问OSS外部表，目前不支持使用外网Endpoint。
 
 ## 关联OSS的PARQUET数据示例 {#section_spx_ttv_ydb .section}
 

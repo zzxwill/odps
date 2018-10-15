@@ -136,7 +136,7 @@ Instance 是对实例信息的描述，可以通过 Instances 获取相应的实
     Odps odps = new Odps(account);
     String odpsUrl = "<your odps endpoint>";
     odps.setEndpoint(odpsUrl);
-    Instance ins = odps.instances().get("instance id");
+    Instance instance= odps.instances().get("instance id");
     Date startTime = instance.getStartTime();
     Date endTime = instance.getEndTime();
     ...

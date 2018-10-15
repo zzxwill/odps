@@ -1,8 +1,8 @@
 # Java SDK {#concept_utw_vvc_5db .concept}
 
-This article will introduce more commonly used MaxCompute core interfaces for you. For more details, please refer to [SDK Java Doc](http://repo.aliyun.com/java-sdk-doc/).
+This article introduces most commonly used MaxCompute core interfaces. For more information, see [SDK Java Doc](http://repo.aliyun.com/java-sdk-doc/).
 
-You can configure the version of the new SDK through maven management. The configuration information of Maven is as follows\(The latest version can be searched for odps-sdk-core at any time at [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5).
+Configure the new SDK version through maven management. The configuration information of Maven is as follows: \(The latest version can be searched for odps-sdk-core at any time at [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5).
 
 ```
 <dependency>
@@ -17,22 +17,22 @@ The overall information of the SDK package provided by MaxCompute is shown in th
 |Package Name|Description|
 |:-----------|:----------|
 |odps-sdk-core|The basic functions of MaxCompute, such as the operation of tables, Project, and Tunnel, are all included in this package.|
-|odps-sdk-commons|Some Util packages|
-|odps-sdk-udf|Main interface of UDF|
-|odps-sdk-mapred|MapReduce Java SDK|
-|odps-sdk-graph|Graph Java SDK, the keyword used to search is “odps-sdk-graph”.|
+|odps-sdk-commons|Some Util packages.|
+|odps-sdk-udf|Main interface of UDF.|
+|odps-sdk-mapred|MapReduce Java SDK.|
+|odps-sdk-graph|Graph Java SDK, the keyword. used to search is “odps-sdk-graph”.|
 
 ## AliyunAccount {#section_os1_f5b_wdb .section}
 
-AlibabaCloudAccount. The primary account created in Alibaba Cloud. It generally has an AccessKey that is comprised of an AccessKeyId. and an AccessKeySecret and which is used to initialize MaxCompute.
+AlibabaCloudAccount. The primary account created with Alibaba Cloud. It generally has an AccessKey that comprises of an AccessKeyId and an AccessKeySecret, used to initialize MaxCompute.
 
 ## MaxCompute {#section_i25_f5b_wdb .section}
 
-It is the entry of MaxCompute SDK. User can get set of all objects under the project shell by such endpoint, including [Projects](../../../../reseller.en-US/Product Introduction/Definition/Projects.md), [Tables](../../../../reseller.en-US/Product Introduction/Definition/Table.md), [Resources](../../../../reseller.en-US/Product Introduction/Definition/Resource.md), [Functions](../../../../reseller.en-US/Product Introduction/Definition/Function.md), and [Instances](../../../../reseller.en-US/Product Introduction/Definition/Instance.md).
+It is the entry of MaxCompute SDK. You can get set of all objects under the project shell by such endpoint, including [Projects](../../../../reseller.en-US/Product Introduction/Definition/Projects.md), [Tables](../../../../reseller.en-US/Product Introduction/Definition/Table.md), [Resources](../../../../reseller.en-US/Product Introduction/Definition/Resource.md), [Functions](../../../../reseller.en-US/Product Introduction/Definition/Function.md), and [Instances](../../../../reseller.en-US/Product Introduction/Definition/Instance.md).
 
-**Note:** MaxCompute was formerly called ODPS, so the portal class is still named ODPS in the current SDK version.
+**Note:** MaxCompute was formerly called ODPS, so the portal class is still named as ODPS in the current SDK version.
 
-User can construct MaxCompute object by inputting the AliyunAccount  instance. The code example is shown as follows:
+User can construct MaxCompute object by entering the AliyunAccount instance. The code example is shown as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -48,7 +48,7 @@ User can construct MaxCompute object by inputting the AliyunAccount  instance. 
 
 ## Projects {#section_eg4_k5b_wdb .section}
 
-It is the set of all projects in MaxCompute. The element of this set is  Projects. The code example is shown as follows:
+It is the set of all projects in MaxCompute. The element of this set is Projects. The code example is shown as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -68,9 +68,11 @@ It refers to the description of project and corresponding project, and can be ac
 
 ## SQLTask {#section_fpg_45b_wdb .section}
 
-It refers to an interface to run and process SQL task.  SQL can run directly through the interface ‘run’.\(**Note: only one SQL statement can be submitted at a time.**\)
+It refers to an interface to run and process SQL task. SQL can run directly through the interface ‘run’.\(**Note: only one SQL statement can be submitted at a time.**\)
 
-The run interface returns the Instance instance and obtains the SQL running status and result through Instance.  An example is as follows:
+The run interface returns the Instance instance and obtains the SQL running status and result through Instance.  
+
+**Example:**
 
 ```
     import java.util.List;
@@ -109,7 +111,7 @@ The run interface returns the Instance instance and obtains the SQL running stat
 
 ```
 
-**Note:** To create a table, you can use SQLTask interface instead of the interface Table. You must introduce the statement of [Table Operation](reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#) into SQLTask.
+**Note:** To create a table, use SQLTask interface instead of the interface Table. You must introduce the statement of [Table Operation](reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#) into SQLTask.
 
 ## Instances {#section_xtz_s5b_wdb .section}
 
@@ -129,14 +131,14 @@ This class refers to the set of all \(instances\) in MaxCompute and the element 
 
 ## Instance {#section_rqp_v5b_wdb .section}
 
-It refers to the description of instance and corresponding instance,and can be acquired from Instances. The code example is shown as follows:
+It refers to the description of instance and corresponding instance,and can be acquired from Instances. The code example is as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
     Odps odps = new Odps(account);
     String odpsUrl = "<your odps endpoint>";
     odps.setEndpoint(odpsUrl);
-    Instance ins = odps.instances().get("instance id");
+    Instance instance= odps.instances().get("instance id");
     Date startTime = instance.getStartTime();
     Date endTime = instance.getEndTime();
     ...
@@ -195,7 +197,7 @@ It refers to the description of table and corresponding table and can be acquire
 
 ## Resources {#section_tdn_dvb_wdb .section}
 
-The class refers to the set of all resources in MaxCompute.   The element of this set is  Resource. The code example is shown as follows:
+The class refers to the set of all resources in MaxCompute. The element of this set is Resource. The code example is as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -211,7 +213,7 @@ The class refers to the set of all resources in MaxCompute.   The element of t
 
 ## Resource {#section_p3x_fvb_wdb .section}
 
-It refers to the description of resource and corresponding resource and can be acquired through Resources. The code example is shown as follows:
+It refers to the resource description and the corresponding resource and can be acquired through Resources. The code example is as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -233,7 +235,7 @@ It refers to the description of resource and corresponding resource and can be a
 
 ```
 
-File resource creation example,as shown:
+File resource creation example is as follows:
 
 ```
     String projectName = "my_porject";
@@ -246,7 +248,7 @@ File resource creation example,as shown:
     odps.resources().create(projectName, resource, is);
 ```
 
-Table resource creation example:
+Table resource creation example is as follows:
 
 ```
     TableResource resource = new TableResource(tableName, tablePrj, partitionSpec);
@@ -257,7 +259,7 @@ Table resource creation example:
 
 ## Functions {#section_b4d_lvb_wdb .section}
 
-This class refers to the set of all functions in MaxCompute. The element of this set is  Function. An example is as follows:
+This class refers to the set of all functions in MaxCompute. The element of this set is Function. An example is as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -273,7 +275,7 @@ This class refers to the set of all functions in MaxCompute. The element of this
 
 ## Function {#section_xbw_nvb_wdb .section}
 
-It refers to the description of function and corresponding function and can be acquired through Functions. The code example is shown as follows:
+It refers to the function description and corresponding function and can be acquired through Functions. The code example is as follows:
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");

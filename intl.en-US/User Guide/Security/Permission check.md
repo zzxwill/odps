@@ -69,6 +69,8 @@ show grants for RAM$bob@aliyun.com:Alice;
 describe role --View access permissions granted to a specified role
 ```
 
+**Note:** In the public cloud environment, description role currently only displays ACL information of the object authorization type of project and table, while ACL information of other objects \(such as function, resource, instance, job\) is not displayed.
+
 ## View the authorization list of a specified object: {#section_zhs_lg1_wdb .section}
 
 ```

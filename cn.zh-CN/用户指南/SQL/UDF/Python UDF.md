@@ -128,7 +128,7 @@ class MyPlus(object):
 
 **说明：** Python UDF必须通过annotate指定函数签名。
 
-公共云上的Python UDF使用权限需要提交工单申请开通，申请单可按照提示填写。
+从2018年10月16日开始，MaxCompute公共云环境下的Python UDF使用权限全面开放。
 
 ## UDAF {#section_ilj_mhf_xdb .section}
 

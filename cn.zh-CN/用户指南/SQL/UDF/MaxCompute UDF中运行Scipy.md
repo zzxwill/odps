@@ -8,7 +8,7 @@
 
     您需要下载后缀为cp27-cp27m-manylinux1\_x86\_64.whl的包，其他的包会无法加载，包括名为cp27-cp27mu的包，如下图中仅红框中的包可以直接使用。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/15171/6628_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/15171/15397596326628_zh-CN.png)
 
 2.  下载后将文件名更改为scipy.zip，在MaxCompute Console中执行下述语句。
 
@@ -18,7 +18,11 @@
 
     此时scipy.zip即被创建为MaxCompute Archive资源。
 
-    **说明：** 不建议您使用其他类型的资源，因为在执行时，MaxCompute会自动解压Archive类型的资源，从而省去手动解压的步骤。
+    **说明：** 
+
+    不建议您使用其他类型的资源，因为在执行时，MaxCompute会自动解压Archive类型的资源，从而省去手动解压的步骤。
+
+    PyODPS 默认支持执行纯 Python 且不含文件操作的第三方库。在较新版本的 MaxCompute 服务下，PyODPS 也支持执行带有二进制代码或带有文件操作的 Python 库。这些库的后缀必须是 cp27-cp27m-manylinux1\_x86\_64， 以 archive 格式上传，whl 后缀的包需要重命名为 zip。同时，作业需要开启 `odps.isolation.session.enable` 选项，或者在 Project 级别开启 Isolation。
 
 
 ## 从非Whl包生成Whl包 {#section_wnp_lch_h2b .section}
@@ -87,4 +91,6 @@ select my_psi(sepal_length) from iris;
 如果包依赖了其他Python包，需要一同上传并同时加入到UDF依赖中。
 
 使用0.7.4以上的PyODPS DataFrame可以简化使用二进制包的UDF的编写，无需手动调用include\_package\_path。
+
+Python UDF运行二进制包的详细介绍请参见[使用第三方Python库](cn.zh-CN/用户指南/PyODPS/DataFrame/使用自定义函数.md#)。
 

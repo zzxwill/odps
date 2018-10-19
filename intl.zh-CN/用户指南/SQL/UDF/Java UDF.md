@@ -161,7 +161,7 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值 avg 为例，下图简要说明了在 MaxCompute UDAF 中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15381282641855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15399209951855_zh-CN.jpg)
 
 在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
@@ -235,8 +235,13 @@ public class AggrAvg extends Aggregator {
 
 **说明：** 
 
--   UDAF 在 SQL 中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
--   关于如何运行 UDTF 的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
+-   Writable\[\] writables：表示一行数据。代码中是指你传入的列，比如writables\[0\]表示第一列，writables\[1\]表示第二列。
+-   iterate\(Writable writable,Writable\[\] writables\)方法：writable是指一个阶段性的汇总数据，在不同map任务中，group by后得出的数据（可理解为一个集合），每行执行一次。
+-   merge\(\)方法：将不同的map直接结算的结果进行汇总。
+-   terminate\(\)方法：返回数据。
+-   newBuffer\(\)方法：创建初始返回结果的值。
+-   UDAF在SQL中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
+-   关于如何运行UDTF的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
 -   String对应的Writable类型为Text。
 
 ## UDTF {#section_a4t_34f_vdb .section}

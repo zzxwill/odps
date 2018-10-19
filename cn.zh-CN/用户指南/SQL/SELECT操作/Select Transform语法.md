@@ -50,7 +50,11 @@ USING 'unix_command_line'
 假设通过Shell脚本生成50行数据，值是从1到50，对应data字段输出：
 
 ```
-SELECT  TRANSFORM(script) USING 'sh' AS (data) FROM (SELECT  'for i in `seq 1 50`; do echo $i; done' AS script) t;
+SELECT  TRANSFORM(script) USING 'sh' AS (data) 
+FROM (
+        SELECT  'for i in `seq 1 50`; do echo $i; done' AS script
+      ) t
+;
 ```
 
 直接将Shell命令作为transform数据输入。
@@ -65,11 +69,13 @@ select transform不仅仅是语言支持的扩展，一些简单的功能，如a
 #!/usr/bin/env python
 import sys
 line = sys.stdin.readline()
-while line:token = line.split('\t')
-if (token[0] == '\\N') or (token[1] == '\\N'):print '\\N'
-else:
-print int(token[0]) + int(token[1])
-line = sys.stdin.readline()
+while line:
+    token = line.split('\t')
+    if (token[0] == '\\N') or (token[1] == '\\N'):
+        print '\\N'
+    else:
+        print int(token[0]) + int(token[1])
+    line = sys.stdin.readline()
 ```
 
 将该Python脚本文件添加为MaxCompute资源（Resource）：
@@ -85,11 +91,20 @@ add py ./myplus.py -f;
 ```
 Create table testdata(c1 bigint,c2 bigint);--创建测试表
 insert into Table testdata values (1,4),(2,5),(3,6);--测试表中插入测试数据
+
 --接下来执行select transform如下： 
-SELECT TRANSFORM (testdata.c1, testdata.c2) USING 'python myplus.py'resources 'myplus.py' AS (result bigint) FROM testdata;
+SELECT 
+TRANSFORM (testdata.c1, testdata.c2) 
+USING 'python myplus.py'resources 'myplus.py' 
+AS (result bigint) 
+FROM testdata;
+
 -- 或者
 set odps.sql.session.resources=myplus.py;
-SELECT TRANSFORM (testdata.c1, testdata.c2) USING 'python myplus.py' AS (result bigint) FROM testdata;
+SELECT TRANSFORM (testdata.c1, testdata.c2) 
+USING 'python myplus.py' 
+AS (result bigint) 
+FROM testdata;
 ```
 
 执行结果如下：

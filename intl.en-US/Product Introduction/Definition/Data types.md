@@ -14,11 +14,11 @@ and the set command is not added, the INT type is converted to BIGINT, which is 
 |:---|:--|:-------|:----------|
 |TINYINT|Yes |1Y，-127Y|8-bit signed integer, range -128 to 127|
 |SMALLINT|Yes |32767S, -100S| 16-bit signed integer, range -32768 to 32767|
-|INT|Yes |1000,-15645787 \(Note1\)|32 bit signed shaping, the range is \(-2\) of the 31 power to 2 of the 31 power minus 1.|
-|BIGINT|No|100000000000L, -1L|64 bit signed shaping, the range is \(-2\) of the 63 power to 2 of the 63 power minus 1.|
+|INT|Yes |1000,-15645787 \(Note1\)|32 bit signed shaping, the range is -231 to 231 - 1.|
+|BIGINT|No|100000000000L, -1L|64 bit signed shaping, the range is -263 + 1 to 263 - 1.|
 |FLOAT|Yes |None|32-bit binary floating point|
 |DOUBLE|No|3.1415926 1E+7|64-bit binary floating point|
-|DECIMAL|No|3.5BD， 99999999999.9999999BD|Decimal precision number type, shaping part range \(-10\)∧36 plus 1 to 10∧36 reduce 1, decimal part accurate to 10∧\(-18\)|
+|DECIMAL|No|3.5BD， 99999999999.9999999BD|Decimal precision number type, shaping part range -1036 + 1 to 1036 - 1, decimal part accurate to 10-18|
 |VARCHAR|Yes |None \(Note2\)|Variable-length character type, n is the length, and the range is 1 to 65535.|
 |STRING|No|“abc”,’bcd’,”alibaba” ‘inc’ \(Note3\)|A single string length can be up to 8M|
 |BINARY|Yes |None|Binary data type, a single string length can be up to 8M|
@@ -43,7 +43,7 @@ All data types in the preceding table can be NULL.
 
 -   NOTE 2: VARCHAR constants can be expressed by STRING constants of implicit transformation.
 -   NOTE 3: STRING constants support connections, for example, `abc``xyz` is parsed as `abcxyz`, and different parts can be written on different lines.
--   NOTE 4: The time value displayed by the current query does not contain milliseconds. The tunnel command specifies the time format through`-dfp`, and can be specified in milliseconds, such as`tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'`, for more information about tunnel commands, refer to[Tunnel commands](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md#).
+-   NOTE 4: The time value displayed by the current query does not contain milliseconds. The tunnel command specifies the time format through`-dfp`, and can be specified in milliseconds, such as`tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'`, for more information about tunnel commands, refer to[Tunnel commands](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md#).
 
 MaxCompute2.0 supports the complex data types listed in the following table.
 

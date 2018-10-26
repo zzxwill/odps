@@ -1,6 +1,6 @@
 # Basic differences with standard SQL and solutions {#concept_tcb_h12_5db .concept}
 
-This article describes problems that occur frequently when users who are familiar with the relational database SQL use MaxCompute SQL.  For specific MaxCompute SQL syntax,  see [SQL  Overview](../../../../reseller.en-US/User Guide/SQL/SQL Summary.md).
+This article describes problems that occur frequently when users who are familiar with the relational database SQL use MaxCompute SQL.  For specific MaxCompute SQL syntax,  see [SQL  Overview](../../../../reseller.en-US/User Guide/SQL/SQL summary.md).
 
 ## Basic differences of MaxCompute SQL {#section_zt4_pb2_5db .section}
 
@@ -16,9 +16,7 @@ This article describes problems that occur frequently when users who are familia
 
 -   A table supports 60,000 partitions.
 
--   [The number of partitions entered by a query cannot be greater than 10,000](https://help.aliyun.com/document_detail/43152.html).Otherwise an error is returned. If the partitions are list partitions and the query performs filtering based only on list partitions,  an error may be returned if the total number of partitions exceeds 10,000.
-
--   [The number of output partitions in a query cannot exceed 2048](https://help.aliyun.com/document_detail/44226.html).
+-   Otherwise an error is returned. If the partitions are list partitions and the query performs filtering based only on list partitions,  an error may be returned if the total number of partitions exceeds 10,000.
 
 
 **Precision**
@@ -39,9 +37,9 @@ This article describes problems that occur frequently when users who are familia
 
 **Table structure**
 
--   The partition column name cannot be changed. Only the value corresponding to the partition column can be changed.  For the specific differences between partition columns and partitions, see  [FAQs](https://help.aliyun.com/document_detail/40278.html).
+-   The partition column name cannot be changed. Only the value corresponding to the partition column can be changed.  For the specific differences between partition columns and partitions.
 
--   You can add columns but cannot delete columns and modify the data type of columns. For more information, see  [SQL FAQs](https://help.aliyun.com/document_detail/40292.html). If you must delete columns or modify the column data types, see Modify the structure of MaxCompute tables for the most secure procedure.
+-   You can add columns but cannot delete columns and modify the data type of columns. For more information. If you must delete columns or modify the column data types, see Modify the structure of MaxCompute tables for the most secure procedure.
 
 
 ## DML difference and solutions {#section_bz4_hd2_5db .section}
@@ -55,11 +53,9 @@ This article describes problems that occur frequently when users who are familia
 
 **UPDATE/DELETE**
 
--   Currently, the Update/Delete statements are not supported. If you want to perform the update and delete actions, see  [Update and Delete data](https://help.aliyun.com/document_detail/40275.html).
+-   Currently, the Update/Delete statements are not supported. If you want to perform the update and delete actions.
 
 **SELECT**
-
--   [The number of input tables cannot exceed 16](https://help.aliyun.com/document_detail/44309.html).
 
 -   The Select field in the Group by query is either the group field of Group By or the aggregate function to be used.  From the logic perspective,  if a non-group column and Group By Key have multiple records of data, the data cannot be displayed without the aggregate function.
 
@@ -71,19 +67,19 @@ Subqueries must have aliases.  We recommend that all queries have aliases.
 
 **IN/NOT IN**
 
--   The data volume in the subquery following In/Not In and Exist/Not Exist cannot exceed 1000. To solve the problem, see [this article](https://help.aliyun.com/document_detail/40282.html).  If the uniqueness of the results returned by the subquery is guaranteed in the business aspect, you can consider removing  Distinct to improve the query performance.
+-   The data volume in the subquery following In/Not In and Exist/Not Exist cannot exceed 1000. To solve the problem.  If the uniqueness of the results returned by the subquery is guaranteed in the business aspect, you can consider removing  Distinct to improve the query performance.
 
 **10,000 results returned by MaxCompute SQL**
 
--   MaxCompute limits the number of data records returned by the separately executed Select clause. For the specific configurations, [ see Other operations](../../../../reseller.en-US/User Guide/Common commands/Other Operations.md). The maximum data number is set to 10,000. If the number of data records to be queried is large, see  [this article](https://help.aliyun.com/document_detail/40333.html) to obtain all data while using the Tunnel Command.
+-   MaxCompute limits the number of data records returned by the separately executed Select clause. For the specific configurations, [ see Other operations](../../../../reseller.en-US/User Guide/Common commands/Other operations.md). The maximum data number is set to 10,000. If the number of data records to be queried is large.
 
 **MAPJOIN**
 
--   The Join clause does not support Cartesian products. The Join clause must use the on clause to set the joining conditions.  If you want to create broadcast tables for small tables, you must use MapJoin Hint.  For more information, see this [article](https://help.aliyun.com/document_detail/40268.html).
+-   The Join clause does not support Cartesian products. The Join clause must use the on clause to set the joining conditions.  If you want to create broadcast tables for small tables, you must use MapJoin Hint.  For more information.
 
 **ORDER BY**
 
--   **Order By must be followed by Limit n**. If you want to sort a large number of data records, or even sort the full table, you can  set N to a large number.  However, use this method with caution. Because the system does not have advantages of distributed systems, the performance may be affected.  For more information, see [Sort the queried data in MaxCompute](https://help.aliyun.com/document_detail/40302.html).
+-   **Order By must be followed by Limit n**. If you want to sort a large number of data records, or even sort the full table, you can  set N to a large number.  However, use this method with caution. Because the system does not have advantages of distributed systems, the performance may be affected.  For more information.
 
 **UNION ALL**
 

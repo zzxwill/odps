@@ -1,6 +1,6 @@
 # 与标准SQL的主要区别及解决方法 {#concept_tcb_h12_5db .concept}
 
-本文将从习惯使用关系型数据库 SQL 用户的实践角度出发，列举用户在使用 MaxCompute SQL 时比较容易遇见的问题。具体的 MaxCompute SQL 语法请参见[SQL 概述](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md)。
+本文将从习惯使用关系型数据库 SQL 用户的实践角度出发，列举用户在使用 MaxCompute SQL 时比较容易遇见的问题。
 
 ## MaxCompute SQL 基本区别 {#section_zt4_pb2_5db .section}
 

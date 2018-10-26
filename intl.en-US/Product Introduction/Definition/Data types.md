@@ -4,11 +4,28 @@
 
 supported by MaxCompute2.0 are listed in the following table. Columns in a MaxCompute table must be any of the listed types. New types include TINYINT, SMALLINT, INT,  FLOAT, VARCHAR, TIMESTAMP, and BINARY data type.The details are as follows:
 
-**Note:** If data type such as TINYINT, SMALLINT,  INT, FLOAT, VARCHAR, TIMESTAMP, or BINARY are involved when running an SQL command, the set command `set odps.sql.type.system.odps2=true;` must be added before the SQL command. 
+**Note:** At present, the Set commands supported by MaxCompute SQL and new version Mapreduce are divided into two ways:
 
-The set command and SQL command are then submitted simultaneously. If INT type is involved, 
+-   Session Level: To use the new data types \(Tinyint, Smallint, Int, Float, Varchar, TIMESTAMP BINARY\), add a set statement before the table statement
 
-and the set command is not added, the INT type is converted to BIGINT, which is 64 bits.
+    ```
+    set odps.sql.type.system.odps2=true;
+    ```
+
+    And submit the execution together with the table statement.
+
+-   Project level: that is to support new types of project level open. The Owner of project can set up project as required.
+
+    ```
+    - setproject odps.sql.type.system.odps2=true;
+    ```
+
+    For a detailed description of setproject, please see:[Other operations](../../../../reseller.en-US/User Guide/Common commands/Other operations.md#).
+
+-   When it comes to INT types, 32 bits are added to the set statement and converted to BIGINT, 64 bits, if not added.
+-   SDK 0.27.2-public version and above, Client 0.27.0 version and above support new data type.
+
+MR type tasks do not support new data types for the time being.
 
 |Type|New|Constant|Description|
 |:---|:--|:-------|:----------|

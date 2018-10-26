@@ -12,6 +12,8 @@
 </dependency>
 ```
 
+**说明：** 注意：0.27.2-public 版本及以上才支持MaxCompute 2.0[新数据类型](../../../../intl.zh-CN/产品简介/基本概念/数据类型.md#) 。
+
 MaxCompute 提供的 SDK 包整体信息，如下表所示：
 
 |包名|描述|

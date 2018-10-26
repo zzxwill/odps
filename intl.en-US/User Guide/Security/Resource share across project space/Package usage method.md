@@ -11,7 +11,7 @@ The following is a description of the operations involved with the package creat
 
 ## Package creator {#section_sbs_1l1_wdb .section}
 
--   **Create package**
+-   Create package
 
     ```
     Create package;
@@ -21,7 +21,7 @@ The following is a description of the operations involved with the package creat
 
     -   Only the project owner has the permission to create a package.
     -   The name of the package cannot exceed 128 characters.
--   **Add a resource to be shared to the package**
+-   Add a resource to be shared to the package
 
     ```
         Add project_object to package package_name [with privileges] -- add objects to package
@@ -37,33 +37,34 @@ The following is a description of the operations involved with the package creat
 
     -   Currently, supported types of objects exclude projects. Therefore, you cannot use a package to create objects in other projects.
     -   The objects themselves and the permission to perform operations on them are added to the package at the same time. When not passed \(with privileges\) even specifying an action permission, the default is read-only, that is, read/describe/select. The object and its permissions are treated as a whole and cannot be updated once added. If necessary, you can only delete and re-add.
+    -   When an object is added to a package, it is not packaged as a snapshot, so subsequent object data changes, and access to the object through package authorization is also the current data of the object.
     Use the following commands to perform various operations on the package:
 
--   **Allow other projects to use a package**
+-   Allow other projects to use a package
 
     ```
     allow project <prjName> to install package <pkgName> [using label <num>]
     ```
 
--   **Revoke other projects’ permission to use a package**
+-   Revoke other projects’ permission to use a package
 
     ```
     disallow project <prjName> to install package <pkgName>
     ```
 
--   **Drop a package**
+-   Drop a package
 
     ```
     Delete package <pkgname>;
     ```
 
--   **View the list of packages already created and installed**
+-   View the list of packages already created and installed
 
     ```
     Show packages;
     ```
 
--   **View package details**
+-   View package details
 
     ```
     Describe package <pkgname>;
@@ -72,7 +73,7 @@ The following is a description of the operations involved with the package creat
 
 ## Package users {#section_kwk_fl1_wdb .section}
 
--   **Install package**
+-   Install package
 
     ```
     Install package <pkgname>;
@@ -82,7 +83,7 @@ The following is a description of the operations involved with the package creat
 
     **Note:** Only the project owner has permissions to perform this operation.
 
--   **Uninstalling package**
+-   Uninstalling package
 
     ```
     Uninstall package <pkgname>;
@@ -90,7 +91,7 @@ The following is a description of the operations involved with the package creat
 
     For package installation, the pkgName format is: <projectName\>.<packageName\>.`<projectName>.<packageName>`
 
--   **View a package**
+-   View a package
 
     ```
         Show packages;
@@ -100,18 +101,37 @@ The following is a description of the operations involved with the package creat
     
     ```
 
--   **Client project grants access to package to other members of this project**
+-   Client project grants access to package to other members or role of this project
 
     The installed package is an independent type of MaxCompute object. To access resources in a package \(resources shared with you by other projects\), you must have the permission to read package.
 
     If you do not have the Read permission, you must apply to the project owner or admin for the permission. The project owner or admin can grant permissions through ACL authorization or policy authorization.
 
+    Authorize package to user or role:
+
+    ```
+    grant actions on package <pkgName> to user <username>;
+    grant actions on package <pkgName> to role <role_name>;
+    ```
+
+    **Note:** After authorization, user has access to the object in that package only in this project.
+
     For example, the following ACL authorization allows the cloud account user odps\_test@aliyun.com to access resources in the package:
 
     ```
-        Use prm9;
-        Install package maid;
-        Grant read on package maid to user alien $ fig;
+        use prj2;
+        install package prj1.testpkg;
+        grant read on package prj1.testpackage to user aliyun$odps_test@aliyun.com;
+    ```
+
+    \]
+
+    Or allow all members of role role\_dev to access resources in package:
+
+    ```
+    use prj2;
+        install package prj1.testpkg;
+        grant read on package prj1.testpackage to role role_dev;
     ```
 
 
@@ -134,16 +154,16 @@ Procedure:
 2.  Prj2 administrator Bob installs a package in prj2.
 
     ```
-        Use prm9;
-        Install package; -- installs a package
-        Describe package maid; -- view a list of resources in the package
+        use prj2;
+        install package prj1.datamining; -- installs a package
+        describe package prj1.datamining; -- view a list of resources in the package
     ```
 
 3.  Bob self-authorizes the package.
 
     ```
-        Use prm9;
-        Grant read on package prj1.datamining to user alike $ --; -- authorization of Bob to use package via ACL
+        use prj2;
+        grant Read on package prj1.datamining to user aliyun$bob@aliyun.com; -- authorization of Bob to use package via ACL
     ```
 
 

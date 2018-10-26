@@ -11,7 +11,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 
 ## Package创建者 {#section_sbs_1l1_wdb .section}
 
--   **创建Package**
+-   创建Package
 
     ```
     create package ;
@@ -21,7 +21,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 
     -   仅project的owner有权限进行该操作。
     -   目前创建的package名称不能超过128个字符。
--   **将分享的资源添加到Package**
+-   将分享的资源添加到Package
 
     ```
         add project_object to package package_name [with privileges privileges];--将对象添加到Package
@@ -37,31 +37,32 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 
     -   目前支持的对象类型不包括Project类型，也就是不允许通过Package在其他Project中创对象。
     -   添加到Package中的不仅仅是对象本身，还包括相应的操作权限。当没有通过\[with privileges privileges\]来指定操作权限时，默认为只读权限，即Read/Describe/Select。“对象及其权限”被看作一个整体，添加后不可被更新。若有需要，只能删除和重新添加。
--   **许可其他项目空间使用Package**
+    -   对象添加到package时，并非快照打包，因此后续对象数据有变更，通过package授权访问对象也是访问该对象的当前数据。
+-   许可其他项目空间使用Package
 
     ```
     allow project <prjname> to install package <pkgname> [using label <number>];
     ```
 
--   **撤销其他项目空间使用Package的许可**
+-   撤销其他项目空间使用Package的许可
 
     ```
     disallow project <prjname> to install package <pkgname>;
     ```
 
--   **删除Package**
+-   删除Package
 
     ```
     delete package <pkgname>;
     ```
 
--   **查看已创建和已安装的Package列表**
+-   查看已创建和已安装的Package列表
 
     ```
     show packages;
     ```
 
--   **查看Package详细信息**
+-   查看Package详细信息
 
     ```
     describe package <pkgname>;
@@ -70,7 +71,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 
 ## Package使用者 {#section_kwk_fl1_wdb .section}
 
--   **安装Package**
+-   安装Package
 
     ```
     install package <pkgname>;
@@ -80,7 +81,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 
     **说明：** 仅project的Owner有权限进行该操作。
 
--   **卸载Package**
+-   卸载Package
 
     ```
     uninstall package <pkgname>;
@@ -88,7 +89,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 
     对于卸载Package来说，要求pkgName的格式为：`<projectName>.<packageName>`
 
--   **查看Package**
+-   查看Package
 
     ```
         show packages;
@@ -98,11 +99,20 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
     
     ```
 
--   **使用方项目给本项目其他成员授权访问Package**
+-   使用方项目给本项目其他成员或role授权访问Package
 
     被安装的Package是一种独立的MaxCompute对象类型。若要访问Package里的资源\(即其他项目空间分享给您的资源\)，您必须拥有对该Package的Read权限。
 
     如果请求者没有Read权限，则需要向ProjectOwner或Admin申请。ProjectOwner或Admin可以通过ACL授权机制来完成。
+
+    将package授权给user或role：
+
+    ```
+    grant actions on package <pkgName> to user <username>;
+    grant actions on package <pkgName> to role <role_name>;
+    ```
+
+    **说明：** 授权后，user仅在此project中有权限访问该package中的对象。
 
     比如，如下的ACL授权允许云账号用户LIYUN$odps\_test@aliyun.com访问Package里的资源：
 
@@ -110,6 +120,14 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
         use prj2;
         install package prj1.testpkg;
         grant read on package prj1.testpackage to user aliyun$odps_test@aliyun.com;
+    ```
+
+    或者允许角色 role\_dev的所有成员访问package里的资源：
+
+    ```
+    use prj2;
+        install package prj1.testpkg;
+        grant read on package prj1.testpackage to role role_dev;
     ```
 
 

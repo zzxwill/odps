@@ -65,9 +65,9 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 
         **说明：** 您可单击右上角的登录账号，进入账号管理页面查看云账号的UID。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15351183202844_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15407341452844_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15351183212845_zh-CN.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15407341452845_zh-CN.jpg)
 
     3.  编辑该角色的授权策略AliyunODPSRolePolicy，如下所示：
 
@@ -188,4 +188,23 @@ FROM internal_orders;
 ```
 
 对于Table Store这种KV数据的NoSQL存储介质，从MaxCompute的输出将只影响相对应主键所在的行，比如示例中只影响所有odps\_orderkey + odps\_orderdate这两个主键值能对应行上的数据。而且在这些Tabele Store行上面，也只会去更新在创建External Table（ots\_table\_external）时指定的属性列，而不会去修改未在External Table中出现的数据列。
+
+**说明：** 
+
+-   将MaxCompute中的数据往写入OTS时一次不能超过4MB，否则需要用户剔除掉超大数据再写入。此时可能会产生报错：
+
+    ```
+    ODPS-0010000:System internal error - Output to TableStore failed with exception:
+    TableStore BatchWrite request id XXXXX failed with error code OTSParameterInvalid and message:The total data size of BatchWriteRow request exceeds the limit
+    ```
+
+-   将数据批量写入或分行写入，都算一次操作。详细描述请参考[BatchWriteRow](https://help.aliyun.com/document_detail/27311.html)。因此如果批量写入数据量太大，也可以分行写入。
+-   将数据批量写入时请注意不要有重复行，否则可能产生报错：
+
+    ```
+    ErrorCode: OTSParameterInvalid, ErrorMessage: The input parameter is invalid 
+    ```
+
+    详细描述请参考[使用BatchWriteRow一次提交100条数据的时候报OTSParameterInvalid错误](https://help.aliyun.com/knowledge_detail/38586.html)。
+
 

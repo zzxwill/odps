@@ -17,7 +17,7 @@ supported by MaxCompute2.0 are listed in the following table. Columns in a MaxCo
 -   Project level: that is to support new types of project level open. The Owner of project can set up project as required.
 
     ```
-    - setproject odps.sql.type.system.odps2=true;
+    setproject odps.sql.type.system.odps2=true;
     ```
 
     For a detailed description of setproject, please see:[Other operations](../../../../reseller.en-US/User Guide/Common commands/Other operations.md#).
@@ -47,11 +47,10 @@ All data types in the preceding table can be NULL.
 
 **Note:** 
 
--   NOTE 1:When insert is constant to decimal field, pay attention to the writing of constants. For example, 3.5BD in the definition of constants.
+-   NOTE 1:When insert is constant to decimal field, pay attention to the writing of constants. For example,3.5BD in the definition of constants.
 
     ```
-    insert into
-          test_tb(a) values (3.5BD);
+    insert into test_tb(a) values (3.5BD);
     ```
 
     The a field is decimal type.

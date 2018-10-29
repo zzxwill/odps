@@ -47,7 +47,16 @@ All data types in the preceding table can be NULL.
 
 **Note:** 
 
--   NOTE 1: For INT constant, if the range of INT is exceeded, INT is converted into BIGINT;  if the range of BIGINT is exceeded, it is converted into DOUBLE. 
+-   NOTE 1:When insert is constant to decimal field, pay attention to the writing of constants. For example, 3.5BD in the definition of constants.
+
+    ```
+    insert into
+          test_tb(a) values (3.5BD);
+    ```
+
+    The a field is decimal type.
+
+-   NOTE 2: For INT constant, if the range of INT is exceeded, INT is converted into BIGINT;  if the range of BIGINT is exceeded, it is converted into DOUBLE. 
 
     In MaxCompute versions earlier than 2.0, all INT types in SQL script are converted to BIGINT , for example:
 
@@ -58,9 +67,9 @@ All data types in the preceding table can be NULL.
 
     To be compatible with earlier MaxCompute versions, MaxCompute 2.0 retains this conversion without setting odps.sql.type.system.odps2 as True. However, a warning is triggered when INT is treated as BIGINT. In this case, we recommend that you change an Int to a Bigint to avoid confusion.
 
--   NOTE 2: VARCHAR constants can be expressed by STRING constants of implicit transformation.
--   NOTE 3: STRING constants support connections, for example, `abc``xyz` is parsed as `abcxyz`, and different parts can be written on different lines.
--   NOTE 4: The time value displayed by the current query does not contain milliseconds. The tunnel command specifies the time format through`-dfp`, and can be specified in milliseconds, such as`tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'`, for more information about tunnel commands, refer to[Tunnel commands](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md#).
+-   NOTE 3: VARCHAR constants can be expressed by STRING constants of implicit transformation.
+-   NOTE 4: STRING constants support connections, for example, `abc``xyz` is parsed as `abcxyz`, and different parts can be written on different lines.
+-   NOTE 5: The time value displayed by the current query does not contain milliseconds. The tunnel command specifies the time format through`-dfp`, and can be specified in milliseconds, such as`tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'`, for more information about tunnel commands, refer to[Tunnel commands](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md#).
 
 MaxCompute2.0 supports the complex data types listed in the following table.
 

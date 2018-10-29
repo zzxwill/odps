@@ -65,9 +65,9 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 
         **说明：** 您可单击右上角的登录账号，进入账号管理页面查看云账号的UID。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408037082844_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408071392844_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408037082845_zh-CN.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408071392845_zh-CN.jpg)
 
     3.  编辑该角色的授权策略AliyunODPSRolePolicy，如下所示：
 
@@ -191,7 +191,7 @@ FROM internal_orders;
 
 **说明：** 
 
--   将MaxCompute中的数据往写入OTS时一次不能超过4MB，否则需要用户剔除掉超大数据再写入。此时可能会产生报错：
+-   将MaxCompute中的数据写入OTS时一次不能超过4MB，否则需要用户剔除掉超大数据再写入。此时可能会产生报错：
 
     ```
     ODPS-0010000:System internal error - Output to TableStore failed with exception:

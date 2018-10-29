@@ -65,9 +65,9 @@ You can authorize permissions in the following two ways:
 
         **Note:** In the upper-right corner, click the **Avatar** to open the Billing Management page, and check the account UID.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408038832844_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408071442844_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408038832845_en-US.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408071442845_en-US.jpg)
 
     3.  Edit this role’s authorization policy AliyunODPSRolePolicy:
 
@@ -191,7 +191,7 @@ Because Table Store is a KV data NoSQL storage medium, the data output from MaxC
 
 **Note:** 
 
--   The data in MaxCompute must not exceed 4MB at a time when writing to OTS, otherwise the user will have to remove the large data and write it again. Mistakes may occur at this time.
+-   Writing data from MaxCompute to OTS should not exceed 4MB at a time, otherwise the user will have to remove the large data and write it again. Mistakes may occur at this time.
 
     ```
     ODPS-0010000:System internal error - Output to TableStore failed with exception:

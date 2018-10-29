@@ -20,7 +20,7 @@ Modify the value of date according to a specified unit ‘datepart’ and specif
 -   delta: Bigint type, date scope to be modified.  If the input is ‘string’ type or ‘double’ type, it is converted to ‘bigint’ type by implicit conversion. If it is another data type, exception occurs.  If ‘delta’ is greater than zero, do ‘add’ operation, otherwise do ‘minus’ operation.
 -   datepart: a String type constant. This field value follows ‘string’ and ‘datetime’ type conversion agreement, where, ‘yyyy’ indicates year; ‘mm’ indicates month.
 
-    See Conversion between [String type and Datetime type](reseller.en-US/User Guide/SQL/SQL Summary.md).  In addition, the extensional date format is also supported: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.  If it is not a constant or unsupported format or other data type, an exception is indicated.
+    See Conversion between [String type and Datetime type](reseller.en-US/User Guide/SQL/SQL summary.md).  In addition, the extensional date format is also supported: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.  If it is not a constant or unsupported format or other data type, an exception is indicated.
 
 
 **Return value:**
@@ -164,32 +164,6 @@ datetrunc('2011-12-07 16:28:46', 'month') = 2011-12-01 00:00:00
 datetrunc('2011-12-07 16:28:46', 'DD') = 2011-12-07 00:00:00
 ```
 
-## FROM\_UNIXTIME {#section_yzv_j5l_vdb .section}
-
-**Command format**:
-
-```
-datetime from_unixtime(bigint unixtime)
-```
-
-**Command description**:
-
-Convert the numeric UNIX time value ‘unixtime’ to datetime value.
-
-**Parameter description**:
-
-unixtime: Bigint type, number of seconds, UNIX format date time value. If the input is ‘string’, ‘double’, it is converted to ‘bigint’ type by implicit conversion.
-
-**Return value**:
-
-Datetime type date value. If ‘unixtime’ is NULL, return NULL.
-
-**For example**:
-
-```
-from_unixtime(123456789) = 1973-11-30 05:33:09
-```
-
 ## GETDATE {#section_o4p_45l_vdb .section}
 
 **Command format**:
@@ -318,7 +292,7 @@ to_char('2010-24-01', 'yyyy') -- Format is not compatible and exception is throw
 to_char('2008718', 'yyyymmdd') -- Format is not compatible and exception is thrown.
 ```
 
-See [TO\_CHAR](reseller.en-US/User Guide/SQL/Builtin Function/String Functions.md) for conversion from other types to string type.
+See [TO\_CHAR](reseller.en-US/User Guide/SQL/Builtin Function/String functions.md) for conversion from other types to string type.
 
 ## UNIX\_TIMESTAMP {#section_k4r_zfm_vdb .section}
 
@@ -339,6 +313,32 @@ date: Datetime type date value. If the input is ‘string’ type, it is convert
 **Return value**:
 
 Bigint type, it indicates UNIX format date value. If ‘date’ is NULL, return NULL.
+
+## FROM\_UNIXTIME {#section_yzv_j5l_vdb .section}
+
+**Command format**:
+
+```
+datetime from_unixtime(bigint unixtime)
+```
+
+**Command description**:
+
+Convert the numeric UNIX time value ‘unixtime’ to datetime value.
+
+**Parameter description**:
+
+unixtime: Bigint type, number of seconds, UNIX format date time value. If the input is ‘string’, ‘double’, it is converted to ‘bigint’ type by implicit conversion.
+
+**Return value**:
+
+Datetime type date value. If ‘unixtime’ is NULL, return NULL.
+
+**For example**:
+
+```
+from_unixtime(123456789) = 1973-11-30 05:33:09
+```
 
 ## WEEKDAY {#section_g41_2gm_vdb .section}
 

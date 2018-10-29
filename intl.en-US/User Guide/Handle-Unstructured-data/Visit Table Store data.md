@@ -65,9 +65,9 @@ You can authorize permissions in the following two ways:
 
         **Note:** In the upper-right corner, click the **Avatar** to open the Billing Management page, and check the account UID.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408037132844_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408038832844_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408037132845_en-US.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408038832845_en-US.jpg)
 
     3.  Edit this role’s authorization policy AliyunODPSRolePolicy:
 
@@ -198,13 +198,10 @@ Because Table Store is a KV data NoSQL storage medium, the data output from MaxC
     TableStore BatchWrite request id XXXXX failed with error code OTSParameterInvalid and message:The total data size of BatchWriteRow request exceeds the limit
     ```
 
--   Batch write or branch write is done once. For detailed description, please refer to[BatchWriteRow](https://help.aliyun.com/document_detail/27311.html).Therefore, if the volume of data written in batch is too large, it can also be written in branch.
 -   When you write data in bulk, please be careful not to repeat it, otherwise it may cause errors.
 
     ```
     ErrorCode: OTSParameterInvalid, ErrorMessage: The input parameter is invalid 
     ```
 
-
-For detailed description, please refer to[When using BatchWriteRow to submit 100 data at a time, it will report OTSParameterInvalid error](https://help.aliyun.com/knowledge_detail/38586.html).
 

@@ -17,7 +17,7 @@ MaxCompute\(ODPS\) SQL中，很常用的一个操作就是关联\(Join\)。
 
 **说明：** [User Defined Join](https://www.atatech.org/articles/100074)指定两个输入流，用户自己实现Join的逻辑，这里不展开讨论。
 
-根据不同的场景，用户可以使用不同的Join类型来实现对应的关联操作。但是在实际使用过程当中，经常有用户分不清楚过滤条件在JOIN ON语句中还是在WHERE中有什么区别，或者认为他们的效果都是一样的，例如在生产的环境中经常可以看到用户写了：
+根据不同的场景，用户可以使用不同的Join类型来实现对应的关联操作。但是在实际使用过程中，存在这样的错误示例：
 
 ```
 A (LEFT/RIGHT/FULL/LEFT SEMI/LEFT ANTI) JOIN B
@@ -438,18 +438,10 @@ WHERE {where_condition}
         |:----|:---|
         |2|20180101|
 
-        可以看到，LEFT ANTI JOIN中，过滤条件放在JOIN ON条件中和前后的WHERE条件中，结果是不相同的。
+        可以看到，LEFT ANTI JOIN中，过滤条件WHERE语句分别放在JOIN ON条件中、条件前和条件后，得到的结果是不相同的。
 
-        以上只是针对一个常用场景的几种不同的写法做的简单的测试，没有具体的推导过程，对于涉及到不等值表达式的场景会更加复杂，有兴趣的同学可以自己尝试推导一下。
+        以上内容只是针一个常用场景测试的几种不同的写法，没有具体的推导过程，对于涉及到不等值表达式的场景会更加复杂，如果您有兴趣可以尝试推导一下。
 
-
-## 线上状态 {#section_cwv_ctw_1fb .section}
-
-上述结果都是在SQL标准语义模式下的推导结果。有的用户会发现在线上环境中，相同的语句得到的结果和预期并不相符，这是由于一些历史原因和兼容性的考虑。在OUTER JOIN的实现中，在project级别设置了一个flag，叫做`odps.sql.outerjoin.supports.filters`，如果这个设置为false，表示OUTER JOIN的ON条件不支持过滤条件，写在`{on_condition}`会被当做写在了`{subquery_where_condition}`，这是一个非标准的行为。有些用户在两个project中切换，发现相同的SQL在两个project中运行行为不一致，就是由这个引起的。
-
-这里希望大家都能够按照标准的SQL语义来写SQL，这样才能保证后续SQL的可移植性。
-
-查看project设置可以在 [http://adminconsole.odps.aliyun-inc.com/inn.view](http://adminconsole.odps.aliyun-inc.com/inn.view) 中`project管理`找到对应的project，查看属性。
 
 ## 总结 {#section_qxs_jtw_1fb .section}
 

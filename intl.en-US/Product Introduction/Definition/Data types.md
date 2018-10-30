@@ -31,15 +31,15 @@ MR type tasks do not support new data types for the time being.
 |:---|:--|:-------|:----------|
 |TINYINT|Yes |1Y，-127Y|8-bit signed integer, range -128 to 127|
 |SMALLINT|Yes |32767S, -100S| 16-bit signed integer, range -32768 to 32767|
-|INT|Yes |1000,-15645787 \(Note1\)|32 bit signed shaping, the range is -231 to 231 - 1.|
+|INT|Yes |1000,-15645787 \(Note2\)|32 bit signed shaping, the range is -231 to 231 - 1.|
 |BIGINT|No|100000000000L, -1L|64 bit signed shaping, the range is -263 + 1 to 263 - 1.|
 |FLOAT|Yes |None|32-bit binary floating point|
 |DOUBLE|No|3.1415926 1E+7|64-bit binary floating point|
-|DECIMAL|No|3.5BD， 99999999999.9999999BD|Decimal precision number type, shaping part range -1036 + 1 to 1036 - 1, decimal part accurate to 10-18|
-|VARCHAR|Yes |None \(Note2\)|Variable-length character type, n is the length, and the range is 1 to 65535.|
-|STRING|No|“abc”,’bcd’,”alibaba” ‘inc’ \(Note3\)|A single string length can be up to 8M|
+|DECIMAL|No|3.5BD， 99999999999.9999999BD\(Note1\)|Decimal precision number type, shaping part range -1036 + 1 to 1036 - 1, decimal part accurate to 10-18|
+|VARCHAR|Yes |None \(Note3\)|Variable-length character type, n is the length, and the range is 1 to 65535.|
+|STRING|No|“abc”,’bcd’,”alibaba” ‘inc’ \(Note4\)|A single string length can be up to 8M|
 |BINARY|Yes |None|Binary data type, a single string length can be up to 8M|
-|DATETIME|No|DATETIME ‘2017-11-11 00:00:00’|Date-time type, range from December 31, 999 to January 1-9, 0000, exact to milliseconds \(note 4\)|
+|DATETIME|No|DATETIME ‘2017-11-11 00:00:00’|Date-time type, range from December 31, 999 to January 1-9, 0000, exact to milliseconds \(note 5\)|
 |TIMESTAMP|Yes |TIMESTAMP ‘2017-11-11 00:00:00.123456789’|It is independent of the time zone and ranges from January 1st 0000 to December 31, 9999 23.59:59.999999999,  and is accurate to nanosecond-level.|
 |BOOLEAN|No|TRUE，FALSE|True/False, Boolean type|
 

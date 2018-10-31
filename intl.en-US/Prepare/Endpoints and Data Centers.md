@@ -2,7 +2,7 @@
 
 This sections details the regions where MaxCompute is available, and connection methods. Problems such as network connectivity and downloading charges related to use of other Alibaba Cloud products \(such as ECS, TableStore, OSS, and so on\) are also detailed.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15329464211423_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15409762571423_en-US.png)
 
 MaxCompute provides two types of service connection addresses as follows:
 
@@ -38,7 +38,7 @@ According to the Tunnel service request to download data, and from which region 
 
 ## The connectivity configuration {#section_d2d_51y_5db .section}
 
-MaxCompute 2.0 supports reading and writing OSS object, and also supports reading and writing tables of Table Store. For more information, see [Access OSS Unstructured Data](../../../../intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md) and [Access Table Store Data](../../../../intl.en-US/User Guide/Handle-Unstructured-data/Visit Table Store Data.md).
+MaxCompute 2.0 supports reading and writing OSS object, and also supports reading and writing tables of Table Store. For more information, see [Access OSS Unstructured Data](../../../../reseller.en-US/User Guide/Handle-Unstructured-data/Access OSS data.md) and [Access Table Store Data](../../../../reseller.en-US/User Guide/Handle-Unstructured-data/Visit Table Store data.md).
 
 Configuration instructions about network connectivity are as follows:
 
@@ -49,35 +49,37 @@ Configuration instructions about network connectivity are as follows:
 
 The table as follows gives information about deployment of MaxCompute in different regions. On the International Site, MaxCompute is currently only available in the following regions. You can apply to use MaxComputer in this region only. In this case, your data storage and computing consumption all occur in the Asia Pacific SE 1 \(Singapore\) region.
 
-**Note:** \>All endpoints support both HTTP and HTTPS. If you need to encrypt your requests, use HTTPS.
+**Note:** All endpoints support both HTTP and HTTPS. If you need to encrypt your requests, use HTTPS.
 
 -   **External MaxCompute activation and service connections by region**
 
     |Region name|City|Service status|Internet endpoint|Classic Network tunnel endpoint|
     |:----------|:---|:-------------|:----------------|:------------------------------|
     |Asia Pacific SE 1|Singapore|In service|http://service.ap-southeast-1.maxcompute.aliyun.com/api|http://dt.ap-southeast-1.maxcompute.aliyun.com|
-    |ap-southeast-2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun.com/api|http://dt.ap-southeast-2.maxcompute.aliyun.com|
-    |ap-southeast-3|Kuala Lumpur|In service|Http://service.ap-southeast-3.maxcompute.aliyun.com/api|Http://dt.ap-southeast-3.maxcompute.aliyun.com|
-    |ap-southeast-5|Jakarta|In service|Http://service.ap-southeast-5.maxcompute.aliyun.com/api|Http://dt.ap-southeast-5.maxcompute.aliyun.com|
-    |Asia Pacific NE 1|Japan|In service|Http://service.ap-northeast-1.maxcompute.aliyun.com/api|Http://dt.ap-northeast-1.maxcompute.aliyun.com|
-    |Central Europe 1|Frankfurt|In service|Http://service.eu-central-1.maxcompute.aliyun.com/api|Http://dt.eu-central-1.maxcompute.aliyun.com|
-    |West USA 1|Silicon Valley|In service|Http://service.us-west-1.maxcompute.aliyun.com/api|Http://dt.us-west-1.maxcompute.aliyun.com|
-    |East USA 1|Virginia|In service|Http://service.us-east-1.maxcompute.aliyun.com/api|Http://dt.us-east-1.maxcompute.aliyun.com|
-    |ap-south-1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun.com/api|http://dt.ap-south-1.maxcompute.aliyun.com|
+    |Asia Pacific SE 2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun.com/api|http://dt.ap-southeast-2.maxcompute.aliyun.com|
+    |Asia Pacific SE 3|Kuala Lumpur|In service|http://service.ap-southeast-3.maxcompute.aliyun.com/api|http://dt.ap-southeast-3.maxcompute.aliyun.com|
+    |Asia Pacific SE 5|Jakarta|In service|http://service.ap-southeast-5.maxcompute.aliyun.com/api|http://dt.ap-southeast-5.maxcompute.aliyun.com|
+    |Asia Pacific NE 1|Japan|In service|http://service.ap-northeast-1.maxcompute.aliyun.com/api|http://dt.ap-northeast-1.maxcompute.aliyun.com|
+    |Central Europe 1|Frankfurt|In service|http://service.eu-central-1.maxcompute.aliyun.com/api|http://dt.eu-central-1.maxcompute.aliyun.com|
+    |West USA 1|Silicon Valley|In service|http://service.us-west-1.maxcompute.aliyun.com/api|http://dt.us-west-1.maxcompute.aliyun.com|
+    |East USA 1|Virginia|In service|http://service.us-east-1.maxcompute.aliyun.com/api|http://dt.us-east-1.maxcompute.aliyun.com|
+    |Asia Pacific SOU 1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun.com/api|http://dt.ap-south-1.maxcompute.aliyun.com|
+    |Middle East 1|Dubai|In service|http://service.me-east-1.maxcompute.aliyun.com/api|http://dt.me-east-1.maxcompute.aliyun.com|
 
 -   **Classic network MaxCompute activation and service connections by region**
 
     |Region name|City|Service status|Classic network endpoint|Classic Network tunnel endpoint|
     |-----------|----|--------------|------------------------|-------------------------------|
     |Asia Pacific SE 1|Singapore|In service|http://service.ap-southeast-1.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-1.maxcompute.aliyun-inc.com|
-    |ap-southeast-2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-2.maxcompute.aliyun-inc.com|
-    |ap-southeast-3|Kuala Lumpur|In service|http://service.ap-southeast-3.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-3.maxcompute.aliyun-inc.com|
-    |ap-southeast-5|Jakarta|In service|http://service.ap-southeast-5.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-5.maxcompute.aliyun-inc.com|
+    |Asia Pacific SE 2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-2.maxcompute.aliyun-inc.com|
+    |Asia Pacific SE 3|Kuala Lumpur|In service|http://service.ap-southeast-3.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-3.maxcompute.aliyun-inc.com|
+    |Asia Pacific SE 5|Jakarta|In service|http://service.ap-southeast-5.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-5.maxcompute.aliyun-inc.com|
     |Asia Pacific NE 1|Japan|In service|http://service.ap-northeast-1.maxcompute.aliyun-inc.com/api|http://dt.ap-northeast-1.maxcompute.aliyun-inc.com|
     |Central Europe 1|Frankfurt|In service|http://service.eu-central-1.maxcompute.aliyun-inc.com/api|http://dt.eu-central-1.maxcompute.aliyun-inc.com|
     |West USA 1|Silicon Valley|In service|http://service.us-west-1.maxcompute.aliyun-inc.com/api|http://dt.us-west-1.maxcompute.aliyun-inc.com|
     |East USA 1|Virginia|In service|http://service.us-east-1.maxcompute.aliyun-inc.com/api|http://dt.us-east-1.maxcompute.aliyun-inc.com|
-    |ap-south-1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
+    |Asia Pacific SOU 1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
+    |Middle East 1|Dubai|In service|http://service.me-east-1.maxcompute.aliyun-inc.com/api|http://dt.me-east-1.maxcompute.aliyun-inc.com|
 
 -   **VPC MaxCompute activation and service connections by region**
 
@@ -86,15 +88,23 @@ The table as follows gives information about deployment of MaxCompute in differe
     |Region name|City|Service status|VPC endpoint|VPC tunnel endpoint|
     |:----------|:---|:-------------|:-----------|:------------------|
     |Asia Pacific SE 1|Singapore|In service|http://service.ap-southeast-1.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-1.maxcompute.aliyun-inc.com|
-    |ap-southeast-2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-2.maxcompute.aliyun-inc.com|
-    |ap-southeast-3|Kuala Lumpur|In service|http://service.ap-southeast-3.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-3.maxcompute.aliyun-inc.com|
-    |ap-southeast-5|Jakarta|In service|http://service.ap-southeast-5.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-5.maxcompute.aliyun-inc.com|
+    |Asia Pacific SE 2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-2.maxcompute.aliyun-inc.com|
+    |Asia Pacific SE 3|Kuala Lumpur|In service|http://service.ap-southeast-3.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-3.maxcompute.aliyun-inc.com|
+    |Asia Pacific SE 5|Jakarta|In service|http://service.ap-southeast-5.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-5.maxcompute.aliyun-inc.com|
     |Asia Pacific NE 1|Japan|In service|http://service.ap-northeast-1.maxcompute.aliyun-inc.com/api|http://dt.ap-northeast-1.maxcompute.aliyun-inc.com|
     |Central Europe 1|Frankfurt|In service|http://service.eu-central-1.maxcompute.aliyun-inc.com/api|http://dt.eu-central-1.maxcompute.aliyun-inc.com|
     |West USA 1|Silicon Valley|In service|http://service.us-west-1.maxcompute.aliyun-inc.com/api|http://dt.us-west-1.maxcompute.aliyun-inc.com|
     |East USA 1|Virginia|In service|http://service.us-east-1.maxcompute.aliyun-inc.com/api|http://dt.us-east-1.maxcompute.aliyun-inc.com|
-    |ap-south-1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
+    |Asia Pacific SOU 1|Mumbai |In service|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
+    |Middle East 1|Dubai|In service|http://me-east-1.maxcompute.aliyun-inc.com/api|http://dt.me-east-1.maxcompute.aliyun-inc.com|
 
+
+**Note:** Scenarios that need to configure Endpoint and Tunnel Endpoint:
+
+-   MaxCompute client \(console\) configuration. See[Install and configure client](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md#).
+-   -   MaxCompute studio project connection configuration. See[Project space management connection](../../../../reseller.en-US/Tools and Downloads/Client.md#).
+-   SDK connects to MaxCompute configuration. See[Java SDK](../../../../reseller.en-US/User Guide/SDK/Java SDK.md#) and[Python SDK](../../../../reseller.en-US/User Guide/SDK/Python SDK.md#) connect the MaxCompute interface configuration.
+-   The DataWorks data integration script pattern connects the MaxComputer data source configuration and uses the DataX open source tool to connect the MaxComputer data source. See[Configuring MaxCompute data sources](https://help.aliyun.com/knowledge_detail/74280.html)and [Export SQL operation results](../../../../reseller.en-US/Best Practices/Export SQL operation result.md#).
 
 ## Access concepts { .section}
 

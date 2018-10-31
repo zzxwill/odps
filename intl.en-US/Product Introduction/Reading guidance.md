@@ -11,6 +11,7 @@ The following sections give recommended reading for users of differing expertise
 
     We provide the following [tool](../../../../reseller.en-US/Tools and Downloads/Client.md): You can operate MaxCompute through this tool.
 
+-   [Endpoints and Data Centers](../../../../reseller.en-US/Prepare/Endpoints and Data Centers.md#)：MaxCompute Region opens and connects to answer network connectivity and download data charges that you encounter in other cloud products \(ECS, Table Store, OSS\) interchange scenarios.
 
 After you are familiar with those modules that mentioned preceding, you are recommended to perform a further study on other modules.
 

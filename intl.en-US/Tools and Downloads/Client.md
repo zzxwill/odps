@@ -1,13 +1,14 @@
 # Client {#concept_dvj_dzw_5db .concept}
 
-This article describes how to use the basic functions of the MaxCompute using client command line tool.  Before using the MaxCompute client, you must [install and configure the client](../../../../intl.en-US/Prepare/Install and configure a client.md) .
+This article describes how to use the basic functions of the MaxCompute using client command line tool.  Before using the MaxCompute client, you must [install and configure the client](../../../../reseller.en-US/Prepare/Install and configure a client.md) .
 
 **Note:** 
 
 -   Do not perform the analysis operation based on the output format of the client.  The output format of the client is not ensured for forward compatibility. Clients of different versions are different in their command formats and behaviors.
--   For more information about basic commands of the client, see [Basic commands](../../../../intl.en-US/User Guide/Common commands/Overview of Common commands.md). 
+-   For more information about basic commands of the client, see [Basic commands](../../../../reseller.en-US/User Guide/Common commands/Overview of Common commands.md). 
 -   Download [MaxCompute console](http://repo.aliyun.com/download/odpscmd/latest/odpscmd_public.zip)
 -   The client supports JDK 1.9 from the 0.28.0 version, and the previous version can only use JDK 1.8.
+-   The client supports MaxCompute 2.0 from the 0.27.0 version [New data type](../../../../reseller.en-US/User Guide/Definition/Data types.md#).
 
 After the client is installed and configured, you can use a command line to perform the following operations.
 
@@ -66,7 +67,7 @@ Take the -f parameter as an example, the operation is as follows:
 2.  Run the following command:
 
     ```
-    odpscmd\bin>odpscmd -f ./script.sql;
+    odpscmd\bin>odpscmd -f D:/script.txt;
     ```
 
 

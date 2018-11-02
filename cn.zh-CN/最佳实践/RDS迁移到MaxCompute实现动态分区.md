@@ -14,7 +14,7 @@
 
 2.  准备数据源，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918714385_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225714385_zh-CN.png)
 
     新增ODPS数据源和MYSQL数据源，详细描述请参考文档[配置MaxCompute数据源](https://help.aliyun.com/knowledge_detail/74280.html)和[配置MySQL数据源](https://help.aliyun.com/knowledge_detail/74276.html)。
 
@@ -30,7 +30,7 @@
 
     本节将新建一个同步节点sdtest并进行配置，将MySQL中的表emp\_test\_new中的数据写入到自己的ODPS数据库中。如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918714388_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225714388_zh-CN.png)
 
 
 详细的数据同步任务的操作和配置请参见[DataWorks数据开发和运维](https://help.aliyun.com/document_detail/84669.html)。
@@ -41,19 +41,19 @@
 
 1.  选择来源，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918714391_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225814391_zh-CN.png)
 
 2.  选择目标，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918714392_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225814392_zh-CN.png)
 
 3.  参数配置，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918714394_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225814394_zh-CN.png)
 
     一般配置到这个地方的时候，默认是系统自带的时间参数：`${bdp.system.bizdate}`，格式为yyyymmdd。也就是说在调度执行这个任务的时候，这个分区会被自动替换为任务执行日期的前一天，一般用户会在当前跑前一天的业务数据，这个日期也叫业务日期。如果用户要使用当天任务运行的日期作为分区值，需要自定义这个参数。如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918714396_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225814396_zh-CN.png)
 
     自定义参数设置，格式非常灵活，日期是当天日期，用户可以自由选择哪一天以及格式。可供参考的变量参数配置方式如下：
 
@@ -90,11 +90,11 @@
 
 4.  测试运行，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918714399_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225814399_zh-CN.png)
 
     可以看到日志中，MaxCompute（日志中打印原名ODPS）的信息中partition分区，date\_test=20170829，自动替换成功。检查下实际的数据有没有转移到ODPS表中，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918814400_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225814400_zh-CN.png)
 
     **说明：** 在maxcompute2.0中分区表查询需要添加分区筛选，SQL语句如下。其中分区列需要更新为业务日期，如任务运行的日期为20180717，那么业务日期为20180716。
 
@@ -111,27 +111,27 @@
 
 1.  首先，我们需要在RDS端把历史数据按照日期筛选出来，比如历史数据2017-08-25这天的数据，我们要自动同步到MaxCompute的20170825的分区中。在RDS阶段可以设置where过滤条件，如图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918814401_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225814401_zh-CN.png)
 
 2.  补数据操作。然后**保存** \> **提交**。提交后到**运维中心** \> **任务管理** \> **图形模式**右键单击**补数据节点**。如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918820998_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225820998_zh-CN.png)
 
 3.  跳转至补数据节点页面。选择日期区间，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918820999_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225820999_zh-CN.png)
 
 4.  单击**提交** \> **运行**。此时会同时生成多个同步的任务实例按顺序执行。如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918821000_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225821000_zh-CN.png)
 
 5.  查看运行的日志，可以看到运行过程中对RDS数据的抽取。此时MaxCompute已自动创建分区，如图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918821001_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225821001_zh-CN.png)
 
     查看运行结果。数据写入的情况，以及是否自动创建了分区，数据是否已同步到分区表中，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918821002_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225821002_zh-CN.png)
 
     **说明：** 在maxcompute2.0中分区表查询需要添加分区筛选，SQL语句如下。其中分区列需要更新为业务日期，如任务运行的日期为20180717，那么业务日期为20180716。
 
@@ -187,15 +187,15 @@
 
 4.  最后将三个节点配置成一个工作流，按顺序执行。如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918821007_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225821007_zh-CN.png)
 
 5.  查看执行过程。我们可以重点观察最后一个节点的动态分区过程，如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918821008_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225921008_zh-CN.png)
 
     查看数据。动态的自动化分区完成。相同的日期数据迁移到了同一个分区中。如下图。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154081918821013_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154115225921013_zh-CN.png)
 
     如果是以省份字段命名分区，执行步骤参请考上述内容。
 

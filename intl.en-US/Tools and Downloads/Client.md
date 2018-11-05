@@ -105,7 +105,7 @@ insert overwrite table dual select count(*) from dual;
 To ignore the first two statements, and start running from the third statement, the command format is as follows:
 
 ```
-odpscmd–k 3 –f dual.sql
+odpscmd -k 3 -f dual.sql
 ```
 
 ## Get current logon user {#section_lvh_41x_5db .section}

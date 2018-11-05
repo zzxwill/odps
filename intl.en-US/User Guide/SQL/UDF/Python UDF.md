@@ -1,6 +1,6 @@
 # Python UDF {#concept_pjv_qs2_xdb .concept}
 
-The MaxCompute UDF consists of UDF, UDAF, and UDTF functions. This article explains how to implement these three functions through Python.
+The MaxCompute UDF consists of UDF, UDAF, and UDTF functions. This article explains how to implement these three functions through MaxCompute Python.
 
 ## RESTRICTED ENVIRONMENT {#section_gwg_3ff_xdb .section}
 
@@ -60,7 +60,9 @@ In addition, not all modules are available in the Python standard library, and m
 
 Common third-party libraries are installed in the operating environment to supplement the standard library. The supported third-party libraries also include **numpy**.
 
-**Note:** The use of third-party libraries is also subject to 'prohibit local', 'network I/O', and other restrictions. Therefore, APIs that have such functions are also prohibited in a third-party library.
+**Note:** 
+
+The use of third-party libraries is also subject to 'prohibit local', 'network I/O', and other restrictions. Therefore, APIs that have such functions are also prohibited in a third-party library.
 
 ## Parameters and return value types {#section_mrj_cgf_xdb .section}
 
@@ -128,7 +130,7 @@ class myplus (object ):
 
 **Note:** A Python UDF must have its signature specified through annotate.
 
-Python UDF permissions on the public cloud need to be submitted for work order application, which can be filled out as prompted.
+Since October 16, 2018, the use of Python UDF in the MaxCompute public cloud environment has been fully opened.
 
 ## UDAF {#section_ilj_mhf_xdb .section}
 

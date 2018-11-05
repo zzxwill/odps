@@ -1,6 +1,6 @@
 # Python UDF {#concept_pjv_qs2_xdb .concept}
 
-MaxCompute UDF包括UDF、UDAF和UDTF三种函数，本文将重点介绍如何通过Python实现这三种函数。
+MaxCompute UDF包括UDF、UDAF和UDTF三种函数，本文将重点介绍如何通过MaxCompute Python实现这三种函数。
 
 ## 受限环境 {#section_gwg_3ff_xdb .section}
 
@@ -61,6 +61,8 @@ MaxCompute UDF的Python版本为2.7，并以沙箱模式执行用户代码，即
 运行环境中还安装了除标准库以外比较常用的三方库，做为标准库的补充。支持的三方库还包括numpy。
 
 **说明：** 三方库的使用同样受到禁止本地、网络IO或其他在受限环境下的限制，因此三方库中涉及到相关功能的API也是被禁止的。
+
+Python UDF使用第三方库的详细介绍请参见[使用第三方库](intl.zh-CN/用户指南/PyODPS/DataFrame/使用自定义函数.md#)。
 
 ## 参数与返回值类型 {#section_mrj_cgf_xdb .section}
 

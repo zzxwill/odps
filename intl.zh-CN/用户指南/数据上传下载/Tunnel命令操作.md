@@ -1,5 +1,7 @@
 # Tunnel命令操作 {#concept_rkf_2wc_5db .concept}
 
+本文向您介绍Upload、Show、Resume等Tunnel上传下载命令使用说明。
+
 ## 功能简介 {#section_hcs_btf_vdb .section}
 
 您可以通过[客户端](../../../../intl.zh-CN/工具及下载/客户端.md)提供的[Tunnel](intl.zh-CN/用户指南/数据上传下载/Tunnel命令操作.md)命令实现原有Dship工具的功能。
@@ -131,7 +133,7 @@ Example:
 -   -dbr：是否忽略脏数据（多列、少列、列数据类型不匹配等情况）。
     -   值为true时，将全部不符合表定义的数据忽略。
     -   值为false时，若遇到脏数据，则给出错误提示信息，目标表内的原始数据不会被污染。
--   -dfp：DateTime类型数据格式，默认为yyyy-MM-dd HH:mm:ss。如果您想指定时间格式到毫秒级别，可以使用tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'，有关DateTime数据类型的详情请参见[数据类型](../../../../intl.zh-CN/产品简介/基本概念/数据类型.md#)。
+-   -dfp：DateTime类型数据格式，默认为yyyy-MM-dd HH:mm:ss。如果您想指定时间格式到毫秒级别，可以使用tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'，有关DateTime数据类型的详情请参见[数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
 -   -fd：本地数据文件的列分割符，默认为逗号。
 -   -h：数据文件是否包括表头，如果为true，则dship会跳过表头从第二行开始上传数据。
 -   -mbr：默认情况下，当上传的脏数据超过1000条时，上传动作终止。通过此参数，可以调整可容忍的脏数据量。
@@ -167,9 +169,9 @@ PARTITIONED BY (sale_date STRING,region STRING);
 -   准备数据文件data.txt，其内容如下所示：
 
     ```
-    shop9,97,100
-    shop10,10,200
-    shop11,11
+    shopx,x_id,100
+    shopy,y_id,200
+    shopz,z_id
     ```
 
     这份文件的第三行数据与sale\_detail的表定义不符。sale\_detail定义了三列，但数据只有两列。
@@ -178,7 +180,7 @@ PARTITIONED BY (sale_date STRING,region STRING);
 
     ```
     odps@ project_name>tunnel u d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false
-    Upload session: 201506101639224880870a002ec60c
+    Upload session: 20150610xxxxxxxxxxx70a002ec60c
     Start upload:d:\data.txt
     Total bytes:41   Split input to 1 blocks
     2015-06-10 16:39:22     upload block: '1'
@@ -191,7 +193,7 @@ PARTITIONED BY (sale_date STRING,region STRING);
 
     ```
     odps@ odpstest_ay52c_ay52> select * from sale_detail where sale_date='201312';
-    ID = 20150610084135370gyvc61z5
+    ID = 20150610xxxxxxxxxxxvc61z5
     +-----------+-------------+-------------+-----------+--------+
     | shop_name | customer_id | total_price | sale_date | region |
     +-----------+-------------+-------------+-----------+--------+
@@ -211,8 +213,8 @@ usage: tunnel show history [options]
               show session information
  -n,-number <ARG>   lines
 Example:
-    tunnel show history -n 5
-    tunnel show log
+       tunnel show history -n 5
+       tunnel show log
 ```
 
 **参数说明：**
@@ -223,10 +225,10 @@ Example:
 
 ```
 odps@ project_name>tunnel show  history;
-201506101639224880870a002ec60c  failed  'u --config-file /D:/console/conf/odps_config.ini --project odpstest_ay52c_ay52 --endpoint http://service.odps.aliyun.com/api --id UlVxOHuthHV1QrI1 --key 2m4r3WvTZbsNJjybVXj0InVke7UkvR d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false'
+20150610xxxxxxxxxxx70a002ec60c  failed  'u --config-file /D:/console/conf/odps_config.ini --project odpstest_ay52c_ay52 --endpoint http://service.odps.aliyun.com/api --id UlxxxxxxxxxxxrI1 --key 2m4r3WvTxxxxxxxxxx0InVke7UkvR d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false'
 ```
 
-**说明：** 201506101639224880870a002ec60c是上节中导入数据失败时的运行ID。
+**说明：** 20150610xxxxxxxxxxx70a002ec60c是上节中导入数据失败时的运行ID。
 
 ## Resume {#section_wgq_jyf_vdb .section}
 
@@ -238,7 +240,7 @@ usage: tunnel resume [session_id] [-force]
               resume an upload session
  -f,-force   force resume
 Example:
-    tunnel resume
+       tunnel resume
 ```
 
 **示例如下：**
@@ -253,10 +255,10 @@ shop10,10,200
 修复执行上传数据，如下所示：
 
 ```
-odps@ project_name>tunnel resume 201506101639224880870a002ec60c --force;
+odps@ project_name>tunnel resume 20150610xxxxxxxxxxx70a002ec60c --force;
 start resume
-201506101639224880870a002ec60c
-Upload session: 201506101639224880870a002ec60c
+20150610xxxxxxxxxxx70a002ec60c
+Upload session: 20150610xxxxxxxxxxx70a002ec60c
 Start upload:d:\data.txt
 Resume 1 blocks 
 2015-06-10 16:46:42     upload block: '1'
@@ -265,18 +267,18 @@ upload complete, average speed is 0 KB/s
 OK
 ```
 
-**说明：** 201506101639224880870a002ec60c为上传失败的session ID。
+**说明：** 20150610xxxxxxxxxxx70a002ec60c为上传失败的session ID。
 
 数据验证，如下所示：
 
 ```
 odps@ project_name>select * from sale_detail where sale_date='201312';
- ID = 20150610084801405g0a741z5
+ ID = 20150610xxxxxxxxxxxa741z5
  +-----------+-------------+-------------+-----------+--------+
  | shop_name | customer_id | total_price | sale_date | region |
  +-----------+-------------+-------------+-----------+--------+
- | shop9     | 97          | 100.0       | 201312    | hangzhou |
- | shop10    | 10          | 200.0       | 201312    | hangzhou |
+ | shopx     | x_id        | 100.0       | 201312    | hangzhou|
+ | shopy     | y_id        | 200.0       | 201312    | hangzhou|
  +-----------+-------------+-------------+-----------+--------+
 ```
 
@@ -286,7 +288,7 @@ odps@ project_name>select * from sale_detail where sale_date='201312';
 
 ```
 odps@ project_name>tunnel help download;
-usage: tunnel download [options] <[project.]table[/partition]> <path>
+usage:tunnel download [options] <[project.]table[/partition]> <path>
               download data to local file
  -c,-charset <ARG>                 specify file charset, default ignore.
                                    set ignore to download raw data
@@ -353,8 +355,8 @@ usage: tunnel download [options] instance://<[project/]instance_id> <path>
  -tz,-time-zone <ARG>              time zone, default local timezone:
                                    Asia/Shanghai
 Example:
-    tunnel download test_project.test_table/p1="b1",p2="b2" log.txt
-    tunnel download instance://test_project/test_instance log.txt
+       tunnel download test_project.test_table/p1="b1",p2="b2" log.txt
+       tunnel download instance://test_project/test_instance log.txt
 ```
 
 **参数说明：**
@@ -384,7 +386,7 @@ Example:
 
 ```
 $ ./tunnel download sale_detail/sale_date=201312,region=hangzhou result.txt;
-    Download session: 201506101658245283870a002ed0b9
+    Download session: 20150610xxxxxxxxxxx70a002ed0b9
     Total records: 2
     2015-06-10 16:58:24     download records: 2
     2015-06-10 16:58:24     file size: 30 bytes
@@ -394,8 +396,8 @@ $ ./tunnel download sale_detail/sale_date=201312,region=hangzhou result.txt;
 验证result.txt的文件内容，如下所示：
 
 ```
-shop9,97,100.0
-shop10,10,200.0
+shopx,x_id,100.0
+shopy,y_id,200.0
 ```
 
 ## Purge {#section_l3y_51g_vdb .section}
@@ -408,7 +410,7 @@ usage: tunnel purge [n]
               force session history to be purged.([n] days before, default
               3 days)
 Example:
-    tunnel purge 5
+       tunnel purge 5
 ```
 
 **数据类型说明**：
@@ -440,7 +442,7 @@ Example:
 **示例如下：**
 
 ```
-tunnel upload  log.txt  test_table -dfp  "yyyy-MM-dd HH:mm:ss"
+tunnel upload log.txt test_table -dfp "yyyy-MM-dd HH:mm:ss"
 ```
 
 **空值**：所有数据类型都可以有空值。

@@ -20,4 +20,6 @@ The restrictions of MaxCompute MapReduce are as follows:
 |Content length of the string column|8 MB|Length limit|N/A|None|No|The content in the string column of the MaxCompute table cannot exceed 8 MB.|
 |Worker running timeout period|［1，3600］|Time limit|odps.function.timeout|600|Yes|Timeout period for the worker when the map or reduce worker does not read or write data or  actively send heartbeat data by using context.progress\(\). The default value is 600s.|
 |The supported field types of table referenced by MR|BIGINT、DOUBLE、STRING、DATETIME、BOOLEAN|Data type limit|N/A|None|No|When the MR task refers to a table, an error occurs if the table contains other types of fields.|
+|Read data from OSS| |Feature limit|N/A|None|No|Not supported|
+|MaxCompute 2.0 new types| |Feature limit|N/A|None|No|Not supported|
 

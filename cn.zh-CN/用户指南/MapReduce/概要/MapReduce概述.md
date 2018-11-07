@@ -1,21 +1,23 @@
 # MapReduce概述 {#concept_fml_smf_vdb .concept}
 
+本文为您介绍MaxCompute支持的MapReduce 编程接口及使用限制。
+
 MaxCompute 提供了三个版本的 MapReduce 编程接口，如下所示：
 
 -   MaxCompute MapReduce：MaxCompute 的原生接口，执行速度更快。开发更便捷，不暴露文件系统。
 
--   [MR2](intl.zh-CN/用户指南/MapReduce/概要/扩展MapReduce.md)（扩展 MapReduce）：对 MaxCompute MapReduce 的扩展，支持更复杂的作业调度逻辑。Map/Reduce 的实现方式与 MaxCompute 原生接口一致。
+-   [MR2](cn.zh-CN/用户指南/MapReduce/概要/扩展MapReduce.md)（扩展 MapReduce）：对 MaxCompute MapReduce 的扩展，支持更复杂的作业调度逻辑。Map/Reduce 的实现方式与 MaxCompute 原生接口一致。
 
--   以及 [Hadoop 兼容版本](intl.zh-CN/用户指南/MapReduce/概要/开源兼容MapReduce.md)：高度兼容 [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ，与 MaxCompute 原生 MapReduce，[MR2](https://help.aliyun.com/document_detail/27876.html) 不兼容。
+-    [Hadoop 兼容版本](cn.zh-CN/用户指南/MapReduce/概要/开源兼容MapReduce.md)：高度兼容 [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ，与 MaxCompute 原生 MapReduce，[MR2](https://help.aliyun.com/document_detail/27876.html) 不兼容。
 
 
-以上三个版本在 [基本概念](intl.zh-CN/用户指南/MapReduce/功能介绍/基本概念.md)，[作业提交](intl.zh-CN/用户指南/MapReduce/功能介绍/作业提交.md)，[输入输出](intl.zh-CN/用户指南/MapReduce/功能介绍/输入与输出.md)，[资源使用](intl.zh-CN/用户指南/MapReduce/功能介绍/资源使用.md) 等方面基本一致，不同的是 Java SDK 彼此不同。本文仅对 MapReduce 的基本原理做简单介绍，更多详情请参见 [Hadoop MapReduce 教程](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html)。
+以上三个版本在 [基本概念](cn.zh-CN/用户指南/MapReduce/功能介绍/基本概念.md)，[作业提交](cn.zh-CN/用户指南/MapReduce/功能介绍/作业提交.md)，[输入输出](cn.zh-CN/用户指南/MapReduce/功能介绍/输入与输出.md)，[资源使用](cn.zh-CN/用户指南/MapReduce/功能介绍/资源使用.md) 等方面基本一致，不同的是 Java SDK 彼此不同。本文仅对 MapReduce 的基本原理做简单介绍，更多详情请参见 [Hadoop MapReduce 教程](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html)。
 
-**说明：** 您还不能够通过 MapReduce 读写“外部表”中的数据。
+**说明：** 您还不能够通过 MapReduce 读写[外部表](cn.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md#)中的数据。
 
 ## 应用场景 {#section_m5s_rwf_vdb .section}
 
-MapReduce 最早是由 Google 提出的分布式数据处理模型，随后受到了业内的广泛关注，并被大量应用到各种商业场景中。示例如下：
+MapReduce被大量应用到各种商业场景中：
 
 -   搜索：网页爬取、倒排索引、PageRank。
 -   Web 访问日志分析：
@@ -41,13 +43,13 @@ MapReduce 处理数据过程主要分成 Map 和 Reduce 两个阶段。首先执
 3.  在进入 Reduce 阶段之前，MapReduce 框架会对数据按照 Key 值排序，使得具有相同 Key 的数据彼此相邻。如果您指定了 **合并操作（Combiner）**，框架会调用 Combiner，将具有相同 Key 的数据进行聚合。Combiner 的逻辑可以由您自定义实现。与经典的 MapReduce 框架协议不同，在 MaxCompute 中，Combiner 的输入、输出的参数必须与 Reduce 保持一致，这部分的处理通常也叫做 **洗牌（Shuffle）**。
 4.  接下来进入 Reduce 阶段。相同 Key 的数据会到达同一个 Reduce Worker。同一个 Reduce Worker 会接收来自多个 Map Worker 的数据。每个 Reduce Worker 会对 Key 相同的多个数据进行 Reduce 操作。最后，一个 Key 的多条数据经过 Reduce 的作用后，将变成一个值。
 
-**说明：** 上文仅是对 MapReduce 框架做简单介绍，更多详情请查阅其他相关资料。
+**说明：** 上文仅是对 MapReduce 框架做简单介绍，更多详情请查阅[功能介绍](cn.zh-CN/用户指南/MapReduce/功能介绍/基本概念.md#)。
 
 下文将以 WordCount 为例，为您介绍 MaxCompute MapReduce 各个阶段的概念。
 
 假设存在一个文本 a.txt，文本内每行是一个数字，您要统计每个数字出现的次数。文本内的数字称为 Word，数字出现的次数称为 Count。如果 MaxCompute Mapreduce 完成这一功能，需要经历以下流程，如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15349379161922_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15415954561922_zh-CN.jpg)
 
 操作步骤：
 
@@ -59,4 +61,10 @@ MapReduce 处理数据过程主要分成 Map 和 Reduce 两个阶段。首先执
 6.  输出结果数据。
 
 **说明：** 由于 MaxCompute 的所有数据都被存放在表中，因此 MaxCompute MapReduce 的输入、输出只能是表，不允许您自定义输出格式，不提供类似文件系统的接口。
+
+## 使用限制 {#section_fcf_mcn_sfb .section}
+
+MapReduce[使用限制汇总](cn.zh-CN/用户指南/MapReduce/MR限制项汇总.md#)
+
+本地运行的MapReduce使用限制您还可以参考[本地运行和分布式环境运行差异](cn.zh-CN/用户指南/MapReduce/功能介绍/本地运行.md#section_k3l_t3g_vdb)
 

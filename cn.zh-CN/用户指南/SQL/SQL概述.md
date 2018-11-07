@@ -1,6 +1,6 @@
 # SQL概述 {#concept_awk_jmb_5db .concept}
 
-本文为您介绍MaxCompute SQL的关键字、类型转换说明、分区表及UNION ALL运算。
+本文为您介绍MaxCompute SQL的关键字、类型转换说明、分区表、UNION ALL运算及使用限制。
 
 ## SQL概述 {#section_tdn_ppg_hfb .section}
 
@@ -46,4 +46,17 @@ MaxCompute SQL支持分区表。指定分区表会对您带来诸多便利，例
 Select Transform功能明显简化了对脚本代码的引用，支持Java、Python、Shell、Perl等语言，且编写过程简单，适合adhoc功能的实现。详情请参见[Select Transform语法](cn.zh-CN/用户指南/SQL/SELECT操作/Select Transform语法.md)。
 
 目前MaxCompute的select transform完全兼容了Hive的语法、功能和行为，包括input/output row format以及reader/writer。Hive上的脚本，大部分可以直接运行，部分脚本只需要经过稍微的改动即可运行。
+
+## 使用限制 {#section_zrv_jcm_sfb .section}
+
+SQL限制项请参见[SQL限制项汇总](cn.zh-CN/用户指南/SQL/SQL限制项汇总.md#)，不支持的DDL及DML语法请参见[与其他SQL语法的差异](cn.zh-CN/用户指南/SQL/与其他SQL语法的差异.md#)。
+
+**说明：** 与其他SQL的差异和不兼容带来的限制，可参见[与标准SQL的主要区别及解决方法](../../../../cn.zh-CN/最佳实践/与标准SQL的主要区别及解决方法.md#)及[修改不兼容SQL实战](../../../../cn.zh-CN/最佳实践/修改不兼容SQL实战.md#)解决。
+
+其他限制：
+
+-   [SCALAR SUBQUERY限制](cn.zh-CN/用户指南/SQL/SELECT操作/子查询.md#section_f52_1w5_hfb)
+-   Insert values限制：values必须是常量
+-   MaxCompute最多允许256个表的union all/union
+-   Mapjoin的小表不能超过512MB
 

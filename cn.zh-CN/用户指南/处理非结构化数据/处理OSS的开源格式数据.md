@@ -40,8 +40,8 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
     LOCATION 'oss://${accessKeyId}:${accessKeySecret}@${endpoint}/${bucket}/${userPath}/'
     ```
 
-
-访问OSS外部表，目前不支持使用外网Endpoint。
+-   访问OSS外部表，目前不支持使用外网Endpoint。
+-   目前STORE AS单个文件大小不能超过3G，如果文件过大，建议split拆分。
 
 ## 关联OSS的PARQUET数据示例 {#section_spx_ttv_ydb .section}
 
@@ -172,7 +172,7 @@ LOCATION 'oss://${accessKeyId}:${accessKeySecret}@oss-cn-hangzhou-zmf.aliyuncs.c
 
     **说明：** 直接使用外表，每次读取数据都需要涉及外部OSS的I/O操作，且MaxCompute系统本身针对内部存储做的许多高性能优化都用不上，如此一来性能上就会有所损失。 因此如果是需要对数据进行反复计算以及对计算的高效性比较敏感的场景，推荐使用下文介绍的用法：先将数据导入MaxCompute内部再进行计算。
 
-    SQL（ create、select、insert等操作）中涉及到这几个复杂数据类型，需在SQL语句前加语句`set odps.sql.type.system.odps2=true;`，执行时set语句和SQL语句一起提交执行。详情请参见[数据类型](../../../../cn.zh-CN/产品简介/基本概念/数据类型.md#)。
+    SQL（ create、select、insert等操作）中涉及到这几个复杂数据类型，需在SQL语句前加语句`set odps.sql.type.system.odps2=true;`，执行时set语句和SQL语句一起提交执行。详情请参见[数据类型](../../../../cn.zh-CN/用户指南/基本概念/数据类型.md#)。
 
 -   **将OSS的开源数据导入MaxCompute再进行计算**
 

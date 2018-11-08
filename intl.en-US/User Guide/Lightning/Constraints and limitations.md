@@ -8,7 +8,7 @@ MaxCompute Lightning only supports Select queries for MaxCompute tables and does
 
 -   A maximum number of 1,024 scanned partitions can be queried when you query partitioned tables.
 -   Currently, views cannot be created or used.
--   Currently, map, array, tinyint and timestamp data types are not supported.
+-   Currently, MAP、ARRAY、TINYINT、BINARY、TIMESTAMP and DECIMAL with accuracy data types are not supported.
 -   A maximum of 1 TB data can be scanned for a table in each query.
 -   The size of the submitted query statement cannot exceed 100 KB.
 -   The query timeout period is one hour.
@@ -17,6 +17,7 @@ MaxCompute Lightning only supports Select queries for MaxCompute tables and does
 
 -   User-defined functions \(UDF\) created using MaxCompute cannot be used in MaxCompute Lightning.
 -   [PostgreSQL](https://www.postgresql.org/docs/8.2/static/functions.html) user-defined functions cannot be created or used in MaxCompute Lightning.
+-   MaxCompute built-in functions are not supported at this time.
 
 ## Query concurrency constraints {#section_nsd_c2l_z2b .section}
 

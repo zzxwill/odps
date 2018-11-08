@@ -1,5 +1,7 @@
 # 更新表中的数据（INSERT OVERWRITE and INTO） {#concept_yzd_ndb_wdb .concept}
 
+本文向您介绍Insert into和Insert overwrite两种更新表数据的命令操作。
+
 ## insert操作 {#section_o5d_vdy_gfb .section}
 
 命令格式如下：
@@ -15,6 +17,7 @@ FROM from_statement;
 -   MaxCompute的Insert语法与通常使用的MySQL或Oracle的Insert语法有差别，在insert overwrite|into后需要加入table关键字，不是直接使用tablename。
 -   当Insert的目标表是分区表时，指定分区值`[PARTITION (partcol1=val1, partcol2=val2 …)]`语法中不允许使用函数等表达式。
 -   目前INSERT OVERWRITE还不支持指定插入列的功能，暂时只能用INSERT INTO。
+-   不支持insert into到hash clustering表
 
 在MaxCompute SQL处理数据的过程中，Insert overwrite/into用于将计算的结果保存目标表中。
 

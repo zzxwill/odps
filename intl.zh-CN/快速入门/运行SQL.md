@@ -1,6 +1,6 @@
 # 运行SQL {#concept_tgf_v5y_5db .concept}
 
-大多数用户对SQL的语法并不陌生，简单来说，MaxCompute SQL是用于查询和分析MaxCompute中的大规模数据。目前SQL的主要功能如下所示。
+您对SQL语法可能并不陌生，MaxCompute SQL用于查询和分析MaxCompute中的大规模数据，主要功能如下所示。
 
 -   支持各类运算符。
 -   通过DDL语句对表、分区以及视图进行管理。
@@ -20,9 +20,9 @@
 
 ## DDL语句 {#section_kdh_cvy_5db .section}
 
-简单的DDL操作包括创建表、添加分区、查看表和分区信息、修改表、删除表和分区，更多详情请参见[创建/查看/删除表](intl.zh-CN/快速入门/创建/查看/删除表.md#)。
+简单的DDL操作包括创建表、添加分区、查看表和分区信息、修改表、删除表和分区，更多详情请参见[创建/查看/删除表](intl.zh-CN/快速入门/创建__查看__删除表.md#)。
 
-**Select语句**
+## Select语句 { .section}
 
 -   group by语句的key可以是输入表的列名，也可以是由输入表的列构成的表达式，不可以是Select语句的输出列。
 
@@ -117,7 +117,7 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
 
         此时，复制logview的链接并打开webcosole页面，双击执行Join操作的fuxi job，可以看到此时在\[Long-tails\]区域有长尾，表示数据已经倾斜了。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15382737231560_zh-CN.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15417502741560_zh-CN.PNG)
 
         此时您可通过如下方法进行优化。
 

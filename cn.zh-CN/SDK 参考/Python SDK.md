@@ -2,12 +2,12 @@
 
 本文简单向您介绍如何通过Python SDK实现创建、查看、删除表等操作。
 
-PyODPS是MaxCompute的Python版本的SDK，它提供了对MaxCompute对象的基本操作和DataFrame框架，可以轻松地在MaxCompute上进行数据分析。更多详情请参见[Github项目](https://github.com/aliyun/aliyun-odps-python-sdk)和包括所有接口、类的细节等内容的[详细文档](http://pyodps.readthedocs.org/)。
+PyODPS是MaxCompute的Python版本的SDK，提供对MaxCompute对象的基本操作和DataFrame框架，让您可以轻松地在MaxCompute上进行数据分析。更多详情请参见[Github项目](https://github.com/aliyun/aliyun-odps-python-sdk)和包括所有接口、类的细节等内容的[详细文档](http://pyodps.readthedocs.org/)。
 
--   关于PyODPS的更多详情请参见[PyODPS云栖社区专辑](https://yq.aliyun.com/album/19)。
+-   更多关于PyODPS的开发内容，请参见[PyODPS开发文档](cn.zh-CN/用户指南/PyODPS/工具平台使用指南/工具平台使用指南概述.md#)。
+-   关于PyODPS的社区信息请参见[PyODPS云栖社区专辑](https://yq.aliyun.com/album/19)。
 -   欢迎各位开发者参与到PyODPS的生态开发中，详情请参见[GitHub文档](http://pyodps.readthedocs.io/zh_CN/latest/?spm=a2c4e.11153959.blogcont138752.16.5bec51d32BpKgB)。
--   欢迎提交issue和merge request，加快PyODPS生态成长，更多详情请参见[代码](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ)。
--   如果您想了解更多关于PyODPS的开发内容，请参见[PyODPS开发文档](cn.zh-CN/用户指南/PyODPS/工具平台使用指南/工具平台使用指南概述.md#)。
+-   欢迎提交Issue和Merge Request，加快PyODPS生态成长，更多详情请参见[代码](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ)。
 -   钉钉技术交流群：11701793。
 
 ## 安装 {#section_mj1_jxb_wdb .section}
@@ -517,7 +517,7 @@ DataFrame API提供了value\_counts方法来快速达到同样的目的。如下
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15410613342854_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15417535412854_zh-CN.png)
 
 将年龄分成30组，查看各年龄分布的直方图，如下所示：
 
@@ -525,7 +525,7 @@ ylabel='prefession')
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15410613342855_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15417535412855_zh-CN.png)
 
 使用join把这三张表进行联合后，把它保存成一张新的表。如下所示：
 

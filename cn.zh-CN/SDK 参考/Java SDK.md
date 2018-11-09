@@ -1,8 +1,10 @@
 # Java SDK {#concept_utw_vvc_5db .concept}
 
-This article introduces most commonly used MaxCompute core interfaces. For more information, see [SDK Java Doc](http://repo.aliyun.com/java-sdk-doc/).
+本文从实例、资源、表、函数等几个方面为您介绍Java SDK。
 
-Configure the new SDK version through maven management. The configuration information of Maven is as follows: \(The latest version can be searched for odps-sdk-core at any time at [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5).
+本文将为您介绍较为常用的 MaxCompute 核心接口，更多详情请参见 [SDK Java Doc](http://repo.aliyun.com/java-sdk-doc/)。
+
+您可以通过 Maven 管理配置新 SDK 的版本。Maven 的配置信息如下（最新版本可以随时到 [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5) 搜索 odps-sdk-core 获取）：
 
 ```
 <dependency>
@@ -12,29 +14,29 @@ Configure the new SDK version through maven management. The configuration inform
 </dependency>
 ```
 
-**Note:** 0.27.2-public version and above support MaxCompute 2.0[New data type](../../../../reseller.en-US/User Guide/Definition/Data types.md#).
+**说明：** 注意：0.27.2-public 版本及以上才支持MaxCompute 2.0[新数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#) 。
 
-The overall information of the SDK package provided by MaxCompute is shown in the following table:
+MaxCompute 提供的 SDK 包整体信息，如下表所示：
 
-|Package Name|Description|
-|:-----------|:----------|
-|odps-sdk-core|The basic functions of MaxCompute, such as the operation of tables, Project, and Tunnel, are all included in this package.|
-|odps-sdk-commons|Some Util packages.|
-|odps-sdk-udf|Main interface of UDF.|
-|odps-sdk-mapred|MapReduce Java SDK.|
-|odps-sdk-graph|Graph Java SDK, the keyword. used to search is “odps-sdk-graph”.|
+|包名|描述|
+|:-|:-|
+|odps-sdk-core|MaxCompute 的基础功能，例如：对表，Project 的操作，以及 Tunnel 均在此包中|
+|odps-sdk-commons|一些 Util 封装|
+|odps-sdk-udf|UDF 功能的主体接口|
+|odps-sdk-mapred|MapReduce 功能|
+|odps-sdk-graph|Graph Java SDK，搜索关键词“odps-sdk-graph”|
 
 ## AliyunAccount {#section_os1_f5b_wdb .section}
 
-AlibabaCloudAccount. The primary account created with Alibaba Cloud. It generally has an AccessKey that comprises of an AccessKeyId and an AccessKeySecret, used to initialize MaxCompute.
+阿里云认证账号。输入参数为 accessId 及 accessKey，是阿里云用户的身份标识和认证密钥。此类用来初始化 MaxCompute。
 
 ## MaxCompute {#section_i25_f5b_wdb .section}
 
-It is the entry of MaxCompute SDK. You can get set of all objects under the project shell by such endpoint, including [Projects](../../../../reseller.en-US/User Guide/Definition/Projects.md), [Tables](../../../../reseller.en-US/User Guide/Definition/Table.md), [Resources](../../../../reseller.en-US/User Guide/Definition/Resource.md), [Functions](../../../../reseller.en-US/User Guide/Definition/Function.md), and [Instances](../../../../reseller.en-US/User Guide/Definition/Instance.md).
+MaxCompute SDK 的入口，您可通过此类来获取项目空间下的所有对象集合，包括：[Projects](../../../../intl.zh-CN/用户指南/基本概念/项目空间.md)，[Tables](../../../../intl.zh-CN/用户指南/基本概念/表.md)，[Resources](../../../../intl.zh-CN/用户指南/基本概念/资源.md)，[Functions](../../../../intl.zh-CN/用户指南/基本概念/函数.md)，[Instances](../../../../intl.zh-CN/用户指南/基本概念/任务实例.md)。
 
-**Note:** MaxCompute was formerly called ODPS, so the portal class is still named as ODPS in the current SDK version.
+**说明：** MaxCompute 原名 ODPS，因此在现有的 SDK 版本中，入口类仍命名为 ODPS。
 
-User can construct MaxCompute object by entering the AliyunAccount instance. The code example is shown as follows:
+您可以通过传入 AliyunAccount 实例来构造 MaxCompute 对象。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -48,17 +50,17 @@ User can construct MaxCompute object by entering the AliyunAccount instance. The
 
 ```
 
-## Tunnel {#section_ohh_wy5_qfb .section}
+## 批量数据通道 {#section_ff1_yd5_qfb .section}
 
-The MaxCompute Tunnel data channel is written based on the Tunnel SDK, and you can upload or download data to MaxCompute through the Tunnel. For more information, see[Tunnel SDK](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md#).At present, Tunnel supports only tables \(excluding views View\) and uploading and downloading data.
+MaxCompute Tunnel数据通道是基于Tunnel SDK编写的，您可以通过Tunnel向MaxCompute中上传或者下载数据，详细内容请参见[批量数据通道](../../../../intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md#)。目前Tunnel仅支持表（不包括视图View）和数据的上传和下载。
 
-## MapReduce {#section_pjl_pnz_sfb .section}
+## MapReduce {#section_k1z_3nz_sfb .section}
 
-See[MapReduce SDK](../../../../reseller.en-US/User Guide/MapReduce/Java SDK/Java SDK.md#) for more information.
+MapReduce 支持的MapReduce SDK请参见[原生SDK概述](../../../../intl.zh-CN/用户指南/MapReduce/Java SDK/原生SDK概述.md#)。
 
 ## Projects {#section_eg4_k5b_wdb .section}
 
-It is the set of all projects in MaxCompute. The element of this set is Projects. The code example is shown as follows:
+Projects 是 MaxCompute 中所有项目空间的集合。集合中的元素为 Project。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -74,20 +76,18 @@ It is the set of all projects in MaxCompute. The element of this set is Project
 
 ## Project {#section_lg2_n5b_wdb .section}
 
-It refers to the description of project and corresponding project, and can be acquired from Projects.
+Project 是对项目空间信息的描述，可以通过 Projects 获取相应的项目空间。
 
 ## SQLTask {#section_fpg_45b_wdb .section}
 
-It refers to an interface to run and process SQL task. SQL can run directly through the interface ‘run’.\(**Note: only one SQL statement can be submitted at a time.**\)
+SQLTask 是用于运行、处理 SQL 任务的接口。可以通过 run 接口直接运行 SQL。\(**注意：每次只能提交运行一个SQL语句。**\)
 
-The run interface returns the Instance instance and obtains the SQL running status and result through Instance.  
-
-**Example:**
+run 接口返回 Instance 实例，通过 Instance 获取 SQL 的运行状态及运行结果。程序示例如下：
 
 ```
     import java.util.List;
     import com.aliyun.odps.Instance;
-    mport com.aliyun.odps.Odps;
+    import com.aliyun.odps.Odps;
     import com.aliyun.odps.OdpsException;
     import com.aliyun.odps.account.Account;
     import com.aliyun.odps.account.AliyunAccount;
@@ -121,11 +121,11 @@ The run interface returns the Instance instance and obtains the SQL running stat
 
 ```
 
-**Note:** To create a table, use SQLTask interface instead of the interface Table. You must introduce the statement of [Table Operation](reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#) into SQLTask.
+**说明：** 如果您想创建表，需要通过 SQLTask 接口，而不是 Table 接口。您需要将[ZH-CN\_TP\_13396.md\#](intl.zh-CN/用户指南/SQL/DDL语句/表操作.md#)的语句传入SQLTask。
 
 ## Instances {#section_xtz_s5b_wdb .section}
 
-This class refers to the set of all \(instances\) in MaxCompute and the element of this set is Instance. The code example is shown as follows:
+Instances 是 MaxCompute 中所有实例（Instance）的集合，集合中的元素为 Instance。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -141,7 +141,7 @@ This class refers to the set of all \(instances\) in MaxCompute and the element 
 
 ## Instance {#section_rqp_v5b_wdb .section}
 
-It refers to the description of instance and corresponding instance,and can be acquired from Instances. The code example is as follows:
+Instance 是对实例信息的描述，可以通过 Instances 获取相应的实例。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -158,7 +158,7 @@ It refers to the description of instance and corresponding instance,and can be a
       instanceStatusStr = TaskStatus.Status.SUCCESS.toString();
       Map<String, TaskStatus> taskStatus = instance.getTaskStatus();
       for (Entry<String, TaskStatus> status : taskStatus.entrySet()) {
-        if (status.getValue().getStatus() ! = TaskStatus.Status.SUCCESS) {
+        if (status.getValue().getStatus() != TaskStatus.Status.SUCCESS) {
           instanceStatusStr = status.getValue().getStatus().toString();
           break;
         }
@@ -174,7 +174,7 @@ It refers to the description of instance and corresponding instance,and can be a
 
 ## Tables {#section_bwd_z5b_wdb .section}
 
-This class refers to the set of all tables in MaxCompute. The element of this set is Table. The code example is shown as follows:
+Tables 是 MaxCompute 中所有表的集合，集合中的元素为 Table。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -190,7 +190,7 @@ This class refers to the set of all tables in MaxCompute. The element of this se
 
 ## Table {#section_c13_bvb_wdb .section}
 
-It refers to the description of table and corresponding table and can be acquired through Tables. The code example is shown as follows:
+Table 是对表信息的描述，可以通过 Tables 获取相应的表。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -207,7 +207,7 @@ It refers to the description of table and corresponding table and can be acquire
 
 ## Resources {#section_tdn_dvb_wdb .section}
 
-The class refers to the set of all resources in MaxCompute. The element of this set is Resource. The code example is as follows:
+Resources 是 MaxCompute 中所有资源的集合。集合中的元素为 Resource。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -223,7 +223,7 @@ The class refers to the set of all resources in MaxCompute. The element of this 
 
 ## Resource {#section_p3x_fvb_wdb .section}
 
-It refers to the resource description and the corresponding resource and can be acquired through Resources. The code example is as follows:
+Resource 是对资源信息的描述，可以通过 Resources 获取相应的资源。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -236,7 +236,7 @@ It refers to the resource description and the corresponding resource and can be 
      TableResource tr = new TableResource(r);
      String tableSource = tr.getSourceTable().getProject() + "."
          + tr.getSourceTable().getName();
-     if (tr.getSourceTablePartition() ! = null) {
+     if (tr.getSourceTablePartition() != null) {
        tableSource += " partition(" + tr.getSourceTablePartition().toString()
            + ")";
      }
@@ -245,7 +245,7 @@ It refers to the resource description and the corresponding resource and can be 
 
 ```
 
-File resource creation example is as follows:
+创建文件资源的示例，如下所示：
 
 ```
     String projectName = "my_porject";
@@ -258,7 +258,7 @@ File resource creation example is as follows:
     odps.resources().create(projectName, resource, is);
 ```
 
-Table resource creation example is as follows:
+创建表资源的示例，如下所示：
 
 ```
     TableResource resource = new TableResource(tableName, tablePrj, partitionSpec);
@@ -269,7 +269,7 @@ Table resource creation example is as follows:
 
 ## Functions {#section_b4d_lvb_wdb .section}
 
-This class refers to the set of all functions in MaxCompute. The element of this set is Function. An example is as follows:
+Functions 是 MaxCompute 中所有函数的集合。集合中的元素为 Function。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -285,7 +285,7 @@ This class refers to the set of all functions in MaxCompute. The element of this
 
 ## Function {#section_xbw_nvb_wdb .section}
 
-It refers to the function description and corresponding function and can be acquired through Functions. The code example is as follows:
+Function 是对函数信息的描述，可以通过 Functions 获取相应的函数。程序示例如下：
 
 ```
     Account account = new AliyunAccount("my_access_id", "my_access_key");
@@ -297,7 +297,7 @@ It refers to the function description and corresponding function and can be acqu
 
 ```
 
-Function creation example:
+创建函数的示例，如下所示：
 
 ```
     String resources = "xxx:xxx";

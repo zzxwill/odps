@@ -2,13 +2,13 @@
 
 You can import and export  data through MaxCompute using the following methods:
 
--    [Tunnel commands](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md), directly on the console.
--   MaxCompute Studio in the visualization method. For more information, see [Import and Export Data](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/Manage data and resources/Import and export data.md).
--   Java tools written with the SDK provided by [Tunnel](../../../../intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
+-    [Tunnel commands](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md), directly on the console.
+-   MaxCompute Studio in the visualization method. For more information, see [Import and Export Data](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Manage data and resources/Import and export data.md).
+-   Java tools written with the SDK provided by [Tunnel](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 -   Flume and Fluentd plug-ins.
--   Data is imported and exported through dataworks. For more information, see [Data Integration overview](https://www.alibabacloud.com/help/doc-detail/47677.html).
+-   Data is imported and exported through DataWorks. For more information, see [Data Integration overview](https://www.alibabacloud.com/help/doc-detail/72961.html).
 
-For data export, see commands about downloading in [Tunnel commands](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md).
+For data export, see commands about downloading in [Tunnel commands](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md).
 
 ## Tunnel commands Follow the steps below to import data using tunnel commands. {#section_v5p_zjy_5db .section}
 
@@ -39,16 +39,16 @@ For data export, see commands about downloading in [Tunnel commands](../../../..
 
 4.  After the command has run successfully, check the records in the table wc\_in.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/1484_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532531484_en-US.png)
 
     **Note:** 
 
-    -   For more information of Tunnel commands, for example, how to import data into a partitioned table, see [Tunnel Operation](../../../../intl.en-US/User Guide/Data upload and download/Tunnel commands.md).
+    -   For more information of Tunnel commands, for example, how to import data into a partitioned table, see [Tunnel Operation](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md).
     -   If multiple columns are in the table, you can specify column separators by using-fd parameter.
 
 ## Max compute studio imports data {#section_unz_vky_5db .section}
 
-Follow the steps below to import data using MaxCompute Studio. Before using MaxCompute Studio, make sure that you have [installed MaxCompute Studio](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/Tools Installation and version history/Install IntelliJ IDEA.md) and [configured Project Space Connection](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md).
+Follow the steps below to import data using MaxCompute Studio. Before using MaxCompute Studio, make sure that you have [installed MaxCompute Studio](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Tools Installation and version history/Install IntelliJ IDEA.md) and [configured Project Space Connection](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md).
 
 1.  Data Preparation
 
@@ -63,7 +63,7 @@ Follow the steps below to import data using MaxCompute Studio. Before using MaxC
 
     To import the data created in the preceding step, a MaxCompute table must be created first. Right-click **tables&views** in the project and operate as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/1490_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541490_en-US.png)
 
     If the statement is executed successfully, then the table has been created.
 
@@ -73,7 +73,7 @@ Follow the steps below to import data using MaxCompute Studio. Before using MaxC
 
     **Note:** If the table name does not appear in the list, click the **refresh** button.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/1522_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541522_en-US.png)
 
 
 ## Tunnel SDK {#section_gdq_z4y_5db .section}
@@ -250,11 +250,11 @@ Upload data into MaxCompute, where the project is odps\_public\_dev, the table n
 
     1.  Right-click on the **Java program** and click**Import \>** \> **Maven \> ** \> **Existing Maven Projects**, The settings are as follows:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/1545_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541545_en-US.PNG)
 
     2.  Right-click on **UploadSample.java** and click**Run As** \> **Run Configurations**, as follows:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/1547_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541547_en-US.PNG)
 
     3.  Click **Run**After running successfully, the console shows as follows:
 
@@ -293,9 +293,9 @@ Upload data into MaxCompute, where the project is odps\_public\_dev, the table n
     **Note:** 
 
     -   As an independent service in MaxCompute, Tunnel has an exclusive access port provided for users. When you download data with MaxCompute Tunnel over the Alibaba Cloud intranet, MaxCompute does not bill you for the traffic produced by this operation. The Intranet address is only valid for cloud products in the Shanghai region.
-    -   For more information about MaxCompute Alibaba Intranet and public network access addresses, see [Access domains and data centers](../../../../intl.en-US/Prepare/Access domains and data centers.md).
+    -   For more information about MaxCompute Alibaba Intranet and public network access addresses, see [Access domains and data centers](../../../../reseller.en-US/Prepare/Configure Endpoint.md).
 
 ## Other import methods {#section_vcl_r5y_5db .section}
 
-In addition to MaxCompute Console and Tunnel Java SDK, data can also be imported through Alibaba Cloud DTplus products, Sqoop, Fluentd, Flume, LogStash , and other tools.And more [Tools](../../../../intl.en-US/User Guide/Data upload and download/Tools.md).
+In addition to MaxCompute Console and Tunnel Java SDK, data can also be imported through Alibaba Cloud DTplus products, Sqoop, Fluentd, Flume, LogStash , and other tools.And more [Tools](../../../../reseller.en-US/User Guide/Data upload and download/Data upload and download tools.md).
 

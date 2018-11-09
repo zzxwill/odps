@@ -1,6 +1,6 @@
 # 运行SQL {#concept_tgf_v5y_5db .concept}
 
-大多数用户对SQL的语法并不陌生，简单来说，MaxCompute SQL是用于查询和分析MaxCompute中的大规模数据。目前SQL的主要功能如下所示。
+您对SQL语法可能并不陌生，MaxCompute SQL用于查询和分析MaxCompute中的大规模数据，主要功能如下所示。
 
 -   支持各类运算符。
 -   通过DDL语句对表、分区以及视图进行管理。
@@ -14,15 +14,15 @@
 
 **说明：** 
 
--   MaxCompute SQL不支持事务、索引及Update/Delete等操作，同时MaxCompute的SQL语法与Oracle，MySQL有一定差别，您无法将其他数据库中的SQL语句无缝迁移到MaxCompute上来。
+-   MaxCompute SQL不支持事务、索引及Update/Delete等操作，同时MaxCompute的SQL语法与Oracle，MySQL有一定差别，您无法将其他数据库中的SQL语句无缝迁移到MaxCompute上来，更多差异请参见[与其他SQL语法的差异](../../../../cn.zh-CN/用户指南/SQL/与其他SQL语法的差异.md#)。
 -   在使用方式上，MaxCompute作业提交后会有几十秒到数分钟不等的排队调度，所以适合处理跑批作业，一次作业批量处理海量数据，不适合直接对接需要每秒处理几千至数万笔事务的前台业务系统。
--   关于SQL操作的详细示例，请参见[SQL模块](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md#)。
+-   关于SQL操作的详细示例，请参见[SQL模块](../../../../cn.zh-CN/用户指南/SQL/SQL概述.md#)。
 
 ## DDL语句 {#section_kdh_cvy_5db .section}
 
-简单的DDL操作包括创建表、添加分区、查看表和分区信息、修改表、删除表和分区，更多详情请参见[创建/查看/删除表](intl.zh-CN/快速入门/创建/查看/删除表.md#)。
+简单的DDL操作包括创建表、添加分区、查看表和分区信息、修改表、删除表和分区，更多详情请参见[创建/查看/删除表](cn.zh-CN/快速入门/创建__查看__删除表.md#)。
 
-**Select语句**
+## Select语句 { .section}
 
 -   group by语句的key可以是输入表的列名，也可以是由输入表的列构成的表达式，不可以是Select语句的输出列。
 
@@ -85,7 +85,7 @@ Union All可以把多个Select操作返回的结果，联合成一个数据集�
 -   MaxCompute SQL目前最多支持128个并发Union操作。
 -   最多支持128个并发insert overwrite/into操作。
 
-MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-CN/用户指南/SQL/SQL限制项汇总.md#)。
+MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../cn.zh-CN/用户指南/SQL/SQL限制项汇总.md#)。
 
 ## SQL优化示例 {#section_osj_bwy_5db .section}
 
@@ -105,7 +105,7 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
 
     产生数据倾斜的根本原因是有少数Worker处理的数据量远远超过其他Worker处理的数据量，从而导致少数Worker的运行时长远远超过其他的平均运行时长，从而导致整个任务运行时间超长，造成任务延迟。
 
-    更多数据倾斜优化的详情请参见[计算长尾调优](../../../../intl.zh-CN/最佳实践/计算长尾调优.md#)。
+    更多数据倾斜优化的详情请参见[计算长尾调优](../../../../cn.zh-CN/最佳实践/计算长尾调优.md#)。
 
     -   **Join造成的数据倾斜**
 
@@ -117,7 +117,7 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
 
         此时，复制logview的链接并打开webcosole页面，双击执行Join操作的fuxi job，可以看到此时在\[Long-tails\]区域有长尾，表示数据已经倾斜了。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15382737231560_zh-CN.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15417501941560_zh-CN.PNG)
 
         此时您可通过如下方法进行优化。
 

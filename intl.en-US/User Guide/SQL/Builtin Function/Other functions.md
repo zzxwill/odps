@@ -1,26 +1,27 @@
 # Other functions {#concept_wzd_xhm_vdb .concept}
 
+This article shows you how to use functions such as cast, decode, least, array, split, map, and so on.
+
 ## CAST {#section_bpc_dy1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
-cast(expr as <type>)
+cast(expr as &lt;type>)
 ```
 
-**Usage**:
-
-Converts the result of expression to object type. For example, cast \(‘1’ as bigint\) converts string ‘1’ to bigint ‘1’. If the conversion is unsuccessful or not supported, an exception is thrown.
+convert the result of expression to object type. For example, cast \(‘1’ as bigint\) is to convert string ‘1’ to bingint ‘1’. If the conversion is unsuccessful or the conversion is not supported, an exception occurs.
 
 **Note:** 
 
--   cast \(double as bigint\): Converts double type value to bigint type value.
--   cast \(string as bigint\): While the string is converted to ‘bigint’ type, if the digits indicated by ‘int’ exist in this string, it is converted to ‘bigint’ type directly. If the digits indicated by ‘float’ or ‘exponent’ exist in this string, firstly they are converted to ‘double’ type and then converted to ‘bigint’ type.
--   For cast \(string as datetime\) or cast \(datetime as string\), it adopts the default datetime format yyyy-mm-dd hh: mi: ss.
+-   cast \(double as bigint\): convert Double type value to Bigint type value.
+-   cast\(string as bigint\) converts a value of the string type into a value of the bigint type. If the string is composed of numerals expressed in integer form, it is directly converted into a value of the bigint type.
+-   If the string is composed of numerals expressed in the float or exponent form, it is converted into a value of the double type first and then into a value of the bigint type.
+-   \* cast\(string as datetime\) or cast\(datetime as string\) adopts the default format yyyy-mm-dd hh:mi:ss.
 
 ## COALESCE {#section_dts_3y1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 coalesce(expr1, expr2, ...)
@@ -28,21 +29,21 @@ coalesce(expr1, expr2, ...)
 
 **Usage**:
 
-Returns the first value which is not NULL from the list. If all values in the list are NULL, return NULL.
+return the first value which is not NULL from the list. If all values in the list are NULL, return NULL.
 
 **Parameter description**:
 
-expr: Value to be tested. All these values have the same data type or be NULL, otherwise an exception is thrown.
+Expri: value to be tested. All these values have the same data type or be NULL, otherwise an expction occurs.
 
 **Return value**:
 
-Returns value type is the same as parameter type.
+Return value type is the same as parameter type.
 
-**Note:** At least one parameter must exist, otherwise an exception is thrown.
+**Note:** There must be one parameter at least, otherwise an exception occurs.
 
 ## DECODE {#section_ygq_4y1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 decode(expression, search, result[, search, result]...[, default])
@@ -50,28 +51,28 @@ decode(expression, search, result[, search, result]...[, default])
 
 **Usage**:
 
-Implements the selection function of if-then-else branch.
+Implement the selection function of if-then-else branch.
 
 **Parameter description**:
 
--   expression: An expression to be compared.
--   search: The search string; which is compared with the expression.
--   result: Return value when the values of search and expression match.
--   default: Optional. If all search items do not match the expression, return this default value. If it is not specified, return NULL.
+-   expression: expression to be compared.
+-   search: A search string to be compared with the expression.
+-   result: the returned value when the values of search and expression match.
+-   default: it is optional. If all search items do not match the expression, return this default value. If it is not specified, return NULL.
 
-**Return value**:
+**Return Value**:
 
--   Returns a matched search.
--   If no matched record exists, return default.
+-   return matched search.
+-   If no matching record exists, return default.
 -   If default is not specified, return NULL.
 
     **Note:** 
 
-    1.  Specify at least three parameters.
-    2.  All of the result types must be the same or NULL. Inconsistent data type throws an exception. All of the ‘search’ and ‘expression’ types must be consistent, otherwise an exception is thrown.
-    3.  If the option ‘search’ in ‘decode’ has duplicate or matched records, return the first value.
+    -   You must specify at least three parameters.
+    -   All of the result types must be the same or NULL. Inconsistent data type causes an exception. All of the search and expression types must be consistent, otherwise an exception is reported.
+    -   If the option search in decode has repeated record and has been matched, return the first value.
 
-**Example**:
+**The example is as follows**:
 
 ```
 Select
@@ -81,10 +82,10 @@ decode(customer_id,
 3, 'Aliyun',
 Null, 'N/A',
 'Others') as result
-from sale_detail;
+From sale_detail;
 ```
 
-The decode function mentioned earlier implements the function in following if-then-else sentence:
+The decode function mentioned previously implements the function in following if-then-else sentence:
 
 ```
 if customer_id = 1 then
@@ -101,32 +102,32 @@ end if;
 
 **Note:** 
 
--   Calculating NULL= NULL by MaxCompute SQL, return NULL, while the values of NULL and NULL are equal in a decode function.
--   In the preceding example, if the value of customer\_id is NULL, decode function returns N/A.
+-   Calculating NULL= NULL by MaxCompute SQL, return NULL, while the values of NULL and NULL are equal in decode function.
+-   In the preceding example, if the value of customer\_id is NULL, decode function returns N/A as a result.
 
 ## GET\_IDCARD\_AGE {#section_j2q_1z1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 get_idcard_age(idcardno)
 ```
 
-**Usage**: 
+**Usage**:-
 
-Returns the current age according to the ID information. The number is the difference of the current year and the birth year identified in the ID.
+Returns the current age based on the ID number which is the difference of the current year and the year of birth identified in the ID.
 
 **Parameter description**:
 
-idcardno: String type, ID number of 15-digit or 8-digit. While calculating, the validity of the ID is checked according to the province code and the last digit, and Null returns if the check fails.
+idcardno: String type, ID number of 15-digit or 18-digit. In the calculation, the validity of the ID is checked according to the province code and the last digit, and Null is returned if the check fails.
 
-**Return value**:
+**Return Value**:
 
-Returns the Bigint type. Input is Null, returns Null. Returns Null if the difference of the current year and the birth year is greater than 100.
+Returns the Bigint type. Input is Null, returns Null. Returns Null if the difference of the current year and the year of birth is larger than 100.
 
 ## GET\_IDCARD\_BIRTHDAY {#section_tfq_dz1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 get_idcard_birthday(idcardno)
@@ -134,90 +135,90 @@ get_idcard_birthday(idcardno)
 
 **Usage**:
 
-Returns date of birth according to the ID information.
+Returns date of birth based on the ID number.
 
 **Parameter description**:
 
-idcardno: String type, ID number of 15-digit or 18-digit. While calculating, the validity of the ID is checked according to the province code and the last digit, and Null is returned if the check fails.
+idcardno: String type, ID number of 15-digit or 18-digit. In the calculation, the validity of the ID is checked according to the province code and the last digit, and Null is returned if the check fails.
 
-**Return value**:
+**Return Value**:
 
 Returns the Datetime type. Input is Null, returns Null.
 
 ## GET\_IDCARD\_SEX {#section_akt_gz1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 get_idcard_sex(idcardno)
 ```
 
-**Usage**: 
+**Usage**:
 
-Returns the gender according to the ID information. The value is either M \(male\) or F \(female\)
+Returns the gender based on the ID number and the value is either M \(male\) or F \(female\).
 
 **Parameter description**:
 
-idcardno: String type, ID number of 15-digit or 18-digit. While calculating, the validity of the ID is checked according to the province code and the last digit, and Null is returned if the check fails.
+idcardno: String type, ID number of 15-digit or 18-digit. In the calculation, the validity of the ID is checked according to the province code and the last digit, and Null is returned if the check fails.
 
-**Return value**:
+**Return Value**:
 
 Returns the String type. Input is Null, returns Null.
 
 ## GREATEST {#section_n1g_kz1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 greatest(var1, var2, ...)
 ```
 
-**Usage**: 
+**Usage**:
 
-Returns the greatest input parameter.
+Return the greatest input parameter.
 
 **Parameter description**:
 
-var1/var2: Its type can be Bigint, Double, Decimal, Datetime, or String type. If all values are NULL, return NULL.
+var1/var2: Its type can be Bigint, Double, Decimal，Datetime or String type. If all values are NULL, return NULL.
 
-**Return value**:
+**Return Value**:
 
--   The greatest value in the input parameter. If the implicit conversion is not needed, return type is the same as input parameter type.
+-   The greatest value in input parameter. If the implicit conversion is not needed, return type is the same as input parameter type.
 -   NULL is the least value.
 
-    If the input parameter types are different, 
+    If the input parameter types are different,
 
-    -   for Double, Bigint, Decimal and String type, convert them into Double type. 
-    -   for String and Datetime, convert them into Datetime type.
-    -   other implicit conversions are not allowed.
+    -   for Double, Bigint, Decimal and String type, convert them to be Double type.
+    -   For String and Datetime, convert them to be Datetime type.
+    -   Other implicit conversion is not allowed.
 
 ## ORDINAL {#section_pcj_pz1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 ordinal(bigint nth, var1, var2, ...)
 ```
 
-**Usage**: 
+**Usage**:
 
-Returns the location value specified by ‘nth’ after the input variables are sorted by small to large.
+Return the location value specified by ‘nth’ after the input variables are sorted by small to large.
 
 **Parameter description**:
 
 -   nth: Bigint type, specify the location to return its value. If it is NULL, return NULL.
--   var1/var2: Its type can be Bigint, Double, Datetime, or String type.
+-   var1/var2: Its type can be Bigint, Double, Datetime or String type.
 
-**Return value**:
+**Return Value**:
 
 -   The value in nth bit. If the implicit conversion is not needed, return type is the same as input parameter type.
 -   If implicit conversion is in input parameters,
-    -   For Double, Bigint and String type, convert them into Double type.
-    -   For String and Datetime type, convert them into Datetime type.
-    -   Other implicit conversions are not allowed.
+    -   For Double, Bigint and String type, convert them to be Double type.
+    -   For String and Datetime type, convert them to be Datetime type.
+    -   Other implicit conversion is not allowed.
 -   NULL is the least value.
 
-**Example**:
+**The example is as follows**:
 
 ```
 ordinal(3, 1, 3, 2, 5, 2, 4, 6) = 2
@@ -225,54 +226,54 @@ ordinal(3, 1, 3, 2, 5, 2, 4, 6) = 2
 
 ## LEAST {#section_m1b_xz1_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 least(var1, var2, ...)
 ```
 
-**Usage**: 
+**Usage**:-
 
-Returns the least value in the input parameter.
+return the least value in input parameter.
 
 **Parameter description**:
 
-var1/var2: Its type can be Bigint, Double, Decimal, Datetime, or String type. If all values are NULL, return NULL.
+var1/var2: Its type can be Bigint, Double, Decimal，Datetime or String type. If all values are NULL, return NULL.
 
-**Return value**:
+**Return Value**:
 
--   The least value in the input parameter. If the implicit conversion is not needed, return type is the same as input parameter type.
--   If implicit conversion is in input parameters:
-    -   For Double, Bigint and String type, convert them into Double type.
-    -   For String and Datetime type, convert them into Datetime type.
-    -   Convert to Decimal type when Decimal type compares to Double, Bigint or String type.
-    -   Other implicit conversions are not allowed.
+-   The least value in input parameter; If the implicit conversion is not needed, return type is the same as input parameter type.
+-   If implicit conversion is in input parameters,
+    -   For Double, Bigint and String type, convert them to be Double type.
+    -   For ‘string’ type and ‘datetime’ type, convert them to be ‘datetime’ type.
+    -   Converts to Decimal type when Decimal type compares to Double, Bigint or String type.
+    -   Other implicit conversion is not allowed.
 -   NULL is the least value.
 
 
 ## MAX\_PT {#section_yyf_d1b_wdb .section}
 
-**Command prompt**:
+**Function definition**:
 
 ```
 max_pt(table_full_name)
 ```
 
-**Usage**: 
+**Usage**:-
 
-For a partitioned table, this function returns the maximum value of the level-one partition of the partitioned table, which is sorted alphabetically, and a corresponding data file exists for the partition.
+For a partitioned table, this function returns the maximum value of the level-one partition of the partitioned table, which is sorted alphabetically, and there is a corresponding data file for the partition.
 
 **Parameter description**:
 
-table\_full\_name: String type, specifies the name of table. To use this funtion, specify the name of project, for example: prj.src. You must have read permission on this table.
+table\_full\_name: String type, specifys the name of table, which must be with the name of project, for example: prj.src\). You must own read permission on this table.
 
-**Return value**:
+**Return Value**:
 
-Returns the value of the largest level-one partition.
+Return value: Returns the value of the largest level-one partition.
 
-**Example**:
+**The example is as follows**:
 
-Example: Suppose that ‘tbl’ is a partitioned table, all partitions of the table with data files are as follows:
+Example: Suppose that ‘tbl’ is a partitioned table, all partitions of the table are as follows, and there are data files:
 
 ```
 pt =‘20120901’
@@ -287,57 +288,57 @@ select * from tbl where pt=max_pt('myproject.tbl');
 
 **Note:** 
 
-If you only add a new partition using alter table, but no data file is in this partition, the partition will not return.
+If a new partition is added by using alter table, but there is no data file in this partition, then this partition is not returned.
 
 ## UUID {#section_gtg_j1b_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 string uuid()
 ```
 
-**Usage**: 
+**Usage**:-
 
-Returns a random ID. For example: `29347a88-1e57-41ae-bb68-a9edbdd94212`.
+return a random ID. Example: `29347a88-1e57-41ae-bb68-a9edbdd94212`.
 
 **Note:** 
 
-Returns a random global ID with a low probability of duplication.
+returns a random global ID with a low probability of duplication.
 
 ## SAMPLE {#section_vvl_l1b_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 boolean sample(x, y, column_name)
 ```
 
-**Usage**: 
+**Usage**:-
 
-Samples all values of column\_name according to the setting of x and y and filter out the rows which do not meet the sampling conditions.
+sample all values of column\_name according to the setting of x and y and filter out the rows which do not meet the sampling condition.
 
 **Parameter description**:
 
 -   x, y: Bigint type, indicates hash to x portions, take yth portions. y can be ignored.
-    -   If y is ignored, take the first portion. If y in the parameter is ignored, then column\_name is ignored at the same time. 
-    -   x and y are Bigint constants and greater than 0. If it is other data type or less than or equal to 0, an exception is thrown. If y&gt, x exception is thrown. If any input of x and y is NULL, return NULL.
--   column\_name: The destination column to be sampled.
-    -   column\_name can be excluded, in this case, a random sample is taken according to the values of x and y.
-    -   It can be any data type and the column value can be NULL. Implicit type conversion is not needed.
-    -   If column\_name is the constant NULL, an exception is thrown.
+    -   If y is ignored, take the first portion. If y in parameter is ignored, then column\_name is ignored at the same time.
+    -   x and y are Bigint constants and greater than 0. If it is other data type or less than or equal to 0, an exception is thrown. If y&gt, x exception is also thrown. If any input of x and y is NULL, return NULL.
+-   column\_name: the destination column to be sampled.
+    -   column\_name can be omitted, in which case, a random sample is taken according to the values of x and y.
+    -   It can be any data type and the column value can be NULL. Do not need implicit type conversion.
+    -   If column\_name is the constant NULL, an exception is reported.
 
-**Return value:**
+**Return Value:**
 
-Returns the Boolean type.
+Return value: Boolean type.
 
 **Note:** 
 
-To avoid data skew caused by NULL value, the NULL values in column\_name are perform a uniform hash operations in x portions. If ‘column\_name’ is not added, the output will not necessarily be uniform, since the data size is small. We recommend to add a ‘column\_name’ for better output.
+To avoid data skew brought by NULL value, so NULL values in column\_name are carried out a uniform hash in x portions. If column\_name is not added, the output is not necessarily uniform since the data size is smaller. So column\_name is suggested to be added to get better output.
 
-**Example**:
+**The example is as follows**:
 
-Suppose that the table 'tbla' already exists and a column 'cola' is in this table:
+Suppose that the table tbla is existent and a column cola is in this table:
 
 ```
 select * from tbla where sample (4, 1 , cola) = true;
@@ -346,9 +347,9 @@ select * from tbla where sample (4, 2) = true;
 -- The values do random Hash into 4 portions for each row of data and take the second portion.
 ```
 
-## CASE WHEN Expression {#section_axm_v1b_wdb .section}
+## CASE WHEN EXPRESSION {#section_axm_v1b_wdb .section}
 
-The following are the two case types that MaxCompute offers:
+Maxcompute provides two kinds of case when syntax formats, as follows:
 
 ```
 case value
@@ -366,9 +367,9 @@ else resultn
 end
 ```
 
-‘case when’ expression can return different values according to the computing result of expression values. 
+case when expression can return different values according to the computing result of expression values flexibly.
 
-The following sentences are used to get the region according to different shop\_name:
+The following sentences is used to get the region according to different shop\_name:
 
 ```
 select
@@ -376,44 +377,43 @@ case
 when shop_name is null then 'default_region'
 when shop_name like 'hang%' then 'zj_region'
 end as region
-from sale_detail;
+From sale_detail;
 ```
 
 **Note:** 
 
--   If the types of result include bigint and double, convert them to double type and then return the result.
--   If the types of result include string type, convert them into string type and then return the result. If the conversion is unsuccessful, the error is thrown, for example, boolean type.
+-   If the types of result include Bigint and Double, convert them to be Double type and then return the result.
+-   If the types of result include string type, convert them to be string type and then return the result. If the conversion is unsuccessfully, the error is reported. \(such as Boolean type\).
+-   Expect these, the conversion between other types is not allowed.
 
-The conversion between other types is not allowed.
+## If expression {#section_mg5_1bb_wdb .section}
 
-## IF Expression {#section_mg5_1bb_wdb .section}
-
-**Command format**:
+**Function definition**:
 
 ```
 if(testCondition, valueTrue, valueFalseOrNull)
 ```
 
-**Usage**: 
+**Usage**:-
 
-Determine if testCondition is true. If it is true, return valueTrue, otherwise return valueFalse or Null.
+Judge if testCondition is true. If it is true, return valueTrue, otherwise return valueFalse or Null.
 
 **Parameter description**:
 
--   testCondition: The expression to be Determined. Boolean type.
+-   testCondition: The expression to be judged. Boolean type.
 -   valueTrue: It returns when the expression testCondition is true.
--   valueFalseOrNull: It returns when the expression testCondition is not true and can also be null.
+-   valueFalseOrNull: It returns when the expression testCondition is not true and also can be null.
 
-**Return value**:
+**Return Value**:
 
 The return type is the same as the valueTrue or valueFalseOrNul type.
 
-**Example**:
+**The example is as follows**:
 
 ```
 select if(1=2,100,200) from dual; 
-Return Value:
-+------------+
+--Returned results:
++ ------------ +
 | _c0 |
 +------------+
 | 200 |
@@ -424,30 +424,28 @@ Return Value:
 
 ## SPLIT {#section_omq_nbb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 split(str, pat)
 ```
 
-**Usage**: 
-
-Separates 'str' using 'pat'.
+Purpose: After the STR is split by Pat, the array is returned.
 
 **Parameter description**:
 
 -   str: String type, specifies the string to be separated.
--   pat: String type, specifies the delimiter and supports regular expressions.
+-   pat: String type, specifies the delimiter, supports regular expressions.
 
-**Return value**:
+**Return Value**:
 
-`array <string >`, the result is the elements in 'str' separated by 'pat'.
+`array &lt;string >` , the result is the elements in str separated by pat.
 
-**Example**:
+**The example is as follows**:
 
 ```
 select split("a,b,c",",") from dual;
-Result:
+Results:
 +------+
 | _c0 |
 +------+
@@ -457,39 +455,86 @@ Result:
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
+
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
+
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
+
+## STR\_TO\_MAP {#section_p1z_xrj_dfb .section}
+
+Function declaration:
+
+```
+str_to_map(text [, delimiter1 [, delimiter2]])
+```
+
+Purpose: use ‘delimiter1’ to separate ‘text’ into K-V pairs, then use ‘delimiter2’ to separate each K-V pair.
+
+Parameter description
+
+-   str: String type, specifies the string to be separated.
+
+-   Impressioniter1: string type, separator that does not specify the default ',';
+
+-   Impressioniter2: string type, separator, default to '=' when not specified ';
+
+
+<b\>Return value</b\>: Map &lt;string, string \>. The elements are the K-V results of the separation of 'text' by the strings 'delimiter1' and 'delimiter2'.
+
+Example:
+
+```
+Select fig ('test1 &amp; 1-test2 & 2 ','-','&amp;');
+```
+
+Return result:
+
+```
++------------+
+| A |
++------------+
+| {Test1: 1, Test2: 2} |
+```
 
 ## EXPLODE {#section_wgw_xbb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 explode(var)
 ```
 
-**Usage**: 
+**Usage**:-
 
 Converts one row of data into a multi-row UDTF.
 
 -   If var is Array type, the array stored in the column is converted to multiple rows.
--   If var is Map type, each key-value pair of the map stored in the column is converted to a row with two columns, one column for the key and the other for the value.
+-   If var is Map type, each key-value pair of the map stored in the column is converted to a row with two columns, one column for the key and one for the value.
 
 **Parameter description**:
 
-`var: array<T> type or map<K, V> type.`
+`var: array&lt;T> type or map&lt;K, V> type.`
 
-**Return value**:
+**Return Value**:
 
 Rows after conversion are returned.
 
 **Note:** 
 
-The following limits apply when UDTF is used:
+The following restrictions apply when using UDTF:
 
 -   One select can only have one UDTF and no other columns can appear.
 -   It cannot be used with group by, cluster by, distribute by, or sort by.
 
-**Example**:
+**The example is as follows**:
 
 ```
 explode(array(null, 'a', 'b', 'c')) col
@@ -497,120 +542,178 @@ explode(array(null, 'a', 'b', 'c')) col
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
+
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
+
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
 
 ## MAP {#section_bzn_hcb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 MAP map(K key1, V value1, K key2, V value2, ...)
 ```
 
-**Usage**: 
+**Usage**:
 
-Uses the given key or value pairs to create a map.
+Uses the given key/value pairs to create a map.
 
 **Parameter description**:
 
 key/value
 
--   All key types must be the same basic type. 
--   Any value types can be used, but all value types must be consistent.
+-   All key types are consistent, including those after implicit conversion, and must be basic.
+-   All value types are consistent, including those after implicit conversion, and can be of any type.
 
-**Return value**:
+**Return Value**:
 
-Returns the `map<K：V>` type.
+Returns the map type.
 
-**Example**:
+The example is as follows:
 
-```
-select map('a',123,'b',456) from dual;
-```
-
-**Result**:
+For example, the fields in Table t\_table are \(C1 bigint, C2 string, C3 string, C4 bigint, barclay bigint\), with the following data
 
 ```
-{a:123, b:456}
++------------+----+----+------------+------------+
+| c1         | c2 | c3 | c4         | c5         |
++------------+----+----+------------+------------+
+| 1000       | k11 | k21 | 86         | 15         |
+| 1001       | k12 | k22 | 97         | 2          |
+| 1002       | k13 | k23 | 99         | 1          |
++------------+----+----+------------+------------+
 ```
 
-**Note:** 
+Execute SQL:
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+```
+select  map(c2,c4,c3,c5) from t_table;
+```
+
+The result is as follows:
+
+```
++ ---- +
+| _c0 |
++------+
+| {k11:86, k21:15} |
+| {k12:97, k22:2} |
+| {k13:99, k23:1} |
++------+
+```
 
 ## MAP\_KEYS {#section_mym_clb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
-ARRAY map_keys(map<K, V> )
+ARRAY map_keys(map&lt;K, V> )
 ```
 
-**Usage**: 
+**Usage**:-
 
 Returns an array of all the keys in the map parameter.
 
 **Parameter description**:
 
-`map<K, V>`: Map-type data.
+map：map type data.
 
-**Return Value**:
+Return value:
 
-Returns the `array<K>` type. If the input is null, null is returned.
+Returns the array type, enter null, and null.
 
-**Example**:
+The example is as follows:
+
+For example, the field of t\_table\_map is \(`c1 bigint,t_map map&lt;string,bigint>`\), data as follows
 
 ```
-select map_keys(map('a',123,'b',456)) from dual;
-Result:
-[a, b]
++------------+-------+
+| C1 | t_map |
++ ------------ + ------- +
+| 1000       | {k11:86, k21:15} |
+| 1001       | {k12:97, k22:2} |
+| 1002       | {k13:99, k23:1} |
++------------+-------+
 ```
 
-**Note:** 
+Execute SQL:
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+```
+select  c1,map_keys(t_map) from t_table_map;
+```
+
+The result is as follows:
+
+```
++------------+------+
+| c1         | _c1  |
++------------+------+
+| 1000       | [k11, k21] |
+| 1001       | [k12, k22] |
+| 1002       | [k13, k23] |
++------------+------+
+```
 
 ## MAP\_VALUES {#section_pd3_jlb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
-ARRAY map_values(map<K, V>)
+ARRAY map_values(map&lt;K, V>)
 ```
 
-**Usage**: 
+**Usage**:-
 
 Returns an array of all the values in the map parameter.
 
 **Parameter description**:
 
-`map<K, V>`: Map-type data.
+\`map: map-type data.
 
 **Return Value**:
 
-Returns the `array<V>` type. If the input is null, null is returned.
+Returns the array type, enter null, and null.
 
-**Example**:
+**The example is as follows**:
 
 ```
 select map_values(map('a',123,'b',456));
-Result:
+Results:
 [123, 456]
 ```
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
+
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
+
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
 
 ## ARRAY {#section_zcz_4lb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 ARRAY array(value1,value2, ...)
 ```
 
-**Usage**: 
+**Usage**:-
 
 Creates an array using the given values.
 
@@ -618,50 +721,81 @@ Creates an array using the given values.
 
 value: This parameter can be of any type, but all the values must be of the same type.
 
-**Return value**:
+**Return Value**:
 
-Returns the Array type.
+Returns the array type.
 
-**Example**:
+**The example is as follows**:
 
-```
-select array(123,456,789) from dual;
-```
-
-**Result**:
+For example, the fields in Table t\_table are \(C1 bigint, C2 string, C3 string, C4 bigint, barclay bigint\), with the following data
 
 ```
-[123, 456, 789]
++------------+----+----+------------+------------+
+| c1         | c2 | c3 | c4         | c5         |
++------------+----+----+------------+------------+
+| 1000       | k11 | k21 | 86         | 15         |
+| 1001       | k12 | k22 | 97         | 2          |
+| 1002       | k13 | k23 | 99         | 1          |
++------------+----+----+------------+------------+
+```
+
+Execute SQL:
+
+```
+select array(c2,c4,c3,c5) from t_table;
+```
+
+Results:
+
+```
++------+
+| _c0 |
++------+
+| [k11, 86, k21, 15] |
+| [k12, 97, k22, 2] |
+| [k13, 99, k23, 1] |
++ ---- +
 ```
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
+
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
+
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
 
 ## SIZE {#section_nr5_vlb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 INT size(map)
 INT size(array)
 ```
 
-**Usage**: 
+**Usage**:-
 
--   `size(map<K，V>)` returns the number of K/V pairs in the given map.
--   `size(array<T>)` returns the number of elements in the given array.
+-   `size(map&lt;K，V>)` returns the number of K/V pairs in the given map.
+-   `size(array&lt;T>)` returns the number of elements in the given array.
 
 **Parameter description**:
 
--   `map<K, V>`: Map-type data.
--   `array<T>`: Array-type data.
+-   `map&lt;K, V>`: Map-type data.
+-   `array&lt;T>`: Array-type data.
 
-**Return value**:
+**Return Value**:
 
 Returns the Int type.
 
-**Example**:
+**The example is as follows**:
 
 ```
 select size(map('a',123,'b',456)) from dual;--Returns 2
@@ -672,17 +806,28 @@ select size(array(123,456,789)) from dual;--Returns 3
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
 
-## ARRAY\_CONTAINS  {#section_rk2_2mb_wdb .section}
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
 
-**Command format**:
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
+
+## ARRAY\_CONTAINS {#section_rk2_2mb_wdb .section}
+
+**Function definition**:
 
 ```
-boolean array_contains(ARRAY<T> a,value v)
+boolean array_contains(ARRAY&lt;T> a,value v)
 ```
 
-**Usage**: 
+**Usage**:
 
 Checks if the given array a contains v.
 
@@ -691,78 +836,122 @@ Checks if the given array a contains v.
 -   a: Array-type data.
 -   v: The given v must be of the same type as the data in the array.
 
-**Return value**:
+**Return Value**:
 
 Returns the Boolean type.
 
-**Example**:
+**The example is as follows**:
+
+If the field of table t\_glasarray is \(`c1 bigint, t_array array&lt;string>`\), the data is as follows:
 
 ```
-select array_contains(array('a','b'), 'a') from dual; --Returns true
-select array_contains(array(456,789),123) from dual; -- Returns false
++ ------------ + --------- +
+| c1         | t_array |
++------------+---------+
+| 1000       | [k11, 86, k21, 15] |
+| 1001       | [k12, 97, k22, 2] |
+| 1002       | [k13, 99, k23, 1] |
++------------+---------+
 ```
 
-**Note:** 
+Execute SQL:
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+```
+select c1, array_contains(t_array,'1') from t_table_array;
+```
+
+Results:
+
+```
++------------+------+
+| c1         | _c1  |
++------------+------+
+| 1000       | false |
+| 1001       | false |
+| 1002       | true |
++------------+------+
+```
 
 ## SORT\_ARRAY {#section_jmq_rmb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
-ARRAY sort_array(ARRAY<T>)
+ARRAY sort_array(ARRAY&lt;T>)
 ```
 
-**Usage**: 
+**Usage**:-
 
-Sorts the given array.
+This function used to sorts the given array.
 
 **Parameter description**:
 
-`ARRAY<T>`: Array-type data, the data in the array can be of any type.
+`ARRAY&lt;T>`: Array-type data, the data in the array can be of any type.
 
-**Return value**:
+**Return Value**:
 
 Returns the array type.
 
-**Example**:
+**The example is as follows**:
 
 ```
 select sort_array(array('a','c','f','b')),sort_array(array(4,5,7,2,5,8)),sort_array(array('You','Me','He')) from dual;
-Result:
+Results:
+[a, b, c, f] [2, 4, 5, 5, 7, 8] [He, You, Me]
+```
+
+Execute SQL
+
+```
+Select sort_array (C1), sort_array (C2), sort_array (C3) from t_array;
+```
+
+Return result:
+
+```
 [a, b, c, f] [2, 4, 5, 5, 7, 8] [He, You, Me]
 ```
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
+
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
+
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
 
 ## POSEXPLODE {#section_ilc_xmb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
-posexplode(ARRAY<T>)
+posexplode(ARRAY&lt;T>)
 ```
 
-**Usage**: 
+**Usage**:-
 
 Explodes the given array. Each value is given a row and each row has two columns corresponding to the subscript \(starting from 0\) and the array element.
 
 **Parameter description**:
 
-`ARRAY<T>`: Array-type data, the data in the array can be of any type.
+ARRAY: Array-type data, the data in the array can be of any type.
 
-**Return value**:
+**Return Value**:
 
-Functions generated by the table are returned.
+Returns the table generation function.
 
-**Example**:
+**The example is as follows**:
 
 ```
 select posexplode(array('a','c','f','b')) from dual;
-Result:
+Results:
 +------------+-----+
 | pos | val |
 +------------+-----+
@@ -772,10 +961,6 @@ Result:
 | 3 | b |
 +------------+-----+
 ```
-
-**Note:** 
-
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
 
 ## STRUCT {#section_ifb_2nb_wdb .section}
 
@@ -793,21 +978,32 @@ Creates a struct using the given value list.
 
 value: Each value can be of any type.
 
-**Return value**:
+**Return Value**:
 
-Returns the `STRUCT<col1:T1, col2:T2, ... >`Type. Field names are sequential: col1, col2, …
+Returns the `STRUCT&lt;col1:T1, col2:T2, ... >`Type. field names are sequential: col1, col2, …
 
-**Example**:
+**The example is as follows**:
 
 ```
 select struct('a',123,'ture',56.90) from dual;
-Result:
+Results:
 {col1:a, col2:123, col3:ture, col4:56.9}
 ```
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
+
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
+
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
 
 ## NAMED\_STRUCT {#section_ecs_3nb_wdb .section}
 
@@ -817,120 +1013,155 @@ Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses
 STRUCT named_struct(string name1, T1 value1, string name2, T2 value2, ...)
 ```
 
-**Usage**: 
+**Usage**:
 
 Creates a struct using the given name/value list.
 
 **Parameter description**:
 
--   value: A value can be of any type.
+-   value: Each value can be of any type.
 -   name: Specifies the name of a String-type field.
 
-**Return value**:
+**Return Value**:
 
-Returns the `STRUCT<name1:T1, name2:T2, ... >`type. The field names of the generated struct are sequential: name1, name2, …
+Returns the `STRUCT&lt;name1:T1, name2:T2, ... >`type. The field names of the generated struct are sequential: name1, name2, …
 
-**Example**:
+**The example is as follows**:
 
 ```
 select named_struct('user_id',10001,'user_name','LiLei','married','F','weight',63.50) from dual;
-Result:
+Results:
 {user_id:10001, user_name:LiLei, married:F, weight:63.5}
 ```
 
 **Note:** 
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+--Set commands supported by MaxCompute SQL and Mapreduce \(new version\)
+
+-   Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
+-   Project level: that is, the project level is supported for new type opening. The project owner can be set to project as needed, with the following commands:
+
+    ```
+    set odps.sql.type.system.odps2=true;
+    
+    ```
+
+    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
+
 
 ## INLINE {#section_w3l_pnb_wdb .section}
 
-**Command format**:
+Command Format:
 
 ```
-inline(array<struct<f1:T1, f2:T2, ... >>)
+inline(array&lt;struct&lt;f1:T1, f2:T2, ... >>)
 ```
 
-**Usage**: 
+as shown in the following figure:
 
 Explodes the given struct array. Each element is given one row and each struct element corresponds to one column in each row.
 
-**Parameter description**:
+Parameter description:
 
-`STRUCT<f1:T1, f2:T2, ... >`: The values in the array can be of any type.
+`STRUCT&lt;f1:T1, f2:T2, ... >`: The values in the array can be of any type.
 
-**Return value**:
+Return Value:
 
 Returns the table generation function.
 
-**Example**:
+The example is as follows:
+
+If the field in Table t\_table is \(`t_struct struct&lt;user_id:bigint,user_name:string,married:string,weight:double>` <user\_id: bigint,="" user\_name:="" string,="" married:="" weight:="" double=""\>\), the table data is as follows:</user\_id:\>
 
 ```
-select inline(array(named_struct('user_id',10001,'user_name','LiLei','married','F','weight',63.50))) from dual;
-Result:
-+------------+-----------+---------+------------+
-| user_id | user_name | married | weight |
-+------------+-----------+---------+------------+
-| 10001 | LiLei | F | 63.5 |
-+------------+-----------+---------+------------+
++----------+
+| T_struct |
++----------+
+{user_id:10001, user_name:LiLei, married:F, weight:63.5}
+{user_id:10001, user_name:LiLei, married:F, weight:63.5}
++----------+
 ```
 
-**Note:** 
+Execute SQL:
 
-Add `set odps.sql.type.system.odps2=true;`, opposite the SQL statement that uses this function, and submit it with SQL to use the new data type normally.
+```
+select inline(array(t_struct)) from t_table;
+```
+
+Return result:
+
+```
++------------+----+----+------------+------------+
+| user_id    | user_name | married | weight     |
++------------+----+----+------------+------------+
+| 10001      | LiLei     | N       | 63.5       |
+| 10002      | HanMeiMei | Y       | 43.5       |
++------------+-----------+---------+------------+
+```
 
 ## TRANS\_ARRAY {#section_y21_vnb_wdb .section}
 
-**Command format**:
+**Function definition**:
 
 ```
 trans_array (num_keys, separator, key1,key2,…,col1, col2,col3) as (key1,key2,…,col1, col2)
 ```
 
-**Usage**: 
+**Usage**:-
 
-A UDTF that converts a single row of data into multiple rows, and converts an array separated by a fixed-separator format in a column into multiple rows.
+A UDTF that converts one row of data to multiple rows, and converts an array separated with fixed-separator format in column into multiple rows.
 
 **Parameter description**:
 
-1.  num\_keys: Bigint type constant, must be greater than or equal to 0. It is used as a number of columns to transpose key when converting into multiple rows.
-2.  Key: Duplicate columns in multiple rows when converting one row into multiple rows.
-3.  separator: String type constant, a separator is used to split a string into multiple elements. Exception is thrown when it is null.
-4.  keys: As column of key when you transpose. It is specified by num\_keys. If num\_keys specifies that all columns are keys \(that is, num\_keys equals the number of all columns\), only one row is returned.
-5.  cols: An array to convert columns into rows. All columns after keys are considered as an array to be transposed. String type. The stored contents are arrays of string format, such as “Hangzhou; Beijing; Shanghai” and these arrays are separated by a semicolon “;”.
+-   num\_keys: Bigint type constant, must be larger than or equal to 0. It is used as the number of columns to transpose key when converting to multiple rows.
+-   Key: Duplicate columns in multiple rows when converting one row to multiple rows.
+-   separator: String type constant. It is a separator used to split a string into multiple elements. Exception is thrown when it is null.
+-   keys: As column of key when you transpose. It is specified by num\_keys. If num\_keys specifies that all columns are keys \(that is, num\_keys equals the number of all columns\), only one row is returned.
+-   cols: An array to convert to rows. All columns after keys are considered as an array to be transposed. String type. The stored contents are arrays of string format, such as “Hangzhou; Beijing; shanghai”, they are arrays separated by “;”.
 
-**Return value**:
+**Return Value**:
 
-Transposed rows, new column names are specified by as. The type of key column remains unchanged, and all other columns are String type. The number of rows to be split depends on the array that has a maximum number, no-value locales are complemented with NULL.
+Transposed rows, new column names are specified by as. The type of column that is as key remains unchanged, and all other columns are String type. The number of rows to be split depends on the array that has maximum number, no-value locales are complemented with NULL.
 
 **Note:** 
 
-The following limits apply when UDTF is used:
+The following restrictions apply when using UDTF:
 
--   All columns that are considered as keys are placed in the front, and columns to be transposed are placed behind.
+-   All columns that are considered as keys must be placed front, and columns to be transposed must be placed behind.
 -   One select can only have one UDTF and no other columns can appear.
 -   One select can only have one UDTF and no other columns can appear.
 
-**Example**:
+**The example is as follows**:
 
-The table contains the following data:
+The data in the t\_table table is as follows:
 
 ```
-Login_id LOGIN_IP LOGIN_TIME 
++----------+----------+------------+
+| login_id | login_ip | login_time |
++----------+----------+------------+
 wangwangA 192.168.0.1,192.168.0.2 20120101010000,20120102010000
+| Wangwangb | 192.168.25.10, 192.168.67.22, 192,168.6. 3 | maid, 20120223080000 |
++----------+----------+------------+
 ```
 
-Use the trans\_array function:
+Execute SQL:
 
 ```
 trans_array(1, ",", login_id, login_ip, login_time) as (login_id,login_ip,login_time)
 ```
 
-Result:
+Results:
 
 ```
-Login_id Login_ip Login_time
-wangwangA 192.168.0.1 20120101010000
-wangwangA 192.168.0.2 20120102010000
++----------+----------+------------+
+| Login_id | login_ip | login_time |
++----------+----------+------------+
+| wangwangB | 192.168.45.10 | 20120111010000 |
+| wangwangB | 192.168.67.22 | 20120112010000 |
+| wangwangB | 192.168.6.3 | 20120223080000 |
+| wangwangA | 192.168.0.1 | 20120101010000 |
+| wangwangA | 192.168.0.2 | 20120102010000 |
++----------+----------+------------+
 ```
 
 If the table contains the following data:

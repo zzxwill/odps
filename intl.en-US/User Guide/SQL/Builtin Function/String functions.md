@@ -82,20 +82,10 @@ Parameter description:
 
 -   json: String type, standard json format string.
 -   path: **String type, describing the path in json, starting with a dollor sign \($\)**.  For a description of the new implementation, see [JsonPath](http://goessner.net/articles/JsonPath/index.html#e2).
-
     -   $ : Root object
     -   . : Child operator
     -   \[\] : Subscript operator for array
     -   \* : Wildcard for \[\]
-    Syntax not supported that's worth noticing:
-
-    -   : Zero length string as key
-    -   .. : Recursive descent
-    -   @ : Current object/element
-    -   \(\) : Script expression
-    -   ?\(\) : Filter \(script\) expression.
-    -   \[,\] : Union operator
-    -   \[start:end.step\] : array slice operator
 -   String: Returns string type.
 
 **Note:** 

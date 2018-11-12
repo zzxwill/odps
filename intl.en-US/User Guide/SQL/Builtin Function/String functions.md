@@ -81,7 +81,21 @@ In a standard json string, the specified string is extracted according to the pa
 Parameter description:
 
 -   json: String type, standard json format string.
--   path: **String type, describing the path in json, starting with a dollor sign \($\)**.  For a description of the [JsonPath](http://goessner.net/articles/JsonPath/index.html#e2) in the new implementation, see: jsonpath, $ for the root node, \(.\) Represents child, \[number\] represents the subscript of an array, for an array, the format is key \[sub1\] \[sub2\] \[sub3\]..., \[\*\] Returns the entire array, \* escape is not supported.
+-   path: **String type, describing the path in json, starting with a dollor sign \($\)**.  For a description of the new implementation, see [JsonPath](http://goessner.net/articles/JsonPath/index.html#e2).
+
+    -   $ : Root object
+    -   . : Child operator
+    -   \[\] : Subscript operator for array
+    -   \* : Wildcard for \[\]
+    Syntax not supported that's worth noticing:
+
+    -   : Zero length string as key
+    -   .. : Recursive descent
+    -   @ : Current object/element
+    -   \(\) : Script expression
+    -   ?\(\) : Filter \(script\) expression.
+    -   \[,\] : Union operator
+    -   \[start:end.step\] : array slice operator
 -   String: Returns string type.
 
 **Note:** 

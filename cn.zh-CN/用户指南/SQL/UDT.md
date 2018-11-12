@@ -8,7 +8,7 @@ UDT的常用场景如下：
 
 -   场景1：某些用其他语言实现非常简单的功能，比如只需要调用一次Java内置类的方法即可实现的功能，而MaxCompute的内置函数却没有简单的方法实现。若使用UDF实现，整个过程又过于繁杂。
 -   场景2：SQL中需要调用第三方库来实现相关功能。希望能够在SQL中直接调用，而不需要再wrap一层UDF。
--   场景3：[Select Transform](https://help.aliyun.com/document_detail/73719.html)支持把脚本写到SQL语句中，可读性和代码维护大提升。但是某些语言无法这么用，比如Java源代码必须经过编译才能执行，希望类似这些语言也可直接写到SQL中。
+-   场景3：[Select Transform](cn.zh-CN/用户指南/SQL/SELECT操作/Select Transform语法.md#)支持把脚本写到SQL语句中，可读性和代码维护大提升。但是某些语言无法这么用，比如Java源代码必须经过编译才能执行，希望类似这些语言也可直接写到SQL中。
 
 ## UDT概述 {#section_drd_zp4_hfb .section}
 
@@ -94,13 +94,13 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 
 上述示例还表现了一种用UDF比较不好实现的功能：子查询的结果允许UDT类型的列。如上面变量a的x列是java.math.BigInteger类型，而不是内置类型。UDT类型的数据可以被带到下一个operator中再调用其他方法，甚至能参与数据shuffle。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/153821731613239_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154201207213239_zh-CN.png)
 
 如上图可知，该UDT共有三个STAGE：M1、R2和J3。如果您熟悉MapReduce原理便会知道，由于join的存在需要做数据reshuffle，所以会出现多个stage。一般情况下，不同stage不仅是在不同进程，甚至是在不同物理机器上运行的。
 
-查看M1，会发现M1仅仅执行了new java.math.BigInteger\(x\) 这个操作。
+查看M1，会发现M1仅仅执行了`new java.math.BigInteger(x)` 这个操作。
 
-查看J3，可以看到J3在不同阶段执行了java.math.BigInteger.valueOf\(y\)和x.add\(y\).toString\(\)的操作。这几个操作不仅分阶段执行，而且在不同进程、不同物理机器上执行。但是UDT把这个过程封装起来，看起来和在同一个JVM中执行的效果几乎一样。
+查看J3，可以看到J3在不同阶段执行了`java.math.BigInteger.valueOf(y)`和`x.add(y).toString()`的操作。这几个操作不仅分阶段执行，而且在不同进程、不同物理机器上执行。但是UDT把这个过程封装起来，看起来和在同一个JVM中执行的效果几乎一样。
 
 详细功能说明
 
@@ -155,7 +155,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
     -   内置类型的数据能够直接调用其映射到的Java类型的方法，如`'123'.length() , 1L.hashCode()`。
     -   UDT类型能够直接参与内置函数或者UDF的运算， 如`chr(Long.valueOf('100'))`，其中`Long.valueOf`返回的是`java.lang.Long`类型的数据，而内置函数chr接受的数据类型是内置类型BIGINT。
     -   Java的primitive类型可以自动转化为其boxing类型，并应用前两条规则。
-    **说明：** 部分内置的[新数据类型](../../../../cn.zh-CN/产品简介/基本概念/数据类型.md#)需要设置`set odps.sql.type.system.odps2=true;` 方可使用，否则会报错。
+    **说明：** 部分内置的[新数据类型](../../../../cn.zh-CN/用户指南/基本概念/数据类型.md#)需要设置`set odps.sql.type.system.odps2=true;` 方可使用，否则会报错。
 
 -   UDT对泛型有比较完整的支持，如`java.util.Arrays.asList(new java.math.BigInteger('1'))`，编译器能够根据参数类型知道该方法的返回值是`java.util.List<java.math.BigInteger>`类型。
 

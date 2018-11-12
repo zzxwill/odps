@@ -1,5 +1,7 @@
 # UDJ {#concept_e3d_ck4_hfb .concept}
 
+目前基于MaxCompute 2.0计算引擎，MaxCompute在UDF框架中新近引入的一种新扩展机制：UDJ\(User Defined Join\)，来实现灵活的跨表、多表自定义操作，同时减少不得不通过MR等方式对分布式系统底层细节的操作。这是MaxCompute基于新一代体系机构发展NewSQL数据处理框架的重要一步。
+
 ## UDJ简介 {#section_p1f_kk4_hfb .section}
 
 目前MaxCompute内置了多种[Join](cn.zh-CN/用户指南/SQL/SELECT操作/JOIN操作.md#)操作，包括inner/right join、 outer/left jion、outer/full join、 outer/semi/anti-semi join等。这些内置的join操作功能强大，能够满足很大一部分需求，但是其标准的join实现，无法满足很多跨表操作的需求。
@@ -10,8 +12,6 @@
 
 -   对于计算平台而言，多个复杂的join和散布在SQL语言各处的代码揉合在一起，将带来多处的“逻辑黑盒”，这点不利于生成最优的执行计划；
 -   使用MR，不仅更大程度上剥夺了系统进行执行优化的可能性，而且由于MR绝大部分代码由Java完成，在执行效率上会远低于MaxCompute基于LLVM 代码生成器产生的深度优化native运行时。
-
-目前基于MaxCompute 2.0计算引擎，MaxCompute在UDF框架中新近引入的一种新扩展机制：UDJ\(User Defined Join\)，来实现灵活的跨表、多表自定义操作，同时减少不得不通过MR等方式对分布式系统底层细节的操作。这是MaxCompute基于新一代体系机构发展NewSQL数据处理框架的重要一步。
 
 ## UDJ样例定义 {#section_pww_vk4_hfb .section}
 

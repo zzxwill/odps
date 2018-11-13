@@ -463,8 +463,6 @@ Set commands supported by MaxCompute SQL and MapReduce for MaxCompute 2.0
     
     ```
 
-    For a detailed description of setproject, see: [other actions](https://help.aliyun.com/document_detail/27834.html#concept_in2_nbd_5db).
-
 
 ## STR\_TO\_MAP {#section_p1z_xrj_dfb .section}
 

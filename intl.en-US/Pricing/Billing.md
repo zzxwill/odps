@@ -106,6 +106,20 @@ The preceding SQL includes 4 keywords \(one DISTINCT, one COUNT, one GROUP BY, a
 
 **Note:** When you need to mix the internal and external tables, you will pay separately.
 
+Since January 1, 2019, MaxCompute will begin charging for external table SQL tasks. The billing for one external table SQL task is calculated as follows.：
+
+```
+ Computing Cost of One SQL Task = DataInputSize x SQLComplexity x SQL Price
+```
+
+The SQL price is as follows.
+
+|Item|Price|
+|:---|:----|
+|SQL task|0.0044 USD/GB|
+
+The external table SQL task is charged according to I/O for each job and is separated from the billing of normal SQL tasks. All daily measurement information is paid next day.
+
 Pay-As-You-Go for MapReduce
 
 In December 19, 2017, MaxCompute began charging for MapReduce \(MR\) tasks. The billing of a MR task is calculated as follows.

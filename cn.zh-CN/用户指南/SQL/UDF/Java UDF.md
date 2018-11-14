@@ -4,19 +4,20 @@ MaxCompute的UDF包括UDF，UDAF 和UDTF三种函数，本文将重点介绍如�
 
 ## 参数与返回值类型 {#section_uhs_43f_vdb .section}
 
-MaxCompute2.0版本升级后，Java UDF支持的数据类型从原来的Bigint，String，Double，Boolean扩展了更多基本的数据类型，同时还扩展支持了ARRAY，MAP，STRUCT 等复杂类型。
+MaxCompute 2.0版本升级后，Java UDF支持的数据类型从原来的Bigint，String，Double，Boolean扩展了更多基本的数据类型，同时还扩展支持了ARRAY，MAP，STRUCT 等复杂类型。
 
 -   Java UDF使用新基本类型的方法，如下所示：
     -   UDTF通过@Resolve注解来获取signature，如：`@Resolve("smallint->varchar(10)")`。
     -   UDF通过反射分析evaluate来获取signature，此时MaxCompute内置类型与 Java类型符合一一映射关系。
     -   UDAF通过@Resolve注解来获取signature，MaxCompute2.0支持在注解中使用新类型，如：`@Resolve("smallint->varchar(10)")`。
 -   Java UDF使用复杂类型的方法，如下所示：
-    -   UDTF 通过 @Resolve annotation 来指定 sinature，如：`@Resolve("array<string>,struct<a1:bigint,b1:string>,string->map<string,bigint>,struct<b1:bigint>")`。
+    -   UDTF 通过 @Resolve annotation 来指定 signature，如：`@Resolve("array<string>,struct<a1:bigint,b1:string>,string->map<string,bigint>,struct<b1:bigint>")`。
     -   UDF通过evaluate方法的signature来映射UDF的输入输出类型，此时参考 MaxCompute类型与Java类型的映射关系。其中array对应java.util.List，map对应 java.util.Map，struct对应com.aliyun.odps.data.Struct。
     -   UDAF通过@Resolve注解来获取signature，MaxCompute2.0支持在注解中使用新类型，如： `@Resolve("smallint->varchar(10)")`。
 
         **说明：** 
 
+        -   您可以使用`type,*`实现任意个数的传参和输出，例如@resolve\("string,\*-\>array<string\>"\)，请注意此处array后需要加subtype。
         -   com.aliyun.odps.data.Struct从反射看不出field name和field type，所以需要用@Resolve annotation来辅助。即如果需要在UDF中使用 struct，要求在UDF class上也标注上@Resolve注解，这个注解只会影响参数或返回值中包含com.aliyun.odps.data.Struct的重载。
         -   目前class上只能提供一个@Resolve annotation，因此一个UDF中带有struct参数或返回值的重载只能有一个。
 
@@ -52,7 +53,7 @@ MaxCompute数据类型与Java类型的对应关系，如下所示：
 
 实现UDF需要继承com.aliyun.odps.udf.UDF类，并实现evaluate方法。evaluate方法必须是非static的public方法 。Evaluate方法的参数和返回值类型将作为SQL中UDF的函数签名。这意味着您可以在UDF中实现多个evaluate方法，在调用UDF时，框架会依据UDF调用的参数类型匹配正确的evaluate方法 。
 
-特别注意：不同的jar包最好不要有类名相同但实现功能逻辑不一样的类。如，UDF\(UDAF/UDTF\)： udf1、 udf2分别对应资源udf1.jar、udf2.jar，如果两个jar包里都包含一个com.aliyun.UserFunction.class类，当同一个sql中同时使用到这两个udf时，系统会随机加载其中一个类，那么就会导致udf执行行为不一致甚至编译失败。
+特别注意：不同的jar包最好不要有类名相同但实现功能逻辑不一样的类。如，UDF\(UDAF/UDTF\)： udf1、 udf2分别对应资源udf1.jar、udf2.jar，如果两个jar包里都包含一个com.aliyun.UserFunction.class类，当同一个sql中同时使用到这两个udf时，系统会随机加载其中一个类，那么就会导致UDF执行行为不一致甚至编译失败。
 
 UDF 的示例如下：
 
@@ -72,7 +73,7 @@ public final class Lower extends UDF {
 
 可以通过实现`void setup(ExecutionContext ctx)`和`void close()`来分别实现UDF的初始化和结束代码。
 
-UDF的使用方式与MaxCompute SQL中普通的内建函数相同，详情请参见 [内建函数](cn.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
+UDF的使用方式与MaxCompute SQL中普通的内建函数相同，详情请参见 [内建函数](intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
 
 新版的MaxCompute支持定义Java UDF时，使用Writable类型作为参数和返回值。下面为MaxCompute类型和Java Writable类型的映射关系。
 
@@ -161,9 +162,9 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值avg为例，下图简要说明了在MaxCompute UDAF中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15417476221855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15421671061855_zh-CN.jpg)
 
-在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](cn.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
+在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
 UDAF的计算过程分为两个阶段：
 
@@ -240,8 +241,8 @@ public class AggrAvg extends Aggregator {
 -   merge\(\)方法：将不同的map直接结算的结果进行汇总。
 -   terminate\(\)方法：返回数据。
 -   newBuffer\(\)方法：创建初始返回结果的值。
--   UDAF在SQL中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](cn.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
--   关于如何运行UDTF的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../cn.zh-CN/快速入门/JAVA UDF开发.md)。
+-   UDAF在SQL中的使用语法与普通的内建聚合函数相同，详情请参见 [聚合函数](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
+-   关于如何运行UDTF的方法与 UDF 类似，详情请参见 [运行 UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
 -   String对应的Writable类型为Text。
 
 ## UDTF {#section_a4t_34f_vdb .section}
@@ -277,7 +278,7 @@ import com.aliyun.odps.udf.UDFException;
    }
 ```
 
-**说明：** 以上只是程序示例，关于如何在MaxCompute中运行 UDTF的方法与UDF类似，详情请参见：[运行UDF](../../../../cn.zh-CN/快速入门/JAVA UDF开发.md)。
+**说明：** 以上只是程序示例，关于如何在MaxCompute中运行 UDTF的方法与UDF类似，详情请参见：[运行UDF](../../../../intl.zh-CN/快速入门/JAVA UDF开发.md)。
 
 在SQL中可以这样使用这个UDTF，假设在MaxCompute上创建UDTF时注册函数名为 user\_udtf：
 
@@ -342,7 +343,7 @@ select reduce_udtf(col0, col1, col2) as (c0, c1) from (select col0, col1, col2 f
 
 ## 其他UDTF示例 {#section_h4k_ppf_vdb .section}
 
-在UDTF中，您可以读取MaxCompute的 [资源](../../../../cn.zh-CN/用户指南/基本概念/资源.md)。利用UDTF读取 MaxCompute 资源的示例，如下所示：
+在UDTF中，您可以读取MaxCompute的 [资源](../../../../intl.zh-CN/用户指南/基本概念/资源.md)。利用UDTF读取 MaxCompute 资源的示例，如下所示。
 
 1.  编写UDTF程序，编译成功后导出jar包（udtfexample1.jar）。
 
@@ -533,11 +534,11 @@ select hive_collect(4y,5y,6y) from dual;
 +------+
 ```
 
-**说明：** 该udf可以支持所有的类型，包括array，map，struct等复杂类型。
+**说明：** 该UDF可以支持所有的类型，包括array，map，struct等复杂类型。
 
 使用兼容hive的udf需要注意：
 
 -   MaxCompute的add jar命令会永久地在project中创建一个resource，所以创建udf时需要指定jar包，无法自动将所有jar包加入classpath。
 -   在使用兼容的HIVE UDF的时候，需要在sql前加set语句`set odps.sql.hive.compatible=true;`语句，set语句和sql语句一起提交执行。
--   在使用兼容的HIVE UDF时，还要注意MaxCompute的[JAVA沙箱](cn.zh-CN/用户指南/Java沙箱.md)限制。
+-   在使用兼容的HIVE UDF时，还要注意MaxCompute的[JAVA沙箱](intl.zh-CN/用户指南/Java沙箱.md)限制。
 

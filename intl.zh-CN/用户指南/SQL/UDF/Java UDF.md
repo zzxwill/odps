@@ -17,7 +17,7 @@ MaxCompute 2.0版本升级后，Java UDF支持的数据类型从原来的Bigint�
 
         **说明：** 
 
-        -   您可以使用`type,*`实现任意个数的传参和输出，例如@resolve\("string,\*-\>array<string\>"\)，请注意此处array后需要加subtype。
+        -   您可以使用`type,*`实现任意个数的传参，例如@resolve\("string,\*-\>array<string\>"\)，请注意此处array后需要加subtype。
         -   com.aliyun.odps.data.Struct从反射看不出field name和field type，所以需要用@Resolve annotation来辅助。即如果需要在UDF中使用 struct，要求在UDF class上也标注上@Resolve注解，这个注解只会影响参数或返回值中包含com.aliyun.odps.data.Struct的重载。
         -   目前class上只能提供一个@Resolve annotation，因此一个UDF中带有struct参数或返回值的重载只能有一个。
 
@@ -162,7 +162,7 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值avg为例，下图简要说明了在MaxCompute UDAF中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15421671061855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15422752871855_zh-CN.jpg)
 
 在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 

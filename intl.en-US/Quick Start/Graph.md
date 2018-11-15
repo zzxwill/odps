@@ -1,8 +1,8 @@
 # Graph {#concept_gzg_1c2_vdb .concept}
 
-This article uses the[SSSP Algorithm](../../../../intl.en-US/User Guide/Graph/Examples/SSSP.md) in an example to show how to submit Graph jobs.
+This article uses the [SSSP Algorithm](../../../../reseller.en-US/User Guide/Graph/Examples/SSSP.md) in an example to show how to submit Graph jobs.
 
-Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is similar to submitting a job using [MapReduce](../../../../intl.en-US/User Guide/MapReduce/Function Introduction/Command.md). Maven users can search `odps-sdk-graph` from [Maven Library](http://search.maven.org/) to get the Java
+Submitting a [Graph](../../../../reseller.en-US/User Guide/Graph/Summary.md) job is similar to submitting a job using [MapReduce](../../../../reseller.en-US/User Guide/MapReduce/Function Introduction/Commands.md). Maven users can search `odps-sdk-graph` from [Maven Library](http://search.maven.org/) to get the Java
 
 ```
 <dependency>
@@ -22,7 +22,7 @@ Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is 
     create table sssp_out (v bigint, l bigint);
     ```
 
-    See creating more statements for tables[../../../../dita-oss-bucket/SP\_76/DNODPS1898901/EN-US\_TP\_13396.md\#](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
+    See creating more statements for tables in [../../../../dita-oss-bucket/SP\_76/DNODPS1898901/EN-US\_TP\_13396.md\#](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
 
 3.  Upload Data.
 
@@ -44,7 +44,7 @@ Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is 
 
 4.  Write SSSP example.
 
-    According to the introduction in [Graph Eclipse Plug-in](../../../../intl.en-US/Tools and Downloads/Eclipse Plugins/Detailed introduction.md), compile and debug [SSSP Example](../../../../intl.en-US/User Guide/Graph/Examples/SSSP.md) on local. In this example, we assume the code is packaged as odps-graph-example-sssp.jar.
+    According to the introduction in [Graph Eclipse Plug-in](../../../../reseller.en-US/Tools and Downloads/Eclipse Plugins/Detailed introduction.md), compile and debug [SSSP Example](../../../../reseller.en-US/User Guide/Graph/Examples/SSSP.md) on local. In this example, we assume the code is packaged as odps-graph-example-sssp.jar.
 
     **Note:** You only need to package the SSSP code. You do not need to package the SDK in odps-graph-example-sssp.jar.
 
@@ -54,7 +54,7 @@ Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is 
     add jar $LOCAL_JAR_PATH/odps-graph-example-sssp.jar
     ```
 
-    **Note:** For resource creation, see [Resource Operation](../../../../intl.en-US/User Guide/Common commands/Resource.md).
+    **Note:** For resource creation, see [Resource Operation](../../../../reseller.en-US/User Guide/Common commands/Resources.md).
 
 6.  Run SSSP.
 
@@ -62,7 +62,7 @@ Submitting a [Graph](../../../../intl.en-US/User Guide/Graph/Summary.md) job is 
     jar -libjars odps-graph-example-sssp.jar -classpath $LOCAL_JAR_PATH/odps-graph-example-sssp.jar com.aliyun.odps.graph.example.SSSP 1 sssp_in sssp_out;
     ```
 
-    The jar command is used to run MaxCompute Graph jobs in the same way as the command for running [MapReduce](../../../../intl.en-US/User Guide/MapReduce/Function Introduction/Command.md) jobs.
+    The jar command is used to run MaxCompute Graph jobs in the same way as the command for running [MapReduce](../../../../reseller.en-US/User Guide/MapReduce/Function Introduction/Commands.md) jobs.
 
     When Graph job is running, the corresponding instance ID, execution schedule and result summary are printed on the command line
 

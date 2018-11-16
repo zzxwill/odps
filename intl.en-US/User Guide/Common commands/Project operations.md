@@ -72,7 +72,7 @@ setproject [<KEY>=<VALUE>];
 |odps.instance.remain.days|ProjectOwner|Determines the duration of the retention of the instance information.|\[3- 30\]|
 |READ\_TABLE\_MAX\_ROW|ProjectOwner|The number of data entries returned by running the Select statement in the client.|\[1-10000\]|
 
-**Take odps.security.ip.whitelist as an example**
+## Examples for odps.security.ip.whitelist {#section_nky_ycz_5fb .section}
 
 MaxCompute supports a project level IP whitelist.
 

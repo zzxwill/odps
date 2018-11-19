@@ -93,6 +93,8 @@ All data types in the preceding table can be NULL.
 -   NOTE 4: STRING constants support connections, for example, `abc``xyz` is parsed as `abcxyz`, and different parts can be written on different lines.
 -   NOTE 5: The time value displayed by the current query does not contain milliseconds. The tunnel command specifies the time format through`-dfp`, and can be specified in milliseconds, such as`tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS'`, for more information about tunnel commands, refer to[Tunnel commands](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md#).
 
+## Complex data types {#section_r53_rbb_5db .section}
+
 MaxCompute2.0 supports the complex data types listed in the following table.
 
 |Type|Definition method|Construction method|

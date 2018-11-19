@@ -63,7 +63,7 @@ MR type tasks do not support new data types for the time being.
 |STRING|No|“abc”,’bcd’,”alibaba” ‘inc’ \(Note4\)|A single string length can be up to 8M|
 |BINARY|Yes |None|Binary data type, a single string length can be up to 8M|
 |DATETIME|No|DATETIME ‘2017-11-11 00:00:00’|Date-time type, range from December 31, 999 to January 1-9, 0000, exact to milliseconds \(note 5\)|
-|TIMESTAMP|Yes |TIMESTAMP ‘2017-11-11 00:00:00.123456789’|It is independent of the time zone and ranges from January 1st 0000 to December 31, 9999 23.59:59.999999999,  and is accurate to nanosecond-level.|
+|TIMESTAMP|Yes |TIMESTAMP ‘2017-11-11 00:00:00.123456789’|It depends on the time zone and ranges from January 1st 0000 to December 31, 9999 23.59:59.999999999,  and is accurate to nanosecond-level.|
 |BOOLEAN|No|TRUE，FALSE|True/False, Boolean type|
 
 All data types in the preceding table can be NULL.

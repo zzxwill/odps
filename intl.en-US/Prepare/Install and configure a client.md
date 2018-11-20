@@ -1,17 +1,17 @@
 # Install and configure a client {#concept_qbk_1kv_tdb .concept}
 
-Once you install and configure the MaxCompute console, you can access all functions of MaxCompute through the console. For more information, see [Client](../../../../intl.en-US/Tools and Downloads/Client.md).
+Once you install and configure the MaxCompute console, you can access all functions of MaxCompute through the console. For more information, see [Client](../../../../reseller.en-US/Tools and Downloads/Client.md).
 
 **Note:** 
 
--   We recommend that you use the MaxCompute Studio tool. This tool integrates with the Java environment and allows MaxCompute SQL script development and execution, data management, visual log analysis, and Java \(UDF, MR\) development. For more information. see [What is Studio](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/What is Studio.md).
--   You can also use MaxCompute through DataWorks. After creating a project in the console, you can click on **Enter Workspace** of the specified project in the project list to operate projects with MaxCompute. For more information, see [DataWorks](https://www.alibabacloud.com/help/zh/product/30254.html).
+-   We recommend that you use the MaxCompute Studio tool. This tool integrates with the Java environment and allows MaxCompute SQL script development and execution, data management, visual log analysis, and Java \(UDF, MR\) development. For more information. see [What is Studio](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/What is Studio.md).
+-   You can also use MaxCompute through DataWorks. After creating a project in the console, you can click on **Enter Workspace** of the specified project in the project list to operate projects with MaxCompute. For more information, see .
 
 ## Install the console {#section_cnm_c5v_tdb .section}
 
 **Note:** Make sure you have JRE 1.7 or a later version installed to properly use the MaxCompute console.
 
-1.  Download the [MaxCompute console](http://repo.aliyun.com/odpscmd/).
+1.  Download [MaxCompute console](http://repo.aliyun.com/odpscmd/)\(For Windows or MAC, download [MaxCompute console](http://repo.aliyun.com/download/odpscmd/latest/odpscmd_public.zip).\)
 2.  Decompress it into a folder. After decompression, you can see four following folders:
 
     ```
@@ -39,8 +39,8 @@ https_check=true  # Determine whether to enable HTTPS access.
 
 -   We recommend that you configure the console according to the region you designated the MaxCompute service.
 -   **\#** is used as a comment symbol in the dps\_config.ini file. However, the MaxCompute console uses two minus signs **--** as a comment symbol.
--   Creating a project in advance is needed so that you can specify in the configuration file. For more information, see [Project](intl.en-US/Prepare/Create a project.md).
--   MaxCompute provides two service addresses separately on the Internet and the intranet. Different addresses correspond to different download prices.For more information. see [Access Domains and Data Centers](intl.en-US/Prepare/Access domains and data centers.md).
+-   Creating a project in advance is needed so that you can specify in the configuration file. For more information, see [Project](reseller.en-US/Prepare/Create a project.md).
+-   MaxCompute provides two service addresses separately on the Internet and the intranet. Different addresses correspond to different download prices.For more information. see [Access Domains and Data Centers](reseller.en-US/Prepare/Configure Endpoint.md).
 
 ## Run the console {#section_epm_szx_5db .section}
 
@@ -52,5 +52,5 @@ insert overwrite table tbl1 select count(*) from tbl1;
 select 'welcome to MaxCompute!' from tbl1;
 ```
 
-For more information about SQL statements, see [SQL Summary](../../../../intl.en-US/User Guide/SQL/SQL Summary.md).
+For more information about SQL statements, see [SQL Summary](../../../../reseller.en-US/User Guide/SQL/SQL summary.md).
 

@@ -14,8 +14,9 @@
 -   目前，MaxCompute在MapJoin中最多支持指定8张小表，否则报语法错误。
 -   如果使用MapJoin，则所有小表占用的内存总和不得超过512MB。由于MaxCompute是压缩存储，因此小表在被加载到内存后，数据大小会急剧膨胀。此处的512MB限制是加载到内存后的空间大小。
 -   多个表Join时，最左边的两个表不能同时是MapJoin的表。
+-   您可以通过mapjoin on 1 = 1 来实现笛卡尔乘积，但请注意可能会带来计算量的膨胀。
 
-**示例如下**：
+**示例如下：**
 
 ```
 select /* + mapjoin(a) */
@@ -28,7 +29,7 @@ select /* + mapjoin(a) */
 
 MaxCompute SQL不支持在普通Join的on条件中使用不等值表达式，or逻辑等复杂的Join条件，但是在MapJoin中可以进行如上操作。
 
-**示例如下**：
+**示例如下：**
 
 ```
 select /*+ mapjoin(a) */

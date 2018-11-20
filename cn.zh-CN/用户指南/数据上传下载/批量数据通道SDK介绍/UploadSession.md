@@ -1,6 +1,6 @@
 # UploadSession {#concept_ecn_pjg_vdb .concept}
 
-本文介绍UploadSession接口。
+本文为您介绍UploadSession接口。
 
 ## UploadSession接口定义 {#section_cyg_f41_wfb .section}
 

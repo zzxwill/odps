@@ -31,7 +31,7 @@ public class TunnelBufferedWriter implements RecordWriter {
 -   创建TunnelBufferedWriter实例：通过调用UploadSession的openBufferedWriter接口创建。
 -   数据上传：调用Write接口，数据会先写入本地缓存区，缓存区满后会批量提交到服务端，避免了连接超时，同时，如果上传失败会自动进行重试。
 -   结束上传：调用close接口，最后再调用UploadSession的commit接口，即可完成上传。
--   缓冲区控制：可以通过setBufferSize接口修改缓冲区占内存的字节数（bytes），建议设置64M以上的大小，避免服务端产生过多小文件，影响性能，一般无须设置，维持默认值即可。
+-   缓冲区控制：可以通过setBufferSize接口修改缓冲区占内存的字节数（bytes），建议设置大于等于64MB，避免服务端产生过多小文件，影响性能。最小可设置为1MB，最大1000MB，通常无需设置，维持默认值64M即可。
 -   重试策略设置：您可以选择三种重试回避策略：指数回避（EXPONENTIAL\_BACKOFF）、线性时间回避（LINEAR\_BACKOFF）、常数时间回避（CONSTANT\_BACKOFF）。例如：下面这段代码可以将Write的重试次数调整为6，每一次重试之前先分别回避4s、8s、16s、32s、64s和128s（从4开始的指数递增的序列），这个也是默认的行为，一般情况不建议调整。
 
     ```

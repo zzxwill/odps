@@ -367,7 +367,7 @@ regexp_extract('foothebar', 'foothebar')
 
 ## REGEXP\_INSTR {#section_jpn_5c1_wdb .section}
 
-**Function definition:**
+Function definition:
 
 ```
 bigint regexp_instr(string source, string pattern[,

@@ -20,7 +20,7 @@ Parameter description:
 -   delta: Bigint type, date scope to be modified.  If the input is ‘string’ type or ‘double’ type, it is converted to ‘bigint’ type by implicit conversion. If it is another data type, exception occurs.  If ‘delta’ is greater than zero, do ‘add’ operation, otherwise do ‘minus’ operation.
 -   datepart: a String type constant. This field value follows ‘string’ and ‘datetime’ type conversion agreement, where, ‘yyyy’ indicates year; ‘mm’ indicates month.
 
-    See Conversion between [String type and Datetime type](reseller.en-US/User Guide/SQL/SQL summary.md).  In addition, the extensional date format is also supported: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.  If it is not a constant or unsupported format or other data type, an exception is indicated.
+    See Conversion between [String type and Datetime type](intl.en-US/User Guide/SQL/SQL summary.md).  In addition, the extensional date format is also supported: year- ‘year’; month-‘month’ or ‘mon’; day-‘day’; hour-‘hour.  If it is not a constant or unsupported format or other data type, an exception is indicated.
 
 
 Return value:Datetime type. If any input is NULL, return NULL.
@@ -293,7 +293,7 @@ to_char('2010-24-01', 'yyyy') -- Format is not compatible and exception is throw
 to_char('2008718', 'yyyymmdd') -- Format is not compatible and exception is thrown.
 ```
 
-See [TO\_CHAR](reseller.en-US/User Guide/SQL/Builtin functions/String functions.md) for conversion from other types to string type.
+See [TO\_CHAR](intl.en-US/User Guide/SQL/Builtin functions/String functions.md) for conversion from other types to string type.
 
 ## UNIX\_TIMESTAMP {#section_k4r_zfm_vdb .section}
 
@@ -424,8 +424,6 @@ Command format:
 ```
 INT year(string date)
 ```
-
-**Note:** Before the SQL statement which uses the YEAR function, add `set odps.sql.type.system.odps2=true;` to use the new data type function normally.
 
 Command description:
 

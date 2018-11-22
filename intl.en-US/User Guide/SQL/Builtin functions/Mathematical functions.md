@@ -589,7 +589,7 @@ Returns the  Double or Decimal type. If the number or Decimal\_places is NULL, 
 
 -   If the Double type is returned, the display of the returned result may not be as expected, such as trunc\(125.815, 1\) \(this problem exists in all the systems\).
 -   The part to be truncated is supplemented by zero.
--   **Decimal\_places** can be negative. The negative is truncated from the decimal point to the left and delete the decimal part. If **Decimal\_places** are greater than the length of the integer, return zero.
+-   Decimal\_places can be negative. The negative is truncated from the decimal point to the left and delete the decimal part. If Decimal\_place are greater than the length of the integer, return zero.
 
 Example:
 
@@ -773,8 +773,6 @@ Example:
 Unhex ('616263') = 'abc'
 unhex(616263)='abc'
 ```
-
-For a detailed description of setproject, please see[Project operations](intl.en-US/User Guide/Common commands/Project operations.md#).
 
 ## RADIANS {#section_dwg_1bn_vdb .section}
 

@@ -56,12 +56,6 @@ FROM table_reference
     select * from sale_detail;
     ```
 
-    If the entire project is required to allow a full table scan, the switch can be turned on or off by itself \(true/false\), and the command is as follows:
-
-    ```
-    setproject odps.sql.allow.fullscan=true;
-    ```
-
 -   table\_reference supports nested subqueries, for example:
 
     ```
@@ -125,7 +119,7 @@ FROM table_reference
 
     These restrictions are imposed because group by operations come before Select operations during SQL parsing. Therefore, group by statements can only accept the columns or expressions of the input table as keys.
 
-    **Note:** For more information, see [Aggregate Functions](intl.en-US/User Guide/SQL/Builtin Function/Aggregate function.md).
+    **Note:** For more information, see [Aggregate Functions](intl.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md).
 
 -   order by: Globally sorts all data based on certain columns. To sort records in descending order, use the DESC keyword. For global sorting, **order by must be used together with limit**. When order by is used for sorting, NULL is considered to be smaller than any other value. This action is the same as that in MySQL but different from that in Oracle.
 

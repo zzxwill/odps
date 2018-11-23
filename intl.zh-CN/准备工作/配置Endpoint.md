@@ -2,7 +2,7 @@
 
 本文将为您介绍MaxCompute Region的开通情况和连接方式，解答您在与其他云产品（ECS、TableStore、OSS）互访场景中遇到的网络连通性和下载数据收费等问题。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15410556311423_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15429684531423_zh-CN.png)
 
 由上图可知，从服务层面来看，MaxCompute为您提供了两大类服务连接地址，如下所示：
 
@@ -41,7 +41,7 @@ Tunnel数据上传无论走哪一种网络形态都免费，如上文示意图�
 
 ## MaxCompute访问外部表的连通性 {#section_d2d_51y_5db .section}
 
-MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore表格存储数据，详情请参见[访问OSS非结构化数据](../../../../intl.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md)和[访问OTS非结构化数据](../../../../intl.zh-CN/用户指南/处理非结构化数据/访问OTS非结构化数据.md)。
+MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore表格存储数据，详情请参见[访问OSS非结构化数据](../../../../intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)和[访问OTS非结构化数据](../../../../intl.zh-CN/用户指南/外部表/访问OTS非结构化数据.md)。
 
 网络连通性的配置说明，如下所示：
 
@@ -107,8 +107,8 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
 
 -   MaxCompute客户端（console）配置。请参见[安装并配置客户端](intl.zh-CN/准备工作/安装并配置客户端.md#)。
 -   MaxCompute studio project连接配置。请参见[项目空间连接管理](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md#)。
--   SDK连接MaxCompute配置。请参见[../../../../dita-oss-bucket/SP\_76/DNODPS1898901/ZH-CN\_TP\_12064.md\#](../../../../intl.zh-CN/SDK 参考/Java SDK.md#)和[../../../../dita-oss-bucket/SP\_76/DNODPS1898901/ZH-CN\_TP\_12065.md\#](../../../../intl.zh-CN/SDK 参考/Python SDK.md#)连接MaxCompute接口配置。
--   DataWorks的数据集成脚本模式连接MaxCompute数据源配置和使用DataX开源工具连接MaxCompute数据源。请参见[配置MaxCompute数据源](https://help.aliyun.com/knowledge_detail/74280.html)和[导出SQL的运行结果](../../../../intl.zh-CN/最佳实践/导出SQL的运行结果.md#)。
+-   SDK连接MaxCompute配置。请参见[Java SDK](../../../../intl.zh-CN/SDK 参考/Java SDK.md#)和[Python SDK](../../../../intl.zh-CN/SDK 参考/Python SDK.md#)连接MaxCompute接口配置。
+-   DataWorks的数据集成脚本模式连接MaxCompute数据源配置和使用DataX开源工具连接MaxCompute数据源。请参见[配置MaxCompute数据源](https://www.alibabacloud.com/help/zh/faq-detail/74280.htm)和[导出SQL的运行结果](../../../../intl.zh-CN/最佳实践/导出SQL的运行结果.md#)。
 
 ## 访问原则 { .section}
 

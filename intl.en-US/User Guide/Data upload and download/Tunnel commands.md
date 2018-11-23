@@ -2,7 +2,7 @@
 
 ## Features {#section_hcs_btf_vdb .section}
 
-The [Client](../../../../intl.en-US/Tools and Downloads/Client.md) provides [Tunnel](intl.en-US/User Guide/Data upload and download/Tunnel commands.md) commands for you to use the functions of the original Dship tool.
+The [Client](../../../../reseller.en-US/Tools and Downloads/Client.md) provides [Tunnel](reseller.en-US/User Guide/Data upload and download/Tunnel commands.md) commands for you to use the functions of the original Dship tool.
 
 Tunnel commands are mainly used to upload or download data.
 
@@ -22,7 +22,7 @@ Tunnel commands are mainly used to upload or download data.
     -- Download data from the table to the test_table.txt file.
     ```
 
--   Resume:  If an error occurs because of the network or the Tunnel service, you can resume transmission of the file or directory after interruption. This command allows you to resume a previous data upload operation, but does not support download operations.
+-   Resume:  If an error occurs because of network or the Tunnel service, you can resume transmission of the file or directory after interruption. This command allows you to resume the previous data upload operation, but does not support download operations.
 
     ```
     tunnel resume;
@@ -69,7 +69,7 @@ Available subcommands:
 tunnel is a command for uploading data to / downloading data from MaxCompute.
 ```
 
-**Parameters information:**
+**Parameters**
 
 -   upload: Uploads the data to a MaxCompute table.
 -   download: Downloads the data from a MaxCompute table.
@@ -122,19 +122,19 @@ For example:
     tunnel upload log.txt test_project.test_table/p1="b1",p2="b2"
 ```
 
-**Parameters information:**
+**Parameters**
 
 -   -acp: Determines if the operation automatically creates the destination partition if it does not exist. This one is disabled by default.
 -   -bs: Specifies the size of each data block uploaded using Tunnel. Default value: 100MiB \(1MiB=1024\*1024B\) .
--   -c: Specifies the local data file encoding. Default value: UTF-8.  When not set, the encoding of the downloaded source data is used by default.
--   -cp: Determines whether the local file is compressed before being uploaded, reducing traffic usage. This one is enabled by default.
+-   -c: Specifies the local data file encoding. Default value: I. When not set, the encoding of the downloaded source data is used by default.
+-   -cp: Determines whether the local file is compressed before being uploaded, reducing traffic usage. It is enabled by default.
 -   -dbr: Determines whether to ignore corrupted data \(including extra, missing columns or mismatched column data types\).
-    -   If this value is true, all the data which does not satisfy table definitions is ignored.
+    -   If this value is true, all the data that does not satisfy table definitions is ignored.
     -   When the parameter is set to false, the system displays error messages in case of corrupted data, but the raw data in the destination table remains unaffected.
--   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss. If you want to specify the time format to the level of milliseconds, use tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS', for more information, see [../../../../dita-oss-bucket/SP\_76/DNODPS1892969/EN-US\_TP\_11923.md\#](../../../../intl.en-US/Product Introduction/Definition/Data types.md#).
+-   -dfp: Specifies the format of DateTime data. Default value: yyyy-MM-dd HH:mm:ss. If you want to specify the time format to the level of milliseconds, use tunnel upload -dfp 'yyyy-MM-dd HH:mm:ss.SSS', for more information, see [Data types](../../../../reseller.en-US/User Guide/Definition/Data types.md#).
 -   -fd: Specifies the column delimiter of the local data file. The default value is comma \(,\).
 -   -h: Determines whether the data file contains the header. If it is set to true, Dship skips the header and starts uploading from the next row.
--   -mbr: By default, if more than 1,000 rows of corrupted data is uploaded, the upload is terminated. This parameter allows you to adjust the tolerated volume of corrupted data.
+-   -mbr: By default, if more than 1,000 rows of corrupted data is uploaded, the upload is terminated. This parameter allows you to adjust the tolerated volume of the corrupted data.
 -   -ni: Specifies the NULL data identifier. Default value: “ “\(blank string\).
 -   -rd: Specifies the row delimiter of the local data file. Default value: \\r\\n. 
 -   -s: Determines whether to scan the local data file. Default value: false.
@@ -146,9 +146,9 @@ For example:
 -   -threads: Specifies the number of threads. Default value: 1.
 -   -tz: Specifies the time zone. The default value is the local time zone: Asia/Shanghai.
 
-**Examples:**
+**Example**
 
--   To create a destination table:
+-   Create a destination table:
 
 ```
 CREATE TABLE IF NOT EXISTS sale_detail(
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS sale_detail(
 PARTITIONED BY (sale_date STRING,region STRING);
 ```
 
--   To add a partition:
+-   Add a partition:
 
     ```
     alter table sale_detail add partition (sale_date='201312', region='hangzhou');
@@ -174,7 +174,7 @@ PARTITIONED BY (sale_date STRING,region STRING);
 
     The data of the third row of this file is not consistent with the definition in Table sale\_detail. The three columns are defined by sale\_detail, but this row only has two.
 
--   To import data:
+-   Import data:
 
     ```
     odps@ project_name>tunnel u d:\data.txt sale_detail/sale_date=201312,region=hangzhou -s false
@@ -187,7 +187,7 @@ PARTITIONED BY (sale_date STRING,region STRING);
 
     Because data.txt contains corrupted data, data import fails. The system displays the session ID and error message.
 
--   To verify data:
+-   Verify data:
 
     ```
     odps@ odpstest_ay52c_ay52> select * from sale_detail where sale_date='201312';
@@ -198,7 +198,7 @@ PARTITIONED BY (sale_date STRING,region STRING);
     +-----------+-------------+-------------+-----------+--------+
     ```
 
-    The data import failed because of dirty data and hence the table contains no data.
+    The data import failed because of dirty data and hence the table is empty.
 
 
 ## Show {#section_wzb_xxf_vdb .section}
@@ -215,11 +215,11 @@ For example:
     tunnel show log
 ```
 
-**Parameter:**
+**Parameter**
 
--n: Specifies the number of rows to display.
+-n: Specifies the number of rows to be displayed.
 
-**Examples:**
+**Example**
 
 ```
 odps@ project_name>tunnel show history;
@@ -241,7 +241,7 @@ For example:
     tunnel resume
 ```
 
-**Examples:**
+**Example**
 
 Modify the data.txt file as follows:
 
@@ -250,7 +250,7 @@ shop9,97,100
 shop10,10,200
 ```
 
-To re-upload the repaired data:
+Re-upload the repaired data:
 
 ```
 odps@ project_name>tunnel resume 201506101639224880870a002ec60c --force;
@@ -267,7 +267,7 @@ OK
 
 **Note:** With reference to the preceding example, 201506101639224880870a002ec60c is session ID.
 
-To verify data:
+Verify data:
 
 ```
 odps@ project_name>select * from sale_detail where sale_date='201312';
@@ -357,9 +357,9 @@ For example:
     tunnel download instance://test_project/test_instance log.txt
 ```
 
-**Parameters information:**
+**Parameters**
 
--   -c: Specifies the local data file encoding. Default value: UTF-8.
+-   -c: Specifies the local data file encoding. Default value: Ignore.
 -   -ci: Specifies the column index \(starts from 0\) for downloading. Separate multiple entries with commas \(,\).
 -   -cn: Specifies the names of the columns to download. Separate multiple entries with commas \(,\).
 -   -cp, -compress: Determines whether the data is compressed before it is downloaded, reducing traffic usage. It is enabled by default.
@@ -378,9 +378,9 @@ For example:
 -   -threads: Specifies the number of threads. Default value: 1.
 -   -tz: Specifies the time zone. The default value is the local time zone: Asia/Shanghai.
 
-**Examples:**
+**Example**
 
-To download data to the result.txt:
+Download data to the result.txt:
 
 ```
 $ ./tunnel download sale_detail/sale_date=201312,region=hangzhou result.txt;
@@ -391,7 +391,7 @@ $ ./tunnel download sale_detail/sale_date=201312,region=hangzhou result.txt;
     OK
 ```
 
-To verify the content of the result.txt:
+Verify the content of the result.txt:
 
 ```
 shop9,97,100.0
@@ -427,7 +427,7 @@ For example:
 -   Negative infinity: -Infinity.
 
  |
-|DATETIME|By default, Datetime data supports the UTC+8 time zone for data uploading. Use the command to specify the format pattern for the date in your data.|
+|DATETIME|By default, Datetime data supports the UTC+8 time zone for data upload. Use the command to specify the format pattern for the date in your data.|
 
 If you upload DATETIME type data, specify the time and date format. For more information about specific formats, see SimpleDateFormat.
 
@@ -437,7 +437,7 @@ If you upload DATETIME type data, specify the time and date format. For more inf
 "MM/dd/yyyy": data format "09/01/2014"
 ```
 
-**Examples:**
+**Example**
 
 ```
 tunnel upload log.txt test_table -dfp "yyyy-MM-dd HH:mm:ss"
@@ -463,10 +463,10 @@ tunnel upload log.txt test_table -c "gbk"
 Description:
 
 -   Row and column delimiters of multiple characters are supported.
--   A column delimiter cannot contain the row delimiter.
+-   A column delimiter cannot contain a row delimiter.
 -   Only the follow escape character delimiters are supported in the command line: \\r, \\n, and \\t.
 
-**Examples:**
+**Example**
 
 ```
 tunnel upload log.txt test_table -fd "||" -rd "\r\n"

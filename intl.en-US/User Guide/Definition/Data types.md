@@ -1,5 +1,7 @@
 # Data types {#concept_jhp_4bb_5db .concept}
 
+This article introduces you to the data types supported by MaxCompute 2.0, including basic data types and complex types.
+
 ## Basic data types {#section_b53_rbb_5db .section}
 
 supported by MaxCompute2.0 are listed in the following table. Columns in a MaxCompute table must be any of the listed types. New types include TINYINT, SMALLINT, INT,  FLOAT, VARCHAR, TIMESTAMP, and BINARY data type.The details are as follows:
@@ -12,15 +14,7 @@ supported by MaxCompute2.0 are listed in the following table. Columns in a MaxCo
     set odps.sql.type.system.odps2=true;
     ```
 
-    And submit the execution together with the table statement.
-
--   Project level: that is to support new types of project level open. The Owner of project can set up project as required.
-
-    ```
-    setproject odps.sql.type.system.odps2=true;
-    ```
-
-    For a detailed description of setproject, please see:[Other operations](../../../../reseller.en-US/User Guide/Common commands/Other operations.md#).
+    And submit the execution together with the table statement.The SQL tool submitted through MaxCompute Studio automatically adds the set statement to submit execution by default.
 
 -   When it comes to INT types, 32 bits are added to the set statement and converted to BIGINT, 64 bits, if not added.
 -   SDK 0.27.2-public version and above, Client 0.27.0 version and above support new data type.

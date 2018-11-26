@@ -1,5 +1,7 @@
 # Package的使用方法 {#concept_vj4_rk1_wdb .concept}
 
+本文为您介绍项目空间Package创建者和Package使用者所涉及的操作。
+
 ## Package的使用方法 {#section_p5q_211_hfb .section}
 
 Package的使用涉及到两个主体：Package创建者和Package使用者。
@@ -36,7 +38,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
     **说明：** 
 
     -   目前支持的对象类型不包括Project类型，也就是不允许通过Package在其他Project中创对象。
-    -   添加到Package中的不仅仅是对象本身，还包括相应的操作权限。当没有通过\[with privileges privileges\]来指定操作权限时，默认为只读权限，即Read/Describe/Select。“对象及其权限”被看作一个整体，添加后不可被更新。若有需要，只能删除和重新添加。
+    -   添加到Package中的不仅仅是对象本身，还包括相应的操作权限。当没有通过\[with privileges privileges\]来指定操作权限时，默认为只读权限，即Read/Describe/Select。对象及其权限被看作一个整体，添加后不可被更新。若有需要，只能删除和重新添加。
     -   对象添加到package时，并非快照打包，因此后续对象数据有变更，通过package授权访问对象也是访问该对象的当前数据。
 -   许可其他项目空间使用Package
 

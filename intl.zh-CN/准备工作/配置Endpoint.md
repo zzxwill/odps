@@ -2,7 +2,7 @@
 
 本文将为您介绍MaxCompute Region的开通情况和连接方式，解答您在与其他云产品（ECS、TableStore、OSS）互访场景中遇到的网络连通性和下载数据收费等问题。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15429684531423_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15431984991423_zh-CN.png)
 
 由上图可知，从服务层面来看，MaxCompute为您提供了两大类服务连接地址，如下所示：
 
@@ -47,7 +47,7 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
 
 -   MaxCompute和TableStore/OSS在同一Region情况下，建议配置阿里云经典网络或VPC网络连接方式，其外网也可以进行连通。
 -   MaxCompute和TableStore/OSS不在同一Region情况下，配置外网访问方式进行连通。在跨Region的情况下，您可选择配置阿里云经典网络或VPC网络则不保证其连通性。
--   对于通过物理专线访问VPC的场景，请参见[通过物理专线访问VPC中的云服务](https://help.aliyun.com/document_detail/57195.html)保证网络连通性。
+-   对于通过物理专线访问VPC的场景，请参见[通过物理专线访问VPC中的云服务](https://www.alibabacloud.com/help/zh/doc-detail/57195.html)保证网络连通性。
 
 ## MaxCompute开通Region和服务连接对照表 {#section_f2d_51y_5db .section}
 

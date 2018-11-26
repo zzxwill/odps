@@ -2,7 +2,7 @@
 
 This sections details the regions where MaxCompute is available, and connection methods. Problems such as network connectivity and downloading charges related to use of other Alibaba Cloud products \(such as ECS, TableStore, OSS, and so on\) are also detailed.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15410556421423_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15431985091423_en-US.png)
 
 MaxCompute provides two types of service connection addresses as follows:
 
@@ -38,7 +38,7 @@ According to the Tunnel service request to download data, and from which region 
 
 ## The connectivity configuration {#section_d2d_51y_5db .section}
 
-MaxCompute 2.0 supports reading and writing OSS object, and also supports reading and writing tables of Table Store. For more information, see [Access OSS Unstructured Data](../../../../reseller.en-US/User Guide/Handle-Unstructured-data/Access OSS data.md) and [Access Table Store Data](../../../../reseller.en-US/User Guide/Handle-Unstructured-data/Visit Table Store data.md).
+MaxCompute 2.0 supports reading and writing OSS object, and also supports reading and writing tables of Table Store. For more information, see [Access OSS Unstructured Data](../../../../reseller.en-US/User Guide/External table/Accessing OSS unstructured data.md) and [Access Table Store Data](../../../../reseller.en-US/User Guide/External table/Visit Table Store Data.md).
 
 Configuration instructions about network connectivity are as follows:
 

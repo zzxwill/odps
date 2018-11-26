@@ -8,7 +8,7 @@ UDT的常用场景如下：
 
 -   场景1：某些用其他语言实现非常简单的功能，比如只需要调用一次Java内置类的方法即可实现的功能，而MaxCompute的内置函数却没有简单的方法实现。若使用UDF实现，整个过程又过于繁杂。
 -   场景2：SQL中需要调用第三方库来实现相关功能。希望能够在SQL中直接调用，而不需要再wrap一层UDF。
--   场景3：[Select Transform](cn.zh-CN/用户指南/SQL/SELECT操作/Select Transform语法.md#)支持把脚本写到SQL语句中，可读性和代码维护大提升。但是某些语言无法这么用，比如Java源代码必须经过编译才能执行，希望类似这些语言也可直接写到SQL中。
+-   场景3：[Select Transform](intl.zh-CN/用户指南/SQL/SELECT操作/Select Transform语法.md#)支持把脚本写到SQL语句中，可读性和代码维护大提升。但是某些语言无法这么用，比如Java源代码必须经过编译才能执行，希望类似这些语言也可直接写到SQL中。
 
 ## UDT概述 {#section_drd_zp4_hfb .section}
 
@@ -94,7 +94,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 
 上述示例还表现了一种用UDF比较不好实现的功能：子查询的结果允许UDT类型的列。如上面变量a的x列是java.math.BigInteger类型，而不是内置类型。UDT类型的数据可以被带到下一个operator中再调用其他方法，甚至能参与数据shuffle。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154201207213239_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154324352713239_zh-CN.png)
 
 如上图可知，该UDT共有三个STAGE：M1、R2和J3。如果您熟悉MapReduce原理便会知道，由于join的存在需要做数据reshuffle，所以会出现多个stage。一般情况下，不同stage不仅是在不同进程，甚至是在不同物理机器上运行的。
 
@@ -108,7 +108,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 -   UDT同样允许用户上传自己的Jar包，并且直接引用。当前提供了一些flag以方便使用。
     -   set odps.sql.session.resources指定引用的资源，可以指定多个，用逗号隔开。如`set odps.sql.session.resources=foo.sh,bar.txt;`。
 
-        **说明：** 这个flag和[Select Transform](https://help.aliyun.com/document_detail/73719.html)中指定资源的flag相同，所以这个flag会同时影响两个功能。 如UDT概述中UDF的Jar包，用UDT来使用：
+        **说明：** 这个flag和Select Transform中指定资源的flag相同，所以这个flag会同时影响两个功能。 如UDT概述中UDF的Jar包，用UDT来使用：
 
         ```
         set odps.sql.type.system.odps2=true;
@@ -150,12 +150,12 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 
     除string的相加操作比较容易混淆外，另一个比较容易混淆的是=操作。SQL中的=不是赋值而是判断相等。而对于Java对象来说，判断相等应该用equals方法，通过等号判断的相等无法保证其行为（在UDT场景下，同一对象的概念是不能保证的，详情请参见下文的说明）。
 
--   内置类型与特定Java类型有一一映射关系，详情请参见[Java UDF](cn.zh-CN/用户指南/SQL/UDF/Java UDF.md#)中的数据类型映射表，这个映射关系在UDT也有效。
+-   内置类型与特定Java类型有一一映射关系，详情请参见[Java UDF](intl.zh-CN/用户指南/SQL/UDF/Java UDF.md#)中的数据类型映射表，这个映射关系在UDT也有效。
 
     -   内置类型的数据能够直接调用其映射到的Java类型的方法，如`'123'.length() , 1L.hashCode()`。
     -   UDT类型能够直接参与内置函数或者UDF的运算， 如`chr(Long.valueOf('100'))`，其中`Long.valueOf`返回的是`java.lang.Long`类型的数据，而内置函数chr接受的数据类型是内置类型BIGINT。
     -   Java的primitive类型可以自动转化为其boxing类型，并应用前两条规则。
-    **说明：** 部分内置的[新数据类型](../../../../cn.zh-CN/用户指南/基本概念/数据类型.md#)需要设置`set odps.sql.type.system.odps2=true;` 方可使用，否则会报错。
+    **说明：** 部分内置的[新数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)需要设置`set odps.sql.type.system.odps2=true;` 方可使用，否则会报错。
 
 -   UDT对泛型有比较完整的支持，如`java.util.Arrays.asList(new java.math.BigInteger('1'))`，编译器能够根据参数类型知道该方法的返回值是`java.util.List<java.math.BigInteger>`类型。
 
@@ -183,7 +183,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 
     某些类可能自带序列化和反序列化的方法，如protobuffer。目前UDT依旧不支持落盘，还是需要用户自己调用序列化反序列化方法，变成binary数据类型来落盘。
 
--   UDT不仅能够实现scalar函数的功能，配合着内置函数[collect list](cn.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)和[explode](cn.zh-CN/用户指南/SQL/内建函数/其他函数.md#)，完全能够实现 aggregator和table function的功能。
+-   UDT不仅能够实现scalar函数的功能，配合着内置函数[collect list](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)和[explode](intl.zh-CN/用户指南/SQL/内建函数/其他函数.md#)，完全能够实现 aggregator和table function的功能。
 
 ## UDT示例 {#section_ors_lq4_hfb .section}
 
@@ -215,7 +215,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
     from @a;
     ```
 
-    相比于内置函数[get\_json\_object](cn.zh-CN/用户指南/SQL/内建函数/字符串函数.md#)，上述用法不仅使用方便，在需要对Json字符串多个部分做内容提取时，先将JSON字符串反序列成格式化数据，大大提升工作效率。
+    相比于内置函数[get\_json\_object](intl.zh-CN/用户指南/SQL/内建函数/字符串函数.md#)，上述用法不仅使用方便，在需要对Json字符串多个部分做内容提取时，先将JSON字符串反序列成格式化数据，大大提升工作效率。
 
     除JSON外，MaxCompute runtime自带的依赖还包括：commons-logging（1.1.1）， commons-lang（2.5）， commons-io（2.4），protobuf-java（2.4.1）。
 
@@ -240,9 +240,9 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 
 -   聚合操作的实现示例
 
-    UDT实现聚合的原理是，先用内置函数[collect\_set](cn.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)或[collect\_list](cn.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)函数将数据转变成List，之后对该List应用UDT的标量方法求得这一组数据的聚合值。
+    UDT实现聚合的原理是，先用内置函数[collect\_set](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)或[collect\_list](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)函数将数据转变成List，之后对该List应用UDT的标量方法求得这一组数据的聚合值。
 
-    例如下述示例实现对BigInteger求中位数（由于数据是java.math.BigInteger类型的，所以不能直接用内置的[median](cn.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)函数）。
+    例如下述示例实现对BigInteger求中位数（由于数据是java.math.BigInteger类型的，所以不能直接用内置的[median](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md#)函数）。
 
     ```
     set odps.sql.session.java.imports=java.math.*;
@@ -298,5 +298,5 @@ UDT在功能方面的优势如下：
 -   对象在一个进程内实际上是不需要做列化反序列化的，只有跨进程的时候才需要。简单地说，就是在没有join或者aggregator等需要做数据reshuffle的情况下，UDT并没有序列化反序列化的开销。
 -   UDT的Runtime实现是基于codegen，而不是反射，所以不会存在反射带来的性能损失连续的多个UDT的操作，实际上会合并在一起，在一个FunctionCall里一起执行，如前面例子中`values[x].add(values[y]).divide(java.math.BigInteger.valueOf(2))` 这个看似存在多次UDT方法调用的操作，实际上只有一次调用。所以虽然UDT操作的单元都比较小，但是并不会因此造成多次函数调用的接口上的额外开销。
 
-在安全控制方面，UDT和UDF完全一样，都会受到[Java沙箱](cn.zh-CN/用户指南/Java沙箱.md#)policy的限制。所以如果要使用受限的操作，需要打开沙箱隔离，或者申请沙箱白名单。
+在安全控制方面，UDT和UDF完全一样，都会受到[Java沙箱](intl.zh-CN/用户指南/Java沙箱.md#)policy的限制。所以如果要使用受限的操作，需要打开沙箱隔离，或者申请沙箱白名单。
 

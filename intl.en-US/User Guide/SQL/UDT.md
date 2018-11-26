@@ -1,6 +1,6 @@
 # UDT {#concept_drb_xk4_hfb .concept}
 
-MaxCompute has introduced the User-defined type \(UDT\) based on the new generation SQL engine. UDT allow you to reference classes or objects of third-party languages in SQL statements to obtain data or call methods.
+MaxCompute has introduced the User-defined type \(UDT\) based on the new generation SQL engine. UDT allows you to reference classes or objects of third-party languages in SQL statements to obtain data or call methods.
 
 ## Scenarios {#section_wbd_xp4_hfb .section}
 
@@ -12,7 +12,7 @@ UDT are typically applied in the following scenarios:
 
 ## Overview {#section_drd_zp4_hfb .section}
 
-UDT allow you to reference classes or objects of third-party languages in SQL statements to obtain data or call methods.
+UDT allows you to reference classes or objects of third-party languages in SQL statements to obtain data or call methods.
 
 There are major differences between UDT supported by MaxCompute and other SQL engines. UDT supported by other SQL engines are similar to the struct composite type in MaxCompute. Some proprietary SQL languages provide features that allow you to call third-party libraries, such as the CREATE TYPE statement in Oracle databases. UDT supported by MaxCompute is similar to the CREATE TYPE statement. A UDT contains both fields and methods. In addition, MaxCompute does not require that you use Data Definition Language \(DDL\) statements to define type mappings. Instead, MaxCompute allows you to reference types directly in SQL statements.
 
@@ -43,7 +43,7 @@ SELECT Integer.MAX_VALUE;
 
 The expression in the preceding SELECT statement is similar to a Java expression and is executed in the same way as in Java. The expression specifies a UDT in MaxCompute.
 
-You can use UDFs to implement all functions provided by UDT. If you use a UDF to implement the same function, you need to follow these steps:
+You can use UDF to implement all functions provided by UDT. If you use a UDF to implement the same function, you need to follow these steps:
 
 1.  Define a UDF class.
 
@@ -72,7 +72,7 @@ You can use UDFs to implement all functions provided by UDT. If you use a UDF to
     Using a UDT simplifies this procedure. By using UDT, you can use external functions provided by other languages in SQL statements more easily.
 
 
-## How UDT work {#section_hgw_cn4_hfb .section}
+## How UDT works {#section_hgw_cn4_hfb .section}
 
 The example shows how to use UDT to access Java static fields. You can use UDT to implement more functions. The following example shows the UDT execution procedure and its functions.
 
@@ -92,9 +92,9 @@ The output is follows:
 100000000000000000100
 ```
 
-This example also shows how to retrieve UDT columns using subqueries, which is difficult to complete using UDFs. The x column retrieved by variable a is java.math.BigInteger type. It is not a built-in type. You can pass the UDT data to another operator and then call its method. You can also use the UDT data in data shuffling.
+This example also shows how to retrieve UDT columns using subqueries, which is difficult to complete using UDF. The x column retrieved by variable a is java.math.BigInteger type. It is not a built-in type. You can pass the UDT data to another operator and then call its method. You can also use the UDT data in data shuffling.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154297270313239_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154324353313239_en-US.png)
 
 This figure shows that a UDT has three stages: M1, R2, and J3. When a Join clause is used, data reshuffling is required, which is the same as MapReduce. Data is processed at multiple stages. Typically, data processing at different stages are performed in different processes or different physical machines.
 
@@ -104,9 +104,9 @@ The java.math.BigInteger.valueOf\(y\) and x.add\(y\).toString\(\) methods are ca
 
 Features
 
--   UDT currently only support Java. Other languages will be supported in later versions.
--   UDT also allow you to upload JAR packages and directly reference the packages. UDT have provided flags.
-    -   You can use set odps.sql.session.resources to specify one or more resources that you need to reference and separate the resources with commas \(,\). Example: `set odps.sql.session.resources=foo.sh,bar.txt;`.
+-   UDT currently only supports Java. Other languages will be supported in later versions.
+-   UDT also allows you to upload JAR packages and directly reference the packages. UDT has provided flags.
+    -   You can use `set odps.sql.session.resources` to specify one or more resources that you need to reference and separate the resources with commas \(,\). Example: `set odps.sql.session.resources=foo.sh,bar.txt;`.
 
         **Note:** This flag is the same as the resource setting flag in Select Transform. Therefore, this flag controls two functions. For example, you can use a UDT to reference the UDF JAR package that we have mentioned in the Overview section.
 
@@ -117,7 +117,7 @@ Features
         select new com.aliyun.odps.test.IntegerMaxValue().evaluate();
         ```
 
-    -   You can use odps.sql.session.java.imports to specify one or more default JAR packages separated with commas \(,\). It is similar to the Java import statement. You can specify a class path, such as `java.math.BigInteger`, or use `*`. Currently, `static import` is not supported.
+    -   You can use `odps.sql.session.java.imports` to specify one or more default JAR packages separated with commas \(,\). It is similar to the Java import statement. You can specify a class path, such as `java.math.BigInteger`, or use `*`. Currently, `static import` is not supported.
 
         For example, you can use a UDT to reference the UDF JAR package that we have mentioned in Overview.
 
@@ -139,9 +139,9 @@ Features
 
     -   Only public methods and public fields are supported.
     -   Identifiers in UDT include package names, class names, method names, and field names. All identifiers are case-sensitive.
-    -   UDT support type conversion and SQL syntax, for example, cast \(1 as java.lang.Object\). UDT do not support type conversion using Java syntax, for example, \(Object\)1.
+    -   UDT supports type conversion and SQL syntax, for example, cast \(1 as java.lang.Object\). UDT does not support type conversion using Java syntax, for example, \(Object\)1.
     -   Anonymous classes and lambda expressions are not supported. They may be supported in later versions.
-    -   UDT are typically used in expressions. Functions that do not return values cannot be called in expressions. Therefore, UDT currently do not support calling functions that do not return values. This issue will be resolved in a later version.
+    -   UDT is typically used in expressions. Functions that do not return values cannot be called in expressions. Therefore, UDT currently does not support calling functions that do not return values. This issue will be resolved in a later version.
 -   By default, you can reference all classes provided by Java SDK.
 
     **Note:** The runtime currently uses JDK1.8. Later versions may be not supported.
@@ -150,18 +150,18 @@ Features
 
     In addition to the string concatenation methods in MaxCompute and Java, you may also have confusion about the equal \(=\) operator. The equal \(=\) operator in SQL statements is used as a comparison operator. To compare two Java objects, you must call the equals method. You cannot use the equal \(=\) operator to verify whether two objects are equal. When UDT are used, you cannot guarantee that one object is equal to another object. For more information, see the following descriptions.
 
--   Java data types are mapped to built-in data types. For more information, see the data type mapping table in [Java UDFs](intl.en-US/User Guide/SQL/UDF/Java UDF.md#). The mapping table can be applied to UDT.
+-   Java data types are mapped to built-in data types. For more information, see the data type mapping table in [Java UDFs](reseller.en-US/User Guide/SQL/UDF/Java UDF.md#). The mapping table can be applied to UDT.
 
     -   Built-in type data can directly call the method of the Java type to which the built-in type is mapped. Example: `'123'.length() , 1L.hashCode()`.
-    -   UDT can be used in built-in functions and UDFs. For example, in `chr(Long.valueOf('100'))`, `Long.valueOf` returns a `java.lang.Long` type value. Built-in function chr supports the built-in type of BIGINT.
+    -   UDT can be used in built-in functions and UDF. For example, in `chr(Long.valueOf('100'))`, `Long.valueOf` returns a `java.lang.Long` type value. Built-in function chr supports the built-in type of BIGINT.
     -   Java primitive type data is automatically converted to boxing type data and the preceding two rules can be applied in this situation.
-    **Note:** For certain built-in [new data types](../../../../intl.en-US/User Guide/Definition/Data types.md#), you must add the `set odps.sql.type.system.odps2=true;` statement to declare these types. Otherwise, an error occurs.
+    **Note:** For certain built-in [new data types](../../../../reseller.en-US/User Guide/Definition/Data types.md#), you must add the `set odps.sql.type.system.odps2=true;` statement to declare these types. Otherwise, an error occurs.
 
 -   UDT completely support Java generics. For example, based on the parameter type, the compiler knows the type of the value returned by the `java.util.Arrays.asList(new java.math.BigInteger('1'))` method is `java.util.List<java.math.BigInteger>`.
 
     **Note:** You must set the type parameter in a construct function or use java.lang.Object, which is the same as in Java. For example, the result of `new java.util.ArrayList(java.util.Arrays.asList('1', '2'))` is `java.util.ArrayList<Object>`. The result of `new java.util.ArrayList<String>(java.util.Arrays.asList('1', '2'))` is `java.util.ArrayList<String>`.
 
--   UDT do not have a clear definition of equal objects. This is caused by data reshuffling. The join example shows that objects may be transmitted between different processes or physical machines. During the transmission, an object may be referenced as two different objects. For example, an object may be shuffled to two machines and then reshuffled.
+-   UDT does not have a clear definition of equal objects. This is caused by data reshuffling. The join example shows that objects may be transmitted between different processes or physical machines. During the transmission, an object may be referenced as two different objects. For example, an object may be shuffled to two machines and then reshuffled.
 
     Therefore, when you use UDT, you must use the equals method to compare two objects instead of using the equal \(=\) operator.
 
@@ -183,7 +183,7 @@ Features
 
     Some classes may have their own serialization and deserialization methods, such as protobuffer. To save UDT, you must call serialization and deserialization methods to convert the data to binary data.
 
--   You can use UDT to achieve the function provided by the scalar function. With the built-in functions [collect list](intl.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) and [explode](intl.en-US/User Guide/SQL/Builtin functions/Other functions.md#), you can use UDT to achieve the functions provided by the aggregator and table functions.
+-   You can use UDT to achieve the function provided by the scalar function. With the built-in functions [collect list](reseller.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) and [explode](reseller.en-US/User Guide/SQL/Builtin functions/Other functions.md#), you can use UDT to achieve the functions provided by the aggregator and table functions.
 
 ## UDT examples {#section_ors_lq4_hfb .section}
 
@@ -215,7 +215,7 @@ Features
     from @a;
     ```
 
-    Compared with built-in function [get\_json\_object](intl.en-US/User Guide/SQL/Builtin functions/String functions.md#), this method is simple and it improves efficiency by extracting content from the JSON string and then deserializing the string to a supported data type.
+    Compared with built-in function [get\_json\_object](reseller.en-US/User Guide/SQL/Builtin functions/String functions.md#), this method is simple and it improves efficiency by extracting content from the JSON string and then deserializing the string to a supported data type.
 
     In addition to JSON dependencies, MaxCompute runtime also carries other dependencies, including commons-logging \(1.1.1\), commons-lang \(2.5\), commons-io \(2.4\), and protobuf-java \(2.4.1\).
 
@@ -240,9 +240,9 @@ Features
 
 -   Example of aggregation
 
-    To use UDT to achieve aggregation, you must first use built-in function [collect\_set](intl.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) or [collect\_list](intl.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) to convert the data to the List type, and then call the UDT methods to aggregate the data.
+    To use UDT to achieve aggregation, you must first use built-in function [collect\_set](reseller.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) or [collect\_list](reseller.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) to convert the data to the List type, and then call the UDT methods to aggregate the data.
 
-    The following example shows how to obtain the median from BigInteger data. You cannot directly call the built-in [median](intl.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) function because the data is java.math.BigInteger type.
+    The following example shows how to obtain the median from BigInteger data. You cannot directly call the built-in [median](reseller.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md#) function because the data is java.math.BigInteger type.
 
     ```
     set odps.sql.session.java.imports=java.math.*;
@@ -278,7 +278,7 @@ Features
 
 ## Features, performance, and security {#section_mxl_mq4_hfb .section}
 
-UDT have the following features:
+UDT has the following features:
 
 -   Easy to use. You do not need to define any functions.
 -   You can directly use all functions supported by the JDK. This improves the flexibility of SQL.
@@ -293,10 +293,10 @@ Improvements that will be made to UDT later:
 -   You can use UDT as shuffle keys.
 -   More languages will be supported, such as Python.
 
-The execution procedure of UDT is similar to UDF. UDT and UDFs have almost the same performance. In addition, the compute engine has been greatly improved. Therefore, UDT have higher performance in certain scenarios.
+The execution procedure of UDT is similar to UDF. UDT and UDFs have almost the same performance. In addition, the compute engine has been greatly improved. Therefore, UDT has higher performance in certain scenarios.
 
 -   Deserialization is not required for objects in only one process. Deserialization is required only when the objects are transmitted among processes. This means that UDT do not incur any serialization or deserialization overhead when no data reshuffling is performed, such as calling the join or aggregator function.
--   The runtime of UDT is based on Codegen. It is not based on reflection. Therefore, no performance reduction is experienced. Multiple UDT are wrapped in one FunctionCall and executed at the same time. For example, you may think that multiple UDT methods are called in `values[x].add(values[y]).divide(java.math.BigInteger.valueOf(2))`, but actually only one method is called. UDT focus on small-granularity data processing. However, this does not incur additional overhead for the interface where multiple functions are called.
+-   The runtime of UDT is based on Codegen. It is not based on reflection. Therefore, no performance reduction is experienced. Multiple UDT is wrapped in one FunctionCall and executed at the same time. For example, you may think that multiple UDT methods are called in `values[x].add(values[y]).divide(java.math.BigInteger.valueOf(2))`, but actually only one method is called. UDT focus on small-granularity data processing. However, this does not incur additional overhead for the interface where multiple functions are called.
 
-UDT are restricted by the [Java sandbox](intl.en-US/User Guide/Java Sandbox.md#) model, as same as UDF. To perform restricted operations, you must enable sandbox isolation or apply to join a sandbox whitelist.
+UDT is restricted by the [Java sandbox](reseller.en-US/User Guide/Java Sandbox.md#) model, as same as UDF. To perform restricted operations, you must enable sandbox isolation or apply to join a sandbox whitelist.
 

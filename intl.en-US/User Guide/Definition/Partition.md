@@ -6,11 +6,11 @@ In MaxCompute, each field can be specified as a separate partition. Alternativel
 
 If the partitions to be accessed are specified when you use data, then only corresponding partitions are read and a full table scan is avoided, improving processing efficiency while reducing costs.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11922/15432287221036_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11922/15432891751036_en-US.png)
 
 ## Partition types {#section_rbw_nz1_5db .section}
 
-Maxcomputerte 2.0 extends the support for partitioning types, currently, MaxCompute supports tinyint, smallint, Int, bigint, varchar, and string partition types.
+MaxCompute 2.0 extends the support for partitioning types, currently, MaxCompute supports tinyint, smallint, Int, bigint, varchar, and string partition types.
 
 **Note:** In MaxCompute versions earlier than 2.0, only STRING partition type is supported. For historical reasons, although you can specify a partition type of bigint, however, except for the schema representation of the table as bigint, any other case is actually handled as a string. Examples:
 

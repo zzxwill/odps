@@ -1,12 +1,12 @@
 # Authorization {#concept_ubm_4yz_vdb .concept}
 
-After a [user](intl.en-US/User Guide/Security/User Management.md)  is added, the project owner  or the project administrator must authorize the user. The user can perform operations only after obtaining permission.  Authorization allows a user to perform operations  including read, write, and view on tables, tasks, resources, and other objects of the MaxCompute.
+Authorization allows a user to perform operations including read, write, and view on tables, tasks, resources, and other objects of the MaxCompute. After the [user](reseller.en-US/User Guide/Security/User management.md) is added, the project owner or the project administrator must authorize the user. The user can perform operations only after obtaining the permission. 
 
-MaxCompute provides access control list \(ACL\)  authorization, cross-project resource sharing, and project resource protection.  Authorization typically includes three elements: subject, object, and action.  In  MaxCompute, the subject refers to a user or a role and the object refers to various types of objects in a project.
+MaxCompute provides Access Control List \(ACL\)  authorization, cross-project resource sharing, and project resource protection. Authorization typically includes three elements: subject, object, and action. In MaxCompute, the subject refers to a user or a role and the object refers to various types of objects in a project.
 
-ACL authorization includes following MaxCompute objects: [Project](../../../../intl.en-US/Product Introduction/Definition/Project.md), [Table](../../../../intl.en-US/Product Introduction/Definition/Table.md), [Function](../../../../intl.en-US/Product Introduction/Definition/Function.md), [Resource](../../../../intl.en-US/Product Introduction/Definition/Resources.md), and [Instance](../../../../intl.en-US/Product Introduction/Definition/Instance.md). Operations are related to specific object types, therefore different types of objects support different types of actions.
+ACL authorization includes following MaxCompute objects: [Project](../../../../reseller.en-US/User Guide/Definition/Projects.md), [Table](../../../../reseller.en-US/User Guide/Definition/Table.md), [Function](../../../../reseller.en-US/User Guide/Definition/Function.md), [Resource](../../../../reseller.en-US/User Guide/Definition/Resource.md), and [Instance](../../../../reseller.en-US/User Guide/Definition/Instance.md). Operations are related to specific object types, therefore different types of objects support different types of actions.
 
-MaxCompute projects support the following object types and actions.
+MaxCompute projects support the following object types and actions:
 
 |Object|Action|Description|
 |:-----|:-----|:----------|
@@ -26,7 +26,7 @@ MaxCompute projects support the following object types and actions.
 |Table|All|Grant all the preceding permissions.|
 |Function|Read|Read and run permissions.|
 |Function|Write|Update.|
-|Function|Delete|Delete|
+|Function|Delete|Delete.|
 |Function|Run|Run.|
 |Function|All|Grant all the preceding permissions.|
 |Resource|Read|Read.|
@@ -39,13 +39,13 @@ MaxCompute projects support the following object types and actions.
 
 **Note:** 
 
--   The CreateTable action for the objects of Project type must work with the CreateInstance permission for the Project object. The Select, Alter, Update, and Drop actions for the objects of Table type  must work with the CreateInstance permission for the Project object.
--   If the CreateInstance permission is not granted, the corresponding operations cannot be performed even though the mentioned permissions are granted.  This is related to the internal implementation of MaxCompute. The Select permission for Table type objects  must work with the CreateInstance  permission. While performing cross-project operation, such as selecting the table of project B in the project A, you must have the project A CreateInstance and the project B Table select permissions .
--   After a user or role is added, you must grant permissions to the user or role.  MaxCompute authorization is an object-based authorization method.  The permission data authorized by the access  control list \(ACL\) is considered as a type of sub-resource of the object.  Authorization can be performed only when the object exists. When the object is deleted, the authorized permission data is automatically deleted.
+-   The CreateTable action for the objects of Project type must work with the CreateInstance permission for the Project object. The Select, Alter, Update, and Drop actions for the objects of Table type must work with the CreateInstance permission for the Project object.
+-   If the CreateInstance permission is not granted, the corresponding operations cannot be performed even though the mentioned permissions are granted. This is related to the internal implementation of MaxCompute. The Select permission for Table type objects must work with the CreateInstance permission. While performing cross-project operation, such as selecting the table of project B in the project A, you must have the project A CreateInstance and the project B Table select permissions.
+-   After a user or role is added, you must grant permissions to the user or role. MaxCompute authorization is an object-based authorization method. The permission data authorized by ACL is considered as a type of sub-resource of the object. Authorization can be performed only if the object exists. When the object is deleted, the authorized permission data is automatically deleted.
 
 -   **SQL92 Authorization**
 
-    MaxCompute supports authorization using the syntax similar to the GRANT and REVOKE commands defined by SQL92. It grants or revokes permissions to/from the existing project object through simple authorization statements.  The authorization syntax is as follows:
+    MaxCompute supports authorization using the syntax similar to the GRANT and REVOKE commands defined by SQL92. It grants or revokes permissions to/from the existing project object through simple authorization statements. The authorization syntax is as follows:
 
     ```
         grant actions on object to subject
@@ -57,16 +57,16 @@ MaxCompute projects support the following object types and actions.
         subject ::= user full_username | role role_name
     ```
 
-    Users familiar with  the GRANT and REVOKE commands defined by SQL92 or with Oracle database security management can find that the ACL  authorization syntax of MaxCompute does not support \[WITH GRANT OPTION\] authorization parameters.  For example, when User A authorizes User B to access an object, User B  cannot grant the permission to User C.  In this scenario, all permissions must be granted by one of the following three roles:
+    Users familiar with GRANT and REVOKE commands defined by SQL92 or with Oracle database security management can identify that the ACL authorization syntax of MaxCompute does not support \[WITH GRANT OPTION\] authorization parameters. For example, when User A authorizes User B to access an object, User B cannot grant the permission to User C. In this scenario, all permissions can be granted by one of the following three roles:
 
     -   Project owner
     -   Project administrator
     -   Object creator
--   **Use Example of ACL Authorization**
+-   **Use example of ACL authorization**
 
     In the following scenario, the Alibaba Cloud account user alice@aliyun.com is a newly added member to the project test\_project\_a,  and Allen is a RAM-sub account added to bob@aliyun.com. In test\_project\_a,  they both must submit jobs, create tables, and view existing objects in the project.
 
-    The following authorization operations procedure is performed by the project administrator:
+    The project administrator performs the following authorization operations:
 
     ```
         use test_project; --Open the project
@@ -75,14 +75,14 @@ MaxCompute projects support the following object types and actions.
         create role worker; --Create a role
         grant worker TO aliyun$alice@aliyun.com; --Grant the role
         grant worker TO aliyun$bob@aliyun.com; --Grant the role
-        grant CreateInstance, CreateResource, CreateFunction, CreateTable, List ON PROJECT test_project TO ROLE worker; --Authorize the role
+        grant CreateInstance, CreateResource, CreateFunction, CreateTable, List ON PROJECT test_project_a TO ROLE worker; --Authorize the role
     ```
 
--   **Cross-project Table/Resource/Function Sharing**
+-   **Cross-project Table/Resource/Function sharing**
 
-    Following the preceding example, aliyun$alice@aliyun.com and  ram$bob@aliyun.com:Allen have certain permissions in test\_project\_a.  These two users must query table prj\_b\_test\_table in test\_project\_b,  and use test\_project\_b. UDF  prj\_b\_test\_udf.
+    Following the preceding example, aliyun$alice@aliyun.com and ram$bob@aliyun.com:Allen have certain permissions in test\_project\_a.  These two users must query table prj\_b\_test\_table in test\_project\_b,  and use test\_project\_b. UDF  prj\_b\_test\_udf.
 
-    The following authorization operations procedure is performed by the administrator test\_project\_b:
+    The project administrator performs the following authorization operations for test\_project\_b:
 
     ```
         use test_project_b; --Open the project
@@ -100,7 +100,7 @@ MaxCompute projects support the following object types and actions.
     ```
 
 
-**Note:** If UDF is created in test\_project\_a,  only Resource authorization is required. Write as the following:
+**Note:** If UDF is created in test\_project\_a, then only Resource authorization is required. Use the following code:
 
 ```
 create function function_name as 'com.aliyun.odps.compiler.udf.PlaybackJsonShrinkUdf' using 'test_project_b/resources/odps-compiler-playback.jar' -f;.

@@ -4,7 +4,7 @@
 
 [淘宝IP地址库](http://ip.taobao.com/)的查询接口为[IP地址字串](http://ip.taobao.com/service/getIpInfo.php?ip=[ip%E5%9C%B0%E5%9D%80%E5%AD%97%E4%B8%B2])。使用示例如下。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431905_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631905_zh-CN.png)
 
 由于在MaxCompute中禁止使用HTTP请求，如何实现在MaxCompute中进行IP的查询？目前有三种方式：
 
@@ -27,11 +27,11 @@
 
 1.  在[IP数据下载链接](http://ip.taobao.org:9999/ipdata_download.html)获取您需要的格式数据。本文以**基本数据格式**为例。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431906_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631906_zh-CN.png)
 
 2.  下载**utf8**数据到本地，检查数据格式。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431907_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631907_zh-CN.png)
 
     前四个数据是IP地址的起始地址与结束地址：前两个是十进制整数形式，后两个是点分形式。这里我们使用整数形式，以便计算IP是否属于这个网段。
 
@@ -67,7 +67,7 @@
 
 3.  使用SQL语句`select count(*) from ipresource limit 0,10;`查看ipresource表前10条的样本数据。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431909_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631909_zh-CN.png)
 
 
 ## 编写UDF函数 {#section_uht_3kl_5fb .section}
@@ -76,7 +76,7 @@
 
 1.  首先您需要在**数据开发** \> **业务流程** \> **资源**中右键新建Python类型资源。在弹框中输入新建的Python资源名称，勾选**上传为ODPS资源**，完成创建。。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431910_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631910_zh-CN.png)
 
 2.  在您新建的Python资源内编写Python资源代码，示例如下。
 
@@ -93,17 +93,17 @@
 
     点击提交并解锁。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431911_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631911_zh-CN.png)
 
 3.  在**数据开发** \> **业务流程** \> **函数**中右键新建自定义函数。
 
     填写函数的类名，本例中为`ipint.ipint`,资源列表填写刚刚我们提交的资源名称，提交并解锁。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431913_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631913_zh-CN.png)
 
 4.  验证ipint函数是否生效并满足预期值，您可以在DataWorks上新建一个ODPS SQL类型节点运行SQL语句查询，示例如下。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431914_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631914_zh-CN.png)
 
 
 您也可以在本地创建ipint.py文件，使用[MaxCompute客户端](../../../../cn.zh-CN/工具及下载/客户端.md#)上传资源。
@@ -126,6 +126,44 @@ Success: Function 'ipint' have been created.
 
 完成注册后，即可正常使用该函数，您可以在客户端运行`select ipint('1.2.24.2');`进行测试。
 
+**说明：** 如果同一主账号下其他项目需要使用这个UDF，您可以进行[跨项目授权](../../../../cn.zh-CN/用户指南/安全指南/跨项目空间的资源分享/基于Package的跨项目空间的资源分享.md#)。
+
+1.  创建名为ipint的package。
+
+    ```
+    odps@ MaxCompute_DOC>create package ipint;
+    OK
+    ```
+
+2.  将已经创建好的UDF函数加入package。
+
+    ```
+    odps@ MaxCompute_DOC>add function ipint to package ipint;
+    OK
+    ```
+
+3.  允许另外一个项目bigdata\_DOC按照这个package。
+
+    ```
+    odps@ MaxCompute_DOC> allow project bigdata_DOC to install package ipint;
+    OK
+    ```
+
+4.  切换到另一个需要使用UDF的项目bigdata\_DOC，安装package。
+
+    ```
+    odps@ MaxCompute_DOC>use bigdata_DOC;
+    odps@ bigdata_DOC>install package MaxCompute_DOC.ipint;
+    OK
+    ```
+
+5.  现在您就可以使用这个UDF函数了， 如果项目空间bigdata\_DOC的用户Bob需要访问这些资源，那么管理员可以通过ACL给Bob自主授权。
+
+    ```
+    odps@ bigdata_DOC>grant Read on package MaxCompute_DOC.ipint to user aliyun$bob@aliyun.com; --通过ACL授权Bob使用package
+    ```
+
+
 ## 在SQL中使用 {#section_rmm_bml_5fb .section}
 
 **说明：** 本例中以一个随机的具体IP 1.2.24.2 地址为例，您在正常使用时可以用具体表的字段来读入。
@@ -138,7 +176,7 @@ WHERE ipint('1.2.24.2') >= start_ip
 AND ipint('1.2.24.2') <= end_ip
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337145431915_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/63437/154337407631915_zh-CN.png)
 
 通过为保证数据准确性，您可以定期从淘宝IP库获取数据来维护ipresource表。
 

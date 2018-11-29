@@ -31,8 +31,8 @@
 
 如果在DataWorks执行生产project授权相关的请求时：
 
-1.  project owner通过临时查询方式执行，不能提交到生产环境，生产环境是由生产账号执行，这个账号没有管理类的权限。
-2.  查询语句前加use<生产project\>;语句，并与命令一起提交。因为DataWorks数据开发默认当前的project是\_dev结尾的开发project。即先执行：
+1.  project owner通过临时查询方式执行，不能提交到生产环境执行。因为生产环境是由生产账号执行，而这个账号没有授权的权限。
+2.  查询语句前加use <生产project\>;语句，并与命令一起提交。因为DataWorks数据开发默认当前的project是\_dev结尾的开发project。通过命令行执行授权命令时，请project owner先执行：
 
     ```
      use project_name;--进入对应的project

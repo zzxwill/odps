@@ -1,5 +1,7 @@
 # Package-based resource sharing {#concept_kyz_531_wdb .concept}
 
+This article gives you a description of resource sharing statements based on Package.
+
 ## Share resources {#section_ofl_bk1_wdb .section}
 
 |Statement|Description|
@@ -29,8 +31,8 @@
 
 If you execute a production plan authorization related request in DataWorks：
 
-1.  The project owner is executed through the temporary query mode and cannot be submitted to the production environment. The production environment is executed by the production account. This account has no management class permissions.
-2.  Add the `use<production project>;` statement before the query and submit it with the command. Because DataWorks data development defaults the current project is the development project ending in \_dev. For example:
+1.  Project owner is executed by temporary query and cannot be submitted to the production environment for execution.Because the production environment is executed by the production account, which has no authorized authority.
+2.  Add the use<production project\>; statement before the query and submit it with the command. Because DataWorks data development defaults the current project is the development project ending in \_dev. When executing authorization commands from the command line, ask project owner to execute them first:
 
     ```
     use project_name;--进入对应的project

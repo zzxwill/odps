@@ -25,3 +25,15 @@
 |show packages|List all created and installed packages.|
 |describe package `<pkgName>`|View details of a package.|
 
+**Note:** 
+
+If you execute a production plan authorization related request in DataWorks：
+
+1.  The project owner is executed through the temporary query mode and cannot be submitted to the production environment. The production environment is executed by the production account. This account has no management class permissions.
+2.  Add the `use<production project>;` statement before the query and submit it with the command. Because DataWorks data development defaults the current project is the development project ending in \_dev. For example:
+
+    ```
+    use project_name;--进入对应的project
+    ```
+
+

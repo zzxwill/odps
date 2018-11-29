@@ -28,7 +28,7 @@ PyODPS的自定义函数是序列化到MaxCompute上执行，MaxCompute的Python
 
 您可进入[python-dateutils](http://mirrors.aliyun.com/pypi/simple/python-dateutil/)找到[python-dateutil-2.6.0.zip](http://mirrors.aliyun.com/pypi/packages/95/8e/71125f3f24771f50e630b5a6fa9fd209a9f167dcbc3aad65a48cb3dd5694/python-dateutil-2.6.0.zip#md5=530f7b56e36fa42ada6c02a17b15660c)进行下载。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/15204/15410621276659_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/15204/15434586846659_zh-CN.png)
 
 重命名为python-dateutil.zip，通过MaxCompute Console上传资源。
 

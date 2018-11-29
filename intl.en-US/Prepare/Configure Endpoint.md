@@ -2,7 +2,7 @@
 
 This sections details the regions where MaxCompute is available, and connection methods. Problems such as network connectivity and downloading charges related to use of other Alibaba Cloud products \(such as ECS, TableStore, OSS, and so on\) are also detailed.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15431985091423_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15434600941423_en-US.png)
 
 MaxCompute provides two types of service connection addresses as follows:
 
@@ -45,7 +45,7 @@ Configuration instructions about network connectivity are as follows:
 -   If MaxCompute and TableStore/OSS are in the same region, we recommend to configure the Alibaba Cloud classic network or VPC network connection method. The external network method can also be selected.
 -   If MaxCompute and TableStore/OSS are not in the same region, select the external network method to connect. In the case of cross-regional access, connectivity is not permanently guaranteed if you select the Alibaba Cloud classic network or VPC network method.
 
-## \#\# MaxCompute activation and service connections by region {#section_f2d_51y_5db .section}
+## MaxCompute activation and service connections by region {#section_f2d_51y_5db .section}
 
 The table as follows gives information about deployment of MaxCompute in different regions. On the International Site, MaxCompute is currently only available in the following regions. You can apply to use MaxComputer in this region only. In this case, your data storage and computing consumption all occur in the Asia Pacific SE 1 \(Singapore\) region.
 
@@ -53,8 +53,8 @@ The table as follows gives information about deployment of MaxCompute in differe
 
 -   **External MaxCompute activation and service connections by region**
 
-    |Region name|City|Service status|Internet endpoint|Classic Network tunnel endpoint|
-    |:----------|:---|:-------------|:----------------|:------------------------------|
+    |Region name|City|Service status|Internet endpoint|Internet tunnel endpoint|
+    |:----------|:---|:-------------|:----------------|:-----------------------|
     |Asia Pacific SE 1|Singapore|In service|http://service.ap-southeast-1.maxcompute.aliyun.com/api|http://dt.ap-southeast-1.maxcompute.aliyun.com|
     |Asia Pacific SE 2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun.com/api|http://dt.ap-southeast-2.maxcompute.aliyun.com|
     |Asia Pacific SE 3|Kuala Lumpur|In service|http://service.ap-southeast-3.maxcompute.aliyun.com/api|http://dt.ap-southeast-3.maxcompute.aliyun.com|
@@ -68,7 +68,7 @@ The table as follows gives information about deployment of MaxCompute in differe
 
 -   **Classic network MaxCompute activation and service connections by region**
 
-    |Region name|City|Service status|Classic network endpoint|Classic Network tunnel endpoint|
+    |Region name|City|Service status|Classic network endpoint|Classic network tunnel endpoint|
     |-----------|----|--------------|------------------------|-------------------------------|
     |Asia Pacific SE 1|Singapore|In service|http://service.ap-southeast-1.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-1.maxcompute.aliyun-inc.com|
     |Asia Pacific SE 2|Australia|In service|http://service.ap-southeast-2.maxcompute.aliyun-inc.com/api|http://dt.ap-southeast-2.maxcompute.aliyun-inc.com|

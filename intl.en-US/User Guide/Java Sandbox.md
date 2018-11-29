@@ -1,6 +1,6 @@
 # Java Sandbox {#concept_aln_lrf_vdb .concept}
 
-MaxCompute MapReduce and UDF are limited by the Java sandbox when running in the distributed environment\(The main program of MapReduce jobs, such as MR Main, is not restricted\), the specific limits are as follows.
+MaxCompute, MapReduce and UDF are limited by the Java sandbox when running in the distributed environment. However, the main program of MapReduce jobs, such as MR Main, is not restricted. The specific limits are as follows.
 
 -   Direct access to local files is not allowed. You can only access files by using interfaces provided by MaxCompute MapReduce/Graph.
     -   Read resources specified by the resources option, including files, Jar packages, and resource tables.

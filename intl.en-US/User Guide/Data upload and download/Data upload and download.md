@@ -22,5 +22,5 @@ Underlying data tunnels used by these tools include:
     -   Kettle
     -   MaxCompute  console
 
-A wide range of data upload and download tools are applicable to most of the cloud data migration scenarios. The following articles introduce the tools, Hadoop data migration, database data synchronization, log collection, and other cloud migration scenarios. Refer to these articles when you select the technical solutions.
+A wide range of data upload and download tools are applicable to most of the cloud data migration scenarios. The subsequent articles introduce the tools, Hadoop data migration, database data synchronization, log collection, and other cloud migration scenarios. We recommend that you refer to these articles when you select the technical solutions.
 

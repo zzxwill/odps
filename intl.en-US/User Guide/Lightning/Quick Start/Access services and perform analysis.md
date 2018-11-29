@@ -24,5 +24,5 @@
 
 Now you have gained access to MaxCompute Lightning using Tableau Desktop. You can perform BI analysis on the data of the connected MaxCompute projects.
 
-**Note:** For better performance, it is recommended that you customize the connection to the Lightning data source using the TDC file supported by Tableau. For more information, see [Tableau Desktop](intl.en-US/User Guide/Lightning/ Access services using JDBC interfaces/Access services using common tools.md#section_p1m_3yk_z2b).
+**Note:** For better performance, it is recommended that you customize the connection to the Lightning data source using the TDC file supported by Tableau. For more information, see [Tableau Desktop](reseller.en-US/User Guide/Lightning/ Access services using JDBC interfaces/Access services using common tools.md#section_p1m_3yk_z2b).
 

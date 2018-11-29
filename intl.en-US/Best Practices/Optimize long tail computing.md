@@ -14,7 +14,7 @@ When the Key of a Join statement has a large amount of data, a long tail occurs.
 
 You can solve the problem in three steps:
 
--   Verify that one or both of the tables are not small tables. If one table is large and the other small, you can use the mapjoin statement to cache the small table. For the syntax and relevant description, see [Introduction to the SELECT Syntax](../../../../intl.en-US/User Guide/SQL/Select Operation/Introduction to the SELECT Syntax.md#). If the job is a MapReduce job, you can use the resource table function to cache the small table.
+-   Verify that one or both of the tables are not small tables. If one table is large and the other small, you can use the mapjoin statement to cache the small table. For the syntax and relevant description, see [Introduction to the SELECT Syntax](../../../../reseller.en-US/User Guide/SQL/Select Operation/Introduction to the SELECT Syntax.md#). If the job is a MapReduce job, you can use the resource table function to cache the small table.
 
 -   If both tables are relatively large, reduce duplicated data as much as possible.
 

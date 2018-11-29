@@ -1,8 +1,12 @@
-# Add users and grant permissions {#concept_oxp_xrz_vdb .concept}
+# Use case: Add users and grant permissions {#concept_oxp_xrz_vdb .concept}
 
-In the following scenario, Jack is the project administrator of a project called prj1. A new team member named Alice, who already has the Alibaba Cloud account  alice@aliyun.com\), applies to join the prj1project. Alice requests the following permissions: view table lists, submit jobs, and create tables.
+Description:
 
-The following procedure is performed by Jack, the project administrator:
+Jack is the project administrator of a project prj1. A new team member named Alice, who already has an Alibaba Cloud account as alice@aliyun.com, applies to join the prj1project. Alice requests the following permissions: view table lists, submit jobs, and create tables.
+
+Solution:
+
+As a project administrator, Jack performs the following procedure to add Alice as the user and grant her permissions to view table lists, submit jobs, and create tables:
 
 ```
     use prj1;

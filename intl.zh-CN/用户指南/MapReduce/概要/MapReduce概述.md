@@ -4,12 +4,12 @@ MaxCompute 提供了三个版本的 MapReduce 编程接口，如下所示：
 
 -   MaxCompute MapReduce：MaxCompute 的原生接口，执行速度更快。开发更便捷，不暴露文件系统。
 
--   [MR2](intl.zh-CN/用户指南/MapReduce/概要/扩展MapReduce.md)（扩展 MapReduce）：对 MaxCompute MapReduce 的扩展，支持更复杂的作业调度逻辑。Map/Reduce 的实现方式与 MaxCompute 原生接口一致。
+-   [MR2](intl.zh-CN//MapReduce/概要/扩展MapReduce.md)（扩展 MapReduce）：对 MaxCompute MapReduce 的扩展，支持更复杂的作业调度逻辑。Map/Reduce 的实现方式与 MaxCompute 原生接口一致。
 
--   以及 [Hadoop 兼容版本](intl.zh-CN/用户指南/MapReduce/概要/开源兼容MapReduce.md)：高度兼容 [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ，与 MaxCompute 原生 MapReduce，[MR2](https://help.aliyun.com/document_detail/27876.html) 不兼容。
+-   以及 [Hadoop 兼容版本](intl.zh-CN//MapReduce/概要/开源兼容MapReduce.md)：高度兼容 [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ，与 MaxCompute 原生 MapReduce，[MR2](https://help.aliyun.com/document_detail/27876.html) 不兼容。
 
 
-以上三个版本在 [基本概念](intl.zh-CN/用户指南/MapReduce/功能介绍/基本概念.md)，[作业提交](intl.zh-CN/用户指南/MapReduce/功能介绍/作业提交.md)，[输入输出](intl.zh-CN/用户指南/MapReduce/功能介绍/输入与输出.md)，[资源使用](intl.zh-CN/用户指南/MapReduce/功能介绍/资源使用.md) 等方面基本一致，不同的是 Java SDK 彼此不同。本文仅对 MapReduce 的基本原理做简单介绍，更多详情请参见 [Hadoop MapReduce 教程](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html)。
+以上三个版本在 [基本概念](intl.zh-CN//MapReduce/功能介绍/基本概念.md)，[作业提交](intl.zh-CN//MapReduce/功能介绍/作业提交.md)，[输入输出](intl.zh-CN//MapReduce/功能介绍/输入与输出.md)，[资源使用](intl.zh-CN//MapReduce/功能介绍/资源使用.md) 等方面基本一致，不同的是 Java SDK 彼此不同。本文仅对 MapReduce 的基本原理做简单介绍，更多详情请参见 [Hadoop MapReduce 教程](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html)。
 
 **说明：** 您还不能够通过 MapReduce 读写“外部表”中的数据。
 
@@ -47,7 +47,7 @@ MapReduce 处理数据过程主要分成 Map 和 Reduce 两个阶段。首先执
 
 假设存在一个文本 a.txt，文本内每行是一个数字，您要统计每个数字出现的次数。文本内的数字称为 Word，数字出现的次数称为 Count。如果 MaxCompute Mapreduce 完成这一功能，需要经历以下流程，如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15349379161922_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15359596801922_zh-CN.jpg)
 
 操作步骤：
 

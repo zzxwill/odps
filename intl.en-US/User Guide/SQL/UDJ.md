@@ -4,7 +4,7 @@ Based on the MaxCompute 2.0 computing engine, MaxCompute introduces a new interf
 
 ## Overview {#section_p1f_kk4_hfb .section}
 
-MaxCompute provides multiple native [Join](intl.en-US/User Guide/SQL/Select Operation/JOIN operation.md#) methods, including INNER JOIN, RIGHT JOIN, OUTER JOIN, LEFT JOIN, FULL JOIN, SEMIJOIN , and ANTISEMIJOIN methods. You can use these native join methods in most scenarios. However, these methods do not support handling multiple tables.
+MaxCompute provides multiple native [Join](reseller.en-US/User Guide/SQL/Select Operation/JOIN operation.md#) methods, including INNER JOIN, RIGHT JOIN, OUTER JOIN, LEFT JOIN, FULL JOIN, SEMIJOIN , and ANTISEMIJOIN methods. You can use these native join methods in most scenarios. However, these methods do not support handling multiple tables.
 
 In most cases, you can build your code framework using UDFs. However, the current UDF, UDTF, and UDAF frameworks only support handling one table. To perform user-defined operations for multiple tables, you have to use native join methods, UDFs, UDTFs, and complex SQL statements. In certain cases, when handling multiple tables, you even have to use custom MapReduce framework instead of SQL, in order to complete the required computing task.
 

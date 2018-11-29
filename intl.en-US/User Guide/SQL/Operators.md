@@ -1,10 +1,10 @@
 # Operators {#concept_bll_pfl_vdb .concept}
 
-## Relational Operators {#section_dlk_lgl_vdb .section}
+## Relational operators {#section_dlk_lgl_vdb .section}
 
 |Operator|Description|
 |:-------|:----------|
-|A=B| If A or B is NULL, NULL is returned. If A is equal to B, TRUE is returned; otherwise FALSE is returned.|
+|A=B|If A or B is NULL, NULL is returned. If A is equal to B, TRUE is returned; otherwise FALSE is returned.|
 |A<\>B|If A or B is NULL, NULL is returned. If A is not equal to B, TRUE is returned; otherwise FALSE is returned.|
 |A<B|If A or B is NULL, NULL is returned. If A is less than B, TRUE is returned; otherwise FALSE is returned.|
 |A<=B|If A or B is NULL, NULL is returned. If A is not greater than B, TRUE is returned; otherwise FALSE is returned.|
@@ -21,11 +21,11 @@
 ```
 
 |
-|A RLIKE B|A is a string, and B is a string constant regular expression. If any substring of A matches the Java regular expression B, TRUE is returned; otherwise FALSE is returned. If expression B is empty, report error and exit. If expression A or B is NULL, NULL is returned.|
+|A RLIKE B|A is a string, and B is a string constant regular expression. If any substring of A matches the Java regular expression B, TRUE is returned; otherwise FALSE is returned. If expression B is empty, report an error and exit. If expression A or B is NULL, NULL is returned.|
 |A IN B|B is a set. If expression A is NULL, NULL is returned. If expression A is in expression B, TRUE is returned; otherwise FALSE is returned. If expression B has only one element NULL, that is, A IN \(NULL\), return NULL. If expression B contains NULL element, take NULL as the type of other elements in B set. B must be a constant and at least has one element; all types must be consistent.|
-|BETWEEN AND|The expression is `A [NOT] BETWEEN B AND C`. Empty if A, B, or C is empty. True if A is larger than or equal to B and less than or equal to C; otherwise false.|
+|BETWEEN AND|The expression is `A [NOT] BETWEEN B AND C`. Empty if A, B, or C is empty. True if A is larger than or equal to B and less than or equal to C; otherwise false is returned.|
 
-The common usage:
+The common use:
 
 ```
 select * from user where user_id = '0001'; 
@@ -38,7 +38,9 @@ select * from user where user_id in (0001,0010);
 select * from user where user_name like 'M%';
 ```
 
-The Double values in MaxCompute are different in precision. For this reason, it is not recommended to use the equal sign for comparison between two Double data. You can subtract two Double types, and then take the absolute value for determination. When the absolute value is small enough, the two double values are considered equal. For example.
+The Double values in MaxCompute are different in precision. For this reason, we do not recommend using the equal sign for comparison between two Double data. You can subtract two Double types, and then take the absolute value into consideration. When the absolute value is small enough, the two double values are considered equal.
+
+**Example:**
 
 ```
 abs(0.9999999999 - 1.0000000000) < 0.000000001
@@ -48,10 +50,10 @@ abs(0.9999999999 - 1.0000000000) < 0.000000001
 
 **Note:** 
 
--   ABS is a built-in function provided by MaxCompute to take absolute value. For more information, see [ABS](intl.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
+-   ABS is a built-in function provided by MaxCompute to take absolute value. For more information, see [ABS](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
 -   In general, the Double type in MaxCompute can retain 14-bit decimal.
 
-## Arithmetic Operators {#section_ycc_chl_vdb .section}
+## Arithmetic operators {#section_ycc_chl_vdb .section}
 
 |Operator|Description|
 |:-------|:----------|
@@ -76,16 +78,16 @@ select age+10, age-10, age%10, -age, age*age, age/10 from user;
 -   If Bigint and Double both are involved in arithmetic operation, the type Bigint is converted into Double by implicit type conversion.
 -   When A and B are Bigint types, the return result of A/B will be a Double type. For other arithmetic operations, the return value is also a Bigint type.
 
-## Bitwise Operators { .section}
+## Bitwise operators { .section}
 
 |Operator|Description|
 |:-------|:----------|
 |A & B|Return the result of bitwise AND of A and B. For example: 1&2, return 0; 1&3, return 1; Bitwise AND of NULL and other values, all return NULL. Expression A and B must be Bigint.|
 |A | B|Return the result of bitwise OR of A and B. For example: 1|2, return3. 1|3, return 3. Bitwise OR of NULL and other values, all return NULL. Expression A and B must be Bigint type.|
 
-**Note:** Bitwise operator does not support implicit conversion, only supports the type Bigint.
+**Note:** Bitwise operator does not support implicit conversions, only supports the type Bigint.
 
-## Logical Operators { .section}
+## Logical operators { .section}
 
 ```
     Operator Description
@@ -110,5 +112,5 @@ select age+10, age-10, age%10, -age, age*age, age/10 from user;
                     If A is FALSE, TRUE is returned.
 ```
 
-**Note:** Only the type Boolean can be involved in logic operation and the implicit type conversion is not supported.
+**Note:** Only the type Boolean can be involved in logic operations and the implicit type conversion is not supported.
 

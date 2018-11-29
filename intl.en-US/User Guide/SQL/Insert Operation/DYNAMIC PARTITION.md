@@ -1,6 +1,6 @@
 # DYNAMIC PARTITION {#concept_b1p_qdb_wdb .concept}
 
-To ‘insert  overwrite’ into a partition table, you can specify the partition value in the statement. It can also be realized in a more flexible way, to specify a partition column in a partition table but not give the value. Correspondingly, the columns in Select clause are used to specify these partition values.
+To ‘insert overwrite’ into a partition table, specify the partition value in the statement. It can also be realized in a more flexible way, to specify a partition column in a partition table but not give the value. Correspondingly, the columns in Select clause are used to specify these partition values.
 
 **Statement format**:
 
@@ -10,17 +10,17 @@ insert overwrite table tablename partition (partcol1, partcol2 ...) select_state
 
 **Note:** 
 
--   In the ‘select\_statement’ field, the following field provides the dynamic partition value for the target table. If the target table only has a one-level dynamic partition, the last field value of select\_statement is the dynamic partition value of the target table.
+-   In the ‘select\_statement’ field, the following field provides a dynamic partition value for the target table. If the target table has only one-level dynamic partition, the last field value of select\_statement is the dynamic partition value of the target table.
 -   Currently, a single worker can only output up to 512 dynamic partitions in a distributed environment, otherwise it leads to abnormality.
 -   Currently, any dynamic partition SQL cannot generate more than 2,000 dynamic partitions; otherwise it causes abnormality.
--   The value of dynamic partition cannot be NULL, and also does not support special characters and Chinese, otherwise exception is thrown. The exception is as follows:
+-   The value of dynamic partition cannot be NULL, and also does not support special or Chinese characters, otherwise an exception is thrown. The exception is as follows:
 
     ```
     FAILED: ODPS-0123031:Partition exception - invalid dynamic partition value:
                   province=xxx
     ```
 
--   If the destination table has multiple-level partitions, it is allowed to specify parts of partitions to be static partitions through ‘Insert’ statement, but the static partitions must be advanced partitions.
+-   If the destination table has multi-level partitions, it is allowed to specify parts of partitions to be static partitions through ‘Insert’ statement, but the static partitions must be advanced partitions.
 
 **A simple example to explain dynamic partition is as follows**:
 
@@ -31,7 +31,7 @@ create table total_revenues (revenue bigint) partitioned by (region string);
             from sale_detail;
 ```
 
-As preceding mentioned, user is unable to know which partitions are generated before running SQL. Only after the Select statement running ends, user can confirm which partitions have been generated through the value of ‘region’. This is why the partition is called **Dynamic Partition**.
+As mentioned in the preceding example, user is unable to know which partitions are generated before running SQL. Only after the Select statement running ends, user can confirm which partitions have been generated using ‘region’ as the value. This is why the partition is called as the **Dynamic Partition**.
 
 **Other Examples**:
 
@@ -48,7 +48,7 @@ select shop_name,customer_id,total_price,sale_date,region from sale_detail;
 ```
 
 -   In ‘sales\_detail’ table, the value of the sale\_date determines the sales\_date partition value of the target table, and the value of the region determines the region partition value of the target table.
--   **In a dynamic partition, the correspondence between the select\_statement field and the dynamic partition of the target table is determined by the order of the fields.** In this example, if the Select statement is written as
+-   **In a dynamic partition, the correspondence between the select\_statement field and the dynamic partition of the target table is determined by the order of the fields.** In this example, if the Select statement is written as the following:
 
     ```
     select shop_name,customer_id,total_price,region,sale_date from
@@ -82,7 +82,7 @@ select shop_name,customer_id,total_price,region from sale_detail;
     -- Return failure information. User cannot specify the lowsubpartition only, but needs to insert advanced partition dynamically.
 ```
 
-When the old version of MaxCompute performs dynamic partitioning, if the partition column type is not exactly the same as the column type in the corresponding select list, an error is reported.  MaxCompute 2.0 supports implicit conversion, an example is as follows:
+When the old version of MaxCompute performs dynamic partitioning, if the partition column type is not exactly the same as the column type in the corresponding select list, an error is reported.  MaxCompute 2.0 supports implicit conversion, as shown in the following :
 
 ```
 create table parttable(a int, b double) partitioned by (p string);

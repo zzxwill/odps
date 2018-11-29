@@ -12,7 +12,7 @@ select * from stv_recents;
 
 The following figure shows a command output example.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20128/153631022511169_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20128/153812969411169_en-US.jpg)
 
 ## Cancel running queries {#section_zc4_kdl_z2b .section}
 
@@ -24,5 +24,5 @@ select cancel('query_id');
 
 In parentheses is the query\_id of a running query.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20128/153631022511170_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20128/153812969411170_en-US.jpg)
 

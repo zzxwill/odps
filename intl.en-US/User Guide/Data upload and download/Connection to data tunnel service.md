@@ -4,7 +4,7 @@ Both DataHub and Tunnel use different endpoints in different network environment
 
 **Note:** 
 
-Different network connections may affect your [Billing](../../../../intl.en-US/Pricing/Billing.md#).
+Different network connections may affect your [Billing](../../../../reseller.en-US/Pricing/Billing.md#).
 
-For detailed endpoints information for different network environments, see [Endpoints and Data Centers](../../../../intl.en-US/Prepare/Endpoints and Data Centers.md#) Access Domains and Data Centers.
+For detailed endpoints information for different network environments, see [Endpoints and Data Centers](../../../../reseller.en-US/Prepare/Endpoints and Data Centers.md#) Access Domains and Data Centers.
 

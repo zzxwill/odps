@@ -33,7 +33,7 @@ MaxCompute Lightning provides a method of connecting endpoints, clients, or appl
 
 Query tasks, connected and submitted by JDBC or ODBC interfaces, use serverless computing resources of MaxCompute Lightning to ensure query service quality.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20113/153630999211152_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20113/153812943511152_en-US.jpg)
 
 ## Scenarios {#section_vdv_zjj_z2b .section}
 
@@ -53,6 +53,6 @@ Query tasks, connected and submitted by JDBC or ODBC interfaces, use serverless 
 
     MaxCompute project data can be encapsulated in RESTful APIs to support online applications.
 
-    In this scenario, MaxCompute Lightning serves as an accelerated query engine to provide MaxCompute table data as API services with the least amount of manual intervention. This is enabled by integrating [data service components](intl.en-US/User Guide/Data service/DataService Overview.md#) of Alibaba Cloud DataWorks.
+    In this scenario, MaxCompute Lightning serves as an accelerated query engine to provide MaxCompute table data as API services with the least amount of manual intervention. This is enabled by integrating [data service components](reseller.en-US/User Guide/DataService studio/DataService studio overview.md#) of Alibaba Cloud DataWorks.
 
 

@@ -1,10 +1,10 @@
 # Open-source MapReduce {#concept_yc2_cyf_vdb .concept}
 
-MaxCompute offers a set of native MapReduce programming models and interfaces. The inputs and outputs for these interfaces are MaxCompute tables, and the data is organized to be processedin the record format.
+MaxCompute offers a set of native MapReduce programming models and interfaces. The inputs and outputs for these interfaces are MaxCompute tables, and the data is organized to be processed in the record format.
 
 However, MaxCompute APIs differ significantly from APIs for the Hadoop framework. Previously, to migrate your Hadoop MapReduce jobs to MaxCompute, firstly, you were needed to rewrite the MapReduce code, compile, and debug the code using MaxCompute APIs, compress the final code into a JAR package, and finally upload the package to the MaxCompute platform.  This process is tedious and requires a lot of development and testing efforts. If you are not required to modify the original Hadoop MapReduce code partially, running it in MaxCompute console is the best solution.
 
-Now, the MaxCompute platform provides a plug-in that allows you to adapt Hadoop MapReduce code to MaxCompute MapReduce specifications. MaxCompute offers a degree of flexibility regarding binary-level compatibility for Hadoop MapReduce jobs. It means that, without modifying the code, you can specify configurations to directly run original Hadoop MapReduce Jar packages on MaxCompute.  Download the development plug-in to get [started](http://repo.aliyun.com/download/hadoop2openmr-1.0.jar). This plug-in is currently in the testing stage, therefore, does not support custom comparators or key types. 
+Now, the MaxCompute platform provides a plug-in that allows you to adapt Hadoop MapReduce code to MaxCompute MapReduce specifications. MaxCompute offers a degree of flexibility regarding binary-level compatibility for Hadoop MapReduce jobs. It means that, without modifying the code, you can specify configurations to directly run original Hadoop MapReduce Jar packages on MaxCompute. Download the development plug-in to get [started](http://repo.aliyun.com/download/hadoop2openmr-1.0.jar). This plug-in is currently in the testing stage, therefore, does not support custom comparators or key types. 
 
 In the following example, a WordCount program is used to introduce the basic usage of the plug-in.
 
@@ -156,7 +156,7 @@ The configuration is a JSON file that describes the mapping relationships betwee
 
 ## Job Submission {#section_okw_gbg_vdb .section}
 
-Use the MaxCompute command line tool odpscmd to submit jobs. For the installation and configuration of MaxCompute command line tool, see the [Console](../../../../reseller.en-US/Tools and Downloads/Client.md#). In odpscmd, run the following command:
+Use the MaxCompute command line tool odpscmd to submit jobs. For the installation and configuration of MaxCompute command line tool, see the [Console](../../../../reseller.en-US//Client.md#). In odpscmd, run the following command:
 
 ```
 jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2openmr-1.0.jar,wordcount_test.jar com.aliyun.odps.mapred.example.hadoop.WordCount /foo/bar;
@@ -173,9 +173,9 @@ jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2
 
 The running process is shown in the following figure:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15349381761957_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15359597501957_en-US.jpg)
 
 After running the job, check the results table wc\_out to verify whether a job is complete:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15349381761959_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15359597501959_en-US.jpg)
 

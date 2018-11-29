@@ -15,8 +15,8 @@ In the local operation course, multiple Map and Reduce workers are yet to start 
 The distinguishing points between the simulation process and real distributed operation are as follows:
 
 -   A limit on therow number of input table exists. Currently, up to 100 rows of data can be downloaded.
--   Usage of resources: in distributed environment, MaxCompute limits the size of the referenced resource. For more information, see [Application  Restriction](reseller.en-US/User Guide/MapReduce/MR Restrictions.md).  Note that in the local running environment, the resource size has no limits..
--   Security restrictions: MaxCompute, MapReduce, and UDF program running in a distributed environment are limited by [Java Sandbox](reseller.en-US/User Guide/Java Sandbox.md).  Note that in local operations this limit is not applicable.
+-   Usage of resources: in distributed environment, MaxCompute limits the size of the referenced resource. For more information, see [Application  Restriction](reseller.en-US//MapReduce/MR Restrictions.md).  Note that in the local running environment, the resource size has no limits..
+-   Security restrictions: MaxCompute, MapReduce, and UDF program running in a distributed environment are limited by [Java Sandbox](reseller.en-US//Java Sandbox.md).  Note that in local operations this limit is not applicable.
 
 ## Example {#section_e44_v3g_vdb .section}
 
@@ -40,7 +40,7 @@ A local operation example is as follows:
     OK
 ```
 
-For a detailed WordCount example, see [WordCount Code example](reseller.en-US/User Guide/MapReduce/Program Example/Preparation.md).
+For a detailed WordCount example, see [WordCount Code example](reseller.en-US//MapReduce/Program Example/WordCount samples.md).
 
 If a user runs local debugging command for the first time, a path named ‘warehouse’ appears in the current path after the command is executed successfully.  The directory structure of warehouse is as follows:
 

@@ -1,5 +1,7 @@
 # 基于Package的资源分享 {#concept_kyz_531_wdb .concept}
 
+本文为您介绍基于Package的资源分享语句说明。
+
 ## 分享资源 {#section_ofl_bk1_wdb .section}
 
 |语句|说明|

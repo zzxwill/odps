@@ -1,6 +1,6 @@
 # Join on condition in MaxCompute\(ODPS\) SQL {#concept_vms_4sv_1fb .concept}
 
-One of the most common operations in MaxCompute\(ODPS\) SQL is join \).
+One of the most common operations in MaxCompute\(ODPS\) SQL is join.
 
 ## Overview {#section_ugb_c1w_1fb .section}
 

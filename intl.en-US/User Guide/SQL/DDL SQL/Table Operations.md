@@ -23,20 +23,20 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 -   When a table is created, an error is returned if the same name table exists without specifying the "if not exists" option. If the option is specified, no matter whether a same name table exists and even if the source table structure and the target table structure are inconsistent, all return successfully. The Meta information of the existing table does not change.
 -   Both the table name and column name are case insensitive and cannot have special characters. It must begin with a letter and can include a-z, A-Z, digits, and underscores \(\_\). The name length cannot exceed 128 bytes.
 -   1200 column definitions are allowed in a table.
--   The data types support Bigint、Double、Boolean、Datetime、Decimal and String, MaxCompute2.0 extends many [data types](../../../../intl.en-US/Product Introduction/Definition/Data types.md).
+-   The data types support Bigint、Double、Boolean、Datetime、Decimal and String, MaxCompute2.0 extends many [data types](../../../../reseller.en-US/User Guide/Definition/Data types.md).
 
     **Note:** Once data type such asTinyint、Smallint、 Int、 Float、Varchar or TIMESTAMP BINARY is involved when running an SQL statement, `set odps.sql.type.system.odps2=true;` must be added before the SQL statement. The set statement and SQL statement are submitted simultaneously.
 
--   Use Partitioned by to specify the [partition](../../../../intl.en-US/Product Introduction/Definition/Partition.md) and now Tinyint、Smallint、 Int、 Bigint、Varchar and String are supported.
+-   Use Partitioned by to specify the [partition](../../../../reseller.en-US/User Guide/Definition/Partition.md) and now Tinyint、Smallint、 Int、 Bigint、Varchar and String are supported.
 
     The partition value cannot have a double byte characters \(for example, Chinese\), and must begin with an uppercase or a lowercase letter, followed by letter or a number. The name length cannot exceed 128 bytes. Special characters can be used, which include space, colon \(:\), underscore \(\_\), dollar sign \($\), pound sign \(\#\), period \(.\), exclamation point \(!\), and ’@’. Other characters such as \(\\t\), \(\\n\), \(/\), and so on are considered as undefined characters. When using partition fields in a partition table, to improve the processing efficiency, a full table scan is not needed to add, update, and read the data in a partition.
 
 -   Currently, 60,000 partitions are allowed in a table, and the partition hierarchy cannot exceed 6 levels.
 -   The comment content is the effective string and its length must not exceed 1024 bytes
 -   Lifecycle indicates the lifecycle of the table, the unit is ‘days’. The statement create table like does not copy the lifecycle attribute from source table
--   For more information about external tables, see [Access OSS](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS Data.md#).
+-   For more information about external tables, see [Access OSS](reseller.en-US/User Guide/External table/Accessing OSS unstructured data.md#).
 
-**For example:**
+For example:
 
 Assume that the table sale\_detail is created to store sale records. The table uses sale\_date and region as partition columns. Table creation statements are described as follows:
 
@@ -98,7 +98,7 @@ Now the table structure of `sale_detail_like` is exactly the same as `sale_detai
 
 ## View table information {#section_cm5_mv1_wdb .section}
 
-**Statement format:**
+Statement format:
 
 ```
 desc <table_name>;
@@ -208,13 +208,13 @@ desc extended <table_name>; --View external table information.
     ```
 
 
-In preceding example, we can see that the attributes of sale\_detail\_like coincide with that of sale\_detail, except for the lifecycle. For more information, see [Describe Table](intl.en-US/User Guide/Common commands/Table Operations.md).
+In preceding example, we can see that the attributes of sale\_detail\_like coincide with that of sale\_detail, except for the lifecycle. For more information, see [Describe Table](reseller.en-US/User Guide/Common commands/Table operations.md).
 
 Check the information of sale\_detail\_ctas1, you can find that sale\_date and region are only normal columns and not partitions of the table.
 
 ## Drop a table {#section_xvw_1w1_wdb .section}
 
-**Statement format:**
+Statement format:
 
 ```
 DROP TABLE [IF EXISTS] table_name;
@@ -237,7 +237,7 @@ create table sale_detail_drop like sale_detail;
 
 ## Rename a table {#section_k4t_2w1_wdb .section}
 
-**Statement format:**
+Statement format:
 
 ```
 ALTER TABLE table_name RENAME TO new_table_name;
@@ -249,7 +249,7 @@ ALTER TABLE table_name RENAME TO new_table_name;
 -   If the new\_table\_name is duplicated an error may occur.
 -   If the table table\_name does not exist, error may occur.
 
-**For example:**
+For example:
 
 ```
 create table sale_detail_rename1 like sale_detail;
@@ -258,7 +258,7 @@ alter table sale_detail_rename1 rename to sale_detail_rename2;
 
 ## Alter Table Comments {#section_qnj_ny1_wdb .section}
 
-**Command format:**
+Command format:
 
 ```
 ALTER TABLE table_name SET COMMENT 'tbl comment';
@@ -269,19 +269,19 @@ ALTER TABLE table_name SET COMMENT 'tbl comment';
 -   The table table\_name must exists.
 -   The comment length must not exceed 1024 bytes.
 
-**For example:**
+For example:
 
 ```
 alter table sale_detail set comment 'new comments for table sale_detail';
 ```
 
-Use the command desc to view the comment modification in the table. For more information, see [Describe Table](intl.en-US/User Guide/Common commands/Table Operations.md).
+Use the command desc to view the comment modification in the table. For more information, see [Describe Table](reseller.en-US/User Guide/Common commands/Table operations.md).
 
 ## Alter Table LastDataModifiedTime {#section_gxl_5y1_wdb .section}
 
 MaxCompute SQL supports touch operation to modify LastDataModifiedTime of a table. The result is to modify LastDataModifiedTime of a table to be current time.
 
-**Statement format:**
+Statement format:
 
 ```
 ALTER TABLE table_name TOUCH;
@@ -296,7 +296,7 @@ ALTER TABLE table_name TOUCH;
 
 Empty the data in specified non-partition table, This command does not support partition table.  For the partition table, use `ALTER TABLE table_name DROP PARTITION` to clear the data in partition.
 
-**Command format:**
+Command format:
 
 ```
 TRUNCATE TABLE table_name;

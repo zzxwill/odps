@@ -10,7 +10,7 @@ Partition pruning is to specify the filtering conditions for partition columns s
 
 The following figure shows the partitions of the test table test\_part\_cut.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/1178_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/15381900891178_en-US.png)
 
 Run the following SQL code:
 
@@ -27,7 +27,7 @@ where ds= bi_week_dim('20150102');
 
 The returned result of bi\_week\_dim\(‘20150102’\) is 2015,1 and does not conform to the partition values of the test\_part\_cut table. Generally, we think that the preceding SQL statements  do not read any partition, but, actually, **the SQL statements read all partitions in the test\_part\_cut table**. The following figure shows the LogView:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/1179_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/15381900891179_en-US.png)
 
 In the preceding figure, the SQL statements read all partitions in the test\_part\_cut table when executed.
 
@@ -52,7 +52,7 @@ You can run the explain command and view SQL execution plans to check whether pa
     where ds=rand();
     ```
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/1180_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/15381900891180_en-US.png)
 
     The red box in the preceding figure shows that all the 1,344 partitions of the xxxxx\_trd\_slr\_ord\_1d table are read.
 
@@ -66,7 +66,7 @@ You can run the explain command and view SQL execution plans to check whether pa
     where ds='20150801';
     ```
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/1181_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/15381900891181_en-US.png)
 
     The red box in the preceding figure shows that only the 20150801 partition of the xxxxx\_trd\_slr\_ord\_1d table is read.
 
@@ -87,7 +87,7 @@ from xxxxx_base2_brd_ind_cw
 where ds = concat(SPLIT_PART(bi_week_dim(' ${bdp.system.bizdate}'), ',', 1), SPLIT_PART(bi_week_dim(' ${bdp.system.bizdate}'), ',', 2))
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/1183_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/15381900891183_en-US.png)
 
 In the preceding SQL statements, the custom functions used in partition pruning trigger full table scan.
 
@@ -112,7 +112,7 @@ In SQL statements,  when you use the Join clause for joining, if partition prun
         and b.ds='20150801';
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/1184_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/15381900891184_en-US.png)
 
     As shown in the preceding figure, the left table is under full table scan, and only partition pruning for the right table takes effect.
 
@@ -131,7 +131,7 @@ In SQL statements,  when you use the Join clause for joining, if partition prun
         and b.ds='20150801';
         ```
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/1185_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12162/15381900891185_en-US.png)
 
         As shown in the preceding figure, partition pruning for both the two tables takes effect.
 

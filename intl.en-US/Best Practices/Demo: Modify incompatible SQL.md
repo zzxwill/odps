@@ -618,7 +618,7 @@ We recommend that you remove MapJoin Hint and use Multi-way Join.
 
 ## wm\_concat.first.argument.const {#section_rvv_p3d_5db .section}
 
-According to the [Aggregate function](../../../../intl.en-US/User Guide/SQL/Builtin Function/Aggregate function.md) document,  the first parameter of WM\_CONCAT must be a constant. The old version of MaxCompute does not have strict check standards. For example, when the source table has no data,  no error is returned even if the first parameter of WM\_CONCAT is ColumnReference.
+According to the [Aggregate function](../../../../reseller.en-US/User Guide/SQL/Builtin Function/Aggregate function.md) document,  the first parameter of WM\_CONCAT must be a constant. The old version of MaxCompute does not have strict check standards. For example, when the source table has no data,  no error is returned even if the first parameter of WM\_CONCAT is ColumnReference.
 
 ```
 
@@ -701,7 +701,7 @@ is converted to:
 INSERT OVERWRITE TABLE srcpt PARTITION(pt='pt1') SELECT id FROM dual;
 ```
 
-If the specified partition value is invalid \(for example, ‘$\{bizdate\}’ is used\), MaxCompute 2.0 returns an error during syntax check. For more information,  For more information, see [Partition](../../../../intl.en-US/Product Introduction/Definition/Partition.md#).
+If the specified partition value is invalid \(for example, ‘$\{bizdate\}’ is used\), MaxCompute 2.0 returns an error during syntax check. For more information,  For more information, see [Partition](../../../../reseller.en-US/Product Introduction/Definition/Partition.md#).
 
 Incorrect syntax:
 

@@ -1,6 +1,6 @@
 # Learn to write SQL statements quickly {#concept_jxd_4qw_5db .concept}
 
-This article introduces you to maxcompute SQL through the way of course practice, allows you to quickly understand how SQL is written, and you know the difference between maxcompute SQL and standard SQL, please read in conjunction with the [MaxCompute SQL base documentation](../../../../intl.en-US/User Guide/SQL/SQL Summary.md).
+This article introduces you to maxcompute SQL through the way of course practice, allows you to quickly understand how SQL is written, and you know the difference between maxcompute SQL and standard SQL, please read in conjunction with the [MaxCompute SQL base documentation](../../../../reseller.en-US/User Guide/SQL/SQL summary.md).
 
 ## Prepare a dataset {#section_cxt_3rw_5db .section}
 

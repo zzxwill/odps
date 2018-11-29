@@ -1,10 +1,10 @@
-# Type conversion {#concept_wyb_sgl_vdb .concept}
+# Type conversions {#concept_wyb_sgl_vdb .concept}
 
 MaxCompute SQL allows conversion between data types. The two conversion methods are **explicit type conversion** and **implicit type conversion**.
 
-## Explicit Conversions {#section_gvj_1jl_vdb .section}
+## Explicit conversion {#section_gvj_1jl_vdb .section}
 
-Explicit conversions use CAST to convert a value type to another one. The following table lists the types that can be explicitly converted in MaxCompute SQL.
+Explicit conversions use CAST to convert a value type to another. The following table lists the types that can be explicitly converted in MaxCompute SQL.
 
 |From/To|Bigint|Double|String|Datetime|Boolean|Decimal|
 |:------|:-----|:-----|:-----|:-------|:------|:------|
@@ -17,7 +17,7 @@ Explicit conversions use CAST to convert a value type to another one. The follow
 
 **Y** means can be converted. **N** means cannot be converted. **–** means conversion is not required.
 
-For example:
+**Example:**
 
 ```
 select cast(user_id as double) as new_id from user;
@@ -31,12 +31,12 @@ select cast('2015-10-01 00:00:00' as datetime) as new_date from user;
 -   The String type that meets the Bigint format can be converted to the Double type, and must keep one digit after the decimal point. For example, `cast(“1” as double) = 1.0`.
 -   Explicit conversions of unsupported types may return an exception.
 -   If a conversion fails during execution, the conversion is aborted with an exception.
--   To convert the Datetime type, use the default format yyyy-mm-dd hh:mi:ss. For more information, see [Conversions between the String type and the Datetime type](intl.en-US/User Guide/SQL/Type conversion.md#section_qkb_fql_vdb).
--   Some types cannot be explicitly converted, but can be converted using built-in SQL functions. For example, the to\_char function can be used to convert values of the Boolean type to the String type. For more information, see [TO\_CHAR](intl.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md). The to\_date function can be used to convert values of the String type to the Datetime type. For more information, see [TO\_DATE](intl.en-US/User Guide/SQL/Builtin Function/Date Functions.md).
--   For more information about cast, see [CAST](intl.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
+-   To convert the Datetime type, use the default format yyyy-mm-dd hh:mi:ss. For more information, see [Conversions between the String type and the Datetime type](reseller.en-US/User Guide/SQL/Type conversion.md#section_qkb_fql_vdb).
+-   Some types cannot be explicitly converted, but can be converted using built-in SQL functions. For example, the to\_char function can be used to convert values of the Boolean type to the String type. For more information, see [TO\_CHAR](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md). The to\_date function can be used to convert values of the String type to the Datetime type. For more information, see [TO\_DATE](reseller.en-US/User Guide/SQL/Builtin Function/Date Functions.md).
+-   For more information, see [CAST](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
 -   If a DECIMAL value exceeds the value range, MSB overflow error or LSB overflow truncation may occur for CAST STRING TO DECIMAL.
 
-## Implicit conversions and scopes {#section_uhl_sml_vdb .section}
+## Implicit conversion and scope {#section_uhl_sml_vdb .section}
 
 Implicit type conversion is an automatic type conversion performed by MaxCompute according to the usage context and type conversion rules. The following table lists the types that can be implicitly converted using MaxCompute.
 
@@ -59,10 +59,10 @@ Implicit type conversion is an automatic type conversion performed by MaxCompute
 
 **Note:** 
 
--   The DECIMAL type and Datetime constant definition mode are added to MaxCompute2.0. 100BD indicates a DECIMAL whose value is 100. Datetime `2017-11-11 00:00:00` indicates a constant of the Datetime type.  The constant definition is convenient because it can be directly used in values clauses and tables.
+-   The DECIMAL type and Datetime constant definition mode are added to MaxCompute2.0. 100BD indicates a DECIMAL, the value is 100. Datetime `2017-11-11 00:00:00` indicates a constant of the Datetime type. The constant definition is convenient because it can be directly used in values clauses and tables.
 -   In the earlier version of MaxCompute, values of the DOUBLE type can be implicitly converted to the BIGINT type. Owing to some reasons, such conversions may lead to data loss, which is not allowed by common database systems.
 
-The common usage is as follows:
+Common use:
 
 ```
 select user_id+age+'12345',
@@ -75,7 +75,7 @@ select user_id+age+'12345',
 -   Implicit conversions of unsupported types may cause an error.
 -   If a conversion fails during execution, an exception occurs.
 -   MaxCompute automatically performs implicit conversions based on the context environment. We recommend that you use CAST to perform an explicit conversion when the types do not match.
--   Implicit conversion rules are applicable to a specific range of scopes. In some scopes, only some rules can take effect. For details, see the scopes of implicit conversions.
+-   Implicit conversion rules are applicable to a specific range of scopes. In some scopes, only some rules can take effect. For more information, see the scopes of implicit conversions.
 
 -   **Implicit conversions under relational operators**
 
@@ -94,8 +94,8 @@ select user_id+age+'12345',
 
     **Note:** 
 
-    -   If two types cannot be implicitly converted, the relational operation is aborted with an error.
-    -   For more information about the relational operators, see [Relational Operators](intl.en-US/User Guide/SQL/Operators.md).
+    -   If two types cannot be implicitly converted, the relational operation is aborted by an error.
+    -   For more information about the relational operators, see [Relational Operators](reseller.en-US/User Guide/SQL/Operators.md).
 -   **Implicit conversions under special relational operators**
 
     Special relational operators include LIKE, RLIKE, and IN.
@@ -110,7 +110,7 @@ select user_id+age+'12345',
         The following illustrates the notes for LIKE and RLIKE in implicit conversions:
 
         -   The source and pattern parameters of LIKE and RLIKE can only be of the String type.
-        -   Other types cannot be involved in the operation, nor be implicitly converted to the String type.
+        -   Other types can neither be involved in the operations nor be implicitly converted to the String type.
 
     -   The usage of IN is as follows:
 
@@ -121,7 +121,7 @@ key in (value1, value2, …)
         Implicit conversion rules of IN:
 
         -   Data in the value column must be consistent.
-        -   To compare keys and values, if Bigint, Double, and String types are compared, convert them to Double type. If the Datetime and String types are compared, convert them to Datetime type.  Conversions between other types are not allowed.
+        -   To compare keys and values, if Bigint, Double, and String types are compared, convert them to Double type. If the Datetime and String types are compared, convert them to Datetime type. Conversions between other types are not allowed.
 -   **Implicit conversions under arithmetic operators**
 
     Arithmetic operators include addition \(+\), subtraction \(-\), multiplication \(\*\), division \(/\), modulo \(%\), unary plus \(+\), and unary minus \(-\). Their implicit conversion rules are described as follows:
@@ -137,16 +137,16 @@ key in (value1, value2, …)
     -   Only the Boolean type can be involved in the logical operation.
     -   Other types are not allowed in the logical operation, and cannot be implicitly converted to other types.
 
-## Implicit Conversions for Built-in Functions {#section_mzm_1ql_vdb .section}
+## Implicit conversions for Built-in functions {#section_mzm_1ql_vdb .section}
 
-MaxCompute SQL provides numerous system functions. You can calculate one or multiple columns of any row and output data of any type. Their implicit conversion rules are described as below:
+MaxCompute SQL provides numerous system functions. You can calculate one or multiple columns of any row and output data of any type. Their implicit conversion rules are described as follows:
 
 -   To call a function, if the data type of an input parameter is different from that defined in the function, convert the data type of the input parameter to that defined in the function.
--   Parameters of different built-in functions of MaxCompute SQL have different requirements on implicit conversions. For more information, see [Built-in Functions](intl.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
+-   Parameters of different built-in functions of MaxCompute SQL have different requirements on implicit conversions. For more information, see [Built-in Functions](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
 
-## Implicit Conversions under CASE WHEN {#section_if3_cql_vdb .section}
+## Implicit conversions under CASE WHEN {#section_if3_cql_vdb .section}
 
-For more information about CASE WHEN, see [CASE WHEN Expressions](intl.en-US/User Guide/SQL/Builtin Function/Other Functions.md).  Its implicit conversion rules are listed as follows:
+For more information about CASE WHEN, see [CASE WHEN Expressions](reseller.en-US/User Guide/SQL/Builtin Function/Other functions.md).  Its implicit conversion rules are listed as follows:
 
 -   If the types of the returned values are Bigint and Double, convert all to the Double type.
 -   If a String type exists in return types, convert all to the String type. If the conversion fails \(such as Boolean type conversion\), an error is returned.
@@ -156,8 +156,8 @@ For more information about CASE WHEN, see [CASE WHEN Expressions](intl.en-US/Use
 
 MaxCompute supports conversions between the String type and Datetime type.  The conversion format is `yyyy-mm-dd hh:mi:ss`.
 
-|Unit|String \(case-insensitive\)|Valid value range|
-|:---|:--------------------------|:----------------|
+|Unit|String \(case-insensitive\)|Value range|
+|:---|:--------------------------|:----------|
 |Year|yyyy|0001 - 9999|
 |Month|mm|01 - 12|
 |Day|dd|01 - 28,29,30,31|
@@ -178,12 +178,14 @@ cast("20131231023434" as datetime)
 cast("2013-12-31 2:34:34" as datetime)
 ```
 
-The threshold of dd depends on the actual days of a month. If the value exceeds the actual days of the month, the conversion is aborted with an error. For example:
+The threshold of dd depends on the actual days of a month. If the value exceeds the actual days of the month, the conversion is aborted with an error.
+
+**Example:**
 
 ```
 cast("2013-02-29 12:12:12" as datetime) -- Returns an error because February 29, 2013 does not exist.   
 cast("2013-11-31 12:12:12" as datetime) -- Returns an exception because November 31, 2013 does not exist.
 ```
 
-MaxCompute provides the TO\_DATE function to convert the String type that does not meet the Datetime format to the Datetime type.  For more information, see [TO\_DATE](intl.en-US/User Guide/SQL/Builtin Function/Date Functions.md).
+MaxCompute provides the TO\_DATE function to convert the String type that does not meet the Datetime format to the Datetime type. For more information, see [TO\_DATE](reseller.en-US/User Guide/SQL/Builtin Function/Date Functions.md).
 

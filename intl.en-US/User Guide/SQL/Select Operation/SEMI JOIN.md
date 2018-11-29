@@ -4,7 +4,7 @@ MaxCompute supports SEMI JOIN.  In SEMI JOIN, the right table does not appear i
 
 ## LEFT SEMI JOIN {#section_kjz_pwb_wdb .section}
 
-When a JOIN condition is valid, data in the left table is returned.  That is, if the ID of a row in mytable1 appears in all IDs in mytable2, this row is stored in the result set.
+When a JOIN condition is valid, data in the left table is returned.  That is, if the ID of a row in mytable1 appears in all IDs in mytable2, this row is saved in the result set.
 
 **For example**:
 

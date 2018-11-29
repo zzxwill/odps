@@ -1,9 +1,9 @@
 # Multi-input and Output {#concept_p5h_f3g_vdb .concept}
 
-## Preparation {#section_e3n_syg_vdb .section}
+## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isThe local storage path is data\\resources.
-2.  Prepare tables and resources for testing the multi-table input and output operations.
+1.  Prepare a Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isThe local storage path is data\\resources.
+2.  Prepare tables and resources for testing the multi-input and output operations.
     -   Create tables:
 
         ```
@@ -28,13 +28,13 @@
     tunnel upload data2 wc_in2;
     ```
 
-    The data  imported into the wc\_in1 table is as follows:
+    The data imported into the wc\_in1 table is as follows:
 
     ```
      hello,odps
     ```
 
-    The data  imported into the wc\_in2 table is as follows:
+    The data imported into the wc\_in2 table is as follows:
 
     ```
      hello,world
@@ -43,16 +43,16 @@
 
 ## Procedure {#section_rlv_bzg_vdb .section}
 
-Run MultipleInOut  in odpscmd.
+Run MultipleInOut in odpscmd.
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
 com.aliyun.odps.mapred.open.example.MultipleInOut wc_in1,wc_in2 mr_multiinout_out1,mr_multiinout_out2|a=1/b=1|out1,mr_multiinout_out2|a=2/b=2|out2;
 ```
 
-## Expected Results {#section_hzz_dzg_vdb .section}
+## Expected output {#section_hzz_dzg_vdb .section}
 
-The content of ‘mr\_multiinout\_out1’   is as follows:
+The content of ‘mr\_multiinout\_out1’ is as follows:
 
 ```
 +------------+------------+
@@ -62,7 +62,7 @@ The content of ‘mr\_multiinout\_out1’   is as follows:
 +------------+------------+
 ```
 
-The content of ‘mr\_multiinout\_out2’  is as follows:
+The content of ‘mr\_multiinout\_out2’ is as follows:
 
 ```
 +--------+------------+---+---+

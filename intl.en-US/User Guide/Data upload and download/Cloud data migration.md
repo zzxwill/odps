@@ -1,12 +1,12 @@
 # Cloud data migration {#concept_c3l_njf_vdb .concept}
 
-[Data upload and data download tools](intl.en-US/User Guide/Data upload and download/Tools.md) of the MaxCompute platform can be used for a wide range of cloud data migration scenarios. This document introduces some typical scenarios.
+[Data upload and data download tools](reseller.en-US//Data upload and download/Data upload and download tools.md) of the MaxCompute platform can be used for a wide range of cloud data migration scenarios. This article introduces some typical scenarios.
 
 ## Hadoop data migration {#section_xy1_jkf_vdb .section}
 
-For Hadoop data migration, use either Sqoop or DataWorks.
+For Hadoop data migration, either use Sqoop or DataWorks.
 
--   Sqoop runs an MR job on the original Hadoop cluster for the distributed data transmission to MaxCompute and is highly efficient. For more information, see the [Sqoop tool introduction](http://sqoop.apache.org/).
+-   Sqoop runs an MR job on the original Hadoop cluster for the distributed data transmission to MaxCompute and is highly efficient. For more information, see [Sqoop tool introduction](http://sqoop.apache.org/).
 -   DataWorks can be combined with DataX for Hadoop data migration.
 
 

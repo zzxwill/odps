@@ -12,7 +12,7 @@ The following table describes the connection parameters:
 
 |Parameter|Value|Description|
 |:--------|:----|:----------|
-|endpoint|Access domain name of MaxCompute Lightning in the region|For more information, see [Access domain name](intl.en-US/User Guide/Lightning/Access domain name.md#). For example, accessing the Shanghai Region service through the external network using `lightning.cn-shanghai.maxcompute.aliyun.com`|
+|endpoint|Access domain name of MaxCompute Lightning in the region|For more information, see [Access domain name](reseller.en-US/User Guide/Lightning/Access domain name.md#). For example, accessing the Shanghai Region service through the external network using `lightning.cn-shanghai.maxcompute.aliyun.com`|
 |port|443|-|
 |database|Name of a MaxCompute project|-|
 |User|Access Key ID of the user|-|

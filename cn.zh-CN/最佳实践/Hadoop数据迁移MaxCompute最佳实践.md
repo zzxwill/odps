@@ -18,7 +18,7 @@
 
     Hadoop集群使用经典网络，区域为华东1（杭州），主实例组ECS计算资源配置公网及内网IP，高可用选择为否（非HA模式），具体配置如下所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211593_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321439911593_zh-CN.png)
 
 2.  MaxCompute
 
@@ -26,7 +26,7 @@
 
     开通MaxCompute服务并创建好项目，本文中在华东1（杭州）区域创建项目bigdata\_DOC，同时启动DataWorks相关服务，如下所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211594_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011594_zh-CN.png)
 
 
 ## 数据准备 {#section_p2m_nty_bfb .section}
@@ -61,7 +61,7 @@
 
     选择运行，观察到Query executed successfully提示则说明成功在EMR Hadoop集群上创建了测试用表格hive\_doc\_good\_sale，如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211595_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011595_zh-CN.png)
 
     插入测试数据，您可以选择从OSS或其他数据源导入测试数据，也可以手动插入少量的测试数据。本文中手动插入数据如下：
 
@@ -72,13 +72,13 @@
 
     完成插入数据后，您可以使用select \* from hive\_doc\_good\_sale where pt =1;语句检查Hadoop集群表中是否已存在数据可用于迁移：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211596_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011596_zh-CN.png)
 
 2.  利用DataWorks新建目标表
 
     在管理控制台，选择对应的MaxCompute项目，点击进入数据开发页面，点击新建表，如下所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211597_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011597_zh-CN.png)
 
     在弹框中输入SQL建表语句，本例中使用的建表语句如下：
 
@@ -99,7 +99,7 @@
 
     由于本文使用DataWorks进行数据迁移，而DataWorks数据同步功能当前暂不支持timestamp类型数据，因此在DataWorks建表语句中，将create\_time设置为string类型。 上述步骤同样可通过odpscmd命令行工具完成，命令行工具安装和配置请参考：[安装并配置客户端](../../../../cn.zh-CN/准备工作/安装并配置客户端.md#)。执行过程如下所示：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211598_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011598_zh-CN.png)
 
     **说明：** 考虑到部分HIVE与MaxCompute数据类型的兼容问题，建议在odpscmd客户端上执行以下命令。
 
@@ -110,7 +110,7 @@
 
     完成建表后，可在DataWorks数据开发\>表查询一栏查看到当前创建的MaxCompute上的表，如下所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211599_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011599_zh-CN.png)
 
 
 ## 数据同步 {#section_esz_swy_bfb .section}
@@ -123,11 +123,11 @@
 
         在EMR控制台上首页/集群管理/集群/主机列表页查看，如下图所示，通常非HA模式的EMR上Hadoop集群的master节点主机名为 emr-header-1，datanode主机名为emr-worker-X。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211600_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011600_zh-CN.png)
 
         您也可以通过点击上图中Master节点的ECS ID，进入ECS实例详情页，通过点击远程连接进入ECS，通过 hadoop dfsadmin –report命令查看datenode，如下图所示。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211601_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011601_zh-CN.png)
 
         由上图可以看到，在本例中，datanode只具有内网地址，很难与DataWorks默认资源组互通，所以我们需要设置自定义资源组，将master node设置为执行DataWorks数据同步任务的节点。
 
@@ -135,25 +135,25 @@
 
         进入DataWorks数据集成页面，选择资源组，点击新增资源组，如下图所示。关于自定义资源组的详细信息请参考[新增调度资源](https://help.aliyun.com/document_detail/72979.html)。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352211602_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011602_zh-CN.png)
 
         在添加服务器步骤中，需要输入ECS UUID和机器IP等信息（对于经典网络类型，需输入服务器名称，对于专有网络类型，需输入服务器UUID。目前仅DataWorks V2.0 华东2区支持经典网络类型的调度资源添加，对于其他区域，无论您使用的是经典网络还是专有网络类型，在添加调度资源组时都请选择专有网络类型），机器IP需填写master node公网IP（内网IP有可能不可达）。ECS的UUID需要进入master node管理终端，通过命令dmidecode | grep UUID获取（如果您的hadoop集群并非搭建在EMR环境上，也可以通过该命令获取），如下所示：
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311603_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011603_zh-CN.png)
 
         完成添加服务器后，需保证master node与DataWorks网络可达，如果您使用的是ECS服务器，需设置服务器安全组。如果您使用的内网IP互通，可参考[添加安全组](https://help.aliyun.com/document_detail/72978.html)设置。
 
         如果您使用的是公网IP，可直接设置安全组公网出入方向规则，本文中设置公网入方向放通所有端口（实际应用场景中，为了您的数据安全，强烈建议设置详细的放通规则），如下图所示。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311604_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011604_zh-CN.png)
 
         完成上述步骤后，按照提示安装自定义资源组agent，观察到当前状态为可用，说明新增自定义资源组成功：
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311605_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440011605_zh-CN.png)
 
         如果状态为不可用，您可以登录master node，使用`tail –f/home/admin/alisatasknode/logs/heartbeat.log`命令查看DataWorks与master node之间心跳报文是否超时，如下图所示。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311606_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111606_zh-CN.png)
 
 2.  新建数据源
 
@@ -161,11 +161,11 @@
 
     DataWorks新建项目后，默认设置自己为数据源odps\_first。因此我们只需添加Hadoop集群数据源:在DataWorks数据集成页面，点击数据源\>新增数据源，在弹框中选择HDFS类型的数据源：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311607_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111607_zh-CN.png)
 
     在弹出窗口中填写数据源名称及defaultFS。对于EMR Hadoop集群而言，如果Hadoop集群为HA集群，则此处地址为hdfs://emr-header-1的IP:8020，如果Hadoop集群为非HA集群，则此处地址为hdfs://emr-header-1的IP:9000。在本文中，emr-header-1与DataWorks通过公网连接，因此此处填写公网IP并放通安全组。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311608_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111608_zh-CN.png)
 
     完成配置后，点击测试连通性，如果提示“测试连通性成功”，则说明数据源添加正常。
 
@@ -175,11 +175,11 @@
 
     在DataWorks数据集成页面点击同步任务，选择新建\>脚本模式，在导入模板弹窗选择数据源类型如下：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311609_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111609_zh-CN.png)
 
     完成导入模板后，同步任务会转入脚本模式，本文中配置脚本如下，相关解释请参见：[脚本模式配置](https://help.aliyun.com/document_detail/74304.html)。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311610_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111610_zh-CN.png)
 
     在配置数据同步任务脚本时，需注意DataWorks同步任务和HIVE表中数据类型的转换如下：
 
@@ -274,18 +274,106 @@
 
     其中，path参数为数据在Hadoop集群中存放的位置，您可以在登录master node后，使用hdfs dfs –ls /user/hive/warehouse/hive\_doc\_good\_sale命令确认。对于分区表，您可以不指定分区，DataWorks数据同步会自动递归到分区路径，如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311611_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111611_zh-CN.png)
 
     完成配置后，点击运行。如果提示任务运行成功，则说明同步任务已完成。如果运行失败，可通过复制日志进行进一步排查。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352311612_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111612_zh-CN.png)
 
 
 ## 验证结果 {#section_txr_ybz_bfb .section}
 
 在DataWorks数据开发/表查询页面，选择表hive\_doc\_good\_sale后，点击数据预览可查看HIVE数据是否已同步到MaxCompute。您也可以通过新建一个table查询任务，在任务中输入脚本`select * FROM hive_doc_good_sale where pt =1;`后，点击运行来查看表结果，如下图所示。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/153836352411614_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154321440111614_zh-CN.png)
 
 当然，您也可以通过在odpscmd命令行工具中输入`select * FROM hive_doc_good_sale where pt =1;`查询表结果。
+
+## MaxCompute数据迁移到Hadoop {#section_z44_tdb_3fb .section}
+
+如果您想实现MaxCompute数据迁移到Hadoop。步骤与上述步骤类似，不同的是同步脚本内的reader和writer对象需要对调，具体实现脚本举例如下。
+
+```
+
+{
+  "configuration": {
+    "reader": {
+      "plugin": "odps",
+      "parameter": {
+      "partition": "pt=1",
+      "isCompress": false,
+      "datasource": "odps_first",
+      "column": [
+        "create_time",
+        "category",
+        "brand",
+      "buyer_id",
+      "trans_num",
+      "trans_amount",
+      "click_cnt"
+    ],
+    "table": "hive_doc_good_sale"
+    }
+  },
+  "writer": {
+    "plugin": "hdfs",
+    "parameter": {
+    "path": "/user/hive/warehouse/hive_doc_good_sale",
+    "fileName": "pt=1",
+    "datasource": "HDFS_data_source",
+    "column": [
+      {
+        "name": "create_time",
+        "type": "string"
+      },
+      {
+        "name": "category",
+        "type": "string"
+      },
+      {
+        "name": "brand",
+        "type": "string"
+      },
+      {
+        "name": "buyer_id",
+        "type": "string"
+      },
+      {
+        "name": "trans_num",
+        "type": "BIGINT"
+      },
+      {
+        "name": "trans_amount",
+        "type": "DOUBLE"
+      },
+      {
+        "name": "click_cnt",
+        "type": "BIGINT"
+      }
+    ],
+    "defaultFS": "hdfs://47.99.162.100:9000",
+    "writeMode": "append",
+    "fieldDelimiter": ",",
+    "encoding": "UTF-8",
+    "fileType": "text"
+    }
+  },
+  "setting": {
+    "errorLimit": {
+      "record": "1000"
+  },
+  "speed": {
+    "throttle": false,
+    "concurrent": 1,
+    "mbps": "1",
+    "dmu": 1
+  }
+  }
+},
+"type": "job",
+"version": "1.0"
+}
+```
+
+您需要参考[配置HDFS Writer](../../../../cn.zh-CN/使用指南/数据集成/作业配置/配置Writer插件/配置HDFS Writer.md#)在运行上述同步任务前对Hadoop集群进行设置，在运行同步任务后手动拷贝同步过去的文件。
 

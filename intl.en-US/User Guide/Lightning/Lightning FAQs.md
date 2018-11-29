@@ -22,7 +22,7 @@
 
     A: Select the **Autocommit** check box in the client.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20130/153631025811171_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20130/153812973111171_en-US.jpg)
 
 
  

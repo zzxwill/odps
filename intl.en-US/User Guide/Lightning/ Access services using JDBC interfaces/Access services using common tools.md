@@ -26,15 +26,15 @@ SQL Workbench/J is a widely used free and cross-platform SQL query tool. This to
 
     Select the PostgreSQL driver, connect SQL Workbench/J to the MaxCompute Lightning URL of a project. You must enter the Access Key ID and Access Key Secret of the user.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911161_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812964911161_en-US.jpg)
 
     Alternatively, you can click Extended Properties and set ssl to true in the displayed dialog box.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911162_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812964911162_en-US.jpg)
 
 3.  After SQL Workbench/J is connected to MaxCompute Lightning, you can view, query, and analyze the table data in the SQL Workbench/J workspace.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911163_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812964911163_en-US.jpg)
 
 
 ## psql {#section_fs1_kvk_z2b .section}
@@ -49,7 +49,7 @@ psql -h &lt;endpoint> -U &lt;userid> -d &lt;databasename> -p &lt;port>
 
 Parameter description:
 
--   &lt;endpoint\>: The endpoint of MaxCompute Lightning. For more information, see [Access domain name](intl.en-US/User Guide/Lightning/Access domain name.md#).
+-   &lt;endpoint\>: The endpoint of MaxCompute Lightning. For more information, see [Access domain name](reseller.en-US/User Guide/Lightning/Access domain name.md#).
 -   &lt;userid\>: Access Key ID.
 -   &lt;databasename\>: MaxCompute project name.
 -   &lt;port\>: 443
@@ -58,7 +58,7 @@ After the command is executed, enter the &lt;userid\> password \(Access Key Secr
 
 Example:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153689178911164_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812965011164_en-US.jpg)
 
 **Note:** SSL connections are preferred for psql by default.
 

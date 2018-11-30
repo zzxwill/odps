@@ -2,9 +2,9 @@
 
 本文将为您介绍对于存储在OSS上的各种流行的开源数据格式（ORC、PARQUET、SEQUENCEFILE、RCFILE、AVRO和TEXTFILE）如何通过非结构化框架在MaxCompute进行处理。
 
-[访问OSS非结构化数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)为您介绍了如何在MaxCompute上访问存储在OSS上的文本、音频、图像等格式的数据。非结构框架会直接调用开源社区的实现来进行开源数据格式的解析，并且与MaxCompute系统无缝对接。
+[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)为您介绍了如何在MaxCompute上访问存储在OSS上的文本、音频、图像等格式的数据。非结构框架会直接调用开源社区的实现来进行开源数据格式的解析，并且与MaxCompute系统无缝对接。
 
-**说明：** 处理OSS的开源格式数据前，需要首先对OSS进行[STS模式授权](cn.zh-CN/用户指南/外部表/OSS的STS模式授权.md)。
+**说明：** 处理OSS的开源格式数据前，需要首先对OSS进行[STS模式授权](intl.zh-CN/用户指南/外部表/OSS的STS模式授权.md)。
 
 ## 创建External Table {#section_bxs_hsv_ydb .section}
 
@@ -24,13 +24,13 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 
 **说明：** 该语法格式与Hive的语法相当接近，但需注意以下问题。
 
--   STORED AS关键字，在该语法格式中不是[普通非结构化外表](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)用的STORED BY关键字，这是目前在读取开源兼容数据时独有的。
+-   STORED AS关键字，在该语法格式中不是[普通非结构化外表](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)用的STORED BY关键字，这是目前在读取开源兼容数据时独有的。
 
     STORED AS后面接的是文件格式名字， 比如ORC/PARQUET/RCFILE/SEQUENCEFILE/TEXTFILE等。
 
 -   外部表的column schemas必须与具体OSS上存储存储数据的schema相符合。
 -   ROW FORMAT SERDE非必选选项，只有在使用一些特殊的格式上，比如TEXTFILE时才需要使用。
--   WITH SERDEPROPERTIES当关联OSS权限使用[STS模式授权](cn.zh-CN/用户指南/外部表/OSS的STS模式授权.md)时，需要该参数指定odps.properties.rolearn属性，属性值为RAM中具体使用的Role的Arn的信息。
+-   WITH SERDEPROPERTIES当关联OSS权限使用[STS模式授权](intl.zh-CN/用户指南/外部表/OSS的STS模式授权.md)时，需要该参数指定odps.properties.rolearn属性，属性值为RAM中具体使用的Role的Arn的信息。
 
     若不用STS模式，则无需指定该属性，直接在Location传入明文`AccessKeyId`和`AccessKeySecret`。
 
@@ -256,7 +256,7 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
     FAILED: ODPS-0123131:User defined function exception - Traceback:
     com.aliyun.odps.udf.UDFException: java.lang.ClassNotFoundException: com.aliyun.odps.hive.wrapper.HiveStorageHandlerWrapper
     --需要手动设置hive兼容flag
-    set odps.sql.hive.compatible=false;
+    set odps.sql.hive.compatible=true;
     SELECT * FROM tpch_lineitem_textfile LIMIT 1;
     +------------+------------+------------+--------------+------------+-----------------+------------+------------+--------------+--------------+------------+--------------+---------------+----------------+------------+-----------+
     | l_orderkey | l_partkey  | l_suppkey  | l_linenumber | l_quantity | l_extendedprice | l_discount | l_tax      | l_returnflag | l_linestatus | l_shipdate | l_commitdate | l_receiptdate | l_shipinstruct | l_shipmode | l_comment |
@@ -267,7 +267,7 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 
     **说明：** 直接使用外表，每次读取数据都需要涉及外部OSS的I/O操作，且MaxCompute系统本身针对内部存储做的许多高性能优化都用不上，如此一来性能上就会有所损失。 因此如果是需要对数据进行反复计算以及对计算的高效性比较敏感的场景，推荐使用下文介绍的用法：先将数据导入MaxCompute内部再进行计算。
 
-    SQL（ create、select、insert等操作）中涉及到这几个复杂数据类型，需在SQL语句前加语句`set odps.sql.type.system.odps2=true;`，执行时set语句和SQL语句一起提交执行。详情请参见[数据类型](../../../../cn.zh-CN/用户指南/基本概念/数据类型.md#)。
+    SQL（ create、select、insert等操作）中涉及到这几个复杂数据类型，需在SQL语句前加语句`set odps.sql.type.system.odps2=true;`，执行时set语句和SQL语句一起提交执行。详情请参见[数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)。
 
 -   将OSS的开源数据导入MaxCompute再进行计算
 

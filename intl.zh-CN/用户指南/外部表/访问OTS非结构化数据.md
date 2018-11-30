@@ -1,10 +1,12 @@
 # 访问OTS非结构化数据 {#concept_dgw_n2b_wdb .concept}
 
+本文将进一步为您介绍如何将来自TableStore（OTS）的数据纳入MaxCompute上的计算生态，实现多种数据源之间的无缝连接。
+
 表格存储（Table Store）是构建在阿里云飞天分布式系统之上的NoSQL数据存储服务，提供海量结构化数据的存储和实时访问。您可以通过[TableStore文档](https://www.alibabacloud.com/help/doc-detail/27280.html)对其进行了解。
 
-MaxCompute与TableStore是两个独立的大数据计算和存储服务，所以两者之间的网络必须保证连通性。MaxCompute公共云服务访问TableStore存储时，推荐您使用TableStore**私网**地址，也就是host名以ots-internal.aliyuncs.com作为结尾的地址，例如tablestore://odps-ots-dev.cn-shanghai.ots-internal.aliyuncs.com。
+MaxCompute与TableStore是两个独立的大数据计算和存储服务，所以两者之间的网络必须保证连通性。MaxCompute公共云服务访问TableStore存储时，推荐您使用TableStore私网地址，也就是host名以ots-internal.aliyuncs.com作为结尾的地址，例如`tablestore://odps-ots-dev.cn-shanghai.ots-internal.aliyuncs.com`。
 
-前文为您介绍了如何[访问OSS非结构化数据](intl.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md#)，本文将进一步为您介绍如何将来自TableStore（OTS）的数据纳入MaxCompute上的计算生态，实现多种数据源之间的无缝连接。
+前文为您介绍了如何[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md#)。
 
 TableStore与MaxCompute都有其自身的类型系统。在MaxCompute处理TableStore数据时，两者之间的类型对应关系如下所示：
 
@@ -65,9 +67,9 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 
         **说明：** 您可单击右上角的登录账号，进入账号管理页面查看云账号的UID。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408071392844_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15435506262844_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15408071392845_zh-CN.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15435506262845_zh-CN.jpg)
 
     3.  编辑该角色的授权策略AliyunODPSRolePolicy，如下所示：
 
@@ -125,27 +127,20 @@ LOCATION 'tablestore://odps-ots-dev.cn-shanghai.ots-internal.aliyuncs.com'; -- �
 
 语句说明如下所示：
 
-（1）com.aliyun.odps.TableStoreStorageHandler是MaxCompute内置的处理TableStore数据的StorageHandler，定义了MaxCompute和TableStore的交互，相关逻辑由MaxCompute实现。
-
-（2）SERDEPROPERITES是提供参数选项的接口，在使用TableStoreStorageHandler时，有两个必须指定的选项，分别是下文介绍的tablestore.columns.mapping、tablestore.table.name和odps.properties.rolearn。
-
-①tablestore.columns.mapping选项：必选项，用来描述MaxCompute将访问的Table Store表的列，包括主键和属性列。
-
--   以`:`打头的用来表示Table Store主键，例如此语句中的`:o_orderkey`和`:o_orderdate`，其他的均为属性列。
--   Table Store支持1-4个主键，主键类型为String、Integer和Binary，其中第一个主键为分区键。
--   在指定映射时，您必须提供指定Table Store表的所有主键，对于属性列则没有必要全部提供，可以只提供需要通过MaxCompute来访问的属性列。
-
-②tablestore.table.name：需要访问的Table Store表名。如果指定的Table Store表名错误（不存在），则会报错，MaxCompute不会主动去创建Table Store表。
-
-③odps.properties.rolearn中的信息是RAM中AliyunODPSDefaultRole的Arn信息。您可以通过RAM控制台中的**角色详情**进行获取。
-
-（3）LOCATION clause：用来指定Table Storeinstance名字、endpoint等具体信息。这里的Table Store数据的安全访问建立在前文介绍的RAM/STS授权的前提上。
+-   com.aliyun.odps.TableStoreStorageHandler是MaxCompute内置的处理TableStore数据的StorageHandler，定义了MaxCompute和TableStore的交互，相关逻辑由MaxCompute实现。
+-   SERDEPROPERITES是提供参数选项的接口，在使用TableStoreStorageHandler时，有两个必须指定的选项，分别是下文介绍的tablestore.columns.mapping、tablestore.table.name和odps.properties.rolearn。
+    1.  tablestore.columns.mapping选项：必选项，用来描述MaxCompute将访问的Table Store表的列，包括主键和属性列。
+        -   以`:`打头的用来表示Table Store主键，例如此语句中的`:o_orderkey`和`:o_orderdate`，其他的均为属性列。
+        -   Table Store支持1-4个主键，主键类型为String、Integer和Binary，其中第一个主键为分区键。
+        -   在指定映射时，您必须提供指定Table Store表的所有主键，对于属性列则没有必要全部提供，可以只提供需要通过MaxCompute来访问的属性列。
+    2.  tablestore.table.name：需要访问的Table Store表名。如果指定的Table Store表名错误（不存在），则会报错，MaxCompute不会主动去创建Table Store表。
+    3.  odps.properties.rolearn中的信息是RAM中AliyunODPSDefaultRole的Arn信息。您可以通过RAM控制台中的**角色详情**进行获取。
+-   LOCATION clause：用来指定Table Storeinstance名字、endpoint等具体信息。这里的Table Store数据的安全访问建立在前文介绍的RAM/STS授权的前提上。
 
 如果您想要查看创建好的外部表结构信息，可以执行如下语句：
 
 ```
 desc extended <table_name>;
-
 ```
 
 在返回的信息里，除了跟内部表一样的基础信息外，Extended Info包含外部表StorageHandler 、Location等信息。
@@ -164,7 +159,7 @@ HAVING sum_total> 400000.0;
 
 由上可见，使用常见的MaxCompute SQL语法，访问Table Store的所有细节由MaxComput 内部处理。这包括在列名的选择上，比如上述SQL中，使用的列名是odps\_orderkey，odps\_totalprice等，而不是原始Table Store中的主键名o\_orderkey或属性列名o\_totalprice，因为在创建External Table的DDL语句中，已经做了对应的mapping。当然您也可根据自己的需求在创建External Table时选择保留原始的TableStore主键/列名。
 
-如果需要对一份数据做**多次计算**，相较每次从Table Store去远程读数据，有个更高效的办法是先一次性把需要的数据导入到MaxCompute内部成为一个MaxCompute（内部）表，示例如下：
+如果需要对一份数据做多次计算，相较每次从Table Store去远程读数据，有个更高效的办法是先一次性把需要的数据导入到MaxCompute内部成为一个MaxCompute（内部）表，示例如下：
 
 ```
 CREATE TABLE internal_orders AS
@@ -179,7 +174,7 @@ WHERE odps_orderkey > 5000 ;
 
 **说明：** MaxCompute不会主动创建外部的Table Store表，所以在对Table Store表进行数据输出之前，必须保证该表已经在Table Store上创建过（否则将报错）。
 
-根据上面的操作，您已创建了外部表ots\_table\_external来打通MaxCompute与Table Storeb数据表ots\_tpch\_orders的链路，同时还有一份存储在MaxCompute内部表internal\_orders的数据，现在希望对internal\_orders中的数据进行一定处理后再写回 Table Store，可通过对外部表做**INSERT OVERWITE TABLE**操作来实现，如下所示：
+根据上面的操作，您已创建了外部表ots\_table\_external来打通MaxCompute与Table Storeb数据表ots\_tpch\_orders的链路，同时还有一份存储在MaxCompute内部表internal\_orders的数据，现在希望对internal\_orders中的数据进行一定处理后再写回 Table Store，可通过对外部表做INSERT OVERWITE TABLE操作来实现，如下所示：
 
 ```
 INSERT OVERWRITE TABLE ots_table_external
@@ -198,13 +193,13 @@ FROM internal_orders;
     TableStore BatchWrite request id XXXXX failed with error code OTSParameterInvalid and message:The total data size of BatchWriteRow request exceeds the limit
     ```
 
--   将数据批量写入或分行写入，都算一次操作。详细描述请参考[BatchWriteRow](https://help.aliyun.com/document_detail/27311.html)。因此如果批量写入数据量太大，也可以分行写入。
+-   将数据批量写入或分行写入，都算一次操作。详细描述请参考[BatchWriteRow](https://www.alibabacloud.com/help/doc-detail/27311.html)。因此如果批量写入数据量太大，也可以分行写入。
 -   将数据批量写入时请注意不要有重复行，否则可能产生报错：
 
     ```
     ErrorCode: OTSParameterInvalid, ErrorMessage: The input parameter is invalid 
     ```
 
-    详细描述请参考[使用BatchWriteRow一次提交100条数据的时候报OTSParameterInvalid错误](https://help.aliyun.com/knowledge_detail/38586.html)。
+    详细描述请参考[使用BatchWriteRow一次提交100条数据的时候报OTSParameterInvalid错误](https://www.alibabacloud.com/help/doc-detail/38586.html)。
 
 

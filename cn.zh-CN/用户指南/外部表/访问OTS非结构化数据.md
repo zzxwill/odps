@@ -2,11 +2,11 @@
 
 本文将进一步为您介绍如何将来自TableStore（OTS）的数据纳入MaxCompute上的计算生态，实现多种数据源之间的无缝连接。
 
-表格存储（Table Store）是构建在阿里云飞天分布式系统之上的NoSQL数据存储服务，提供海量结构化数据的存储和实时访问。您可以通过[TableStore文档](https://help.aliyun.com/document_detail/27280.html)对其进行了解。
+表格存储（Table Store）是构建在阿里云飞天分布式系统之上的NoSQL数据存储服务，提供海量结构化数据的存储和实时访问。您可以通过[TableStore文档](https://www.alibabacloud.com/help/doc-detail/27280.html)对其进行了解。
 
 MaxCompute与TableStore是两个独立的大数据计算和存储服务，所以两者之间的网络必须保证连通性。MaxCompute公共云服务访问TableStore存储时，推荐您使用TableStore私网地址，也就是host名以ots-internal.aliyuncs.com作为结尾的地址，例如`tablestore://odps-ots-dev.cn-shanghai.ots-internal.aliyuncs.com`。
 
-前文为您介绍了如何[访问OSS非结构化数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md#)。
+前文为您介绍了如何[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md#)。
 
 TableStore与MaxCompute都有其自身的类型系统。在MaxCompute处理TableStore数据时，两者之间的类型对应关系如下所示：
 
@@ -28,7 +28,7 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 -   自定义授权
     1.  首先在RAM控制台中授予MaxCompute访问Table Store的权限。
 
-        登录 [RAM控制台](https://ram.console.aliyun.com/#/overview)（若MaxCompute和Table Store不是同一个账号，此处需由Table Store账号登录进行授权），创建角色，角色名叫AliyunODPSDefaultRole或AliyunODPSRoleForOtherUser。
+        登录 [RAM控制台](https://account.alibabacloud.com/login/login.html)（若MaxCompute和Table Store不是同一个账号，此处需由Table Store账号登录进行授权），创建角色，角色名叫AliyunODPSDefaultRole或AliyunODPSRoleForOtherUser。
 
     2.  修改策略内容设置，如下所示：
 
@@ -67,9 +67,9 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 
         **说明：** 您可单击右上角的登录账号，进入账号管理页面查看云账号的UID。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15425953802844_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15435506262844_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15425953802845_zh-CN.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15435506262845_zh-CN.jpg)
 
     3.  编辑该角色的授权策略AliyunODPSRolePolicy，如下所示：
 
@@ -141,7 +141,6 @@ LOCATION 'tablestore://odps-ots-dev.cn-shanghai.ots-internal.aliyuncs.com'; -- �
 
 ```
 desc extended <table_name>;
-
 ```
 
 在返回的信息里，除了跟内部表一样的基础信息外，Extended Info包含外部表StorageHandler 、Location等信息。
@@ -194,15 +193,13 @@ FROM internal_orders;
     TableStore BatchWrite request id XXXXX failed with error code OTSParameterInvalid and message:The total data size of BatchWriteRow request exceeds the limit
     ```
 
--   将数据批量写入或分行写入，都算一次操作。详细描述请参考[BatchWriteRow](https://help.aliyun.com/document_detail/27311.html)。因此如果批量写入数据量太大，也可以分行写入。
+-   将数据批量写入或分行写入，都算一次操作。详细描述请参考[BatchWriteRow](https://www.alibabacloud.com/help/doc-detail/27311.html)。因此如果批量写入数据量太大，也可以分行写入。
 -   将数据批量写入时请注意不要有重复行，否则可能产生报错：
 
     ```
     ErrorCode: OTSParameterInvalid, ErrorMessage: The input parameter is invalid 
     ```
 
-    详细描述请参考[使用BatchWriteRow一次提交100条数据的时候报OTSParameterInvalid错误](https://help.aliyun.com/knowledge_detail/38586.html)。
+    详细描述请参考[使用BatchWriteRow一次提交100条数据的时候报OTSParameterInvalid错误](https://www.alibabacloud.com/help/doc-detail/38586.html)。
 
-
-更多详情请参见[MaxCompute访问TableStore（OTS）数据](https://yq.aliyun.com/articles/69314)。
 

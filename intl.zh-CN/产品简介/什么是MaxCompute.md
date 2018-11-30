@@ -48,7 +48,7 @@ DataWorks和MaxCompute关系紧密：DataWorks为MaxCompute提供一站式的数
 
     MaxCompute支持多种计算模型，详情如下。
 
-    -   [SQL](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md#)：MaxCompute以表的形式存储数据，支持多种[数据类型](https://help.aliyun.com/document_detail/27821.html)，并对外提供SQL查询功能。您可以将MaxCompute作为传统的数据库软件操作，但其却能处理TB、PB级别的海量数据。
+    -   [SQL](../../../../intl.zh-CN/用户指南/SQL/SQL概述.md#)：MaxCompute以表的形式存储数据，支持多种[数据类型](../../../../intl.zh-CN/用户指南/基本概念/数据类型.md#)，并对外提供SQL查询功能。您可以将MaxCompute作为传统的数据库软件操作，但其却能处理TB、PB级别的海量数据。
 
 **说明：** 
 

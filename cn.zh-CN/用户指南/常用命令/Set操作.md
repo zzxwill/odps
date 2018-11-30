@@ -12,7 +12,7 @@ set <KEY>=<VALUE>
 
 行为说明如下：
 
-您可以使用set命令设置MaxCompute或用户自定义的系统变量影响MaxCompute的行为。
+您可以使用set命令设置MaxCompute或影响MaxCompute的行为。
 
 **目前，MaxCompute支持的系统变量，如下所示：**
 

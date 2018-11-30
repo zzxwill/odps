@@ -12,7 +12,7 @@ Set <key> = <value>
 
 Actioin:
 
-You can use the set command to set MaxCompute or a user-defined system variables that affects the MaxCompute operation.
+You can use the set command to set MaxCompute or affect the MaxCompute operation.
 
 **Currently, the system variables supported in MaxCompute are as follow:**
 

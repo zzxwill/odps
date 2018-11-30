@@ -53,8 +53,6 @@ Tunnel命令不支持上传下载Array、Map和Struct类型的数据。
 
 每个Tunnel的Session 在服务端的生命周期为 24 小时，创建后 24 小时内均可使用，也可以跨进程/线程共享使用，但是必须保证同一个 BlockId 没有重复使用。
 
-**说明：** 使用Tunnel命令过程中遇到的问题请参见[Tunnel命令相关问题](https://help.aliyun.com/knowledge_list/40347.html)。
-
 ## Tunnel命令使用说明 {#section_g2l_1wf_vdb .section}
 
 Tunnel命令支持在客户端通过help子命令获取帮助信息，每个命令和选择支持短命令格式。

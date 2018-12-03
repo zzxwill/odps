@@ -17,7 +17,7 @@ This article lists the common concepts and terminologies of MaxCompute. For deta
 
 -   Console
 
-    MaxCompute Console is a client tool running under Windows/Linux. It can submit commands to complete project management, DDL, DML and other operations through Console. For tool installation and common parameters, See the [Client](../../../../reseller.en-US/Tools and Downloads/Client.md#)for tool installations and common parameters.
+    MaxCompute Console is a client tool running under Windows/Linux. It can submit commands to complete project management, DDL, DML and other operations through Console. For tool installation and common parameters, See the [Client](../../../../reseller.en-US/Tools and Downloads/Client.md#) for tool installations and common parameters.
 
 
 ## D {#section_o1d_vxv_tdb .section}
@@ -91,7 +91,7 @@ This article lists the common concepts and terminologies of MaxCompute. For deta
 
 -   SDK
 
-    Software Development Kits. Generally, it is a collection of development tools used by software engineers to build application software for specific software packages, software instances, software frameworks, hardware platforms, operating systems, document packages, etc. MaxCompute currently supports [Java SDK](../../../../reseller.en-US/SDK Reference /Java SDK.md#)and [../../../../dita-oss-bucket/SP\_76/DNodps1830562/EN-US\_TP\_12065.md\#](../../../../reseller.en-US/SDK Reference /Python SDK.md#).
+    Software Development Kits. Generally, it is a collection of development tools used by software engineers to build application software for specific software packages, software instances, software frameworks, hardware platforms, operating systems, document packages, etc. MaxCompute currently supports [Java SDK](../../../../reseller.en-US/SDK Reference /Java SDK.md#)and Python SDK.
 
 -   Authorization
 

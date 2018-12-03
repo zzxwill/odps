@@ -42,41 +42,41 @@
 
 将applog.txt文件上传到OSS，本文中OSS Bucket位于华东2区。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431516_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203231516_zh-CN.png)
 
 ## 使用DataWorks导入数据到MaxCompute {#section_zcj_s3d_5fb .section}
 
 1.  新增OSS数据源
 
-    进入DataWorks[数据集成](../../../../cn.zh-CN/使用指南/数据集成/数据集成简介/数据集成概述.md#)控制台，新增[OSS类型数据源](../../../../cn.zh-CN/使用指南/数据集成/数据源配置/配置OSS数据源.md#)。
+    进入DataWorks[数据集成](../../../../intl.zh-CN/使用指南/数据集成/数据集成简介/数据集成概述.md#)控制台，新增[OSS类型数据源](../../../../intl.zh-CN/使用指南/数据集成/数据源配置/配置OSS数据源.md#)。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431532_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203231532_zh-CN.png)
 
     具体参数如下所示，测试数据源连通性通过即可点击完成。Endpoint地址请参见[OSS各区域的外网、内网地址](https://help.aliyun.com/knowledge_detail/39585.html)，本例中为http://oss-cn-shanghai.aliyuncs.com或http://oss-cn-shanghai-internal.aliyuncs.com（由于本文中OSS和DataWorks项目处于同一个region中，本文选用后者，通过内网连接）。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431536_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203231536_zh-CN.png)
 
 2.  新建数据同步任务
 
-    在DataWorks上新建[数据同步类型节点。](../../../../cn.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置OSS Reader.md#)
+    在DataWorks上新建[数据同步类型节点。](../../../../intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置OSS Reader.md#)
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431543_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203231543_zh-CN.png)
 
-    新建的同时，在DataWorks新建一个[建表任务](../../../../cn.zh-CN/使用指南/数据开发/表管理.md#)，用于存放JSON数据，本例中新建表名为mqdata。
+    新建的同时，在DataWorks新建一个[建表任务](../../../../intl.zh-CN/使用指南/数据开发/表管理.md#)，用于存放JSON数据，本例中新建表名为mqdata。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431544_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203231544_zh-CN.png)
 
     表参数可以通过图形化界面完成。本例中mqdata表仅有一列，类型为string，列名为MQ data。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431545_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203231545_zh-CN.png)
 
     完成上述新建后，您可以在图形化界面配置数据同步任务参数，如下图所示。选择目标数据源名称为odps\_first，选择目标表为刚建立的mqdata。数据来源类型为OSS，Object前缀可填写文件路径及名称。列分隔符使用TXT文件中不存在的字符即可，本文中使用^（对于OSS中的TXT格式数据源，Dataworks支持多字符分隔符，所以您可以使用例如%&%\#^$$^%这样很难出现的字符作为列分隔符，保证分割为一列）。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431546_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203231546_zh-CN.png)
 
     映射方式选择默认的同行映射即可。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431548_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203331548_zh-CN.png)
 
     点击左上方的切换脚本按钮，切换为脚本模式。修改fileFormat参数为：`"fileFormat":"binary"`。该步骤可以保证OSS中的JSON文件同步到MaxCompute之后存在同一行数据中，即为一个字段。其他参数保持不变，脚本模式代码示例如下。
 
@@ -151,20 +151,20 @@
 
     完成上述配置后，点击运行接即可。运行成功日志示例如下所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431550_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203331550_zh-CN.png)
 
 
 ## 获取JSON字段信息 {#section_pbc_mf2_5fb .section}
 
-在您的[业务流程](../../../../cn.zh-CN/使用指南/数据开发/业务流程/业务流程介绍.md#)中新建一个ODPS SQL节点。
+在您的[业务流程](../../../../intl.zh-CN/使用指南/数据开发/业务流程/业务流程介绍.md#)中新建一个ODPS SQL节点。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441431551_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203331551_zh-CN.png)
 
-您可以首先输入`SELECT*from mqdata;`语句，查看当前mqdata表中数据。当然这一步及后续步骤，您也可以直接在[MaxCompute客户端](../../../../cn.zh-CN/工具及下载/客户端.md#)中输入命令运行。
+您可以首先输入`SELECT*from mqdata;`语句，查看当前mqdata表中数据。当然这一步及后续步骤，您也可以直接在[MaxCompute客户端](../../../../intl.zh-CN/工具及下载/客户端.md#)中输入命令运行。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441531552_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203331552_zh-CN.png)
 
-确认导入表中的数据结果无误后，您可以使用MaxCompute内建字符串函数[GET\_JSON\_OBJECT](../../../../cn.zh-CN/用户指南/SQL/内建函数/字符串函数.md#section_cdt_gxz_vdb)获取您想要的JSON数据。本例中使用`SELECT GET_JSON_OBJECT(mqdata.MQdata,'$.expensive') FROM mqdata;`获取JSON文件中的expensive值。如下图所示，可以看到已成功获取数据。
+确认导入表中的数据结果无误后，您可以使用MaxCompute内建字符串函数[GET\_JSON\_OBJECT](../../../../intl.zh-CN/用户指南/SQL/内建函数/字符串函数.md#section_cdt_gxz_vdb)获取您想要的JSON数据。本例中使用`SELECT GET_JSON_OBJECT(mqdata.MQdata,'$.expensive') FROM mqdata;`获取JSON文件中的expensive值。如下图所示，可以看到已成功获取数据。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154321441531553_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154382203331553_zh-CN.png)
 

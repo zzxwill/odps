@@ -30,7 +30,7 @@ set odps.sql.type.system.odps2=true; --SQL（Create、select、insert等操作�
 
 ## 创建EXTERNAL TABLE {#section_fs5_tq4_hfb .section}
 
-MaxCompute非结构化数据框架通过EXTERNAL TABLE的概念来提供MaxCompute与各种数据的联通，与[读取OSS数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md#)的使用方法类似，对OSS数据进行写操作，首先要通过CREATE EXTERNAL TABLE语句创建出一个外部表，而在读取开源数据格式时，创建外表的DDL语句格式如下：
+MaxCompute非结构化数据框架通过EXTERNAL TABLE的概念来提供MaxCompute与各种数据的联通，与[读取OSS数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md#)的使用方法类似，对OSS数据进行写操作，首先要通过CREATE EXTERNAL TABLE语句创建出一个外部表，而在读取开源数据格式时，创建外表的DDL语句格式如下：
 
 ```
 --注意设置相关set语句
@@ -63,9 +63,6 @@ TBLPROPERTIES(
 
 **说明：** MaxCompute基本类型没有unsigned类型。因此这里对unsigned类型的支持存在精度损失，具体分为下面两种情况
 
--   设置 `setproject odps.sql.udf.strict.mode=true;` \(即strict模式默认模式\)
-    -   对于读取外表：若unsigned转为signed没有精度损失，则正常读取数据并转换。若有精度损失，则抛出 RuntimeException \(“value out of range”\)。
-    -   对于写入外表：MaxCompute不做类型检查。用户可以通过设置mysql的 sql\_mode让mysql产生预期的行为。sql\_mode的设置及行为请参见[Server SQL Modes](https://dev.mysql.com/doc/refman/5.7/en/sql-mode.html#sqlmode_no_unsigned_subtraction)。
 -   设置 `setproject odps.sql.udf.strict.mode=false;`\(即 非strict 模式 需要显示设置\)
     -   对于读取外表：若unsigned转为signed 没有精度损失，则正常读取数据并转换。若有精度损失，读取数据为NULL。
     -   对于写入外表：MaxCompute不做类型检查。用户可以通过设置mysql的 sql\_mode让mysql产生预期的行为。

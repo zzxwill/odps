@@ -1,68 +1,68 @@
 # Unstructured data exported to OSS {#concept_wsw_nnb_wdb .concept}
 
-[Accessing OSS unstructured data](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS data.md) shows you how MaxCompute can be accessed and processed by using external tables unstructured data stored in OSS, in fact, the unstructured framework of MaxCompute also supports output of MaxCompute data directly to OSS via insert, MaxCompute also associates OSS with external tables for data output.
+The unstructured framework of MaxCompute supports output of MaxCompute data directly to OSS via insert, MaxCompute also associates OSS with external tables for data output.
 
-Output Data to OSS is typically in two cases:
+[Accessing OSS unstructured data](intl.en-US/User Guide/External table/Accessing OSS unstructured data.md) shows you how MaxCompute can be accessed and processed through the associations of External tables unstructured data stored in OSS.
+
+Output Data to OSS is typically two cases:
 
 -   The MaxCompute internal table is output to the External table that is associated with the OSS.
--   After MaxCompute processes the external tables, the result isoutput directly to the external tables that are associated with the OSS.
+-   After MaxCompute processes the external tables, the results are output directly to the external tables that are associated with the OSS.
 
 Like accessing OSS data, MaxCompute supports output via built-in storagehandler and custom storagehandler.
 
-## Output to OSS via built-in storagehandler {#section_xcn_snb_wdb .section}
+## Output to OSS via built-in StorageHandler {#section_xcn_snb_wdb .section}
 
-Using the built-in storagehandler in MaxCompute And can be very convenient to output data in the agreed format to OSS for storage. You must create an external table that indicates the built-in storagehandler, it can be associated with this table, and the related logic is implemented by the system.
+Using the built-in StorageHandler in MaxCompute And can be very convenient to output data in the agreed format to the OSS for storage. All we need to do is create an external table that indicates the built-in StorageHandler, it can be associated with this table, and the related logic is implemented by the system.
 
-Currently MaxCompute supports 2 built-in storagehandlers:
+Currently MaxCompute supports 2 built-in StorageHandler:
 
--   com.aliyun.odps.CsvStorageHandler , Defines how to read and write CSV format data, data format Conventions: Usea comma \(,\) as a column separator`,` line Break is `\n`.
+-   com.aliyun.odps.CsvStorageHandler , Defines how to read and write CSV format data, data format Conventions: English comma, column separator`,` line Break is `\n`.
 -   com.aliyun.odps.TsvStorageHandler, defines how to read and write CSV format data, data format Conventions: `\t`is a column separator, line Break is `\n`.
 
--   Create external TABLE
+-   Creating an External table
 
     ```
-    CREATE EXTERNAL TABLE [IF NOT EXISTS] &lt;external_table&gt;
-    (&lt;column schemas&gt;)
+    CREATE EXTERNAL TABLE [IF NOT EXISTS] <external_table> 
+    (<column schemas>) 
     [PARTITIONED BY (partition column schemas)]
-    STORED BY '&lt;StorageHandler&gt;'  
-    [WITH SERDEPROPERTIES (  'odps.properties.rolearn'='${roleran}') ]
+     STORED BY '<StorageHandler>' 
+    [WITH SERDEPROPERTIES ( 'odps.properties.rolearn'='${roleran}') ] 
     LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
     
     ```
 
-    -   STORED By, if the data file that is required to be exported to OSS is a TSV file, then built-in `com.aliyun.odps.TsvStorageHandler` if the data file that is required to be exported to OSS is a CSV file, a built-in `com.aliyun.odps.CsvStorageHandler`.
-    -   WITH Serdeproperties, when the associated OSS permission uses custom authorization of STS mode authorization, this parameter must bespecified 'odps.properties.rolearn 'property, attribute value is Ram Information about the specific use of custom role arns in.
+    -   STORED By, if the data file that is required to be exported to OSS is a TSV file, then built-in `com.aliyun.odps.TsvStorageHandler`； if the data file that is required to be exported to OSS is a CSV file, a built-in `com.aliyun.odps.CsvStorageHandler`.
+    -   WITH SERDEPROPERTIES, when associating OSS privileges with "Custom Authorization" of "STS Mode Authorization", this parameter needs to specify the'odps.properties.rolearn'attribute, whose value is the information of the Custom Role specifically used in RAM.
 
-        **Note:** For more information about STS mode authorization, see [accessing the unstructured data of OSS](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS data.md).
+        **Note:** STS mode authorization can be seen in [Accessing the unstructured data of OSS](intl.en-US/User Guide/External table/Accessing OSS unstructured data.md).
 
-    -   Location that specifies the path to the file that corresponds to the OSS storage. If the'odps.properties.rolearn'attribute is not set in WITH SERDEPROPERTIESand the authorization is in plaintext AK, the LOCATIONis
+    -   Location that specifies the path to the file that corresponds to the OSS storage. If the 'odps.properties.rolearn' attribute is not set in WITH SERDEPROPERTIES and the plaintext AK is used for authorization, then LOCATION is
 
         ```
-        Location
+        LOCATION
             'oss://${accessKeyId}:${accessKeySecret}@${endpoint}/${bucket}/${userPath}/'
         ```
 
--   Data output to OSS through insert operation on External table
+-   The data is output to OSS through the INSERT operation of External Table.
 
-    **Note:** The size of a single file from insert to OSS can not exceed 5G.
+    **Note:** The insert-to-OSS single file size cannot exceed 5g.
 
-    When an external After table is associated with an OSS storage path, it is possible to do a standard SQL insert override/insert on an external table, the into operation can both output data to OSS.
+    When associated with an OSS storage path via external table,you can do a standard SQL INSERT OVERWRITE/INSERT INTO operation on the External table to output both data to OSS.
 
     ```
-    INSERT OVERWRITE|INTO TABLE &lt;external_tablename&gt; [PARTITION (partcol1=val1, partcol2=val2 ...)]
+    INSERT OVERWRITE|INTO TABLE <external_tablename> [PARTITION (partcol1=val1, partcol2=val2 ...)]
     select_statement
-    FROM &lt;from_tablename&gt; 
+    FROM <from_tablename> 
     [WHERE where_condition];
     
     ```
 
-    -   from\_tablename: It can be both an internal table or an external table \(including an external table for the associated OSS or OTs \).
+    -   from\_tablename: it can be an internal table, it can also be an external table \(including an external table for the associated OSS or OTS \).
+    -   INSERT specifies the format of 'StorageHandler'\(that is, TSV or CSV\) according to the External table 'stored '\) write to OSS.
+    When the INSERT operation is completed successfully, you can see that the corresponding LOCATION on the OSS produces a series of files.
 
-    -   Insert will be specified according to External table 'stored' the format of 'storagehandler' \(that is, TSV or CSV\) is written to OSA.
-
-    When the insert operation is completed successfully, you can see that the corresponding location on the OSS produces a series of files.
-
-    Example: External table the corresponding location is oss://oss-cn-hangzhou-zmf.aliyuncs.com/oss-odps-test/tsv\_output\_folder/Then, you can see the generation of a series of files in the OSS corresponding path:
+    For example: the location corresponding to External table is the oss://oss-cn-hangzhou-zmf.aliyuncs.com/oss-odps-test/tsv\_output\_folder/, you can see the generation of a series of files in the OSS corresponding path:
 
     ```
     osscmd ls oss://oss-odps-test/tsv_output_folder/
@@ -73,29 +73,29 @@ Currently MaxCompute supports 2 built-in storagehandlers:
     ...
     ```
 
-    You can see, through the oss-odps-test specified in the previous location, this OSS A 'was generated under the maid folder under the bucket '.odps 'folder, which will have some '. tsv' file, and '. meta 'file. Similar file structures are specific to MaxCompute's output to OSS:
+    The folder tsv\_output\_folder under the OSS bucket oss-odps-test specified by LOCATION contains the .odps folder which includes some .tsv files and a .meta file. Similar file structures are specific to MaxCompute's output to OSS:
 
-    -   USE insert into/Overwrite for an OSS address via MaxCompute The External table will do the output operation, all data will be under the specified location '. the ODPS 'folder is generated.
-    -   The .meta file in the .odps folder is an extra macro data file written by MaxCompute to record the valid data in the current folder. Typically, if the INSERT operation is successful, all the data in the current folder is valid. The macro data only needs to be parsed when a job fails. For insert, even if the job fails in the middle or is killed. The overwrite operation will run one more success.
+    -   When you use MaxCompute to execute INSERT INTO/OVERWRITE on an external table and write to an OSS address, all of the data is writen to a .odps folder in the specified LOCATION.
+    -   The .meta file in the .odps folder is an extra macro data file written by MaxCompute to record the valid data in the current folder. Typically, if the INSERT operation is successful, all the data in the current folder is valid. The macro data only needs to be parsed when a job fails. If an operation fails midway or is killed, you can simply re-execute the INSERT OVERWRITE statement.
     -   If it is a partition table, A corresponding partition sub-directory is generated based on the partition value specified by the insert statement under the fig folder and then the partition sub-directory inside is '.odps 'folder. For example, `test/tsv_output_folder/first-level partition name = partition value/.odps/20170113224724561g9m6csz7/M1_2_0-0.tsv`.
-    For the TSV/CSV storagehandler processing built in by MaxCompute, the number of files generated is corresponding to the corresponding SQL Stage has the same degree of concurrency.
+    For the TSV/CSV storagehandler processing built in by MaxCompute, the number of files generated is corresponding to the corresponding SQL
 
-    If `INSER OVERWITE ... Select... From ... ;`The operation of the source data table \(FIG\) There are 1000 mapper allocated on, and a total of 1000 TSV/CSV files will be generated.
+    If the `INSER OVERWITE ... SELECT ... FROM ... ;`operation allocates 1000 mappers on the source data table \(from\_tablename\), 1000 TSV/CSV files will be generated.
 
 
 ## Output to OSS via custom storagehandler {#section_tbq_44b_wdb .section}
 
-In addition to using the built-in storagehandler to implement the output TSV/CSV common text format on the OSS, the MaxCompute unstructured framework provides a general-purpose SDK that supports external output of custom data format files.
+In addition to using the built-in StorageHandler to implement the output TSV/CSV common text format on the OSS, the MaxCompute unstructured framework provides a general-purpose SDK that supports external output of custom data format files.
 
-As well as the built-in storagehandler, you need to "Create an External table" before "passing an insert on an external table" The operation implements the output of data to OSS ". The difference is that when creating an external table, stored by is a storagehandler that needs to be specified as a custom.
+As well as the built-in StorageHandler, you need to "Create an External TABLE" And then output data to OSS through INSERT operation of External Table. The difference is that when creating external tables, STORED BY is required to specify custom StorageHandler.
 
-**Note:** The MaxCompute unstructured framework describes the processing of a variety of data storage formats through an interface called storagehandler. Specifically, the storagehandler acts as a Wrapper class, lets you specify a custom expractor \(for Data Reading, parsing, processing, etc\) And outputer \(for data processing and output, etc \). Custom storagehandler should inherit To implement the interface and the interface.
+**Note:** The MaxCompute unstructured framework describes the processing of varieties of data storage formats through an interface called StorageHandler. Specifically, the StorageHandler acts as a Wrapper class, allowing you to specify a custom Exatractor\(for data reading, parsing, processing, etc\) And Outputer\(for data processing and output, etc \). Custom StorageHandler should inherit Odps StorageHandler and implement getExtractorClass and getOutputerClass interfaces.
 
-Next we use custom Extractor [access in accessing OSS unstructured data](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS data.md) to show how MaxComputer can customize StorageHandler Output the data to the TXT file of the OSS, with '|' as the column separator, take '\\ n' as a line break.
+Next, we use the example of [Access OSS data](intl.en-US/User Guide/External table/Accessing OSS unstructured data.md). OSS unstructured data of "Custom Extractor accesses OSS", to show how MaxCompute can output data to OSS txt file by customizing StorageHandler, and use'|'as column delimiter and'\\ n' as line breaker.
 
-**Note:** [MaxCompute After the studio](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/What is Studio.md)is configured with [MaxCompute Java module](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Create MaxCompute Java Module.md), you can see the corresponding sample code in examples. Or click [here](https://github.com/aliyun/aliyun-odps-java-sdk/tree/master/odps-sdk-impl/odps-udf-example/src/main/java/com/aliyun/odps/udf/example/text) to see the complete code.
+**Note:** [After the MaxCompute Studio](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/What is Studio.md)is configured with [MaxCompute Java module](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/Developing Java/Create MaxCompute Java Module.md), you can see the corresponding sample code in examples. Or click [here](https://github.com/aliyun/aliyun-odps-java-sdk/tree/master/odps-sdk-impl/odps-udf-example/src/main/java/com/aliyun/odps/udf/example/text) to see the complete code.
 
--   **Define outputer**
+-   Define Outputer
 
     Both output logic must implement the outputer interface:
 
@@ -150,11 +150,11 @@ Next we use custom Extractor [access in accessing OSS unstructured data](intl.en
     }
     ```
 
-    There are three outputer interfaces: setup, Output and close, which are essentially Symmetric With the extractor's three interfaces, setup, extract, and close. Where setup \(\) and close \(\) are called only once in an outputer. You can do initialization preparation work in setup, And you usually need to put setup \(\) the three parameters passed in are saved as class variable for ouputerd, Used in the output \(\) or close \(\) interface after convenience. The interface, close \(\), is used to sweep the end of the Code.
+    All output logic must call the Outputer API. There are three outputer APIs \(setup, output, and close\) which all correspond to the three extractor APIs \(setup, extract, and close\). Where setup\(\) and close\(\) are called only once in an outputer. The user may perform initialization preparation in setup. Furthermore, the three parameters returned by setup\(\) must be saved as outputer class variables to be used in the output\(\) or close\(\) APIs. The interface, close \(\), is used to sweep the end of the Code.
 
-    Typically, most of the data processing occurs in the output \(record\) interface. The MaxCompute system calls output \(record\) Once based on each input record processed by the current outputer assignment \). Assuming that when an output \(record\) call returns, the Code has already consumed the record, So after the current output \(record\) returns, the system uses the memory used by the record for it, so when the information in record is used across multiple output \(\) function calls, the record for the current process needs to be invoked. clone \(\) method to save the current record.
+    Typically, most of the data processing occurs in the output \(Record\) interface. The MaxCompute system calls output \(Record\) Once based on each input record processed by the current outputer assignment \). Assuming that when an output \(Record\) call returns, the Code has already consumed the Record, so after the current output \(Record\) returns, the system uses the memory used by the record for it, so when the information in Record is used across multiple output\(\) function calls, the record for the current process needs to be invoked.clone\(\) method to save the current record.
 
--   **Define Extractor**
+-   Define Extractor
 
     Exatrractor is used for Data Reading, parsing, processing, and so on, if the output tables eventually do not need to be read by MaxCompute and so on, you do not need to define them.
 
@@ -172,7 +172,7 @@ Next we use custom Extractor [access in accessing OSS unstructured data](intl.en
     import java.io.InputStream;
     import java.io.InputStreamReader;
     /**
-     Text extractor that extract schematized records from formatted plain-text(csv, tsv etc.)
+     * Text extractor that extract schematized records from formatted plain-text(csv, tsv etc.)
      **/
     public class TextExtractor extends Extractor {
         private InputStreamSet inputs;
@@ -214,7 +214,7 @@ Next we use custom Extractor [access in accessing OSS unstructured data](intl.en
         {
             Column[] outputColumns = this.attributes.getRecordColumns();
             ArrayRecord record = new ArrayRecord(outputColumns);
-            if (this.attributes.getRecordColumns().length ! = 0){
+            if (this.attributes.getRecordColumns().length ! = 0 ){
                 // string copies are needed, not the most efficient one, but suffice as an example here
                 String[] parts = line.split(columnDelimiter);
                 int[] outputIndexes = this.attributes.getNeededIndexes();
@@ -226,9 +226,9 @@ Next we use custom Extractor [access in accessing OSS unstructured data](intl.en
                             + outputColumns.length + " columns but get " + parts.length);
                 }
                 int index = 0;
-                for(int i = 0; i < parts.length; i++){
+                for(int i = 0; i &lt; parts.length; i++){
                     // only parse data in columns indexed by output indexes
-                    if (index < outputIndexes.length && i == outputIndexes[index]){
+                    if (index &lt; outputIndexes.length && i == outputIndexes[index]){
                         switch (outputColumns[index].getType()) {
                             case STRING:
                                 record.setString(index, parts[i]);
@@ -290,9 +290,9 @@ Next we use custom Extractor [access in accessing OSS unstructured data](intl.en
     }
     ```
 
-    For more information, see[accessing the OSS unstructured data](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS data.md) documentation.
+    For more information, see [Accessing the OSS unstructured data](intl.en-US/User Guide/External table/Accessing OSS unstructured data.md) documentation.
 
--   **Define StorageHandler**
+-   Define StorageHandler
 
     ```
     package com.aliyun.odps.examples.unstructured.text;
@@ -305,25 +305,25 @@ Next we use custom Extractor [access in accessing OSS unstructured data](intl.en
             return TextExtractor.class;
         }
         @Override
-        public Class&lt;? extends Outputer&gt;getOutputerClass() {
+        public Class&lt;? extends Outputer> getOutputerClass() {
             return TextOutputer.class;
         }
     }
     ```
 
-    If the table does not need to be read, you do not need to specify an extractor interface.
+    If the table does not need to be read, you do not need to specify an Extractor interface.
 
--   **Compile and package**
+-   Compile and package
 
-    Package custom code compilation and act as a jar The resource is uploaded to MaxCompute. If the jar package is named 'odps-TextStorageHandler.jar', upload to MaxCompute The resource is as follows:
+    Compile your custom code into a package and upload it to MaxCompute. If the jar package is named 'odps-TextStorageHandler.jar', upload to MaxCompute
 
     ```
     add jar odps-TextStorageHandler.jar;
     ```
 
--   **Creating External tables**
+-   Creating External tables
 
-    Like using the built-in storagehandler, an External table needs to be created, the difference is that this time you need to specify that the data is output to an external table, using a custom storagehandler.
+    Like using the built-in StorageHandler, an External table needs to be created, the difference is that this time you need to specify that the data is output to an external table, using a custom StorageHandler.
 
     ```
     CREATE EXTERNAL TABLE IF NOT EXISTS output_data_txt_external
@@ -340,25 +340,25 @@ Next we use custom Extractor [access in accessing OSS unstructured data](intl.en
     STORED BY 'com.aliyun.odps.examples.unstructured.text.TextStorageHandler' 
     WITH SERDEPROPERTIES(
         'delimiter'='|'
-        [, 'ODPS. properties. rolearn' = '$ {roleran}'])
+        [,'odps.properties.rolearn'='${roleran}'])
     LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/'
     USING 'odps-TextStorageHandler.jar';
     ```
 
-    **Note:** If you need 'odps.properties.rolearn'property, for more information, see **custom authorization** for STs mode authorization to[access the OSS unstructured data](intl.en-US/User Guide/Handle-Unstructured-data/Access OSS data.md). If not, you can refer to **one-click authorization** or use clear-text AK on top of location.
+    **Note:** If you need `odps.properties.rolearn` property, for more information, see custom authorization for STS mode authorization of [Access the OSS unstructured data](intl.en-US/User Guide/External table/Accessing OSS unstructured data.md). If not, you can refer to one-click authorization or use clear-text AK on top of location.
 
--   **Write unstructured files into External Table using INSERT**
+-   Write unstructured files into External Table using INSERT
 
-    Creating external with custom storagehandler After table is associated with an OSS storage path, it is possible to do a standard SQL insert override/insert on an external table The into operation can both output data to OSS in the same manner as the built-in storagehandler:
+    After creating an external table Association on the OSS storage path by customizing the storagehandler, you can do a standard SQL insert override/insert into operation on the External table to output both data to OSS, in the same way as the built-in storagehandler:
 
     ```
-    INSERT OVERWRITE|INTO TABLE &lt;external_tablename> [PARTITION (partcol1=val1, partcol2=val2 ...)]
+    INSERT OVERWRITE|INTO TABLE &lt;external_tablename&gt; [PARTITION (partcol1=val1, partcol2=val2 ...)]
     Select_statement
-    FROM &lt;from_tablename&gt'; 
+    FROM &lt;from_tablename&gt; 
     [WHERE where_condition];
     
     ```
 
-    When the insert operation is successful, it is the same as the built-in storagehandler, you can see a series of files generated in the OSS corresponding location path '.odps 'folder.
+    When the insert operation is successful,as the built-in StorageHandler, you can see a series of files generated in the OSS corresponding LOCATION path .odps folder.
 
 

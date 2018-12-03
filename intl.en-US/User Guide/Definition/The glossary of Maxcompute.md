@@ -91,7 +91,7 @@ This article lists the common concepts and terminologies of MaxCompute. For deta
 
 -   SDK
 
-    Software Development Kits. Generally, it is a collection of development tools used by software engineers to build application software for specific software packages, software instances, software frameworks, hardware platforms, operating systems, document packages, etc. MaxCompute currently supports [Java SDK](../../../../reseller.en-US/SDK Reference /Java SDK.md#)and Python SDK.
+    Software Development Kits. Generally, it is a collection of development tools used by software engineers to build application software for specific software packages, software instances, software frameworks, hardware platforms, operating systems, document packages, etc. MaxCompute currently supports [Java SDK](../../../../reseller.en-US/SDK Reference /Java SDK.md#) and Python SDK.
 
 -   Authorization
 

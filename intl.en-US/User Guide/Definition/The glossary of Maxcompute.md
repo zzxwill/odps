@@ -10,7 +10,7 @@ This article lists the common concepts and terminologies of MaxCompute. For deta
 
 -   Security
 
-    MaxCompute multi-tenant data security system mainly includes user authentication, user and authorization management in project space, resource sharing across project space and data protection in project space. For more details on MaxCompute security operation, see[Safety Guide](../../../../reseller.en-US/User Guide/Security/Target users.md#).
+    MaxCompute multi-tenant data security system mainly includes user authentication, user and authorization management in project space, resource sharing across project space and data protection in project space. For more details on MaxCompute security operation, see [Safety Guide](../../../../reseller.en-US/User Guide/Security/Target users.md#).
 
 
 ## C {#section_rhc_vxv_tdb .section}
@@ -32,7 +32,7 @@ This article lists the common concepts and terminologies of MaxCompute. For deta
 
 -   DML
 
-    Data Manipulation Language. For example, INSERT operations, MaxCompute DML syntax， please see [Insert Operation](../../../../reseller.en-US/User Guide/SQL/Insert Operation/INSERT OVERWRITE__INTO.md#) .
+    Data Manipulation Language. For example, INSERT operations, MaxCompute DML syntax, please see [Insert Operation](../../../../reseller.en-US/User Guide/SQL/Insert Operation/INSERT OVERWRITE__INTO.md#) .
 
 
 ## F {#section_ptd_vxv_tdb .section}
@@ -69,29 +69,29 @@ This article lists the common concepts and terminologies of MaxCompute. For deta
 
 -   Partition \(partition\)
 
-    Partition partition refers to a table, based on the partition field \(one or more combinations\) divide the data store. That is, if the table does not have a partition, the data is placed directly under the directory where the table is located. If a table has a partition, each partition corresponds to one of the directories in the table, the data is stored separately in a different partition directory. For more information about partitions, see[Basic Concepts\>Partitions](../../../../reseller.en-US/User Guide/Definition/Partition.md#).
+    Partition partition refers to a table, based on the partition field \(one or more combinations\) divide the data store. That is, if the table does not have a partition, the data is placed directly under the directory where the table is located. If a table has a partition, each partition corresponds to one of the directories in the table, the data is stored separately in a different partition directory. For more information about partitions, see [Basic Concepts\>Partitions](../../../../reseller.en-US/User Guide/Definition/Partition.md#).
 
 -   Project \(Project\)
 
-    Project is the basic organizational unit of MaxCompute. It is similar to the concept of database or Scheme in traditional database, and is the main boundary of multi-user isolation and access control. For details, please see[Basic Concepts\>Project](../../../../reseller.en-US/User Guide/Definition/Projects.md#) .
+    Project is the basic organizational unit of MaxCompute. It is similar to the concept of database or Scheme in traditional database, and is the main boundary of multi-user isolation and access control. For details, please see [Basic Concepts\>Project](../../../../reseller.en-US/User Guide/Definition/Projects.md#) .
 
 
 ## R {#section_tp2_vxv_tdb .section}
 
 -   Role \(role\)
 
-    Roles are concepts used in MaxCompute security functions and can be seen as a collection of users with the same privileges. Multiple users can appear at one role at the same time, and a user can also belong to multiple roles. After all roles are authorized, all users under the role have the same permissions. For more information about role management, please see[User's guide\>Role management](../../../../reseller.en-US/User Guide/Security/Role management.md#) .
+    Roles are concepts used in MaxCompute security functions and can be seen as a collection of users with the same privileges. Multiple users can appear at one role at the same time, and a user can also belong to multiple roles. After all roles are authorized, all users under the role have the same permissions. For more information about role management, please see [User's guide\>Role management](../../../../reseller.en-US/User Guide/Security/Role management.md#) .
 
 -   Resource \(resources\)
 
-    Resource \(Resource\) is a unique concept in MaxCompute. If you want to use MaxCompute's custom function \(UDF\) or MapReduce function, you need to rely on resources to complete it. For details, please see[Basic Concepts\>Resource](../../../../reseller.en-US/User Guide/Definition/Resource.md#).
+    Resource \(Resource\) is a unique concept in MaxCompute. If you want to use MaxCompute's custom function \(UDF\) or MapReduce function, you need to rely on resources to complete it. For details, please see [Basic Concepts\>Resource](../../../../reseller.en-US/User Guide/Definition/Resource.md#).
 
 
 ## S {#section_n3h_vxv_tdb .section}
 
 -   SDK
 
-    Software Development Kits software developmentSoftware Development Kits software development kit. Generally, it is a collection of development tools used by software engineers to build application software for specific software packages, software instances, software frameworks, hardware platforms, operating systems, document packages, etc. MaxCompute currently supports[Java SDK](../../../../reseller.en-US/SDK Reference /Java SDK.md#)and [../../../../dita-oss-bucket/SP\_76/DNodps1830562/EN-US\_TP\_12065.md\#](../../../../reseller.en-US/SDK Reference /Python SDK.md#).
+    Software Development Kits. Generally, it is a collection of development tools used by software engineers to build application software for specific software packages, software instances, software frameworks, hardware platforms, operating systems, document packages, etc. MaxCompute currently supports [Java SDK](../../../../reseller.en-US/SDK Reference /Java SDK.md#)and [../../../../dita-oss-bucket/SP\_76/DNodps1830562/EN-US\_TP\_12065.md\#](../../../../reseller.en-US/SDK Reference /Python SDK.md#).
 
 -   Authorization
 
@@ -117,16 +117,16 @@ This article lists the common concepts and terminologies of MaxCompute. For deta
 
 -   UDF
 
-    Generalized UDF, user defined Function, the Java programming interface provided by MaxCompute develops custom functions, for more information, refer to the [User 's guide\>UDF](../../../../reseller.en-US/User Guide/SQL/UDF/UDF Summary.md#).
+    Generalized UDF, user defined Function, the Java programming interface provided by MaxCompute develops custom functions, for more information, refer to [User 's guide\>UDF](../../../../reseller.en-US/User Guide/SQL/UDF/UDF Summary.md#).
 
     In a narrow sense, UDF refers to user-defined scalar function, whose input and output are one-to-one, that is, reading in a row of data and writing out an output value.
 
 -   UDAF
 
-    User Defined Aggregation Function, Custom aggregation function, whose input and output are many-to-one, aggregates multiple input records into one output value. It can be combined with the Group By statement in SQL. For details, please see[Java UDF\>UDAF](../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md#).
+    User Defined Aggregation Function, Custom aggregation function, whose input and output are many-to-one, aggregates multiple input records into one output value. It can be combined with the Group By statement in SQL. For details, please see [Java UDF\>UDAF](../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md#).
 
 -   UDTF
 
-    User Defined Table Valued Function,customictablevaluedFunction, the userDefinedTablevaluedFunction, the customictablevaluedFunction, the function of the function called to the function, the set to the the function to the function, the function to the set to the value to the returned the function, the the function of the function of the the function of the function call to the value of the[Java UDF\>UDAF](../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md#).
+    User Defined Table Valued Function,customictablevaluedFunction, the userDefinedTablevaluedFunction, the customictablevaluedFunction, the function of the function called to the function, the set to the the function to the function, the function to the set to the value to the returned the function, the the function of the function of the the function of the function call to the value of the [Java UDF\>UDAF](../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md#).
 
 

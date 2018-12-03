@@ -1,12 +1,14 @@
 # OSS的STS模式授权 {#concept_ln3_c4v_ydb .concept}
 
-创建外部表时Location访问OSS的账号支持传入明文AccessKeyId和AccessKeySecret，但这样做有泄露账号的风险。在某些场景下，这种风险是不可容忍的，因此MaxCompute提供了更为安全的方式来访问OSS。
+本文向您在介绍如何在RAM中自定义授权MaxCompute访问OSS的权限。
+
+创建外部表时Location访问OSS的账号支持传入明文`AccessKeyId`和`AccessKeySecret`，但这样做有泄露账号的风险。在某些场景下，这种风险是不可容忍的，因此MaxCompute提供了更为安全的方式来访问OSS。
 
 MaxCompute结合了阿里云的访问控制服务（RAM）和令牌服务（STS）来解决账号的安全问题。您可通过以下两种方式授予权限：
 
 -   当MaxCompute和OSS的owner是同一个账号时 ，可以直接在RAM控制台进行一键授权操作。
 -   自定义授权。
-    1.  首先需要在RAM中授权MaxCompute访问OSS的权限。创建角色，角色名如AliyunODPSDefaultRole或AliyunODPSRoleForOtherUser，并将策略内容设置为：
+    1.  首先需要在RAM中授权MaxCompute访问OSS的权限。创建角色，角色名如`AliyunODPSDefaultRole`或`AliyunODPSRoleForOtherUser`，并将策略内容设置为：
 
         ```
         --当MaxCompute和OSS的Owner是同一个账号
@@ -41,7 +43,7 @@ MaxCompute结合了阿里云的访问控制服务（RAM）和令牌服务（STS�
         }
         ```
 
-    2.  授予角色访问OSS必要的权限 AliyunODPSRolePolicy 。如下所示：
+    2.  授予角色访问OSS必要的权限AliyunODPSRolePolicy 。如下所示：
 
         ```
         {

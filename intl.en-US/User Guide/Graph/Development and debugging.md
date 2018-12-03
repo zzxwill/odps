@@ -7,18 +7,18 @@ MaxCompute does not provide Graph development plugins for users. However, you ca
 
 ## Example {#section_zvq_z4m_vdb .section}
 
-This section uses the [SSSP](reseller.en-US/User Guide/Graph/Examples/SSSP.md) algorithm as an example to describe how to use  Eclipse to develop and debug a Graph program.
+This section uses the [SSSP](reseller.en-US/User Guide/Graph/Examples/SSSP.md) algorithm as an example to describe how to use Eclipse to develop and debug a Graph program.
 
 **Procedure**
 
 1.  Create a Java project, for example, graph\_examples.
-2.  Add the JAR package in the lib directory of the MaxCompute client to Build Path of the Eclipse project.  The following figure shows a configured Eclipse project:
+2.  Add the JAR package in the lib directory of the MaxCompute client to Build Path of the Eclipse project. The following figure shows a configured Eclipse project:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12048/15355057172233_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12048/15438344202233_en-US.png)
 
 3.  Develop a MaxCompute Graph program.
 
-    In the actual development process, an example \(such as [SSSP](reseller.en-US/User Guide/Graph/Examples/SSSP.md)\) is often copied and then modified.  In this example, only the  package path is changed to package com.aliyun.odps.graph.example.
+    In the actual development process, an example \(such as [SSSP](reseller.en-US/User Guide/Graph/Examples/SSSP.md)\) is often copied and then modified. In this example, only the  package path is changed to package com.aliyun.odps.graph.example.
 
 4.  Compile and build the package.
 
@@ -28,7 +28,7 @@ This section uses the [SSSP](reseller.en-US/User Guide/Graph/Examples/SSSP.md) a
 
 **Note:** For more information about the related development procedure, see Introduction on the [Graph development plug-in](https://www.alibabacloud.com/help/zh/doc-detail/27985.html)*.*
 
-## Local Debugging {#section_dll_yqm_vdb .section}
+## Local debugging {#section_dll_yqm_vdb .section}
 
 MaxCompute Graph supports the local debugging mode. Use Eclipse to perform breakpoint debugging.
 
@@ -48,7 +48,7 @@ MaxCompute Graph supports the local debugging mode. Use Eclipse to perform break
     
     ```
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12048/15355057172234_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12048/15438344212234_en-US.png)
 
 5.  If MapReduce is in local mode \(the value of odps.end.point is not specified\), you must create the sssp\_in and sssp\_out tables in the warehouse and add data for  sssp\_in.  Input data is listed as follows:
 
@@ -85,14 +85,14 @@ MaxCompute Graph supports the local debugging mode. Use Eclipse to perform break
      graph task finish
     ```
 
-    **Note:** In the preceding example, the sssp\_in and sssp\_out tables must exist in the local warehouse. For more information about the sssp\_in and  sssp\_out tables, see [Run Graph](https://help.aliyun.com/document_detail/27813.html) in “Quick start”.
+    **Note:** In the preceding example, the sssp\_in and sssp\_out tables must exist in the local warehouse. For more information about the sssp\_in and  sssp\_out tables, see [Run Graph](https://www.alibabacloud.com/help/doc-detail/27813.htm) in “Quick start”.
 
 
 ## Temporary directory of local job {#section_ijb_rrm_vdb .section}
 
 A temporary directory is created in the Eclipse project directory when local debugging runs each time, as shown in the following figure.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12048/15355057172235_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12048/15438344212235_en-US.png)
 
 The temporary directory of a locally running Graph job contains the following directories and files:
 
@@ -105,7 +105,7 @@ The temporary directory of a locally running Graph job contains the following di
 
 **Note:** If a detailed log must be output during local debugging, the following log4j configuration file must be placed in the src directory: `log4j.properties_odps_graph_cluster_debug`.
 
-## Cluster Debugging {#section_mfh_zrm_vdb .section}
+## Cluster debugging {#section_mfh_zrm_vdb .section}
 
 After local debugging, submit the job to a cluster for testing. 
 
@@ -121,7 +121,7 @@ After local debugging, submit the job to a cluster for testing. 
 
 The following section describes common performance tuning methods on the MaxCompute Graph framework.
 
-**Job Parameter Configuration**
+**Job Parameter configuration**
 
 GraphJob configurations that have an impact on performance include:
 

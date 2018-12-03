@@ -2,9 +2,9 @@
 
 This article will show you how to process various popular open source data formats \(ORC, PARQUET, SEQUENCEFILE, RCFILE, AVRO and TEXTFILE\) stored on OSS through unstructured frameworks in MaxCompute.
 
-[Accessing the OSS unstructured data](intl.en-US/User Guide/External table/Accessing OSS unstructured data.md) shows you how to access the text stored on the OSS on MaxCompute, audio, image, and other format data. The non-structural framework directly calls the implementation of the open source community to parse the open source data format, and seamlessly with the MaxCompute system.
+[Accessing the OSS unstructured data](reseller.en-US/User Guide/External table/Access OSS unstructured data.md) shows you how to access the text stored on the OSS on MaxCompute, audio, image, and other format data. The non-structural framework directly calls the implementation of the open source community to parse the open source data format, and seamlessly with the MaxCompute system.
 
-**Note:** Before processing the Open Source format data for OSS, it is necessary to authorize [STS mode for OSS](intl.en-US/User Guide/External table/OSS STS mode authorization.md).
+**Note:** Before processing the Open Source format data for OSS, it is necessary to authorize [STS mode for OSS](reseller.en-US/User Guide/External table/OSS STS mode authorization.md).
 
 ## Create External Table {#section_bxs_hsv_ydb .section}
 
@@ -30,7 +30,7 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
 
 -   The column schemas of the external tables must match the schema where the stored data is stored on the specific OSS.
 -   ROW FORMAT SERDE option is not required, and is only available in a number of special formats, for example, textfile needs to be used.
--   When WITH SERDEPROPERTIES associates OSS privileges with [STS mode authorization](intl.en-US/User Guide/External table/OSS STS mode authorization.md), this parameter is required to specify the odps.properties.rolearn attribute, whose value is the Role Arn information specifically used in RAM.
+-   When WITH SERDEPROPERTIES associates OSS privileges with [STS mode authorization](reseller.en-US/User Guide/External table/OSS STS mode authorization.md), this parameter is required to specify the odps.properties.rolearn attribute, whose value is the Role Arn information specifically used in RAM.
 
     If you do not use STS mode, you do not need to specify this property to pass in the clear text `AccessKeyId` and the `AccessKeySecret` directly at location.
 
@@ -267,7 +267,7 @@ Compare the two external representations created in the previous article, you ca
 
     **Note:** Direct use of the external table, each time reading data requires I/O operations involving external OSS, and the MaxCompute system itself does not use many high-performance optimizations for internal storage, so there will be a loss in performance. Therefore, if it is a scenario that requires repeated computation of data and is sensitive to the efficiency of computation, it is recommended to use the following usage: first import the data into MaxCompute and then calculate it.
 
-    These complex data types are involved in SQL \(create, select, insert, etc.\). The statement `set odps. sql. type. system. odps2 = true;` should be added before the SQL statement, and the set statement and the SQL statement should be submitted together for execution at execution time. See for details [Data types](../../../../intl.en-US/User Guide/Definition/Data types.md#).
+    These complex data types are involved in SQL \(create, select, insert, etc.\). The statement `set odps. sql. type. system. odps2 = true;` should be added before the SQL statement, and the set statement and the SQL statement should be submitted together for execution at execution time. See for details [Data types](../../../../reseller.en-US/User Guide/Definition/Data types.md#).
 
 -   Importing the open source data from OSS into MaxCompute for Calculation
 

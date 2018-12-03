@@ -26,15 +26,15 @@ SQL Workbench/J is a widely used free and cross-platform SQL query tool. This to
 
     Select the PostgreSQL driver, connect SQL Workbench/J to the MaxCompute Lightning URL of a project. You must enter the Access Key ID and Access Key Secret of the user.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812964911161_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/154384580111161_en-US.jpg)
 
     Alternatively, you can click Extended Properties and set ssl to true in the displayed dialog box.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812964911162_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/154384580111162_en-US.jpg)
 
 3.  After SQL Workbench/J is connected to MaxCompute Lightning, you can view, query, and analyze the table data in the SQL Workbench/J workspace.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812964911163_en-US.jpg)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/154384580111163_en-US.jpg)
 
 
 ## psql {#section_fs1_kvk_z2b .section}
@@ -44,21 +44,21 @@ The psql is a PostgreSQL interactive terminal that enables you to perform querie
 You can connect psql to MaxCompute Lightning using psql commands. The syntax for the connection is the same as that for the connection to the PostgreSQL database.
 
 ```
-psql -h &lt;endpoint> -U &lt;userid> -d &lt;databasename> -p &lt;port>
+psql -h <endpoint> -U <userid> -d <databasename> -p <port>
 ```
 
 Parameter description:
 
--   &lt;endpoint\>: The endpoint of MaxCompute Lightning. For more information, see [Access domain name](reseller.en-US/User Guide/Lightning/Access domain name.md#).
--   &lt;userid\>: Access Key ID.
--   &lt;databasename\>: MaxCompute project name.
--   &lt;port\>: 443
+-   <endpoint\>: The endpoint of MaxCompute Lightning. For more information, see [Access domain name](reseller.en-US/User Guide/Lightning/Access domain name.md#).
+-   <userid\>: Access Key ID.
+-   <databasename\>: MaxCompute project name.
+-   <port\>: 443
 
-After the command is executed, enter the &lt;userid\> password \(Access Key Secret\) in the command prompt.
+After the command is executed, enter the <userid\> password \(Access Key Secret\) in the command prompt.
 
 Example:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/153812965011164_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20126/154384580111164_en-US.jpg)
 
 **Note:** SSL connections are preferred for psql by default.
 
@@ -116,7 +116,7 @@ After logging on to Tableau Desktop, you can create charts for visual analysis.
     |:--------|:----------|
     |Database|Postgre|
     |Driver|org.postgresql.Driver that is integrated in FineReport|
-    |URL| `jdbc:postgresql://&lt;MaxCompute Lightning Endpoint>:443/&lt;Project_Name>? ssl=true&amp;prepareThreshold=0`
+    |URL| `jdbc:postgresql://<MaxCompute Lightning Endpoint>:443/<Project_Name>? ssl=true&amp;prepareThreshold=0`
 
  For example, `jdbc:postgresql://lightning.cn-shanghai.maxcompute.aliyun.com:443/lightning_demo? ssl=true&amp;prepareThreshold=0`
 

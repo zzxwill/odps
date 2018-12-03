@@ -2,7 +2,7 @@
 
 MaxCompute的非结构化框架支持通过insert方式将MaxCompute的数据直接输出到OSS，MaxCompute也是通过外部表关联OSS，进行数据输出。
 
-[访问OSS非结构化数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)为您介绍了MaxCompute如何通过外部表的关联进行访问并处理存储在OSS的非结构化数据。
+[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)为您介绍了MaxCompute如何通过外部表的关联进行访问并处理存储在OSS的非结构化数据。
 
 输出数据到OSS通常是两种情况：
 
@@ -35,7 +35,7 @@ MaxCompute的非结构化框架支持通过insert方式将MaxCompute的数据直
     -   STORED BY，如果需求输出到OSS上的数据文件是TSV文件，则用内置`com.aliyun.odps.TsvStorageHandler`；如果需求输出到OSS上的数据文件是CSV文件，则用内置`com.aliyun.odps.CsvStorageHandler`。
     -   WITH SERDEPROPERTIES，当关联OSS权限使用“STS模式授权”的“自定义授权”时，需要该参数指定’odps.properties.rolearn’属性，属性值为RAM 中具体使用的自定义role的Arn的信息。
 
-        **说明：** STS模式授权可参看《[访问OSS非结构化数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)》中的对应内容。
+        **说明：** STS模式授权可参看《[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)》中的对应内容。
 
     -   LOCATION，指定对应OSS存储的文件路径。若WITH SERDEPROPERTIES中不设置’odps.properties.rolearn’属性，且授权方式是采用明文AK，则LOCATION为
 
@@ -91,9 +91,9 @@ MaxCompute的非结构化框架支持通过insert方式将MaxCompute的数据直
 
 **说明：** MaxCompute非结构化框架通过StorageHandler这个接口来描述对各种数据存储格式的处理。 具体来说，StorageHandler作为一个wrapper class, 让您指定自定义的Exatractor\(用于数据的读入，解析，处理等\) 以及Outputer\(用于数据的处理和输出等\)。 自定义的StorageHandler 应该继承 OdpsStorageHandler，实现getExtractorClass以及getOutputerClass 两个接口。
 
-接下来我们用[访问OSS非结构化数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)中“自定义 Extractor 访问 OSS”的‘TextStorageHandler ’例子来介绍MaxCompute如何通过自定义StorageHandler 将数据输出到OSS的txt文件，且以‘|’为列分隔符，以‘\\n’为换行符。
+接下来我们用[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)中“自定义 Extractor 访问 OSS”的‘TextStorageHandler ’例子来介绍MaxCompute如何通过自定义StorageHandler 将数据输出到OSS的txt文件，且以‘|’为列分隔符，以‘\\n’为换行符。
 
-**说明：** [MaxCompute Studio](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/认识Studio.md)配置好[MaxCompute Java Module](../../../../cn.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建 MaxCompute Java Module.md)后，可以在examples中看到对应的示例代码。或者点击[此处](https://github.com/aliyun/aliyun-odps-java-sdk/tree/master/odps-sdk-impl/odps-udf-example/src/main/java/com/aliyun/odps/udf/example/text)也看到完整代码。
+**说明：** [MaxCompute Studio](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/认识Studio.md)配置好[MaxCompute Java Module](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建 MaxCompute Java Module.md)后，可以在examples中看到对应的示例代码。或者点击[此处](https://github.com/aliyun/aliyun-odps-java-sdk/tree/master/odps-sdk-impl/odps-udf-example/src/main/java/com/aliyun/odps/udf/example/text)也看到完整代码。
 
 -   定义Outputer
 
@@ -290,7 +290,7 @@ MaxCompute的非结构化框架支持通过insert方式将MaxCompute的数据直
     }
     ```
 
-    详情请参见[访问OSS非结构化数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)文档。
+    详情请参见[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)文档。
 
 -   定义StorageHandler
 
@@ -345,7 +345,7 @@ MaxCompute的非结构化框架支持通过insert方式将MaxCompute的数据直
     USING 'odps-TextStorageHandler.jar';
     ```
 
-    **说明：** 若需用`odps.properties.rolearn`属性，详情请参见[访问OSS非结构化数据](cn.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)的STS模式授权的自定义授权。若不用，可以参考一键授权或者在LOCATION上用明文AK。
+    **说明：** 若需用`odps.properties.rolearn`属性，详情请参见[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)的STS模式授权的自定义授权。若不用，可以参考一键授权或者在LOCATION上用明文AK。
 
 -   通过对External Table的INSERT操作实现数据输出到OSS
 

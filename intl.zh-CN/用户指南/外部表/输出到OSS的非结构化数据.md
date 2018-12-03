@@ -1,6 +1,8 @@
 # 输出到OSS的非结构化数据 {#concept_wsw_nnb_wdb .concept}
 
-[访问OSS非结构化数据](intl.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md)为您介绍了MaxCompute如何通过外部表的关联进行访问并处理存储在OSS的非结构化数据，实际上MaxCompute的非结构化框架也支持通过insert方式将MaxCompute的数据直接输出到OSS，MaxCompute也是通过外部表关联OSS，进行数据输出。
+MaxCompute的非结构化框架支持通过insert方式将MaxCompute的数据直接输出到OSS，MaxCompute也是通过外部表关联OSS，进行数据输出。
+
+[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)为您介绍了MaxCompute如何通过外部表的关联进行访问并处理存储在OSS的非结构化数据。
 
 输出数据到OSS通常是两种情况：
 
@@ -18,7 +20,7 @@
 -   com.aliyun.odps.CsvStorageHandler ，定义如何读写csv格式数据，数据格式约定：英文逗号`,`为列分隔符，换行符为`\n`。
 -   com.aliyun.odps.TsvStorageHandler，定义如何读写csv格式数据，数据格式约定：`\t`为列分隔符，换行符为`\n`。
 
--   **创建EXTERNAL TABLE**
+-   创建EXTERNAL TABLE
 
     ```
     CREATE EXTERNAL TABLE [IF NOT EXISTS] <external_table>
@@ -33,7 +35,7 @@
     -   STORED BY，如果需求输出到OSS上的数据文件是TSV文件，则用内置`com.aliyun.odps.TsvStorageHandler`；如果需求输出到OSS上的数据文件是CSV文件，则用内置`com.aliyun.odps.CsvStorageHandler`。
     -   WITH SERDEPROPERTIES，当关联OSS权限使用“STS模式授权”的“自定义授权”时，需要该参数指定’odps.properties.rolearn’属性，属性值为RAM 中具体使用的自定义role的Arn的信息。
 
-        **说明：** STS模式授权可参看《[访问OSS非结构化数据](intl.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md)》中的对应内容。
+        **说明：** STS模式授权可参看《[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)》中的对应内容。
 
     -   LOCATION，指定对应OSS存储的文件路径。若WITH SERDEPROPERTIES中不设置’odps.properties.rolearn’属性，且授权方式是采用明文AK，则LOCATION为
 
@@ -57,9 +59,7 @@
     ```
 
     -   from\_tablename：可以是内部表，也可以是外部表（包括关联的OSS或OTS的外部表）。
-
     -   INSERT将按照外部表‘STORED BY’指定 ‘StorageHandler’的格式（即TSV或CSV）写到OSS上。
-
     INSERT 操作成功完成后，就可以看到OSS上的对应LOCATION产生了一系列文件。
 
     如：external table 对应的location是oss://oss-cn-hangzhou-zmf.aliyuncs.com/oss-odps-test/tsv\_output\_folder/则，在OSS对应路径中可以看到生成一系列文件：
@@ -91,11 +91,11 @@
 
 **说明：** MaxCompute非结构化框架通过StorageHandler这个接口来描述对各种数据存储格式的处理。 具体来说，StorageHandler作为一个wrapper class, 让您指定自定义的Exatractor\(用于数据的读入，解析，处理等\) 以及Outputer\(用于数据的处理和输出等\)。 自定义的StorageHandler 应该继承 OdpsStorageHandler，实现getExtractorClass以及getOutputerClass 两个接口。
 
-接下来我们用[访问OSS非结构化数据](intl.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md)中“自定义 Extractor 访问 OSS”的‘TextStorageHandler ’例子来介绍MaxCompute如何通过自定义StorageHandler 将数据输出到OSS的txt文件，且以‘|’为列分隔符，以‘\\n’为换行符。
+接下来我们用[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)中“自定义 Extractor 访问 OSS”的‘TextStorageHandler ’例子来介绍MaxCompute如何通过自定义StorageHandler 将数据输出到OSS的txt文件，且以‘|’为列分隔符，以‘\\n’为换行符。
 
 **说明：** [MaxCompute Studio](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/认识Studio.md)配置好[MaxCompute Java Module](../../../../intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建 MaxCompute Java Module.md)后，可以在examples中看到对应的示例代码。或者点击[此处](https://github.com/aliyun/aliyun-odps-java-sdk/tree/master/odps-sdk-impl/odps-udf-example/src/main/java/com/aliyun/odps/udf/example/text)也看到完整代码。
 
--   **定义Outputer**
+-   定义Outputer
 
     输出逻辑都必须实现Outputer接口：
 
@@ -154,7 +154,7 @@
 
     通常情况下大部分的数据处理发生在output\(Record\)这个接口内。 MaxCompute系统根据当前outputer分配处理的每个输入Record调用一次 output\(Record\)。 假设在一个output\(Record\) 调用返回的时候，代码已经消费完这个Record, 因此在当前output\(Record\)返回后，系统会将Record所使用的内存作它用，所以当Record中的信息在跨多个output\(\)函数调用被使用时，需要调用当前处理的record.clone\(\)方法，将当前record保存下来。
 
--   **定义Extractor**
+-   定义Extractor
 
     Exatractor用于数据的读入，解析，处理等，如果输出的表最终不需要再通过MaxCompute进行读取等，可以无需定义。
 
@@ -290,9 +290,9 @@
     }
     ```
 
-    详情请参见[访问OSS非结构化数据](intl.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md)文档。
+    详情请参见[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)文档。
 
--   **定义StorageHandler**
+-   定义StorageHandler
 
     ```
     package com.aliyun.odps.examples.unstructured.text;
@@ -313,7 +313,7 @@
 
     若表无需读取可不用指定Extractor接口。
 
--   **编译打包**
+-   编译打包
 
     将自定义代码编译打包，并作为jar 资源上传到MaxCompute。如打的jar包名为‘odps-TextStorageHandler.jar’,则上传为MaxCompute Resource如下：
 
@@ -321,7 +321,7 @@
     add jar odps-TextStorageHandler.jar;
     ```
 
--   **创建external表**
+-   创建external表
 
     与使用内置StorageHandler类似，需要建立一个外部表，不同的是这次需要指定数据输出到外部表时候，使用自定义的StorageHandler。
 
@@ -345,9 +345,9 @@
     USING 'odps-TextStorageHandler.jar';
     ```
 
-    **说明：** 若需用‘odps.properties.rolearn’属性，详情请参见[访问OSS非结构化数据](intl.zh-CN/用户指南/处理非结构化数据/访问OSS非结构化数据.md)的STS模式授权的**自定义授权**。若不用，可以参考**一键授权**或者在LOCATION上用明文AK。
+    **说明：** 若需用`odps.properties.rolearn`属性，详情请参见[访问OSS非结构化数据](intl.zh-CN/用户指南/外部表/访问OSS非结构化数据.md)的STS模式授权的自定义授权。若不用，可以参考一键授权或者在LOCATION上用明文AK。
 
--   **通过对External Table的INSERT操作实现数据输出到OSS**
+-   通过对External Table的INSERT操作实现数据输出到OSS
 
     通过自定义StorageHandler 创建External Table关联上OSS存储路径后，可以对External Table做标准的SQL INSERT OVERWRITE/INSERT INTO操作既可将数据输出到OSS,方式与内置StorageHandler一样：
 
@@ -359,6 +359,6 @@
     
     ```
 
-    insert操作执行成功后，与内置StorageHandler一样，可以在OSS对应LOCATION路径看到生成一系列文件于’.odps’文件夹中。
+    insert操作执行成功后，与内置StorageHandler一样，可以在OSS对应LOCATION路径看到生成一系列文件于.odps文件夹中。
 
 

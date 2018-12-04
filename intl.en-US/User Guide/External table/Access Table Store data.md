@@ -6,7 +6,7 @@ Table Store is a NoSQL database service that built on Alibaba Cloud’s Apsara d
 
 MaxCompute and TableStore are two independent big data computing and storage services. Therefore, these two services must ensure that the network between them is open. When MaxCompute’s public cloud service accesses data stored in Table Store, we recommend that you use Table Store’s private network address, usually a host name suffixed ‘ots-internal.aliyuncs.com’, for example `tablestore://odps-ots-dev.cn-shanghai.ots-internal.aliyuncs.com`.
 
-The previous article showed you how to [Accessing OSS unstructured data](reseller.en-US/User Guide/External table/Access OSS unstructured data.md#).
+The previous article showed you how to [Access OSS unstructured data](reseller.en-US/User Guide/External table/Access OSS unstructured data.md#).
 
 Both TableStore and MaxCompute have their own type systems. Both Table Store and MaxCompute have their own data type systems. When you process Table Store data in MaxCompute, the data type associations are as follow:
 
@@ -67,9 +67,9 @@ You can authorize permissions in the following two ways:
 
         **Note:** On the upper-right corner, click the avatar to open the Billing Management page, and then check the account UID.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438451082844_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438903932844_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438451082845_en-US.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438903932845_en-US.jpg)
 
     3.  Edit this role’s authorization policy AliyunODPSRolePolicy:
 
@@ -193,7 +193,7 @@ Because Table Store is a KV data NoSQL storage medium, the data output from MaxC
     TableStore BatchWrite request id XXXXX failed with error code OTSParameterInvalid and message:The total data size of BatchWriteRow request exceeds the limit
     ```
 
--   It is a single operation to write data in bulk or by branch. Please refer to [BatchWriteRow](https://help.aliyun.com/knowledge_detail/27311.html) for a detailed description. Therefore, if the volume of bulk write data is too large, you can also branch write.
+-   It is a single operation to write data in bulk or by branch. Please refer to [BatchWriteRow](https://www.alibabacloud.com/help/doc-detail/27311.htm) for a detailed description. Therefore, if the volume of bulk write data is too large, you can also branch write.
 -   When writing data in bulk, be aware that you do not have duplicate rows, otherwise it may cause errors to be reported:
 
     ```

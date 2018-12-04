@@ -2,7 +2,7 @@
 
 本文将为您介绍MaxCompute Region的开通情况和连接方式，解答您在与其他云产品（ECS、TableStore、OSS）互访场景中遇到的网络连通性和下载数据收费等问题。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15431984991423_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11949/15439133221423_zh-CN.png)
 
 由上图可知，从服务层面来看，MaxCompute为您提供了两大类服务连接地址，如下所示：
 
@@ -69,6 +69,7 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
     |美国东部1|弗吉尼亚|已开服|http://service.us-east-1.maxcompute.aliyun.com/api|http://dt.us-east-1.maxcompute.aliyun.com|
     |亚太南部1|孟买|已开服|http://service.ap-south-1.maxcompute.aliyun.com/api|http://dt.ap-south-1.maxcompute.aliyun.com|
     |中东东部1|迪拜|已开服|http://service.me-east-1.maxcompute.aliyun.com/api|http://dt.me-east-1.maxcompute.aliyun.com|
+    |欧洲西部1|伦敦|已开服|http://service.eu-west-1.maxcompute.aliyun.com|http://dt.eu-west-1.maxcompute.aliyun.com|
 
 -   **经典网络下Region和服务连接对照表**
 
@@ -84,6 +85,7 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
     |美国东部1|弗吉尼亚|已开服|http://service.us-east-1.maxcompute.aliyun-inc.com/api|http://dt.us-east-1.maxcompute.aliyun-inc.com|
     |亚太南部1|孟买|已开服|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
     |中东东部1|迪拜|已开服|http://service.me-east-1.maxcompute.aliyun-inc.com/api|http://dt.me-east-1.maxcompute.aliyun-inc.com|
+    |欧洲西部1|伦敦|已开服|http://service.uk-all.maxcompute.aliyun-inc.com|http://dt.uk-all.maxcompute.aliyun-inc.com|
 
 -   VPC网络下Region和服务连接对照表
 
@@ -101,6 +103,7 @@ MaxCompute2.0支持读写OSS对象存储数据，同时也支持读写TableStore
     |美国东部1|弗吉尼亚|已开服|http://service.us-east-1.maxcompute.aliyun-inc.com/api|http://dt.us-east-1.maxcompute.aliyun-inc.com|
     |亚太南部1|孟买|已开服|http://service.ap-south-1.maxcompute.aliyun-inc.com/api|http://dt.ap-south-1.maxcompute.aliyun-inc.com|
     |中东东部1|迪拜|已开服|http://service.me-east-1.maxcompute.aliyun-inc.com/api|http://dt.me-east-1.maxcompute.aliyun-inc.com|
+    |欧洲西部1|伦敦|已开服|http://service.uk-all.maxcompute.aliyun-inc.com|http://dt.uk-all.maxcompute.aliyun-inc.com|
 
 
 **说明：** 需要配置Endpoint、Tunnel Endpoint的场景：

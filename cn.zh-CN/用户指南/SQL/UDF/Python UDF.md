@@ -62,8 +62,6 @@ MaxCompute UDF的Python版本为2.7，并以沙箱模式执行用户代码，即
 
 **说明：** 三方库的使用同样受到禁止本地、网络IO或其他在受限环境下的限制，因此三方库中涉及到相关功能的API也是被禁止的。
 
-Python UDF使用第三方库的详细介绍请参见[使用第三方库](intl.zh-CN/用户指南/PyODPS/DataFrame/使用自定义函数.md#)。
-
 ## 参数与返回值类型 {#section_mrj_cgf_xdb .section}
 
 参数与返回值的指定方式，如下所示：

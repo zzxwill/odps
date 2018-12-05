@@ -45,7 +45,7 @@ FROM table_reference
     ```
     Select * from t1 where c1=1;
     Select * from t1 where (ds=‘20180202’ or c2=3);
-    Select * from t1 left outer join t2 on a.id =b.id and a.ds=b.ds and b.ds=‘20180101);  
+    Select * from t1 left outer join t2 on a.id =b.id and a.ds=b.ds and b.ds=‘20180101’);  
     --Join进行关联时，若分区剪裁条件放在where中，则分区剪裁生效，若放在on条件中，从表的分区剪裁会生效，主表则进行全表扫描。
     ```
 
@@ -158,5 +158,5 @@ FROM table_reference
 **说明：** 
 
 -   order by/sort by/distribute by的key必须是Select语句的输出列，即列的别名。列的别名可以为中文。
--   在MaxCompute SQL解析中， order by/sort by/distribute by是后于Select操作的，因此它们只能接受Select语句的输出列为key。
+-   在MaxCompute SQL解析中，order by/sort by/distribute by是后于Select操作的，因此它们只能接受Select语句的输出列为key。
 

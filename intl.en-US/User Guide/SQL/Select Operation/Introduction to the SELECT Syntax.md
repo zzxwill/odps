@@ -45,7 +45,7 @@ FROM table_reference
     ```
     Select * from t1 where c1=1;
     Select * from t1 where (ds=‘20180202’ or c2=3);
-    Select * from t1 left outer join t2 on a.id =b.id and a.ds=b.ds and b.ds=‘20180101);  
+    Select * from t1 left outer join t2 on a.id =b.id and a.ds=b.ds and b.ds=‘20180101’);  
     --When Join statement is running, if the partition clipping condition is placed in where clause, the partition clipping takes effect. If you put it in on clause, the partition clipping of sub table takes effect, and the main table performs a full table scan.
     ```
 
@@ -119,7 +119,7 @@ FROM table_reference
 
     These restrictions are imposed because group by operations come before Select operations during SQL parsing. Therefore, group by statements can only accept the columns or expressions of the input table as keys.
 
-    **Note:** For more information, see [Aggregate Functions](intl.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md).
+    **Note:** For more information, see [Aggregate Functions](reseller.en-US/User Guide/SQL/Builtin functions/Aggregate functions.md).
 
 -   order by: Globally sorts all data based on certain columns. To sort records in descending order, use the DESC keyword. For global sorting, **order by must be used together with limit**. When order by is used for sorting, NULL is considered to be smaller than any other value. This action is the same as that in MySQL but different from that in Oracle.
 

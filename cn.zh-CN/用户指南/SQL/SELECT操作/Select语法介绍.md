@@ -45,7 +45,7 @@ FROM table_reference
     ```
     Select * from t1 where c1=1;
     Select * from t1 where (ds=‘20180202’ or c2=3);
-    Select * from t1 left outer join t2 on a.id =b.id and a.ds=b.ds and b.ds=‘20180101);  
+    Select * from t1 left outer join t2 on a.id =b.id and a.ds=b.ds and b.ds=‘20180101’);  
     --Join进行关联时，若分区剪裁条件放在where中，则分区剪裁生效，若放在on条件中，从表的分区剪裁会生效，主表则进行全表扫描。
     ```
 
@@ -54,12 +54,6 @@ FROM table_reference
     ```
     set odps.sql.allow.fullscan=true;
     select * from sale_detail;
-    ```
-
-    如果需要整个项目都允许全表扫描，可以通过开关自行打开或关闭（true/false），命令如下：
-
-    ```
-    setproject odps.sql.allow.fullscan=true;
     ```
 
 -   在table\_reference中支持使用嵌套子查询，如下所示：
@@ -103,8 +97,7 @@ FROM table_reference
     -   用group by的key可以是输入表的列名。
     -   也可以是由输入表的列构成的表达式，不允许是Select语句的输出列的别名。
     -   规则i的优先级高于规则ii。当规则i和规则ii发生冲突时，即group by的key既是输入表的列或表达式，又是Select的输出列，以规则i为准。
-
-    **示例如下：**
+    示例如下：
 
     ```
     select region from sale_detail group by region;
@@ -127,7 +120,7 @@ FROM table_reference
 
     **说明：** 关于聚合函数的详情请参见[聚合函数](intl.zh-CN/用户指南/SQL/内建函数/聚合函数.md)。
 
--   order by：对所有数据按照某几列进行全局排序。如果您希望按照降序对记录进行排序，可以使用DESC关键字。由于是全局排序，**order by必须与limit共同使用**。在使用order by排序时，Null会被认为比任何值都小，这个行为与MySQL一致，但是与Oracle不一致。
+-   order by：对所有数据按照某几列进行全局排序。如果您希望按照降序对记录进行排序，可以使用DESC关键字。由于是全局排序，order by必须与limit共同使用。在使用order by排序时，Null会被认为比任何值都小，这个行为与MySQL一致，但是与Oracle不一致。
 
     与group by不同，order by后面必须加Select列的别名，当Select某列时，如果没有指定列的别名，将列名作为列的别名。
 
@@ -165,5 +158,5 @@ FROM table_reference
 **说明：** 
 
 -   order by/sort by/distribute by的key必须是Select语句的输出列，即列的别名。列的别名可以为中文。
--   在MaxCompute SQL解析中， order by/sort by/distribute by是后于Select操作的，因此它们只能接受Select语句的输出列为key。
+-   在MaxCompute SQL解析中，order by/sort by/distribute by是后于Select操作的，因此它们只能接受Select语句的输出列为key。
 

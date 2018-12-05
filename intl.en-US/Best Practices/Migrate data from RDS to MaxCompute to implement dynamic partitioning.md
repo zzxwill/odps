@@ -21,13 +21,13 @@ This topic describes how to use the data synchronization feature of DataWorks to
     2.  Add the ODPS data source. For more information, see [Configure MaxCompute data source](../../../../intl.en-US/User Guide/Data integration/Data source configuration/Configure MaxCompute data source.md#).
     Verify that the configuration is completed, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957314385_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516914385_en-US.png)
 
 3.  Make sure that a table is available in the destination ODPS database.
 
     In the ODPS database, create a destination table named ods\_user\_info\_d. This table corresponds to a table in RDS. Under **Data Development**, right-click **New ODPS SQL node**, create a node named create\_table\_ddl, and enter the table creation statements, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957333545_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516933545_en-US.png)
 
     The SQL statements are as follows:
 
@@ -47,7 +47,7 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
     You can also select **Create Table** under **Business Flow** \> **Table**, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957433547_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516933547_en-US.png)
 
     For more information, see [Create a table and upload data](../../../../intl.en-US/Quick Start/Step 1: Create a table and upload data.md#).
 
@@ -55,13 +55,13 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
     Choose **Data Development** \> **Business Flow** and click **Create Business Flow** to create a workshop, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957433546_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516933546_en-US.png)
 
 5.  Create and configure a synchronization task node.
 
     Create a synchronization node named rds\_sync under the workshop business flow, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957414388_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516914388_en-US.png)
 
 
 For more information about how to configure a data synchronization task, see [DataWorks data development and O&M](../../../../intl.en-US/Quick Start/Instructions.md#).
@@ -72,15 +72,15 @@ After the preparations are completed, the data in RDS needs to be synchronized t
 
 1.  Select the data source and data destination, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957414391_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516914391_en-US.png)
 
 2.  Set the parameters, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957414396_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516914396_en-US.png)
 
     The system time parameter `${bizdate}` is generally used by default. The format is yyyymmdd. This parameter corresponds to the **Partition** parameter under **Destination**. The partition date is called business date. In most cases, users process the business data generated in the previous day. Therefore, when the data synchronization task is scheduled and executed, the partition date is automatically replaced with the date one day before the task execution date. To use the task execution date as the partition value \(partition date\), you must select **Schedule** to customize the parameter, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957414396_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516914396_en-US.png)
 
     The custom parameter can be configured in different formats. By default, the real-time date is displayed. You can select a date and a format as needed. The custom parameter can be set in one of the following formats:
 
@@ -119,15 +119,15 @@ After the preparations are completed, the data in RDS needs to be synchronized t
 
     Click **Save** to save all configurations, and click **Run**, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957433548_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516933548_en-US.png)
 
     View the running log, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957414399_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399516914399_en-US.png)
 
     In the sample log shown in the preceding figure, you can find that the partition value in MaxCompute \(whose printed name is ODPS\) information is dt=20181025. This indicates that the partition value is automatically replaced. Verify that the data is successfully migrated to the ODPS table, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957414400_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517014400_en-US.png)
 
     **Note:** In MaxCompute 2.0, parameter settings are required for partition table query. Full query is not supported. The SQL statements are as follows:
 
@@ -136,7 +136,7 @@ After the preparations are completed, the data in RDS needs to be synchronized t
     select count(*)from ods_user_info_d where dt=business date;
     ```
 
-    For more information about the SELECT command, see [Select operation](../../../../intl.en-US/.md#).
+    For more information about the SELECT command, see [Select operation](../../../../intl.en-US/User Guide/SQL/Select Operation/Introduction to the SELECT Syntax.md#).
 
     Now you can see that the data has been migrated to the ODPS table and a partition value has been successfully created. Then, when the task is executed at scheduled time, the data in RDS is automatically synchronized to the date-based partition in MaxCompute.
 
@@ -147,31 +147,31 @@ If you have many historical data that is generated before the execution date, an
 
 1.  Filter the historical data in RDS by date. For example, filter the historical data generated on 2018-09-13, so that the data can be automatically synchronized to the 20180825 partition in MaxCompute. You can use a WHERE clause to filter data in RDS, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957414401_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517014401_en-US.png)
 
 2.  Perform data patching. Choose **Save** \> **Submit**. After the data is submitted, choose **O&M** \> **Task List** \> **Cycle Task**, select the rds\_sync node, and choose **Patch Data** \> **Current node**, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957420998_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517020998_en-US.png)
 
 3.  On the displayed page, select the business date, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957420999_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517020999_en-US.png)
 
 4.  Click **OK**. Multiple synchronization task instances are generated at the same time and executed in sequence, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957421000_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517021000_en-US.png)
 
 5.  View the running log. You can see the process of extracting data from RDS. A partition has been automatically created in MaxCompute, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957421001_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517021001_en-US.png)
 
     View the results. You can check whether the data is written successfully, whether a partition is created, and whether the data is synchronized to the partition table, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957521002_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517021002_en-US.png)
 
     Query the partition information, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957533549_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517033549_en-US.png)
 
     **Note:** In MaxCompute 2.0, parameter settings are required for partition table query. The partition column needs to be updated to the business date. If the task execution date is 20180717, the business date is 20180716. The SQL statements are as follows:
 
@@ -204,7 +204,7 @@ The procedure is as follows:
 
 2.  Create a synchronization task node named mysql\_to\_odps to synchronize the full amount of RDS data to MaxCompute without setting the partition, as shown in the following table.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957533591_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517033591_en-US.png)
 
 3.  Use SQL statements to dynamically create a partition for the destination table. The SQL statements are as follows:
 
@@ -231,19 +231,19 @@ The procedure is as follows:
 
 4.  Configure the three nodes to form a workflow and execute these nodes in sequence, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957521007_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517021007_en-US.png)
 
 5.  View the execution process. The last node represents the process of dynamic partitioning, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957521008_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517021008_en-US.png)
 
     View data. Dynamic partitioning is completed automatically. Data records with the same date are synchronized to the same partition, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957533594_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517033594_en-US.png)
 
     Query the partition information, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154392957521013_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/24452/154399517021013_en-US.png)
 
     You can follow the preceding steps to name a partition using the province field.
 

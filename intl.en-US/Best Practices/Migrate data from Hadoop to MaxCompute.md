@@ -18,11 +18,11 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
     The network type of the Hadoop cluster is classic. The region is China East 1 \(Hangzhou\). The ECS compute resource of the master instance group is configured with an Internet IP address and an intranet IP address. The high availability mode is set to No \(a non-HA mode\). The following figure shows the configuration for EMR-3.10.1.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382098911593_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541511593_en-US.png)
 
 2.  MaxCompute
 
-    For more information, see [Activate MaxCompute](../../../../intl.en-US/Prepare/Activate MaxCompute.md#).
+    For more information, see [Activate MaxCompute](../../../../reseller.en-US/Prepare/Activate MaxCompute.md#).
 
     Activate MaxCompute and create a project. In this topic, create a project named bigdata\_DOC in China East 1 \(Hangzhou\) and enable the related DataWorks services for this project.
 
@@ -89,9 +89,9 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
     When creating a table, pay attention to the mapping between the Hive data type and the MaxCompute data type.
 
-    The data synchronization feature of DataWorks does not support timestamp data. Therefore, in the DataWorks table creation statements, create\_time is set to a string value. You can also use the odpscmd Command Line \(CLI\) tool to create a table. For more information about how to install and configure the tool, see [Install and configure a client](../../../../intl.en-US/Prepare/Install and configure a client.md#). The table creation process is as follows.
+    The data synchronization feature of DataWorks does not support timestamp data. Therefore, in the DataWorks table creation statements, create\_time is set to a string value. You can also use the odpscmd Command Line \(CLI\) tool to create a table. For more information about how to install and configure the tool, see [Install and configure a client](../../../../reseller.en-US/Prepare/Install and configure a client.md#). The table creation process is as follows.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382098911598_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541511598_en-US.png)
 
     **Note:** Considering the compatibility of the Hive and MaxCompute data types, we recommend that you run the following command on the **odpscmd** client:
 
@@ -102,7 +102,7 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
     After the table is created, you can choose **Data Development** \> **Table Query** in the DataWorks console to view the table created in MaxCompute, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011599_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541511599_en-US.png)
 
 
 ## Synchronize data {#section_esz_swy_bfb .section}
@@ -115,25 +115,25 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
         On the home page of the E-MapReduce console, choose Cluster Management \> Cluster \> Hosts. You can view the data node of the Hadoop cluster. As shown in the following figure, the host name of the master node on the E-MapReduce Hadoop cluster \(non-HA mode\) is emr-header-1, and the host name of the data node is emr-worker-X.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011600_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541511600_en-US.png)
 
         You can also click the ECS ID of the master node, click Connect on the displayed ECS details page, and run the hadoop dfsadmin –report command to view the data node, as shown in the following figure.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011601_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541511601_en-US.png)
 
         As shown in the preceding figure, the data node has only an intranet address and cannot communicate with the default resource group of DataWorks. Therefore, you need to customize a resource group and set the master node to a node that executes the synchronization task of DataWorks.
 
     2.  Create a custom resource group.
 
-        In the DataWorks console, go to the Data Integration page, select Resource Group, and click New Resource Groups, as shown in the following figure. For more information about how to customize a resource group, see [Add scheduling resources](https://help.aliyun.com/document_detail/72979.html).
+        In the DataWorks console, go to the Data Integration page, select Resource Group, and click New Resource Groups, as shown in the following figure. For more information about how to customize a resource group, see [Add scheduling resources](../../../../reseller.en-US/User Guide/Data integration/Common configuration/Add scheduling resources.md#).
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011602_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541511602_en-US.png)
 
         When you add a server, you need to enter the information such as the ECS UUID and machine IP address. \(For a classic network, enter the sever name. For a VPC network, enter the server UUID. You can add scheduling resources only for classic networks in China East 2 \(Shanghai\) in DataWorks V2.0. In other regions, select the VPC network type when you add a scheduling resource group regardless of whether your network type is classic or VPC.\) Set the machine IP address to the Internet IP address of the master node because the intranet IP address might be inaccessible. The ECS UUID must be connected to the master node management terminal, which can be obtained by running the dmidecode | grep UUID command, as shown in the following figure. \(You can use the same method if your Hadoop cluster is not built on E-MapReduce.\)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011603_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541511603_en-US.png)
 
-        After adding the server, make sure that the network between the master node and DataWorks is connected. If you are using an ECS server, you must set the server security group. If you are using an intranet IP address for communication, set the server security group. For more information, see [Add security group](https://help.aliyun.com/document_detail/72978.html).
+        After adding the server, make sure that the network between the master node and DataWorks is connected. If you are using an ECS server, you must set the server security group. If you are using an intranet IP address for communication, set the server security group. For more information, see [Adding security groups](../../../../reseller.en-US/User Guide/Data integration/Common configuration/Add security group.md#).
 
         If you are using an Internet IP address, you can directly set the Internet ingress and egress under **Security Group Rules**\(In practical application scenarios, we recommend that you set detailed bypass rules for your data security.\)
 
@@ -143,13 +143,13 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
 2.  Create a data source.
 
-    For more information about how to create a data source in DataWorks, see [Data source configuration](https://help.aliyun.com/knowledge_list/72788.html).
+    For more information about how to create a data source in DataWorks, see [Configuring Data Source](../../../../reseller.en-US/User Guide/Data integration/Data source configuration/Supported data sources.md#).
 
     After you create a project in DataWorks, the data source is set to odps\_first by default. Therefore, you only need to add a Hadoop cluster data source. To do so, perform the following steps: On the Data Integration page of DataWorks, choose **Data Source** \> **New Source**, and select **HDFS**.
 
     In the displayed window, enter the data source name and defaultFS. If the E-MapReduce Hadoop cluster is an HA cluster, the address is IP:8020 of hdfs://emr-header-1. If the E-MapReduce Hadoop cluster is a non-HA cluster, the address is IP:9000 of hdfs://emr-header-1. In this topic, emr-header-1 is connected to DataWorks through the Internet. Therefore, enter the Internet IP address and open the security group.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011608_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541611608_en-US.png)
 
     After the configuration is completed, click Test Connectivity. If **Test connectivity successfully** is displayed, the data source is added successfully.
 
@@ -159,9 +159,9 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
     On the Data Integration page of DataWorks, click **Sync Tasks** and create a script mode. In the displayed window, select a data source, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011609_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541611609_en-US.png)
 
-    After the template is imported, the synchronization task is converted to the script mode. For more information, see [Script mode configuration](https://help.aliyun.com/document_detail/74304.html).
+    After the template is imported, the synchronization task is converted to the script mode. For more information, see [Script Mode](../../../../reseller.en-US/User Guide/Data integration/Task Configuration/Configure Reader plug-in/Script mode configuration.md#).
 
     When you configure the data synchronization task script, the data types of the DataWorks synchronization task and the Hive table are as follows.
 
@@ -256,7 +256,7 @@ This topic describes how to use the data synchronization feature of DataWorks to
 
     The path parameter indicates the place where the data is stored in the Hadoop cluster. You can log on to the master node and run the `hdfs dfs –ls /user/hive/warehouse/hive_doc_good_sale` command to confirm the place. For a partition table, you do not need to specify the partitions. The data synchronization feature of DataWorks can automatically recurse to the partition path, as shown in the following figure.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154382099011611_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/21113/154397541611611_en-US.png)
 
     After the configuration is completed, click **Run**. If a message is displayed indicating that the task is executed successfully, the synchronization task is completed. If a message is displayed indicating that the task failed to be executed, copy the logs for further troubleshooting.
 
@@ -353,5 +353,5 @@ To migrate data from MaxCompute to Hadoop, perform the preceding steps but excha
 }
 ```
 
-Before executing the preceding synchronization task, you must set the Hadoop cluster. For more information, see [Configure HDFS Writer](../../../../intl.en-US/User Guide/Data integration/Task Configuration/Configure Writer plug-in/Configure HDFS Writer.md#). After executing the synchronization task, you need to manually copy the synchronized files.
+Before executing the preceding synchronization task, you must set the Hadoop cluster. For more information, see [Configure HDFS Writer](../../../../reseller.en-US/User Guide/Data integration/Task Configuration/Configure Writer plug-in/Configure HDFS Writer.md#). After executing the synchronization task, you need to manually copy the synchronized files.
 

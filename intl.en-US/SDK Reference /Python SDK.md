@@ -2,8 +2,6 @@
 
 PyODPS is the Python SDK of MaxCompute. It supports basic actions on MaxCompute objects and the DataFrame framework for ease of data analysis on MaxCompute. For more information, see the [GitHub project](https://github.com/aliyun/aliyun-odps-python-sdk) and the [PyODPS Documentation](http://pyodps.readthedocs.org/) that describes all interfaces and classes.
 
--   For more information about PyODPS, see the [PyODPS community album](https://yq.aliyun.com/album/19).
-
 -   Developers are invited to participate in the ecological development of PyODPS. For more information, see [GitHub document](http://pyodps.readthedocs.io/zh_CN/latest/?spm=a2c4e.11153959.blogcont138752.16.5bec51d32BpKgB).
 
 -   Developers can also submit the issue and merge request to accelerate PyODPS eco-growth. For more information, see [code](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ).
@@ -206,7 +204,7 @@ A table object can also perform the `open_writer` action to open the writer and 
 >>> writer.close() # You must close the writer. Otherwise, the written data may be incomplete.
 ```
 
-Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
+Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 
 ## Delete a table {#section_ayt_mzb_wdb .section}
 
@@ -536,7 +534,7 @@ Use a horizontal bar chart to visualize data, as shown in the following code:
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15392572732854_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623972854_en-US.png)
 
 Divide ages into 30 groups and view the histogram of age distribution, as shown in the following code:
 
@@ -544,7 +542,7 @@ Divide ages into 30 groups and view the histogram of age distribution, as shown 
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15392572732855_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623972855_en-US.png)
 
 Use JOIN to join the three tables and save the joined tables as a new table. 
 

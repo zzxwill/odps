@@ -1,15 +1,13 @@
 # Python SDK {#concept_g14_4wb_wdb .concept}
 
-PyODPS是MaxCompute的Python版本的SDK，它提供了对MaxCompute对象的基本操作和DataFrame框架，可以轻松地在MaxCompute上进行数据分析。更多详情请参见[Github项目](https://github.com/aliyun/aliyun-odps-python-sdk)和包括所有接口、类的细节等内容的[详细文档](http://pyodps.readthedocs.org/)。
+本文简单向您介绍如何通过Python SDK实现创建、查看、删除表等操作。
 
--   关于PyODPS的更多详情请参见[PyODPS云栖社区专辑](https://yq.aliyun.com/album/19)。
+PyODPS是MaxCompute的Python版本的SDK，提供对MaxCompute对象的基本操作和DataFrame框架，让您可以轻松地在MaxCompute上进行数据分析。更多详情请参见[Github项目](https://github.com/aliyun/aliyun-odps-python-sdk)和包括所有接口、类的细节等内容的[详细文档](http://pyodps.readthedocs.org/)。
 
+-   关于PyODPS的社区信息请参见[PyODPS云栖社区专辑](https://yq.aliyun.com/album/19)。
 -   欢迎各位开发者参与到PyODPS的生态开发中，详情请参见[GitHub文档](http://pyodps.readthedocs.io/zh_CN/latest/?spm=a2c4e.11153959.blogcont138752.16.5bec51d32BpKgB)。
-
--   欢迎提交issue和merge request，加快PyODPS生态成长，更多详情请参见[代码](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ)。
-
--   钉钉技术交流群：**11701793**
-
+-   欢迎提交Issue和Merge Request，加快PyODPS生态成长，更多详情请参见[代码](https://github.com/aliyun/aliyun-odps-python-sdk?spm=a2c4e.11153959.blogcont138752.17.5bec51d3IMNtLJ)。
+-   钉钉技术交流群：11701793。
 
 ## 安装 {#section_mj1_jxb_wdb .section}
 
@@ -42,9 +40,7 @@ project = odps.get_project()              # 取到默认项目
 
 -   如果不提供参数，则获取到默认项目空间。
 -   通过`exist_project`，可以查看某个项目空间是否存在。
-
 -   表是MaxCompute的数据存储单元。
-
 
 ## 表操作 {#section_mmv_kyb_wdb .section}
 
@@ -58,8 +54,8 @@ for table in odps.list_tables():
 通过调用`exist_table`可以判断表是否存在，通过调用`get_table`可以获取表。
 
 ```
->>> t = odps.get_table('dual')
->>> t.schema
+ t = odps.get_table('dual')
+ t.schema
 odps.Schema {
   c_int_a                 bigint
   c_int_b                 bigint
@@ -72,15 +68,15 @@ odps.Schema {
   c_datetime_a            datetime
   c_datetime_b            datetime
 }
->>> t.lifecycle
+ t.lifecycle
 -1
->>> print(t.creation_time)
+ print(t.creation_time)
 2014-05-15 14:58:43
->>> t.is_virtual_view
+ t.is_virtual_view
 False
->>> t.size
+ t.size
 1408
->>> t.schema.columns
+ t.schema.columns
 [<column c_int_a, type bigint>,
  <column c_int_b, type bigint>,
  <column c_double_a, type double>,
@@ -101,11 +97,11 @@ False
 -   通过表的列和可选的分区来初始化。
 
     ```
-    >>> from odps.models import Schema, Column, Partition
-    >>> columns = [Column(name='num', type='bigint', comment='the column')]
-    >>> partitions = [Partition(name='pt', type='string', comment='the partition')]
-    >>> schema = Schema(columns=columns, partitions=partitions)
-    >>> schema.columns
+     from odps.models import Schema, Column, Partition
+     columns = [Column(name='num', type='bigint', comment='the column')]
+     partitions = [Partition(name='pt', type='string', comment='the partition')]
+     schema = Schema(columns=columns, partitions=partitions)
+     schema.columns
     [<column num, type bigint>, <partition pt, type string>]
     
     ```
@@ -113,8 +109,8 @@ False
 -   通过调用`Schema.from_lists`，虽然调用更加方便，但显然无法直接设置列和分区的注释。
 
     ```
-    >>> schema = Schema.from_lists(['num'], ['bigint'], ['pt'], ['string'])
-    >>> schema.columns
+     schema = Schema.from_lists(['num'], ['bigint'], ['pt'], ['string'])
+     schema.columns
     [<column num, type bigint>, <partition pt, type string>]
     
     ```
@@ -125,18 +121,18 @@ False
 您可以使用表的Schema来创建表，操作如下所示：
 
 ```
->>> table = odps.create_table('my_new_table', schema)
->>> table = odps.create_table('my_new_table', schema, if_not_exists=True)  # 只有不存在表时才创建
->>> table = o.create_table('my_new_table', schema, lifecycle=7)  # 设置生命周期
+ table = odps.create_table('my_new_table', schema)
+ table = odps.create_table('my_new_table', schema, if_not_exists=True)  # 只有不存在表时才创建
+ table = o.create_table('my_new_table', schema, lifecycle=7)  # 设置生命周期
 ```
 
-也可以使用逗号连接的**字段名 字段类型**字符串组合来创建表，操作如下所示：
+也可以使用逗号连接的字段名 字段类型字符串组合来创建表，操作如下所示：
 
 ```
->>> # 创建非分区表
->>> table = o.create_table('my_new_table', 'num bigint, num2 double', if_not_exists=True)
->>> # 创建分区表可传入 (表字段列表, 分区字段列表)
->>> table = o.create_table('my_new_table', ('num bigint, num2 double', 'pt string'), if_not_exists=True)
+ # 创建非分区表
+ table = o.create_table('my_new_table', 'num bigint, num2 double', if_not_exists=True)
+ # 创建分区表可传入 (表字段列表, 分区字段列表)
+ table = o.create_table('my_new_table', ('num bigint, num2 double', 'pt string'), if_not_exists=True)
 ```
 
 在未经设置的情况下，创建表时，只允许使用bigint、double、decimal、string、datetime、boolean、map和array类型。
@@ -144,9 +140,9 @@ False
 如果您的服务位于公共云，或者支持tinyint、struct等新类型，可以设置`options.sql.use_odps2_extension = True`，以打开这些类型的支持，示例如下：
 
 ```
->>> from odps import options
->>> options.sql.use_odps2_extension = True
->>> table = o.create_table('my_new_table', 'cat smallint, content struct<title:varchar(100), body string>')
+ from odps import options
+ options.sql.use_odps2_extension = True
+ table = o.create_table('my_new_table', 'cat smallint, content struct<title:varchar(100), body string>')
 
 ```
 
@@ -157,29 +153,29 @@ False
 -   通过调用`head`获取表数据，但仅限于查看每张表开始的小于1万条的数据，如下所示：
 
     ```
-    >>> t = odps.get_table('dual')
-    >>> for record in t.head(3):
-    >>>     print(record[0])  # 取第0个位置的值
-    >>>     print(record['c_double_a'])  # 通过字段取值
-    >>>     print(record[0: 3])  # 切片操作
-    >>>     print(record[0, 2, 3])  # 取多个位置的值
-    >>>     print(record['c_int_a', 'c_double_a'])  # 通过多个字段取值
+     t = odps.get_table('dual')
+     for record in t.head(3):
+         print(record[0])  # 取第0个位置的值
+         print(record['c_double_a'])  # 通过字段取值
+         print(record[0: 3])  # 切片操作
+         print(record[0, 2, 3])  # 取多个位置的值
+         print(record['c_int_a', 'c_double_a'])  # 通过多个字段取值
     ```
 
 -   通过在table上执行`open_reader`操作，打开一个reader来读取数据。您可以使用with表达式，也可以不使用。
 
     ```
     # 使用with表达式
-    >>> with t.open_reader(partition='pt=test') as reader:
-    >>>     count = reader.count
-    >>>     for record in reader[5:10]  # 可以执行多次，直到将count数量的record读完，这里可以改造成并行操作
-    >>>         # 处理一条记录
-    >>>
-    >>> # 不使用with表达式
-    >>> reader = t.open_reader(partition='pt=test')
-    >>> count = reader.count
-    >>> for record in reader[5:10]
-    >>>     # 处理一条记录
+     with t.open_reader(partition='pt=test') as reader:
+         count = reader.count
+         for record in reader[5:10]  # 可以执行多次，直到将count数量的record读完，这里可以改造成并行操作
+             # 处理一条记录
+    
+     # 不使用with表达式
+     reader = t.open_reader(partition='pt=test')
+     count = reader.count
+     for record in reader[5:10]
+         # 处理一条记录
     ```
 
 -   通过使用Tunnel API读取表数据，`open_reader`操作其实也是对Tunnel API的封装。
@@ -189,19 +185,19 @@ False
 类似于`open_reader`，table对象同样可以执行`open_writer`来打开writer，并写数据。如下所示：
 
 ```
->>> # 使用 with 表达式
->>> with t.open_writer(partition='pt=test') as writer:
->>>     writer.write(records)  # 这里records可以是任意可迭代的records，默认写到block 0
->>>
->>> with t.open_writer(partition='pt=test', blocks=[0, 1]) as writer:  # 这里同是打开两个block
->>>     writer.write(0, gen_records(block=0))
->>>     writer.write(1, gen_records(block=1))  # 这里两个写操作可以多线程并行，各个block间是独立的
->>>
->>> # 不使用 with 表达式
->>> writer = t.open_writer(partition='pt=test', blocks=[0, 1])
->>> writer.write(0, gen_records(block=0))
->>> writer.write(1, gen_records(block=1))
->>> writer.close()  # 不要忘记关闭 writer，否则数据可能写入不完全
+ # 使用 with 表达式
+ with t.open_writer(partition='pt=test') as writer:
+     writer.write(records)  # 这里records可以是任意可迭代的records，默认写到block 0
+
+ with t.open_writer(partition='pt=test', blocks=[0, 1]) as writer:  # 这里同是打开两个block
+     writer.write(0, gen_records(block=0))
+     writer.write(1, gen_records(block=1))  # 这里两个写操作可以多线程并行，各个block间是独立的
+
+ # 不使用 with 表达式
+ writer = t.open_writer(partition='pt=test', blocks=[0, 1])
+ writer.write(0, gen_records(block=0))
+ writer.write(1, gen_records(block=1))
+ writer.close()  # 不要忘记关闭 writer，否则数据可能写入不完全
 ```
 
 同样，向表中写入数据也是对Tunnel API的封装，更多详情请参见[数据上传下载通道](intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)。
@@ -211,21 +207,21 @@ False
 删除表的操作，如下所示：
 
 ```
->>> odps.delete_table('my_table_name', if_exists=True)  #  只有表存在时删除
->>> t.drop()  # Table对象存在的时候可以直接执行drop函数
+ odps.delete_table('my_table_name', if_exists=True)  #  只有表存在时删除
+ t.drop()  # Table对象存在的时候可以直接执行drop函数
 ```
 
 ## 表分区 {#section_vxt_4zb_wdb .section}
 
--   **基本操作**
+-   基本操作
 
     遍历表的全部分区，如下所示：
 
     ```
-    >>> for partition in table.partitions:
-    >>>     print(partition.name)
-    >>> for partition in table.iterate_partitions(spec='pt=test'):
-    >>>     # 遍历二级分区
+     for partition in table.partitions:
+         print(partition.name)
+     for partition in table.iterate_partitions(spec='pt=test'):
+         # 遍历二级分区
     ```
 
     判断分区是否存在，如下所示：
@@ -237,24 +233,24 @@ False
     获取分区，如下所示：
 
     ```
-    >>> partition = table.get_partition('pt=test')
-    >>> print(partition.creation_time)
+     partition = table.get_partition('pt=test')
+     print(partition.creation_time)
     2015-11-18 22:22:27
-    >>> partition.size
+     partition.size
     0
     ```
 
--   **创建分区**
+-   创建分区
 
     ```
-    >>> t.create_partition('pt=test', if_not_exists=True) # 不存在的时候才创建
+     t.create_partition('pt=test', if_not_exists=True) # 不存在的时候才创建
     ```
 
--   **删除分区**
+-   删除分区
 
     ```
-    >>> t.delete_partition('pt=test', if_exists=True)  # 存在的时候才删除
-    >>> partition.drop()  # Partition对象存在的时候直接drop
+     t.delete_partition('pt=test', if_exists=True)  # 存在的时候才删除
+     partition.drop()  # Partition对象存在的时候直接drop
     ```
 
 
@@ -262,30 +258,30 @@ False
 
 PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
 
--   **执行SQL**
+-   执行SQL
 
     ```
-    >>> odps.execute_sql('select * from dual')  #  同步的方式执行，会阻塞直到SQL执行完成
-    >>> instance = odps.run_sql('select * from dual')  # 异步的方式执行
-    >>> instance.wait_for_success()  # 阻塞直到完成
+     odps.execute_sql('select * from dual')  #  同步的方式执行，会阻塞直到SQL执行完成
+    instance = odps.run_sql('select * from dual')  # 异步的方式执行
+    instance.wait_for_success()  # 阻塞直到完成
     ```
 
--   **读取SQL执行结果**
+-   读取SQL执行结果
 
     运行SQL的instance能够直接执行`open_reader`的操作，一种情况是SQL返回了结构化的数据。
 
     ```
-    >>> with odps.execute_sql('select * from dual').open_reader() as reader:
-    >>>     for record in reader:
-    >>>         # 处理每一个record
+     with odps.execute_sql('select * from dual').open_reader() as reader:
+         for record in reader:
+             # 处理每一个record
     ```
 
 
 另一种情况是SQL可能执行的比如`desc`，这时通过`reader.raw`属性取到原始的SQL执行结果。
 
 ```
->>> with odps.execute_sql('desc dual').open_reader() as reader:
->>>     print(reader.raw)
+ with odps.execute_sql('desc dual').open_reader() as reader:
+     print(reader.raw)
 ```
 
 ## Resource {#section_xvk_g1c_wdb .section}
@@ -296,13 +292,13 @@ PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
 
 在PyODPS中，主要支持两种资源类型，一种是文件，另一种是表。
 
--   **文件资源**
+-   文件资源
 
     文件资源包括基础的`file`类型、以及`py`、`jar`和`archive`。
 
     **说明：** 在DataWorks中，py格式的文件资源请以file形式上传，详情请参见[Python UDF文档](https://yq.aliyun.com/articles/300307)。
 
-    **创建文件资源**
+    创建文件资源
 
     创建文件资源可以通过给定资源名、文件类型、以及一个file-like的对象（或者是字符串对象）来创建，示例如下：
 
@@ -311,25 +307,25 @@ PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
     resource = odps.create_resource('test_py_resource', 'py', file_obj='import this')  # 使用字符串
     ```
 
-    **读取和修改文件资源**
+    读取和修改文件资源
 
     对文件资源调用`open`方法，或者在MaxCompute入口调用`open_resource`都能打开一个资源， 打开后的对象会是file-like的对象。类似于Python内置的`open`方法，文件资源也支持打开的模式。示例如下：
 
     ```
-    >>> with resource.open('r') as fp:  # 以读模式打开
-    >>>     content = fp.read()  # 读取全部的内容
-    >>>     fp.seek(0)  # 回到资源开头
-    >>>     lines = fp.readlines()  # 读成多行
-    >>>     fp.write('Hello World')  # 报错，读模式下无法写资源
-    >>>
-    >>> with odps.open_resource('test_file_resource', mode='r+') as fp:  # 读写模式打开
-    >>>     fp.read()
-    >>>     fp.tell()  # 当前位置
-    >>>     fp.seek(10)
-    >>>     fp.truncate()  # 截断后面的内容
-    >>>     fp.writelines(['Hello\n', 'World\n'])  # 写入多行
-    >>>     fp.write('Hello World')
-    >>>     fp.flush()  # 手动调用会将更新提交到ODPS
+     with resource.open('r') as fp:  # 以读模式打开
+        content = fp.read()  # 读取全部的内容
+         fp.seek(0)  # 回到资源开头
+         lines = fp.readlines()  # 读成多行
+         fp.write('Hello World')  # 报错，读模式下无法写资源
+    
+     with odps.open_resource('test_file_resource', mode='r+') as fp:  # 读写模式打开
+         fp.read()
+         fp.tell()  # 当前位置
+         fp.seek(10)
+         fp.truncate()  # 截断后面的内容
+         fp.writelines(['Hello\n', 'World\n'])  # 写入多行
+         fp.write('Hello World')
+         fp.flush()  # 手动调用会将更新提交到ODPS
     ```
 
     所有支持的打开类型包括：
@@ -342,19 +338,19 @@ PyODPS支持MaxCompute SQL的查询，并可以读取执行的结果。
     -   `a+`：类似于`r+`，但写入时只能写入文件末尾。
     同时，PyODPS中，文件资源支持以二进制模式打开，打开如说一些压缩文件等等就需要以这种模式， 因此`rb`就是指以二进制读模式打开文件，`r+b`是指以二进制读写模式打开。
 
--   **表资源**
+-   表资源
 
-    **创建表资源**
-
-    ```
-    >>> odps.create_resource('test_table_resource', 'table', table_name='my_table', partition='pt=test')
-    ```
-
-    **更新表资源**
+    创建表资源
 
     ```
-    >>> table_resource = odps.get_resource('test_table_resource')
-    >>> table_resource.update(partition='pt=test2', project_name='my_project2')
+     odps.create_resource('test_table_resource', 'table', table_name='my_table', partition='pt=test')
+    ```
+
+    更新表资源
+
+    ```
+     table_resource = odps.get_resource('test_table_resource')
+     table_resource.update(partition='pt=test2', project_name='my_project2')
     ```
 
 
@@ -367,7 +363,7 @@ DataFrame的示例如下：
 **说明：** 在所有步骤开始前，需要创建MaxCompute对象。
 
 ```
->>> o = ODPS('**your-access-id**', '**your-secret-access-key**',
+ o = ODPS('**your-access-id**', '**your-secret-access-key**',
              project='**your-project**', endpoint='**your-end-point**'))
 ```
 
@@ -376,23 +372,23 @@ DataFrame的示例如下：
 只需传入Table对象，便可创建一个DataFrame对象。如下所示：
 
 ```
->>> from odps.df import DataFrame
+ from odps.df import DataFrame
 ```
 
 ```
->>> users = DataFrame(o.get_table('pyodps_ml_100k_users'))
+ users = DataFrame(o.get_table('pyodps_ml_100k_users'))
 ```
 
 通过dtypes属性来查看这个DataFrame有哪些字段，分别是什么类型，如下所示：
 
 ```
->>> users.dtypes
+users.dtypes
 ```
 
 通过head方法，可以获取前N条数据，方便快速预览数据。如下所示：
 
 ```
->>> users.head(10)
+ users.head(10)
 ```
 
 |　|user\_id|age|sex|occupation|zip\_code|
@@ -411,7 +407,7 @@ DataFrame的示例如下：
 有时候，并不需要都看到所有字段，便可以从中筛选出一部分。如下所示：
 
 ```
->>> users[['user_id', 'age']].head(5)
+ users[['user_id', 'age']].head(5)
 ```
 
 |　|user\_id|age|
@@ -510,17 +506,17 @@ DataFrame API提供了value\_counts方法来快速达到同样的目的。如下
 使用更直观的图来查看这份数据，如下所示：
 
 ```
->>> %matplotlib inline
+ %matplotlib inline
 ```
 
 使用横向的柱状图来可视化，如下所示：
 
 ```
->>> users['occupation'].value_counts().plot(kind='barh', x='occupation', 
+ users['occupation'].value_counts().plot(kind='barh', x='occupation', 
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178202854_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623912854_zh-CN.png)
 
 将年龄分成30组，查看各年龄分布的直方图，如下所示：
 
@@ -528,16 +524,16 @@ ylabel='prefession')
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15351178202855_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623912855_zh-CN.png)
 
 使用join把这三张表进行联合后，把它保存成一张新的表。如下所示：
 
 ```
->>> movies = DataFrame(o.get_table('pyodps_ml_100k_movies'))
->>> ratings = DataFrame(o.get_table('pyodps_ml_100k_ratings'))
->>> o.delete_table('pyodps_ml_100k_lens', if_exists=True)
->>> lens = movies.join(ratings).join(users).persist('pyodps_ml_100k_lens')
->>> lens.dtypes
+ movies = DataFrame(o.get_table('pyodps_ml_100k_movies'))
+ratings = DataFrame(o.get_table('pyodps_ml_100k_ratings'))
+o.delete_table('pyodps_ml_100k_lens', if_exists=True)
+lens = movies.join(ratings).join(users).persist('pyodps_ml_100k_lens')
+lens.dtypes
 ```
 
 ```
@@ -560,8 +556,8 @@ odps.Schema {
 把0到80岁的年龄，分成8个年龄段，如下所示：
 
 ```
->>> labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
->>> cut_lens = lens[lens, lens.age.cut(range(0, 81, 10), right=False, labels=labels).rename('年龄分组')]
+ labels = ['0-9', '10-19', '20-29', '30-39', '40-49', '50-59', '60-69', '70-79']
+ cut_lens = lens[lens, lens.age.cut(range(0, 81, 10), right=False, labels=labels).rename('年龄分组')]
 ```
 
 取分组和年龄唯一的前10条数据来进行查看，如下所示：
@@ -586,7 +582,7 @@ odps.Schema {
 对各个年龄分组下，用户的评分总数和评分均值进行查看，如下所示：
 
 ```
->>> cut_lens.groupby('年龄分组').agg(cut_lens.rating.count().rename('评分总数'), cut_lens.rating.mean().rename('评分均值'))
+ cut_lens.groupby('年龄分组').agg(cut_lens.rating.count().rename('评分总数'), cut_lens.rating.mean().rename('评分均值'))
 ```
 
 |　|年龄分组|评分均值|评分总数|
@@ -604,7 +600,7 @@ odps.Schema {
 
 PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配置的MaxCompute选项，如下所示：
 
--   **通用配置**
+-   通用配置
 
     |选项|说明|默认值|
     |:-|:-|:--|
@@ -629,7 +625,7 @@ PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配
     |sql.settings|ODPS SQL运行全局hints|None|
     |sql.use\_odps2\_extension|启用MaxCompute2.0语言扩展|False|
 
--   **数据上传/下载配置**
+-   数据上传/下载配置
 
     |选项|说明|默认值|
     |:-|:-|:--|
@@ -638,7 +634,7 @@ PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配
     |tunnel.limited\_instance\_tunnel|限制Instance Tunnel获取结果的条数|True|
     |tunnel.string\_as\_binary|在string类型中使用bytes而非unicode|False|
 
--   **DataFrame配置**
+-   DataFrame配置
 
     |选项|说明|默认值|
     |:-|:-|:--|
@@ -651,7 +647,7 @@ PyODPS提供了一系列的配置选项，可通过`odps.options`获得。可配
     |df.quote|ODPS SQL后端是否用\`\`来标记字段和表名|True|
     |df.libraries|DataFrame运行使用的第三方库（资源名）|None|
 
--   **PyODPS ML配置**
+-   PyODPS ML配置
 
     |选项|说明|默认值|
     |:-|:-|:--|

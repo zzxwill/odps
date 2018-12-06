@@ -30,5 +30,5 @@ You can use the **Automatically checks for new version**  check box to control 
 
 ## Next step {#section_h5g_r1z_5db .section}
 
-[Create a MaxCompute project connection](intl.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md)
+[Create a MaxCompute project connection](reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md)
 

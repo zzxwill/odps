@@ -135,7 +135,7 @@ Since October 16, 2018, the use of Python UDF in the MaxCompute public cloud env
 ## UDAF {#section_ilj_mhf_xdb .section}
 
 -   class odps.udf.BaseUDAF: Inherit this class to implement a Python UDAF.
--   BaseUDAF.new\_buffer\(\): Implement this method and return the median ‘buffer’ of the aggregate function. Buffer must be mutable Object \(such as list, dict\), and the size of the buffer must not increase with the amount of data, in case of limit, Buffer size after Marshal must not exceed 2 MB.
+-   BaseUDAF.new\_buffer\(\): Implement this method and return the median ‘buffer’ of the aggregate function. Buffer must be [marshallable](https://docs.python.org/3.3/library/marshal.html#module-marshal) object \(such as list, dict\), and the size of the buffer must not increase with the amount of data, in case of limit, Buffer size after Marshal must not exceed 2 MB.
 -   BaseUDAF.iterate\(buffer\[, args, ...\]\): This method aggregates ‘args’ into the median ‘buffer’.
 -   BaseUDAF.merge\(buffer, pbuffer\): This method aggregates two median buffers; that is, aggregate ‘pbuffer merger’ into ‘buffer’.
 -   BaseUDAF.terminate\(buffer\): This method converts the median ‘buffer’ into the MaxCompute SQL basic types.

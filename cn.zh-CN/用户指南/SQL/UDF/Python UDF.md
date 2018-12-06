@@ -133,7 +133,7 @@ class MyPlus(object):
 ## UDAF {#section_ilj_mhf_xdb .section}
 
 -   class odps.udf.BaseUDAF：继承此类实现Python UDAF。
--   BaseUDAF.new\_buffer\(\)：实现此方法返回聚合函数的中间值的buffer。buffer必须是mutable object（比如list、dict），并且buffer的大小不应该随数据量递增，在极限情况下，buffer marshal过后的大小不应该超过2Mb。
+-   BaseUDAF.new\_buffer\(\)：实现此方法返回聚合函数的中间值的buffer。buffer必须是[marshallable](https://docs.python.org/3.3/library/marshal.html#module-marshal) object（比如list、dict），并且buffer的大小不应该随数据量递增。在极限情况下，buffer marshal过后的大小不应该超过2Mb。
 -   BaseUDAF.iterate\(buffer\[, args, ...\]\)：实现此方法将args聚合到中间值buffer中。
 -   BaseUDAF.merge\(buffer, pbuffer\)：实现此方法将两个中间值buffer聚合到一起，即将pbuffer merge到buffer中。
 -   BaseUDAF.terminate\(buffer\)：实现此方法将中间值buffer转换为MaxCompute SQL的基本类型。

@@ -29,8 +29,8 @@ LOCATION 'oss://${endpoint}/${bucket}/${userfilePath}/';
     STORED AS后面接的是文件格式名字， 比如ORC/PARQUET/RCFILE/SEQUENCEFILE/TEXTFILE等。
 
 -   外部表的column schemas必须与具体OSS上存储存储数据的schema相符合。
--   ROW FORMAT SERDE非必选选项，只有在使用一些特殊的格式上，比如TEXTFILE时才需要使用。
--   WITH SERDEPROPERTIES当关联OSS权限使用[STS模式授权](intl.zh-CN/用户指南/外部表/OSS的STS模式授权.md)时，需要该参数指定odps.properties.rolearn属性，属性值为RAM中具体使用的Role的Arn的信息。您可以在配置STORED AS <file format\>的同时也通过<serde class\>说明file format文件格式。以ORC文件格式为例，如下所示。
+-   ROW FORMAT SERDE：非必选选项，只有在使用一些特殊的格式上，比如TEXTFILE时才需要使用。
+-   WITH SERDEPROPERTIES：当关联OSS权限使用[STS模式授权](intl.zh-CN/用户指南/外部表/OSS的STS模式授权.md)时，需要该参数指定odps.properties.rolearn属性，属性值为RAM中具体使用的Role的Arn的信息。您可以在配置STORED AS <file format\>的同时也通过<serde class\>说明file format文件格式。以ORC文件格式为例，如下所示。
 
     ```
     CREATE EXTERNAL TABLE [IF NOT EXISTS] <external_table>

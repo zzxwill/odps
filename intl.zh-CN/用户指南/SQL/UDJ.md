@@ -97,7 +97,7 @@
     <dependency>
       <groupId>com.aliyun.odps</groupId>
       <artifactId>odps-sdk-udf</artifactId>
-      <version>0.30.0</version>
+      <version>0.29.10-public</version>
       <scope>provided</scope>
     </dependency>
     ```

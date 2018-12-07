@@ -1,6 +1,6 @@
 # Java SDK {#concept_utw_vvc_5db .concept}
 
-This article introduces most commonly used MaxCompute core interfaces. For more information, see [SDK Java Doc](http://repo.aliyun.com/java-sdk-doc/).
+This article introduces most commonly used MaxCompute core interfaces. For more information, see [SDK Java Doc](http://www.javadoc.io/doc/com.aliyun.odps/odps-sdk-core/).
 
 Configure the new SDK version through maven management. The configuration information of Maven is as follows: \(The latest version can be searched for odps-sdk-core at any time at [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5).
 
@@ -12,7 +12,7 @@ Configure the new SDK version through maven management. The configuration inform
 </dependency>
 ```
 
-**Note:** 0.27.2-public version and above support MaxCompute 2.0[New data type](../../../../reseller.en-US/User Guide/Definition/Data types.md#).
+**Note:** 0.27.2-public version and above support MaxCompute 2.0 [New data type](../../../../reseller.en-US/User Guide/Definition/Data types.md#).
 
 The overall information of the SDK package provided by MaxCompute is shown in the following table:
 

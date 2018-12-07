@@ -47,7 +47,7 @@ The following example uses WordCount to explain the stages of MaxCompute MapRedu
 
 Assumethat a text named ‘a.txt’, where each row is indicated by a number, and the frequency of appearance of each number must be counted.  The number in the text is called as‘Word’ and the number appearance occurrence is called as 'Count'.  To complete this function through MaxCompute MapReduce, the following figure illustrates the required steps:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15435581361922_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15441688461922_en-US.jpg)
 
 Procedure:
 

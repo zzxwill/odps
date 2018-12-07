@@ -5,27 +5,26 @@ A project is the basic unit of operation in MaxCompute.
 1.   Log on to the [DataWorks console](https://workbench.data.aliyun.com/console) and create a MaxCompute project in either of the two following ways. 
     -   On the console overview page, go to **Common Functions** \> **Create Project**.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/1414_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858201414_en-US.png)
 
     -   On the console overview page, click **Project List**, select the region, and then click **Create Project**.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/1416_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858211416_en-US.png)
 
-2.   Configure in the **Create Project** dialog box, select region and service. If  you do not buy related services for the selected region,  **'Service is not available for this region'** is displayed. The data development, O&M center, and data management are selected by default. as shown in the following figure:![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/1417_en-US.png)
+2.   Configure in the **Create Project** dialog box, select region and service. If  you do not buy related services for the selected region,  **'Service is not available for this region'** is displayed. The data development, O&M center, and data management are selected by default. as shown in the following figure:![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858211417_en-US.png)
 
  
 
     **Select calculation engine services:**
 
     -   If you want to add and authorize users using DataWorks, see [Add Users and Roles](https://www.alibabacloud.com/help/doc-detail/58185.html).
-    -   If you want to add and authorize users using DataWorks, see [g id="1"\>Add Users and Roles](https://www.alibabacloud.com/help/doc-detail/58185.html).
     **DataWorks service:**
 
     -   Data integration: A data synchronization platform that provides stable, efficient, and elastically scalable services. The Data Integration is designed to implement fast and stable data movement and synchronization between multiple heterogeneous data sources in complex network environments.  For more information, see [Data Integration Overview](https://www.alibabacloud.com/help/doc-detail/47677.html).
     -   Data development: The data development helps you to design data computing processes according to your business demands and make mutually dependent tasks be automatically run in the scheduling system.  For more information, see [Data Development Overview](https://www.alibabacloud.com/help/doc-detail/30276.html).
     -   O&M center: The O&M Center is a place where tasks and instances are displayed and operated. You can view all your tasks in Task List and perform such operations on the displayed tasks.  For more information, see [O&M Center Overview](https://www.alibabacloud.com/help/doc-detail/30295.html).
     -   Data management: The Data Management module of the Alibaba Cloud DTplus platform displays the global data view and metadata details of an organization, and enables operations such as divided permission management, data lifecycle management, and approval and management of data table/resource/function permissions.  For more information, see [data management overview](https://www.alibabacloud.com/help/doc-detail/30284.html).
-3.   Configure the basic information and advanced settings for the new project.![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/1418_en-US.png)
+3.   Configure the basic information and advanced settings for the new project.![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11944/15441858211418_en-US.png)
 
  
 

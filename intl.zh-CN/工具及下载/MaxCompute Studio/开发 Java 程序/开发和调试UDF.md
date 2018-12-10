@@ -1,26 +1,24 @@
 # 开发和调试UDF {#concept_nvh_s2b_5db .concept}
 
-创建完成 [MaxCompute Java Module](intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建 MaxCompute Java Module.md)后，即可开发UDF。
+创建完成[MaxCompute Java Module](intl.zh-CN/工具及下载/MaxCompute Studio/开发 Java 程序/创建MaxCompute Java Module.md)后，即可开发UDF。
 
 ## 操作步骤 {#section_aqr_m1g_vdb .section}
 
-1.  展开已创建的MaxCompute Java Module目录，导航至**src** \> **main** \> **java** \> **new** ，单击**MaxCompute Java** 。如下图所示：
+1.  展开已创建的MaxCompute Java Module目录，导航至**src** \> **main** \> **java** \> **new**，单击**MaxCompute Java** 。如下图所示：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15428554981944_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15444366381944_zh-CN.png)
 
 2.  填写**name**和**kind**，单击**OK** 。如下图所示：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15428554981947_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15444366381947_zh-CN.png)
 
     -   Name：填写创建的MaxCompute Java Class名称，如果还没创建package，可以在此处填写 packagename.classname，会自动生成package。
-
     -   Kind：选择类型。目前支持的类型有：自定义函数（UDF/UDAF/UDTF）、MapReduce（Driver/Mapper/Reducer）、非结构化开发（StorageHandler/Extractor）等。
-
 3.  创建成功后，即可进行开发、编辑、测试Java程序。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15428554981948_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15444366391948_zh-CN.png)
 
-    **说明：** 这里的代码模板可在Intellij中自定义，具体的：**Preference** \> **Editor** \> **File** \> **Code Templates** ，然后在Code标签页中寻找MaxCompute对应的模板修改。
+    **说明：** 这里的代码模板可在Intellij中自定义，具体的：**Preference** \> **Editor** \> **File** \> **Code Templates**，然后在Code标签页中寻找MaxCompute对应的模板修改。
 
 
 通常情况下，JAVA UDF的开发可以通过以下几种方式：
@@ -38,24 +36,24 @@
 
 在examples目录下有各种类型的单元测试示例，可参考示例编写自己的Unit Test。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15428554981949_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15444366391949_zh-CN.png)
 
 **本地运行**
 
-本地运行UDF 时，需要指定运行数据源，有以下两种方式设定测试数据源：
+本地运行UDF时，需要指定运行数据源，有以下两种方式设定测试数据源：
 
--   MaxCompute Studio通过Tunnel 服务自动下载指定项目下的表数据到warehouse目录下。
+-   MaxCompute Studio通过Tunnel服务自动下载指定项目下的表数据到warehouse目录下。
 -   提供Mock项目及表数据，您可参考warehouse下的example\_project自行设置。
 
 **操作步骤**
 
-1.  右击UDF类，单击 **运行**，弹出**run configuration**对话框。UDF/UDAF/UDTF 一般作用于select子句中表的某些列，需要配置MaxCompute project，table和column（元数据来源于project explorer和warehouse下的 Mock项目）。复杂类型的调试也是支持的，如下图：
+1.  右击UDF类，单击**运行**，弹出**run configuration**对话框。UDF/UDAF/UDTF一般作用于select子句中表的某些列，需要配置MaxCompute project，table和column（元数据来源于project explorer和warehouse下的Mock项目）。复杂类型的调试也是支持的，如下图：
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15428554981950_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15444366391950_zh-CN.png)
 
-2.  单击 **OK**。
+2.  单击**OK**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15428554981951_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15444366391951_zh-CN.png)
 
     **说明：** 
 
@@ -67,12 +65,12 @@
 
 本地warehouse用于存储表（包括meta和数据）或资源，用于本地执行UDF或MR。warehouse目录如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15428554981952_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12130/15444366391952_zh-CN.png)
 
 **说明：** 
 
 -   warehouse目录下依次是项目名，tables，表名，表schema和sample data。
--   schema文件依次配置项目名，表名，以及列名和类型（冒号分隔），分区表还需配置分区列（非分区表参考 wc\_in1，分区表参考 wc\_in2）。
+-   schema文件依次配置项目名，表名，以及列名和类型（冒号分隔），分区表还需配置分区列（非分区表参考wc\_in1，分区表参考wc\_in2）。
 -   data文件采用标准csv格式存储表的sample数据：
     -   特殊字符为逗号，双引号和换行（\\n或\\r\\n）
     -   列分隔符为逗号，行分隔符为\\n或\\r\\n

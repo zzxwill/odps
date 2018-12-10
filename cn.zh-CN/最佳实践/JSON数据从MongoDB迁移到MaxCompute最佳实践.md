@@ -4,7 +4,7 @@
 
 ## 数据及账号准备 {#section_qv1_nm2_xfb .section}
 
-首先您需要将数据上传至您的MongoDB数据库。本例中使用阿里云的[云数据库 MongoDB 版](../../../../cn.zh-CN/单节点快速入门/开始使用MongoDB.md#)，网络类型为VPC（需申请公网地址，否则无法与DataWorks默认资源组互通），测试数据如下。
+首先您需要将数据上传至您的MongoDB数据库。本例中使用阿里云的[云数据库 MongoDB 版](../../../../intl.zh-CN/单节点快速入门/开始使用MongoDB.md#)，网络类型为VPC（需申请公网地址，否则无法与DataWorks默认资源组互通），测试数据如下。
 
 ```
 
@@ -42,7 +42,7 @@
 
 登录MongoDB的DMS控制台，本例中使用的数据库为admin，集合为userlog，您可以在查询窗口使用db.userlog.find\(\).limit\(10\)命令查看已上传好的数据，如下图所示。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154320427332875_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154440582232875_zh-CN.png)
 
 此外，需提前在数据库内新建用户，用于DataWorks添加数据源。本例中使用命令`db.createUser({user:"bookuser",pwd:"123456",roles:["root"]})`，新建用户名为bookuser，密码为123456，权限为root。
 
@@ -50,35 +50,35 @@
 
 1.  新增MongoDB数据源
 
-    进入DataWorks[数据集成](../../../../cn.zh-CN/使用指南/数据集成/数据集成简介/数据集成概述.md#)控制台，新增[MongoDB类型](../../../../cn.zh-CN/使用指南/数据集成/数据源配置/配置MongoDB数据源.md#)数据源。
+    进入DataWorks[数据集成](../../../../intl.zh-CN/使用指南/数据集成/数据集成简介/数据集成概述.md#)控制台，新增[MongoDB类型](../../../../intl.zh-CN/使用指南/数据集成/数据源配置/配置MongoDB数据源.md#)数据源。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154320427332876_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154440582232876_zh-CN.png)
 
-    具体参数如下所示，测试数据源连通性通过即可点击完成。由于本文中MongoDB处于VPC环境下，因此**数据源类型**需选择**有公网IP**。
+    具体参数如下所示，测试数据源连通性通过即可点击**完成**。由于本文中MongoDB处于VPC环境下，因此**数据源类型**需选择**有公网IP**。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154320427332877_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154440582332877_zh-CN.png)
 
-    访问地址及端口号可通过在[MongoDB管理控制台](https://mongodb.console.aliyun.com)点击实例名称获取，如下图所示。
+    访问地址及端口号可通过在点击实例名称获取，如下图所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154320427332878_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154440582332878_zh-CN.png)
 
 2.  新建数据同步任务
 
-    在DataWorks上新建[数据同步类型节点。](../../../../cn.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置OSS Reader.md#)
+    在DataWorks上新建[数据同步类型节点。](../../../../intl.zh-CN/使用指南/数据集成/作业配置/配置Reader插件/配置OSS Reader.md#)
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154320427332879_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154440582332879_zh-CN.png)
 
-    新建的同时，在DataWorks新建一个[建表任务](../../../../cn.zh-CN/使用指南/数据开发/表管理.md#)，用于存放JSON数据，本例中新建表名为mqdata。
+    新建的同时，在DataWorks新建一个[建表任务](../../../../intl.zh-CN/使用指南/数据开发/表管理.md#)，用于存放JSON数据，本例中新建表名为mqdata。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154320427331544_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154440582331544_zh-CN.png)
 
     表参数可以通过图形化界面完成。本例中mqdata表仅有一列，类型为string，列名为MQ data。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154320427331545_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154440582331545_zh-CN.png)
 
     完成上述新建后，您可以在图形化界面进行数据同步任务参数的初步配置，如下图所示。选择目标数据源名称为odps\_first，选择目标表为刚建立的mqdata。数据来源类型为MongoDB，选择我们刚创建的数据源mongodb\_userlog。完成上述配置后，**点击转换为脚本**，跳转到脚本模式。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154320427332880_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154440582332880_zh-CN.png)
 
     脚本模式代码示例如下。
 
@@ -111,7 +111,7 @@
                     "truncate": true,
                     "datasource": "odps_first",
                     "column": [
-         //MaxCompute表列名                 "mqdata"
+                              "mqdata"  //MaxCompute表列名
                     ],
                     "emptyAsNull": false,
                     "table": "mqdata"
@@ -144,16 +144,16 @@
 
     完成上述配置后，点击运行接即可。运行成功日志示例如下所示。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154320427331550_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154440582331550_zh-CN.png)
 
 
 ## 结果验证 {#section_cwq_bcf_xfb .section}
 
-在您的[业务流程](../../../../cn.zh-CN/使用指南/数据开发/业务流程/业务流程介绍.md#)中新建一个ODPS SQL节点。
+在您的[业务流程](../../../../intl.zh-CN/使用指南/数据开发/业务流程/业务流程介绍.md#)中新建一个ODPS SQL节点。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154320427331551_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/62284/154440582331551_zh-CN.png)
 
-您可以输入`SELECT * from mqdata;`语句，查看当前mqdata表中数据。当然这一步您也可以直接在[MaxCompute客户端](../../../../cn.zh-CN/工具及下载/客户端.md#)中输入命令运行。
+您可以输入`SELECT * from mqdata;`语句，查看当前mqdata表中数据。当然这一步您也可以直接在[MaxCompute客户端](../../../../intl.zh-CN/工具及下载/客户端.md#)中输入命令运行。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154320427332881_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/64919/154440582332881_zh-CN.png)
 

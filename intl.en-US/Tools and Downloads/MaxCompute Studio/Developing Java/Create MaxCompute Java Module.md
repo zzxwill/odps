@@ -17,5 +17,5 @@ So far, a module for developing a MaxCompute Java program has been established, 
 -   warehouse: Schema and data required for running locally.
 
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12129/1928_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12129/15444074501928_en-US.png)
 

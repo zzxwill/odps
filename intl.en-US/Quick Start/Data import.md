@@ -1,5 +1,7 @@
 # Data import {#concept_amj_mjy_5db .concept}
 
+This article gives you a detailed introduction to Tunnel command importing data, MaxCompute Studio importing data, and other ways of importing data to MaxCompute.
+
 You can import and export  data through MaxCompute using the following methods:
 
 -    [Tunnel commands](../../../../reseller.en-US/User Guide/Data upload and download/Tunnel commands.md), directly on the console.
@@ -39,7 +41,7 @@ For data export, see commands about downloading in [Tunnel commands](../../../..
 
 4.  After the command has run successfully, check the records in the table wc\_in.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532531484_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15444242901484_en-US.png)
 
     **Note:** 
 
@@ -63,7 +65,7 @@ Follow the steps below to import data using MaxCompute Studio. Before using MaxC
 
     To import the data created in the preceding step, a MaxCompute table must be created first. Right-click **tables&views** in the project and operate as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541490_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15444242901490_en-US.png)
 
     If the statement is executed successfully, then the table has been created.
 
@@ -73,7 +75,7 @@ Follow the steps below to import data using MaxCompute Studio. Before using MaxC
 
     **Note:** If the table name does not appear in the list, click the **refresh** button.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541522_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15444242901522_en-US.png)
 
 
 ## Tunnel SDK {#section_gdq_z4y_5db .section}
@@ -82,7 +84,7 @@ The following is a scenario example to show you how to upload data using the Tun
 
 **Scenario**
 
-Upload data into MaxCompute, where the project is odps\_public\_dev, the table name is tunnel\_sample\_test and the partitions are pt=20150801,dt=”hangzhou.
+Upload data into MaxCompute, where the project is odps\_public\_dev, the table name is tunnel\_sample\_test and the partitions are pt=20150801,dt=hangzhou.
 
 **Procedure**
 
@@ -208,7 +210,7 @@ Upload data into MaxCompute, where the project is odps\_public\_dev, the table n
 
     **Note:** The configuration of the accesskeyid and the accesskeysecret is omitted here. Please change your information when you are actually running.
 
-4.  The configuration of pom.xml is as follows:
+4.  The configuration of pom.xmlis as follows:
 
     ```
     <? xml version="1.0" encoding="UTF-8"? >
@@ -250,11 +252,11 @@ Upload data into MaxCompute, where the project is odps\_public\_dev, the table n
 
     1.  Right-click on the **Java program** and click**Import \>** \> **Maven \> ** \> **Existing Maven Projects**, The settings are as follows:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541545_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15444242901545_en-US.PNG)
 
     2.  Right-click on **UploadSample.java** and click**Run As** \> **Run Configurations**, as follows:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15417532541547_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15444242911547_en-US.PNG)
 
     3.  Click **Run**After running successfully, the console shows as follows:
 

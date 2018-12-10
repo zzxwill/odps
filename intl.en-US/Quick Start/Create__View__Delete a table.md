@@ -4,11 +4,11 @@ You can use MaxCompute services once they are added to a project, and granted th
 
 You can create or delete tables using the following methods:
 
--   MaxCompute Studio. For more information, see Visualization of operating the tables. see [Visualization of operating the tables](../../../../intl.en-US/Tools and Downloads/MaxCompute Studio/Manage data and resources/Visualization of operating the tables.md).
+-   MaxCompute Studio. For more information, see Visualization of operating the tables. see [Visualization of operating the tables](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Manage data and resources/Visualization of operating the tables.md).
 -   With dataworks, see [creating tables](https://www.alibabacloud.com/help/doc-detail/30291.html) and [deleting tables](https://www.alibabacloud.com/help/doc-detail/30290.html) for details.
 -   Common client commands.
 
-The following section explains how to create, view, and delete tables using commands through the DTplus console. For more information about console installation, see [Console](../../../../intl.en-US/Prepare/Install and configure a client.md).
+The following section explains how to create, view, and delete tables using commands through the DTplus console. For more information about console installation, see [Console](../../../../reseller.en-US/Prepare/Install and configure a client.md).
 
 ## Create a table {#section_lz3_tcy_5db .section}
 
@@ -29,7 +29,7 @@ Command descriptions:
 
 -   The table name and column name are both case insensitive.
 -   If you do not specify IF NOT EXISTS when creating a table and a table with the same name exists, an error is returned. If the option is specified then all returns are successful, regardless of whether there are tables with the same name, and regardless of whether the source table structure and the target table structure are inconsistent. The Meta information of the existing table does not change.
--   Only the [data types](../../../../intl.en-US/Product Introduction/Definition/Data types.md) BIGINT, DOUBLE, BOOLEAN, DATETIME, and STRING are supported.
+-   Only the [data types](../../../../reseller.en-US/User Guide/Definition/Data types.md) BIGINT, DOUBLE, BOOLEAN, DATETIME, and STRING are supported.
 -   A table name and column name obey the same naming conventions as follows: The name can be up to 128 bytes in length and can contain letters, numbers, and underscores ‘\_’.
 -   Partitioned Partitioned by: Use PARTITIONED BY to specify the partition. Only String is supported. The value can be up to 128 bytes in length and can contain letters, numbers, and the special characters space ‘ ’, colon \(‘:’\), underscore \(‘\_’\), dollar sign \(’$’\), hash sign \(’\#’\), dot \(‘.’\), exclamation point \(‘!’\) and at symbol \(‘@’\). Other characters are considered as undefined characters, such as \(‘\\t’\), \(‘\\n’\), and \(‘/’\) . If you are using partition fields in the partition table, a full table scan is not needed when adding partitions, or when updating data in the partition and then reading the partition.
 -   A comment must be a valid string within 1024 bytes.
@@ -38,9 +38,9 @@ Command descriptions:
 
     **Note:** 
 
-    -   For more information about creating a table, see[Table Operations](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
+    -   For more information about creating a table, see[Table Operations](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
     -   For more information about the partition operation, see [Add/Remove Partition](https://www.alibabacloud.com/help/doc-detail/73771.html).
-    -   For more information about the lifecycle operation, see [Modify Lifecycle for a Table](../../../../intl.en-US/User Guide/SQL/DDL SQL/Lifecycle of table.md#).
+    -   For more information about the lifecycle operation, see [Modify Lifecycle for a Table](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Lifecycle of table.md#).
 
 The following example shows how to create a table:
 
@@ -147,7 +147,7 @@ odps@ $odps_project>desc test4;
 +------------------------------------------------------------------------------------+
 ```
 
-Except for the lifecycle property, other properties of test3 \(field type, partition type\) are completely consistent with test4. For more information about describing a table, see [Describe Table](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md).
+Except for the lifecycle property, other properties of test3 \(field type, partition type\) are completely consistent with test4. For more information about describing a table, see [Describe Table](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md).
 
 When you view the information of test5, the ‘pt’ and ‘ds’ fields only exist as two common columns, rather than as the table partitions.
 
@@ -180,5 +180,5 @@ For example, to delete the table test2:
 drop table test2;
 ```
 
-For more information, see [Table Operations](../../../../intl.en-US/User Guide/SQL/DDL SQL/Table Operations.md#)Drop Table.
+For more information, see [Table Operations](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#)Drop Table.
 

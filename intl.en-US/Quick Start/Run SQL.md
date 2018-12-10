@@ -117,7 +117,7 @@ For more restrictions on MaxCompute SQL, see SQL Restrictions Summary.
 
         Copy the logview link to enter the web console page, and double-click the Fuxi job that runs the Join operation. You can see a long tail in the Long-Tails tab, which indicates that the data has been skewed, as shown in the following figure: 
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15417502791560_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15444293001560_en-US.PNG)
 
         You can optimize the statement by the following methods:
 

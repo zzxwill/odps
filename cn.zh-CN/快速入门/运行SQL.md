@@ -1,6 +1,8 @@
 # 运行SQL {#concept_tgf_v5y_5db .concept}
 
-您对SQL语法可能并不陌生，MaxCompute SQL用于查询和分析MaxCompute中的大规模数据，主要功能如下所示。
+MaxCompute SQL用于查询和分析MaxCompute中的大规模数据。
+
+您对SQL语法可能并不陌生，如下所示。
 
 -   支持各类运算符。
 -   通过DDL语句对表、分区以及视图进行管理。
@@ -20,7 +22,7 @@
 
 ## DDL语句 {#section_kdh_cvy_5db .section}
 
-简单的DDL操作包括创建表、添加分区、查看表和分区信息、修改表、删除表和分区，更多详情请参见[创建/查看/删除表](intl.zh-CN/快速入门/创建__查看__删除表.md#)。
+简单的DDL操作包括创建表、添加分区、查看表和分区信息、修改表、删除表和分区，更多详情请参见[创建、查看和删除表](intl.zh-CN/快速入门/创建、查看和删除表.md#)。
 
 ## Select语句 { .section}
 
@@ -117,7 +119,7 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
 
         此时，复制logview的链接并打开webcosole页面，双击执行Join操作的fuxi job，可以看到此时在\[Long-tails\]区域有长尾，表示数据已经倾斜了。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15417502741560_zh-CN.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11952/15444292941560_zh-CN.PNG)
 
         此时您可通过如下方法进行优化。
 
@@ -137,7 +139,6 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
     在实际场景中，如果您知道数据倾斜了，但无法获取导致数据倾斜的key信息，那么可以使用一个通用的方案，查看数据倾斜，如下所示。
 
     ```
-    
     例如：select * from a join b on a.key=b.key; 产生数据倾斜。 
     您可以执行： 
     ```sql
@@ -168,23 +169,11 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
 
     -   可减少MaxCompute系统产生的小文件，使后续处理更快速。
     -   可避免一个Worker输出文件很多时占用内存过大。
-    但也正是因为这个Reduce的引入，导致分区数据如果有倾斜的话，会发生长尾。因为相同的数据最多只会有10个Worker处理，所以数据量大，则会发生长尾，示例如下。
-
-    ```
-    
-    insert overwrite table A2 partition(dt) 
-    select
-    split_part(value,'\t',1) as field1,
-    split_part(value,'\t',2) as field2, 
-    dt 
-    from A 
-    where dt='20151010';
-    ```
+    但也正是因为这个Reduce的引入，导致分区数据如果有倾斜的话，会发生长尾。因为相同的数据最多只会有10个Worker处理，所以数据量大，则会发生长尾，示例如下。insert overwrite table A2 partition\(dt\) select split\_part\(value,'\\t',1\) as field1, split\_part\(value,'\\t',2\) as field2, dt from A where dt='20151010';
 
     这种情况下，没有必要使用动态分区，所以可以改为如下语句：
 
     ```
-    
     insert overwrite table A2 partition(dt='20151010') 
     select
     split_part(value,'\t',1) as field1,
@@ -202,7 +191,6 @@ MaxCompute SQL的更多限制请参见[SQL限制项汇总](../../../../intl.zh-C
     符合上述两个条件的窗口函数会合并为一个Reduce执行。SQL示例如下所示。
 
     ```
-    
     select
     rank()over(partition by A order by B desc) as rank,
     row_number()over(partition by A order by B desc) as row_num

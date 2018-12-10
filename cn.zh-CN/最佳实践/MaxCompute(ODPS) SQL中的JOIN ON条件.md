@@ -15,7 +15,7 @@ MaxCompute\(ODPS\) SQL中，很常用的一个操作就是关联\(Join\)。
 |Left Semi Join|对于左表中的一条数据，如果右表存在符合关联条件的行，则输出左表。|
 |Left Anti Join|对于左表中的一条数据，如果对于右表所有的行，不存在符合关联条件的数据，则输出左表。|
 
-**说明：** [User Defined Join](https://www.atatech.org/articles/100074)指定两个输入流，用户自己实现Join的逻辑，这里不展开讨论。
+**说明：** User Defined Join 指定两个输入流，您可以自己实现Join的逻辑，这里不展开讨论。
 
 根据不同的场景，用户可以使用不同的Join类型来实现对应的关联操作。但是在实际使用过程中，存在这样的错误示例：
 

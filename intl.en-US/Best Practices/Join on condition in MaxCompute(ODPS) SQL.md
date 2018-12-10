@@ -15,7 +15,7 @@ Currently MaxCompute offers several join types:
 |Left Semi Join|For a single piece of data in the left table, if the right table has rows that match the criteria of the Association, the left table is output.|
 |Left Anti Join|For a single piece of data in the left table, if for all rows in the right table, there is no data that matches the criteria of the Association, and the left table is output.|
 
-**Note:** [User Defined Join](https://www.atatech.org/articles/100074) specifies both input streams, and the user himself implements the logic of the join, which is not discussed here.
+**Note:** User Defined Join specifies both input streams, and you can implements the logic of the join yourself, which is not discussed here.
 
 Depending on the scenario, the user can use different Join types to implement the corresponding Association operation. But in the actual use process, it is often not clear to users that the filtering criteria are different in join on statements or in where, or think they're doing the same thing, for example, in a production environment, users can often be seen writing:
 

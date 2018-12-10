@@ -4,9 +4,9 @@ MaxCompute Studio directly submits MaxCompute SQL scripts  to the server for ru
 
 ## Prerequisite {#section_zrx_zsf_vdb .section}
 
--   [Create a MaxCompute  project connection](intl.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md) and bind it to the target project.
+-   [Create a MaxCompute  project connection](reseller.en-US/Tools and Downloads/MaxCompute Studio/Project space connection management.md) and bind it to the target project.
 
--   Create a [MaxCompute Studio  module](intl.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Create MaxCompute Script module.md).
+-   Create a [MaxCompute Studio  module](reseller.en-US/Tools and Downloads/MaxCompute Studio/Develop SQL procedure/Create MaxCompute Script module.md).
 
 -   Before submission, perform setting as required. MaxCompute Studio provides various setting features. You can perform quick setting on the toolbar  at the top of the editor page. The following three types of setting can be performed:
 

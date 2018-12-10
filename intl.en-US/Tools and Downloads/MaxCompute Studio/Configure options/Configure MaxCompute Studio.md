@@ -59,7 +59,7 @@ The MaxCompute SQL configuration option page provides the following configuratio
 
 ## Account configuration option page {#section_s45_v34_vdb .section}
 
-You can add or manage accounts used to access MaxCompute on the Account configuration option page. For more information, see [User authentication](../../../../dita-oss-bucket/SP_76/DNODPS1898901/EN-US_TP_12094.dita).
+You can add or manage accounts used to access MaxCompute on the Account configuration option page. For more information, see [User authentication](../../../../reseller.en-US/User Guide/Security/User authentication.md).
 
 You must specify an account on MaxCompute Studio to access a MaxCompute project and run or submit jobs.  MaxCompute Studio currently supports the following account type:
 
@@ -74,12 +74,12 @@ On the Account configuration option page, follow these steps:
 3.  In the displayed Add Account window, set the following items:
     -   Account Name: Indicates the name of the account on MaxCompute Studio.
     -   Using properties file: Read the AccessKey ID and  AccessKey Secret from the configuration file.
-        -   Select the configuration file  `conf/odps_config.ini` after you process [User authentication](../../../../dita-oss-bucket/SP_76/DNODPS1898901/EN-US_TP_12094.dita).
+        -   Select the configuration file  `conf/odps_config.ini` after you process [User authentication](../../../../reseller.en-US/User Guide/Security/User authentication.md).
     -   Using properties: Manually enter the AccessKey ID and AccessKey  Secret.
         -   Access Id: Enter the AccessKey ID of your Alibaba Cloud account.
         -   Access Key: Enter the AccessKey Secret of your Alibaba Cloud account.   
 
-            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12143/15380617662461_en-US.png)
+            ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12143/15444389082461_en-US.png)
 
 4.  Click **OK** to complete addition.  Then, the account will be displayed in the Account list  on the Account configuration option page.
 
@@ -87,7 +87,7 @@ On the Account configuration option page, follow these steps:
 
 On the Account configuration option page, follow these steps: \(This operation only deletes the account configuration on Studio configuration, which does not affect your account.\)
 
-1.  Select the account to be deleted in the Account list.
+1.  Select the account to be deleted in the account list.
 2.  Click **-**.
 3.  In the displayed dialog box, click **OK**.
 
@@ -99,5 +99,5 @@ On the Account configuration option page, follow these steps:
 2.  Click the pencil icon.
 3.  In the displayed Edit Account window, modify the account information. The content is similar to that in the preceding section Add  Account.
 
-View the opening and connection of MaxCompute Region and the settings of Endpoint, see [Endpoints and Data Centers](../../../../reseller.en-US/Prepare/Endpoints and Data Centers.md#).
+View the opening and connection of MaxCompute Region and the settings of Endpoint, see [Endpoints and Data Centers](../../../../reseller.en-US/Prepare/Configure Endpoint.md#).
 

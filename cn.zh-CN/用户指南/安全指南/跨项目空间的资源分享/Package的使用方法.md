@@ -16,7 +16,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 -   创建Package
 
     ```
-    create package <prjname>;
+    create package <pkgname>;
     ```
 
     **说明：** 

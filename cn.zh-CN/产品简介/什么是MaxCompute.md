@@ -36,7 +36,7 @@ DataWorks和MaxCompute关系紧密：DataWorks为MaxCompute提供一站式的数
 ## 功能概述 {#section_cnm_c5v_tdb .section}
 
 -   数据通道
-    -   [批量、历史数据通道](../../../../intl.zh-CN/用户指南/数据上传下载/数据上传__下载概述.md#)
+    -   [批量、历史数据通道](../../../../intl.zh-CN/用户指南/数据上传下载/数据上传下载概述.md#)
 
         [TUNNEL](../../../../intl.zh-CN/用户指南/数据上传下载/批量数据通道SDK介绍/批量数据通道概要.md)是MaxCompute为您提供的数据传输服务，提供高并发的离线数据上传下载服务。支持每天TB/PB级别的数据导入导出，特别适合于全量数据或历史数据的批量导入。Tunnel 为您提供Java编程接口，并且在MaxCompute的客户端工具中，有对应的命令实现本地文件与服务数据的互通。
 

@@ -1,6 +1,8 @@
 # What is MaxCompute {#concept_qbk_1kv_tdb .concept}
 
-The big data computing service \(MaxCompute, formerly called ODPS\) is a fast and fully hosted GB/TB/PB level data warehouse solution.  MaxCompute supports a variety of classic distributed computing models that enable you to solve massive data calculation problems while reducing business costs, and maintaining data security.
+The big data computing service \(MaxCompute, formerly called ODPS\) is a fast and fully hosted GB/TB/PB level data warehouse solution. 
+
+MaxCompute supports a variety of classic distributed computing models that enable you to solve massive data calculation problems while reducing business costs, and maintaining data security.
 
 MaxCompute seamlessly integrates with DataWorks, which provides one-stop data synchronization, task development, data workflow development, data operation and maintenance, and data management for MaxCompute. For more information, see [DataWorks](https://www.alibabacloud.com/help/doc-detail/30256.htm).
 

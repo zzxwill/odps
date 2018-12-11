@@ -1,6 +1,6 @@
 # Cloud data migration {#concept_c3l_njf_vdb .concept}
 
-[Data upload and data download tools](reseller.en-US//Data upload and download/Data upload and download tools.md) of the MaxCompute platform can be used for a wide range of cloud data migration scenarios. This article introduces some typical scenarios.
+[Data upload and data download tools](reseller.en-US/User Guide/Data upload and download/Data upload and download tools.md) of the MaxCompute platform can be used for a wide range of cloud data migration scenarios. This article introduces some typical scenarios.
 
 ## Hadoop data migration {#section_xy1_jkf_vdb .section}
 

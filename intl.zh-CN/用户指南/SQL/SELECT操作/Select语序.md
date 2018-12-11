@@ -1,6 +1,8 @@
 # Select语序 {#concept_jsv_mkb_wdb .concept}
 
-按照Select语法格式书写的Select语句，实际上的逻辑执行顺序与标准的书写语序实际并不相同，以下用示例进行说明：
+按照Select语法格式书写的Select语句，实际上的逻辑执行顺序与标准的书写语序实际并不相同。
+
+以下用示例进行说明：
 
 ```
 SELECT  key

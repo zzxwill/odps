@@ -1,6 +1,8 @@
 # SELECT Sequence {#concept_jsv_mkb_wdb .concept}
 
-The actual logic execution sequence of SELECT statements written in compliance with the preceding SELECT syntax are different from the standard writing sequence. See the following example:
+The actual logic execution sequence of SELECT statements written in compliance with the preceding SELECT syntax are different from the standard writing sequence.
+
+See the following example:
 
 ```
 SELECT  key

@@ -6,7 +6,7 @@ In MaxCompute, each field can be specified as a separate partition. Alternativel
 
 If the partitions to be accessed are specified when you use data, then only corresponding partitions are read and a full table scan is avoided, improving processing efficiency while reducing costs.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11922/15432891751036_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11922/15444982731036_en-US.png)
 
 ## Partition types {#section_rbw_nz1_5db .section}
 

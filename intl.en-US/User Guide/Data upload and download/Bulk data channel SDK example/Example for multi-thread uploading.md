@@ -121,4 +121,5 @@ The Tunnel Endpoint can be specified or left blank.
 
 -   If specified, the uploading data goes through the specified Endpoint.
 -   If not specified, the uploading data goes through public network.
+-   This paper gives the Tunnel Endpoint of East China 2 classical network. The Tunnel Endpoint settings of other regions can be referred to [Configure Endpoint](../../../../reseller.en-US/Prepare/Configure Endpoint.md#).
 

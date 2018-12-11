@@ -4,12 +4,12 @@ MaxCompute provides three versions of MapReduce programming interface:
 
 -   MaxCompute MapReduce: Native interface for MaxCompute, which is faster than other interfaces. It is more convenient to develop a program without exposing file system.
 
--   [MR2](reseller.en-US/User Guide/MapReduce/Summary/Extended MapReduce.md) \(Extended MapReduce\): The extension to MaxCompute, which supports more complex job scheduling logic. MapReduce  is implemented in the same way as the  MaxCompute native interface.
+-   [MR2](intl.en-US/User Guide/MapReduce/Summary/Extended MapReduce.md) \(Extended MapReduce\): The extension to MaxCompute, which supports more complex job scheduling logic. MapReduce  is implemented in the same way as the  MaxCompute native interface.
 
--   [Hadoop compatible version](reseller.en-US/User Guide/MapReduce/Summary/Open-source MapReduce.md): Highly compatible with [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ,  but not compatible with  MaxCompute native interface and MR2.
+-   [Hadoop compatible version](intl.en-US/User Guide/MapReduce/Summary/Open-source MapReduce.md): Highly compatible with [Hadoop MapReduce](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html) ,  but not compatible with  MaxCompute native interface and MR2.
 
 
-The preceding three versions are basically the same in the  [Basic concepts](reseller.en-US/User Guide/MapReduce/Function Introduction/Basic concepts.md), [Job submission](reseller.en-US/User Guide/MapReduce/Function Introduction/Commands.md), [Input and output](reseller.en-US/User Guide/MapReduce/Function Introduction/Input and Output.md), and [Resource](reseller.en-US/User Guide/MapReduce/Function Introduction/Resources.md), and the only difference is the Java SDK. This article introduces the principle of MapReduce. For more detailed description of MapReduce, see [Hadoop MapReduce Course](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html).
+The preceding three versions are basically the same in the  [Basic concepts](intl.en-US/User Guide/MapReduce/Function Introduction/Basic concepts.md), [Job submission](intl.en-US/User Guide/MapReduce/Function Introduction/Commands.md), [Input and output](intl.en-US/User Guide/MapReduce/Function Introduction/Input and Output.md), and [Resource](intl.en-US/User Guide/MapReduce/Function Introduction/Resources.md), and the only difference is the Java SDK. This article introduces the principle of MapReduce. For more detailed description of MapReduce, see [Hadoop MapReduce Course](http://hadoop.apache.org/docs/r1.0.4/cn/mapred_tutorial.html).
 
 **Note:** You are not yet able to read or write data from the external tables through MapReduce.
 
@@ -47,7 +47,7 @@ The following example uses WordCount to explain the stages of MaxCompute MapRedu
 
 Assumethat a text named ‘a.txt’, where each row is indicated by a number, and the frequency of appearance of each number must be counted.  The number in the text is called as‘Word’ and the number appearance occurrence is called as 'Count'.  To complete this function through MaxCompute MapReduce, the following figure illustrates the required steps:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15441688461922_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12013/15445111961922_en-US.jpg)
 
 Procedure:
 

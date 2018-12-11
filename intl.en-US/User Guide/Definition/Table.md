@@ -8,6 +8,6 @@ The operating objects \(input, output\) of various computing tasks in MaxCompute
 
 MaxCompute v2.0 supports two types of tables: internal tables and external tables.The MaxCompute2.0 version begins to support the external table.
 
--   For internal tables, all data is stored in MaxCompute tables, and the columns in the table can be any of the data types supported by MaxCompute[Data types](intl.en-US/Product Introduction/Definition/Data types.md#).
+-   For internal tables, all data is stored in MaxCompute tables, and the columns in the table can be any of the data types supported by MaxCompute[Data types](reseller.en-US/User Guide/Definition/Data types.md#).
 -   For external tables, data is not stored in MaxCompute. Instead, table data can be stored in [OSS](https://www.alibabacloud.com/product/oss) or [OTS](https://www.alibabacloud.com/product/ots).  MaxCompute only records meta information of the table. You can use MaxCompute’s external table to process unstructured data on OSS or Table Store, such as video, audio, genetics, meteorological, and geographic information.
 

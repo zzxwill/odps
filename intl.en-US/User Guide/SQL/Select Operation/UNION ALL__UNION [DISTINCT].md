@@ -1,5 +1,7 @@
 # UNION ALL/UNION \[DISTINCT\] {#concept_m5k_pkb_wdb .concept}
 
+The UNION operator is used to merge the result set of two or more SELECT statements.
+
 **The syntax format is as follows**:
 
 ```

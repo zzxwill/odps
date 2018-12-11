@@ -1,5 +1,7 @@
 # Example for BufferedWriter uploading {#concept_npv_cpg_vdb .concept}
 
+This article shows you how to use the BufferedWriter interface to upload data through code examples.
+
 ```
 // Initializes MaxCompute and Tunnel code
 RecordWriter writer = null;

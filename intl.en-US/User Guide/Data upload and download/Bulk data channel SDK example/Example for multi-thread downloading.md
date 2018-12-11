@@ -1,5 +1,7 @@
 # Example for multi-thread downloading {#concept_lq5_k4g_vdb .concept}
 
+This article shows you how to use the TableTunnel interface to achieve multithreaded download through code examples.
+
 ```
 import java.io.IOException;
  import java.util.ArrayList;
@@ -151,4 +153,5 @@ The Tunnel Endpoint can be specified or left blank.
 
 -   If specified, the downloading data goes through the specified Endpoint.
 -   If not specified, the downloading data goes through public network Endpoint.
+-   This paper gives the Tunnel Endpoint of East China 2 classical network. The Tunnel Endpoint settings of other regions can be referred to [Configure Endpoint](../../../../reseller.en-US/Prepare/Configure Endpoint.md#).
 

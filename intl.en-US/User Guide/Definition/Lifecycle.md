@@ -1,5 +1,7 @@
 # Lifecycle {#concept_zbq_yfb_5db .concept}
 
+This article introduces the concept of life cycle of MaxCompute tables in detail.
+
 The lifecycle of a MaxCompute table or partition is measured from the last update time. If the table or partition remains unchanged after a specified time, MaxCompute automatically recycles it.  The **specified time** indicates the lifecycle.
 
 -   Lifecycle units: days, positive integers only.

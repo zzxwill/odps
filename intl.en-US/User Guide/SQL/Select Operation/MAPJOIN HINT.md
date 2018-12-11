@@ -1,6 +1,8 @@
 # MAPJOIN HINT {#concept_bf5_tkb_wdb .concept}
 
-MapJoin helps to join a large table with one or multiple small tables.It is faster than common Join operations. A typical scenario of MapJoin,  is as follows: When the data volume is small, SQL loads all your specified small tables into the memory of the program performing the Join operation to speed up JOIN execution.
+MapJoin helps to join a large table with one or multiple small tables.It is faster than common Join operations.
+
+A typical scenario of MapJoin,  is as follows: When the data volume is small, SQL loads all your specified small tables into the memory of the program performing the Join operation to speed up JOIN execution.
 
 **Note:** When you use the MapJoin, note the following:
 

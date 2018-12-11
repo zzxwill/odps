@@ -51,7 +51,7 @@ Tunnel命令主要用于数据的上传和下载等功能。
 
 Tunnel命令不支持上传下载Array、Map和Struct类型的数据。
 
-每个Tunnel的Session 在服务端的生命周期为 24 小时，创建后 24 小时内均可使用，也可以跨进程/线程共享使用，但是必须保证同一个 BlockId 没有重复使用。
+每个Tunnel的Session在服务端的生命周期为24小时，创建后24小时内均可使用，也可以跨进程/线程共享使用，但是必须保证同一个BlockId没有重复使用。
 
 ## Tunnel命令使用说明 {#section_g2l_1wf_vdb .section}
 
@@ -124,7 +124,7 @@ Example:
     tunnel upload log.txt test_project.test_table/p1="b1",p2="b2"
 ```
 
-**参数说明：**
+参数说明：
 
 -   -acp：如果不存在，自动创建目标分区，默认关闭。
 -   -bs：每次上传至Tunnel的数据块大小，默认100MiB（1MiB＝1024\*1024B）。
@@ -148,7 +148,7 @@ Example:
 -   -threads：指定threads的数量，默认为1。
 -   -tz：指定时区。默认为本地时区：Asia/Shanghai。
 
-**示例如下：**
+示例如下：
 
 -   创建目标表，如下所示：
 
@@ -217,11 +217,11 @@ Example:
        tunnel show log
 ```
 
-**参数说明：**
+参数说明：
 
 -n：指定显示行数。
 
-**示例如下：**
+示例如下：
 
 ```
 odps@ project_name>tunnel show  history;
@@ -243,7 +243,7 @@ Example:
        tunnel resume
 ```
 
-**示例如下：**
+示例如下：
 
 修改data.txt文件为如下内容：
 
@@ -359,7 +359,7 @@ Example:
        tunnel download instance://test_project/test_instance log.txt
 ```
 
-**参数说明：**
+参数说明：
 
 -   -c：本地数据文件编码，默认为忽略。
 -   -ci：指定列索引（从0）下载，使用逗号分隔。
@@ -380,7 +380,7 @@ Example:
 -   -threads：指定threads的数量，默认为1。
 -   -tz：指定时区。默认为本地时区：Asia/Shanghai。
 
-**示例如下：**
+示例如下：
 
 下载数据到result.txt文件中，如下所示：
 
@@ -413,7 +413,7 @@ Example:
        tunnel purge 5
 ```
 
-**数据类型说明**：
+数据类型说明：
 
 |类型|描述|
 |:-|:-|
@@ -439,7 +439,7 @@ Example:
 "yyyy年MM月dd日": 数据格式"2014年09月01日"
 ```
 
-**示例如下：**
+示例如下：
 
 ```
 tunnel upload log.txt test_table -dfp "yyyy-MM-dd HH:mm:ss"
@@ -468,7 +468,7 @@ tunnel upload log.txt test_table -c "gbk"
 -   列分隔符不能够包含行分隔符。
 -   转义字符分隔符，在命令行方式下只支持\\r、\\n和\\t。
 
-**示例如下：**
+示例如下：
 
 ```
 tunnel upload log.txt test_table -fd "||" -rd "\r\n"

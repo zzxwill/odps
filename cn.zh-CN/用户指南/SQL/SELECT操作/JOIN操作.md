@@ -2,7 +2,7 @@
 
 MaxCompute的JOIN支持多路链接，但不支持笛卡尔积，即无on条件的链接。
 
-**命令格式如下**：
+命令格式如下：
 
 ```
 join_table:
@@ -31,7 +31,7 @@ select a.shop_name as ashop, b.shop_name as bshop from shop a
 
 right outer join：右连接，返回右表中的所有记录，即使在左表中没有记录与它匹配。
 
-**示例如下：**
+示例如下。
 
 ```
 select a.shop_name as ashop, b.shop_name as bshop from shop a
@@ -40,7 +40,7 @@ select a.shop_name as ashop, b.shop_name as bshop from shop a
 
 full outer join：全连接，返回左右表中的所有记录。
 
-**示例如下：**
+示例如下。
 
 ```
 select a.shop_name as ashop, b.shop_name as bshop from shop a
@@ -64,7 +64,7 @@ select a.* from shop a join sale_detail b on a.shop_name != b.shop_name;
     -- 不支持不等值Join链接条件，报错返回。
 ```
 
-IMPLICIT JOIN，MaxCompute支持如下Join方式：
+IMPLICIT JOIN，MaxCompute支持如下Join方式。
 
 ```
 SELECT * FROM table1, table2 WHERE table1.id = table2.id;

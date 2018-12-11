@@ -2,7 +2,7 @@
 
 The JOIN operation of MaxCompute supports n-way join, but does not support Cartesian product, that is, a link without the ON condition.
 
-**Function definition**:
+Function definition.
 
 ```
 join_table:
@@ -31,7 +31,7 @@ select a.shop_name as ashop, b.shop_name as bshop from shop a
 
 RIGHT OUTER JOIN: indicates the right join. It returns all records from the right table even if no matching record exists in the left table.
 
-**For example:**
+For example.
 
 ```
 select a.shop_name as ashop, b.shop_name as bshop from shop a
@@ -40,7 +40,7 @@ select a.shop_name as ashop, b.shop_name as bshop from shop a
 
 FULL OUTER JOIN: indicates the full join. It returns all records from both the left and the right table.
 
-**For example:**
+For example.
 
 ```
 select a.shop_name as ashop, b.shop_name as bshop from shop a

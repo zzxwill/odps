@@ -1,9 +1,15 @@
 # Resource {#concept_fqd_ygb_5db .concept}
 
+This paper introduces the concept of MaxCompute Resource, which can provide resource dependency for MaxCompute specific operations.
+
+## The concept of resources {#section_fdb_ftt_bgb .section}
+
 Resources is a concept that is unique to MaxCompute. To accomplish tasks using user-defined functions \(for more information, see [UDF](../../../../reseller.en-US/User Guide/SQL/UDF/UDF Summary.md)\), or [MapReduce](../../../../reseller.en-US/User Guide/MapReduce/Summary/MapReduce.md), you must use resources.
 
 -   **SQL UDF**: After writing a UDF, you must compile it as a Jar package and upload the package to MaxCompute as a resource.  Then, when you run this UDF, MaxCompute automatically downloads its corresponding JAR package to obtain the written code.  The JAR package is one type of MaxCompute resource.
 -   **MapReduce**: After writing a MapReduce program, you must compile it as a Jar package and upload the package to MaxCompute as a resource.  Then, when running a MapReduce job, the MapReduce framework automatically downloads the corresponding JAR package and obtain the written code. You can upload text files and MaxCompute tables to MaxCompute as different types of resources. Then, you can read or use these resources when running UDF or MapReduce.
+
+## Resource type {#section_ncb_g5t_bgb .section}
 
 MaxCompute provides interfaces for you to read and use resources. For more information, see [Use Resourse Example](../../../../reseller.en-US/User Guide/MapReduce/Program Example/Resource samples.md) and [UDTF Usage](../../../../reseller.en-US/User Guide/SQL/UDF/Java UDF.md)  .
 

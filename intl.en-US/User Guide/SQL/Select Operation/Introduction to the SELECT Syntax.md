@@ -1,5 +1,7 @@
 # Introduction to the SELECT Syntax {#concept_i1q_lkb_wdb .concept}
 
+This article introduces you to the Select grammar format and the precautions for executing nested queries, sorting operations and grouping queries using select grammar.
+
 ## Introduction to the SELECT Syntax {#section_dmz_cb1_hfb .section}
 
 The command format is as follows:

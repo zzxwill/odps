@@ -1,5 +1,7 @@
 # Select语法介绍 {#concept_i1q_lkb_wdb .concept}
 
+本文向您介绍Select语法格式及使用select语法执行嵌套查询、排序操作、分组查询等操作的注意事项。
+
 ## Select语法介绍 {#section_dcq_y11_hfb .section}
 
 命令格式如下：

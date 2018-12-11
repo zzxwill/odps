@@ -2,27 +2,27 @@
 
 This article explains how to use common commands to operate functions in the MaxCompute client. 
 
-You can also operate functions using the visualized online data development tools in DataWorks. For more information, see [Function Management](https://www.alibabacloud.com/help/doc-detail/30278.html).
+You can also operate functions using the visualized online data development tools in DataWorks. For more information, see [Function Management](../../../../reseller.en-US/User Guide/Data management/Create a table.md#).
 
 ## Create a Function {#section_rrq_12f_vdb .section}
 
-**The command format is as follows:**
+**Command format:**
 
 ```
 CREATE FUNCTION <function_name> AS <package_to_class> USING <resource_list>;
 ```
 
-**Parameters information:**
+**Parameters**
 
 -   function\_name: An UDF name referenced in SQL.
--   package\_to\_class: For Java UDF,  this this name is a fully qualified class name \(from top-level package name to UDF class name\). This parameter must be in double quotation marks.  And, Ffor Python UDF,    this name is a python script name.  classname.    For both Java UDF and python script, use double quotation \(““\) marks to indicate this parameter. And for the name you should use quotation marks.
+-   package\_to\_class: For Java UDF, this name is a fully qualified class name \(from top-level package name to UDF class name\). This parameter must be in double quotation marks.  And, for Python UDF, this name is a python script name. classname. For both Java UDF and python script, use double quotation \(““\) marks to indicate this parameter. And for the name, use quotation marks.
 -     resource\_list: Provides resource list used by UDF.
     -   Resources that contain UDF code must be included in the list.
     -   If the code reads the resource file by the distributed cache interface, this list also contains the list of resource files read by the UDF.
-    -   The resource list is composed of multiple resource names, separated by comma \(,\). The resource list must be in double quotation \(“”\) marks.
+    -   The resource list is composed of multiple resource names, separated by a comma \(,\). The resource list must be in double quotation \(“”\) marks.
     -   Specify the project in which the resource is located as follows: `<project_name>/resources/<resource_name>`.
 
-**Examples:**
+**Example:**
 
 -   Suppose a Java UDF class org.alidata.odps.udf.examples.Lower is in my\_lower.jar, create function my\_lower as follows:
 
@@ -48,17 +48,17 @@ CREATE FUNCTION <function_name> AS <package_to_class> USING <resource_list>;
 **Note:** 
 
 -   Similar to the resource files, the UDF duplicate name can be registered only once.
--   Generally UDF cannot overwrite system built-in functions.  Only the project owner has right to overwrite the built-in functions.  If you are using a UDF which overwrites the built-in function, the warning is triggered in Summary after SQL execution.
+-   Generally UDF cannot overwrite system built-in functions. Only the project owner has right to overwrite the built-in functions. If you are using a UDF which overwrites the built-in function, the warning is triggered in Summary after SQL execution.
 
 ## Drop a Function {#section_esm_m2f_vdb .section}
 
-**The command format is as follows:**
+**Command format:**
 
 ```
 DROP FUNCTION <function_name>;
 ```
 
-**Examples:**
+**Example:**
 
 ```
 DROP FUNCTION test_lower;
@@ -66,7 +66,7 @@ DROP FUNCTION test_lower;
 
 ## List Functions {#section_o2r_42f_vdb .section}
 
-**The command format is as follows:**
+**Command format:**
 
 ```
 list functions; --View all user-defined functions in current project.

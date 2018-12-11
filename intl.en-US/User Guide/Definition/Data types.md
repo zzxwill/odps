@@ -8,7 +8,7 @@ supported by MaxCompute2.0 are listed in the following table. Columns in a MaxCo
 
 **Note:** At present, the Set commands supported by MaxCompute SQL and new version Mapreduce are divided into two ways:
 
--   Session Level: To use the new data types \(Tinyint, Smallint, Int, Float, Varchar, TIMESTAMP BINARY\), add a set statement before the table statement
+-   Session Level: To use the new data types \(Tinyint, Smallint, Int, Float, Varchar, TIMESTAMP and BINARY\), add a set statement before the table statement
 
     ```
     set odps.sql.type.system.odps2=true;

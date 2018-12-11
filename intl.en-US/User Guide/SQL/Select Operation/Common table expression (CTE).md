@@ -2,7 +2,7 @@
 
 MaxCompute supports CTEs in standard SQL to improve the readability and execution efficiency of SQL statements.
 
-**Syntax structure of CTE:**
+Syntax structure of CTE.
 
 ```
 WITH 

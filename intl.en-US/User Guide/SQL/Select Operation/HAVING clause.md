@@ -2,7 +2,7 @@
 
 HAVING clauses are used because the Where keyword of MaxCompute SQL cannot be used together with aggregate functions.
 
-**Function definition:**
+Function definition.
 
 ```
 SELECT column_name, aggregate_function(column_name)
@@ -12,7 +12,7 @@ GROUP BY column_name
 HAVING aggregate_function(column_name) operator value
 ```
 
-**Example**:
+Example.
 
 A table named Orders contains four fields: Customer, OrderPrice, Order\_date, and Order\_id. To query customers whose OrderPrice is smaller than 2,000, The SQL statement is as follows:
 

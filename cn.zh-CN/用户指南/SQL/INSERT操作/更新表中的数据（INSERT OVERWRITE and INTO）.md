@@ -31,7 +31,7 @@ Insert into与Insert overwrite的区别是：Insert into会向表或表的分区
 create table sale_detail_insert like sale_detail;
 alter table sale_detail_insert add partition(sale_date='2013', region='china');
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
-select shop_name, customer_id, total_price from sale_detail;
+select shop_name, customer_id,total_price from sale_detail;
 ```
 
 **说明：** 在进行Insert更新数据操作时，源表与目标表的对应关系依赖于在select子句中列的顺序，而不是表与表之间列名的对应关系，下面的SQL语句仍然是合法的：
@@ -39,26 +39,26 @@ select shop_name, customer_id, total_price from sale_detail;
 ```
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
 select customer_id, shop_name, total_price from sale_detail;
-    -- 在创建sale_detail_insert表时，列的顺序为：
-    -- shop_name string, customer_id string, total_price bigint
-    -- 而从sale_detail向sale_detail_insert插入数据是，sale_detail的插入顺序为：
-    -- customer_id, shop_name, total_price
-    -- 此时，会将sale_detail.customer_id的数据插入sale_detail_insert.shop_name
-    -- 将sale_detail.shop_name的数据插入sale_detail_insert.customer_id
+-- 在创建sale_detail_insert表时，列的顺序为：
+-- shop_name string, customer_id string, total_price bigint
+-- 而从sale_detail向sale_detail_insert插入数据是，sale_detail的插入顺序为：
+-- customer_id, shop_name, total_price
+-- 此时，会将sale_detail.customer_id的数据插入sale_detail_insert.shop_name
+-- 将sale_detail.shop_name的数据插入sale_detail_insert.customer_id
 ```
 
 向某个分区插入数据时，分区列不允许出现在select列表中。
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
-        select shop_name, customer_id, total_price, sale_date, region  from sale_detail;
-    -- 报错返回，sale_date，region 为分区列，不允许出现在静态分区的 insert 语句中。
+select shop_name, customer_id, total_price, sale_date, region  from sale_detail;
+-- 报错返回，sale_date，region为分区列，不允许出现在静态分区的insert语句中。
 ```
 
 同时，partition的值只能是常量，不可以出现表达式。以下用法是非法的：
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date=datepart('2016-09-18 01:10:00', 'yyyy') , region='china')
-        select shop_name, customer_id, total_price from sale_detail;
+select shop_name, customer_id, total_price from sale_detail;
 ```
 

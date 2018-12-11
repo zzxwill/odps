@@ -34,26 +34,26 @@ select shop_name, customer_id, total_price from sale_detail;
 ```
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
 select customer_id, shop_name, total_price from sale_detail;
-    -- When the sale_detail_insert table is created, the column sequence is as below:
-    -- shop_name string, customer_id string, total_price bigint
-    -- When data is inserted from sale_detail to sale_detail_insert, the insertion sequence of sale_detail is as below:
-    -- customer_id, shop_name, total_price
-    -- Inserts data in sale_detail.customer_id into sale_detail_insert.shop_name.
-    -- Inserts data in sale_detail.shop_name into sale_detail_insert.customer_id.
+-- When the sale_detail_insert table is created, the column sequence is as below:
+-- shop_name string, customer_id string, total_price bigint
+-- When data is inserted from sale_detail to sale_detail_insert, the insertion sequence of sale_detail is as below:
+-- customer_id, shop_name, total_price
+-- Inserts data in sale_detail.customer_id into sale_detail_insert.shop_name.
+-- Inserts data in sale_detail.shop_name into sale_detail_insert.customer_id.
 ```
 
 To insert data into a partition, the partition column cannot appear in the Select list.
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date='2013', region='china')
-        select shop_name, customer_id, total_price, sale_date, region from sale_detail;
-    -- Returns an error. The items sale_date and region are partition columns, which cannot appear in the INSERT statement of static partitions.
+select shop_name, customer_id, total_price, sale_date, region from sale_detail;
+-- Returns an error. The items sale_date and region are partition columns, which cannot appear in the INSERT statement of static partitions.
 ```
 
 Simultaneously, the value of the partition can only be a constant and expressions cannot appear. The following statements are invalid:
 
 ```
 insert overwrite table sale_detail_insert partition (sale_date=datepart('2016-09-18 01:10:00', 'yyyy') , region='china')
-        select shop_name, customer_id, total_price from sale_detail;
+select shop_name, customer_id, total_price from sale_detail;
 ```
 

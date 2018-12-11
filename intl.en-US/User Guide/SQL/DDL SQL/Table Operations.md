@@ -1,8 +1,10 @@
 # Table Operations {#concept_l3j_w31_wdb .concept}
 
+This article shows you how to create, view, delete, rename and modify table information through the client.
+
 ## Create tables {#section_qqp_st1_wdb .section}
 
-**Statement format:**
+Statement format:
 
 ```
 CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
@@ -18,7 +20,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
  LIKE existing_table_name
 ```
 
-**Consider the following points:**
+Consider the following points:
 
 -   When a table is created, an error is returned if the same name table exists without specifying the "if not exists" option. If the option is specified, no matter whether a same name table exists and even if the source table structure and the target table structure are inconsistent, all return successfully. The Meta information of the existing table does not change.
 -   Both the table name and column name are case insensitive and cannot have special characters. It must begin with a letter and can include a-z, A-Z, digits, and underscores \(\_\). The name length cannot exceed 128 bytes.
@@ -34,7 +36,7 @@ CREATE [EXTERNAL] TABLE [IF NOT EXISTS] table_name
 -   Currently, 60,000 partitions are allowed in a table, and the partition hierarchy cannot exceed 6 levels.
 -   The comment content is the effective string and its length must not exceed 1024 bytes
 -   Lifecycle indicates the lifecycle of the table, the unit is ‘days’. The statement create table like does not copy the lifecycle attribute from source table
--   For more information about external tables, see [Access OSS](reseller.en-US/User Guide/External table/Accessing OSS unstructured data.md#).
+-   For more information about external tables, see [Access OSS](reseller.en-US/User Guide/External table/Access OSS unstructured data.md#).
 
 For example:
 
@@ -51,7 +53,7 @@ partitioned by (sale_date string,region string);
  -- Create a partition table sale_detail.
 ```
 
-The statement`create table…as select ...` can also be used to create a table. After creating a table, the data is copied to the new table, such as:
+The statement`create table...as select ...` can also be used to create a table. After creating a table, the data is copied to the new table, such as:
 
 ```
 create table sale_detail_ctas1 as
@@ -60,9 +62,9 @@ select * from sale_detail;
 
 If the table sale\_detail has data, the example mentioned preceding copies all data of sale\_detail into the table sale\_detail\_ctas1.
 
-**Note:** sale\_detail is a partitioned table, while the table created by the statement `create table … as select …` does not copy the partition attribute. The partition column of source table becomes a general column of object table. In other words, sale\_detail\_ctas1 is a non-partition table with 5 columns.
+**Note:** sale\_detail is a partitioned table, while the table created by the statement `create table...as select...` does not copy the partition attribute. The partition column of source table becomes a general column of object table. In other words, sale\_detail\_ctas1 is a non-partition table with 5 columns.
 
-In the statement `create table … as select…` if using a constant as a column value in Select clause, it is suggested specify the column name, such as:
+In the statement `create table...as select...` if using a constant as a column value in Select clause, it is suggested specify the column name, such as:
 
 ```
 create table sale_detail_ctas2 as
@@ -88,7 +90,7 @@ create table sale_detail_ctas3 as
 
 Then the forth column and fifth column of the created table sale\_detail\_ctas3 become system generated names, like `_c3`, `_c4`. 
 
-To let the destination table have the same structure as the source table, try to use `create  table … like’` statement, such as:
+To let the destination table have the same structure as the source table, try to use `create table … like’` statement, such as:
 
 ```
 create table sale_detail_like like sale_detail;
@@ -105,7 +107,7 @@ desc <table_name>;
 desc extended <table_name>; --View external table information.
 ```
 
-**For example:**
+For example:
 
 -   To view the info of the preceding table sale\_detail, run the following statement:
 
@@ -225,7 +227,7 @@ DROP TABLE [IF EXISTS] table_name;
 -   If the option \[if exists\] is not specified and the table does not exist, exception returns.  If this option is specified, no matter whether the table exists or not, all return success.
 -   Data in OSS is not deleted when the external tables are deleted.
 
-**For example:**
+For example:
 
 ```
 create table sale_detail_drop like sale_detail;

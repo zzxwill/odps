@@ -156,7 +156,7 @@ public class WordCount {
 
 ## 作业提交 {#section_okw_gbg_vdb .section}
 
-使用MaxCompute命令行工具odpscmd提交作业。MaxCompute命令行工具的安装和配置方法请参见[客户端用户手册](../../../../intl.zh-CN//客户端.md#)。在odpscmd运行如下命令。
+使用MaxCompute命令行工具odpscmd提交作业。MaxCompute命令行工具的安装和配置方法请参见[客户端用户手册](../../../../intl.zh-CN/工具及下载/客户端.md#)。在odpscmd运行如下命令：
 
 ```
 jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2openmr-1.0.jar,wordcount_test.jar com.aliyun.odps.mapred.example.hadoop.WordCount /foo /bar;
@@ -173,9 +173,9 @@ jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2
 
 运行过程如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15359597451957_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15445112681957_zh-CN.jpg)
 
 当作业运行完成后，便可查看结果表wc\_out的内容，验证作业是否成功结束，结果是否符合预期。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15359597451959_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15445112681959_zh-CN.jpg)
 

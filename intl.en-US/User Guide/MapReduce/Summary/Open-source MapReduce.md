@@ -76,7 +76,7 @@ public class WordCount {
 
 ```
 
-## Prepare the Test Data {#section_y1l_s1g_vdb .section}
+## Prepare the test data {#section_y1l_s1g_vdb .section}
 
 1.  Create input and output tables.
 
@@ -101,9 +101,9 @@ public class WordCount {
     ```
 
 
-## Configure the Mapping Between the Table and the HDFS File Path {#section_b22_1bg_vdb .section}
+## Configure the mapping between the table and the HDFS file path {#section_b22_1bg_vdb .section}
 
-The configuration file is wordcount-table-res.conf.
+The configuration file is wordcount-table-res.conf:
 
 ```
 {
@@ -144,11 +144,11 @@ The configuration file is wordcount-table-res.conf.
 }
 ```
 
-Parameters:
+**Parameters**
 
 The configuration is a JSON file that describes the mapping relationships between HDFS files and the MaxCompute tables. Generally, you must configure both the input and output. One HDFS path corresponds to one Resolver, tableInfos, and matchMode.
 
--   resolver: Specifies the method of processing file data. Currently, you can choose from two built-in Resolvers: com.aliyun.odps.mapred.hadoop2openmr.resolver.TextFileResolver and com.aliyun.odps.mapred.hadoop2openmr.resolver.BinaryFileResolver.  In addition to specifying the Resolver name, you must also configure some properties about data parsing for the Resolver.
+-   resolver: Specifies the method of processing file data. Currently, you can choose from two built-in Resolvers: com.aliyun.odps.mapred.hadoop2openmr.resolver.TextFileResolver and com.aliyun.odps.mapred.hadoop2openmr.resolver.BinaryFileResolver.  In addition to specifying the Resolver name, configure some properties about data parsing for the Resolver.
     -   TextFileResolver: Regards an input or output as plain text if the data is of plain text type. When configuring an input Resolver, configure such properties as text.resolver.columns.combine.enable and text.resolver.seperator. When text.resolver.columns.combine.enable is set to true, all the columns in the input table are combined into a single string based on the delimiter specified by text.resolver.seperator. Otherwise, the first two columns in the input table are used as the key and value.
     -   BinaryFileResolver: Converts binary data into a type that is supported by MaxCompute, for example, Bigint, Boolean, and Double. When configuring an output Resolver, configure the properties binary.resolver.input.key.class and binary.resolver.input.value.class, which define the key and value types of the intermediate result, respectively.
 -   tableInfos: Specifies the MaxCompute table that corresponds to HDFS. Currently, only the tblName parameter \(table name\) is configurable. The partSpec and label parameters must be the same as the values set for the parameters in this example.
@@ -156,7 +156,7 @@ The configuration is a JSON file that describes the mapping relationships betwee
 
 ## Job Submission {#section_okw_gbg_vdb .section}
 
-Use the MaxCompute command line tool odpscmd to submit jobs. For the installation and configuration of MaxCompute command line tool, see the [Console](../../../../reseller.en-US//Client.md#). In odpscmd, run the following command:
+Use the MaxCompute command line tool odpscmd to submit jobs. For the installation and configuration of MaxCompute command line tool, see the [Console](../../../../reseller.en-US/Tools and Downloads/Client.md#). In odpscmd, run the following command:
 
 ```
 jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2openmr-1.0.jar,wordcount_test.jar com.aliyun.odps.mapred.example.hadoop.WordCount /foo/bar;
@@ -171,11 +171,11 @@ jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2
 -   With the mapping relation configured, manually import the Hadoop HDFS input file to wc\_in for MR calculations by using data integration functions of DataX or DataWorks, and manually export the result wc\_out to your HDFS output directory\(/bar\).
 -   In the preceding output, assume that hadoop2openmr-1.0.jar, wordcount\_test.jar, and wordcount-table-res.conf are stored in the current directory of odpscmd. If an error occurs, make the relevant changes when specifying the configuration and -classpath.
 
-The running process is shown in the following figure:
+The running process is as follows:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15359597501957_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15445112731957_en-US.jpg)
 
 After running the job, check the results table wc\_out to verify whether a job is complete:
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15359597501959_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15445112731959_en-US.jpg)
 

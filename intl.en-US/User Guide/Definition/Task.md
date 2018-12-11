@@ -8,5 +8,5 @@ Currently, an execution plan can be logically viewed as a directed graph whose v
 
 For MaxCompute tasks that are not computational tasks, such as DDL statement in SQL, these tasks can only read and modify the metadata information in MaxCompute.  This means that no execution plan can be analyzed and generated from the task.
 
-**Note:** Not all the requests are converted into tasks in MaxCompute, for example, the operations of [Project](reseller.en-US/User Guide/Definition/Projects.md), [Resource](reseller.en-US/User Guide/Definition/Resource.md), [UDF](reseller.en-US/User Guide/Definition/Function.md) and [Instance](reseller.en-US/User Guide/Definition/Instance.md) can be completed without MaxCompute tasks.
+**Note:** Not all the requests are converted into tasks in MaxCompute, for example, the operations of [Project](reseller.en-US/User Guide/Definition/Project.md), [Resource](reseller.en-US/User Guide/Definition/Resource.md), [UDF](reseller.en-US/User Guide/Definition/Function.md) and [Instance](reseller.en-US/User Guide/Definition/Instance.md) can be completed without MaxCompute tasks.
 

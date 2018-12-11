@@ -1,5 +1,7 @@
 # Example for BufferedWriter multi-thread uploading {#concept_dxx_v4g_vdb .concept}
 
+This article shows you how to use BufferedWriter interface to realize multithreaded upload through code examples.
+
 ```
 class UploadThread extends Thread {
   private UploadSession session;

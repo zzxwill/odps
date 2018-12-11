@@ -2,7 +2,7 @@
 
 This article explains how to use the common commands to operate tables in the MaxCompute client.
 
-If you want to operate a table, you can use common commands in the client, and you can also easily collect tables, apply permissions, and view partitions through the visible data table management in DataWorks. For more information, see [Table Details](https://www.alibabacloud.com/help/doc-detail/30288.html).
+If you want to operate a table, use common commands in the client. Moreover it is more convenient to collect tables, apply permissions, and view partitions using the visible data table manager in DataWorks. For more information, see [Table Details](../../../../reseller.en-US/User Guide/Data management/Table detail page.md#).
 
 ## Create tables {#section_wpz_zk2_vdb .section}
 

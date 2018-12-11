@@ -86,7 +86,7 @@ import java.io.IOException;
 
 PartitionSpec\(String spec\): Uses a string to construct this class of object.
 
-**Parameter descriptions:**
+**Parameters**
 
 spec: The partition definition string, such as pt=’1’,ds=’2’.
 
@@ -95,4 +95,6 @@ In this program, the configuration must be as follows:
 ```
 private static String partition = “pt=’XXX’,ds=’XXX’”;
 ```
+
+**Note:** This paper gives the Tunnel Endpoint of East China 2 classical network. The Tunnel Endpoint settings of other regions can be referred to [Configure Endpoint](../../../../reseller.en-US/Prepare/Configure Endpoint.md#).
 

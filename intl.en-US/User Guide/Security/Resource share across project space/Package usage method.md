@@ -14,7 +14,7 @@ The following is a description of the operations involved with the package creat
 -   Create package
 
     ```
-    Create package;
+    create package <pkgname>;
     ```
 
     **Note:** 

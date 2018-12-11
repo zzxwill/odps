@@ -16,7 +16,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 -   创建Package
 
     ```
-    create package ;
+    create package <prjname>;
     ```
 
     **说明：** 
@@ -94,7 +94,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 -   查看Package
 
     ```
-        show packages;
+    show packages;
         --查看已创建和已安装的package列表
         describe package <pkgname>;
         --查看package详细信息
@@ -119,7 +119,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
     比如，如下的ACL授权允许云账号用户LIYUN$odps\_test@aliyun.com访问Package里的资源：
 
     ```
-        use prj2;
+    use prj2;
         install package prj1.testpkg;
         grant read on package prj1.testpackage to user aliyun$odps_test@aliyun.com;
     ```
@@ -142,7 +142,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 1.  项目空间prj1的管理员Jack在项目空间prj1中创建资源包\(package\)。
 
     ```
-        use prj1;
+    use prj1;
         create package datamining; --创建一个package
         add resource datamining.jar to package datamining; --添加资源到package
         add table sampletable to package datamining; --添加table到package
@@ -152,7 +152,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 2.  项目空间prj2管理员Jhon在项目空间prj2中安装package。
 
     ```
-        use prj2;
+    use prj2;
         install package prj1.datamining; --安装一个package
         describe package prj1.datamining; --查看package中的资源列表
     ```
@@ -160,7 +160,7 @@ Package的使用涉及到两个主体：Package创建者和Package使用者。
 3.  Jhon对package给Bob进行自主授权。
 
     ```
-        use prj2;
+    use prj2;
         grant Read on package prj1.datamining to user aliyun$bob@aliyun.com; --通过ACL授权Bob使用package
     ```
 

@@ -1,8 +1,12 @@
 # 输出到动态分区（DYNAMIC PARTITION） {#concept_b1p_qdb_wdb .concept}
 
-在Insert overwrite到一张分区表时，可以在语句中指定分区的值。也可以用另外一种更加灵活的方式，在分区中指定一个分区列名，但不给出值。相应地，在select子句中的对应列来提供分区的值。
+在Insert overwrite到一张分区表时，可以在语句中指定分区的值。
 
-**命令格式如下**：
+## 概述 {#section_aky_dyy_bgb .section}
+
+您可以在分区中指定一个分区列名，但不给出值。相应地，在select子句中的对应列来提供分区的值。
+
+命令格式如下：
 
 ```
 insert overwrite table tablename partition (partcol1, partcol2 ...) select_statement from from_statement;
@@ -22,7 +26,9 @@ insert overwrite table tablename partition (partcol1, partcol2 ...) select_state
 
 -   如果目标表有多级分区，在运行Insert语句时允许指定部分分区为静态，但是静态分区必须是高级分区。
 
-**动态分区的示例如下**：
+## 示例 {#section_shg_fyy_bgb .section}
+
+动态分区的示例如下：
 
 ```
 create table total_revenues (revenue bigint) partitioned by (region string);
@@ -33,46 +39,46 @@ from sale_detail;
 
 按照上述写法，在SQL运行之前，是不知道会产生哪些分区的，只有在select运行结束后，才能由region字段产生的值确定会产生哪些分区，这也是叫做动态分区的原因。
 
-**其他示例如下**：
+其他示例如下：
 
 ```
 create table sale_detail_dypart like sale_detail;--创建示例目标表
 ```
 
-示例一：
+-   示例一：
 
-```
-insert overwrite table sale_detail_dypart partition (sale_date, region)
-select shop_name,customer_id,total_price,sale_date,region from sale_detail;
--- 成功返回;
-```
+    ```
+    insert overwrite table sale_detail_dypart partition (sale_date, region)
+    select shop_name,customer_id,total_price,sale_date,region from sale_detail;
+    -- 成功返回;
+    ```
 
--   此时sale\_detail表中，sale\_date的值决定目标表的sale\_date分区值，region的值决定目标表的region分区值。
--   **动态分区中，select\_statement字段和目标表动态分区的对应是按字段顺序决定的。**如该示例中，select语句若写成`select shop_name,customer_id,total_price,region,sale_date from sale_detail;`，则sale\_detail表中，region值决定决定目标表的 sale\_date分区值，sale\_date的值决定目标表的region分区值。
+    -   此时sale\_detail表中，sale\_date的值决定目标表的sale\_date分区值，region的值决定目标表的region分区值。
+    -   动态分区中，select\_statement字段和目标表动态分区的对应是按字段顺序决定的。如该示例中，select语句若写成`select shop_name,customer_id,total_price,region,sale_date from sale_detail;`，则sale\_detail表中，region值决定决定目标表的 sale\_date分区值，sale\_date的值决定目标表的region分区值。
+-   示例二：
 
-示例二：
+    ```
+    insert overwrite table sale_detail_dypart partition (sale_date='2013', region)
+    select shop_name,customer_id,total_price,region from sale_detail;
+    -- 成功返回，多级分区，指定一级分区
+    ```
 
-```
-insert overwrite table sale_detail_dypart partition (sale_date='2013', region)
-select shop_name,customer_id,total_price,region from sale_detail;
--- 成功返回，多级分区，指定一级分区
-```
+-   示例三：
 
-示例三：
+    ```
+    insert overwrite table sale_detail_dypart partition (sale_date='2013', region)
+    select shop_name,customer_id,total_price from sale_detail;
+    -- 失败返回，动态分区插入时，动态分区列必须在select列表中
+    ```
 
-```
-insert overwrite table sale_detail_dypart partition (sale_date='2013', region)
-select shop_name,customer_id,total_price from sale_detail;
--- 失败返回，动态分区插入时，动态分区列必须在select列表中
-```
+-   示例四：
 
-示例四：
+    ```
+    insert overwrite table sales partition (region='china', sale_date)
+    select shop_name,customer_id,total_price,region from sale_detail;
+    -- 失败返回，不能仅指定低级子分区，而动态插入高级分区
+    ```
 
-```
-insert overwrite table sales partition (region='china', sale_date)
-select shop_name,customer_id,total_price,region from sale_detail;
--- 失败返回，不能仅指定低级子分区，而动态插入高级分区
-```
 
 另外，旧版MaxCompute在进行动态分区时，如果分区列的类型与对应select列表中列的类型不严格一致，会报错。MaxCompute2.0则支持隐式类型转换，示例如下：
 

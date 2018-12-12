@@ -2,7 +2,7 @@
 
 This article introduces common MapReduce interfaces.
 
-If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Library](http://search.maven.org/) to get the required Java SDK \(available in different versions\).  The configuration is as follows:
+If you are using Maven, you can search "odps-sdk-mapred" from [Maven Library](http://search.maven.org/) to get the required Java SDK \(available in different versions\).  The configuration is as follows:
 
 ```
 <dependency>
@@ -23,7 +23,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## MapperBase {#section_dgt_z3l_vdb .section}
 
-**Main function interfaces** are as follows.
+Main function interfaces are as follows.
 
 |Interface|Description|
 |:--------|:----------|
@@ -33,7 +33,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## ReducerBase {#section_jng_hjl_vdb .section}
 
-**Main function interfaces** are as follows.
+Main function interfaces are as follows.
 
 |Interface|Description|
 |:--------|:----------|
@@ -43,7 +43,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## TaskContext {#section_vch_kjl_vdb .section}
 
-**Main function interfaces** are as follows.
+Main function interfaces are as follows.
 
 |Interface|Description|
 |:--------|:----------|
@@ -61,11 +61,14 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 |Counter getCounter\(String group, String name\)|Gets the Counter object with specified name and the group name.|
 |void progress\(\)|Reports heartbeat information to the MapReduce framework. If a user’s method takes a long time to process, and no framework is called in the process, this method can be called to avoid task timeout.  Timeout of the framework is 600s by default.|
 
-**Note:** MaxCompute TaskContext interface provides the progress function, however, this function is to prevent the Worker from being terminated as it runs for long time and the framework considers it as a timeout Worker. This interface is similar to sending heartbeat information to the framework, but does not report the progress of the Worker. The default timeout schedule of MaxCompute MapReduce Worker is 10 minutes \(system default, cannot be controlled by the user\). If the schedule exceeds 10 minutes and Worker is unable to send heartbeat information to the framework \(not to call progress interface\), the framework is forced to stop this Worker and MapReduce task fails and exits. We recommend calling the progress interface regularly in Mapper/Reducer functions  to prevent the worker from being terminated by the framework.
+**Note:** 
+
+-   MaxCompute TaskContext interface provides the progress function, however, this function is to prevent the Worker from being terminated as it runs for long time and the framework considers it as a timeout Worker. This interface is similar to sending heartbeat information to the framework, but does not report the progress of the Worker. 
+-   The default timeout schedule of MaxCompute MapReduce Worker is 10 minutes \(system default, cannot be controlled by the user\). If the schedule exceeds 10 minutes and Worker is unable to send heartbeat information to the framework \(not to call progress interface\), the framework is forced to stop this Worker and MapReduce task fails and exits. We recommend calling the progress interface regularly in Mapper/Reducer functions  to prevent the worker from being terminated by the framework.
 
 ## JobConf {#section_nht_pjl_vdb .section}
 
-**Main function interfaces** are as follows:
+Main function interfaces are as follows:
 
 |Interface|Description|
 |:--------|:----------|
@@ -91,7 +94,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## JobClient {#section_jz2_5jl_vdb .section}
 
-**Main function interfaces** are as follows:
+Main function interfaces are as follows:
 
 |Interface|Description|
 |:--------|:----------|
@@ -100,7 +103,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## RunningJob {#section_wnp_vjl_vdb .section}
 
-**Main function interfaces** are as follows.
+Main function interfaces are as follows.
 
 |Interface|Description|
 |:--------|:----------|
@@ -114,7 +117,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## InputUtils {#section_udl_xjl_vdb .section}
 
-**Main function interfaces** are as follows:
+Main function interfaces are as follows:
 
 |Interface|Description|
 |:--------|:----------|
@@ -123,7 +126,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## OutputUtils {#section_uzf_zjl_vdb .section}
 
-**Main function interfaces** are as follows:
+Main function interfaces are as follows:
 
 |Interface|Description|
 |:--------|:----------|
@@ -132,7 +135,7 @@ If you are using Maven, you can search “odps-sdk-mapred” from  [Maven Libra
 
 ## Pipeline {#section_zld_bkl_vdb .section}
 
-Pipeline is the subject of [MR2](reseller.en-US/User Guide/MapReduce/Summary/Extended MapReduce.md) .   It can be constructed by Pipeline.builder. Pipelines are as follows:
+Pipeline is the subject of [MR2](reseller.en-US/User Guide/MapReduce/Summary/Extended MapReduce.md). It can be constructed by Pipeline.builder. Pipelines are as follows:
 
 ```
     public Builder addMapper(Class<? extends Mapper> mapper)
@@ -188,7 +191,12 @@ As shown in the preceding example, a user can construct a Map in the main class,
 
 The data types supported in MapReduce include: BIGINT, STRING, DOUBLE, BOOLEAN, and DATETIME.  MaxCompute between MaxCompute data types and Java types are as follows:
 
-|MaxCompute SQL Type|Bigint|String|Double|Boolean|Datetime|Decimal|
-|:------------------|:-----|:-----|:-----|:------|:-------|:------|
-|Java Type|Long|String|Double|Boolean|date|BigDecimal|
+|MaxCompute SQL Type|Java Type|
+|-------------------|---------|
+|Bigint|Long|
+|String|String|
+|Double|Double|
+|Boolean|Boolean|
+|Datetime|Date|
+|Decimal|BigDecimal|
 

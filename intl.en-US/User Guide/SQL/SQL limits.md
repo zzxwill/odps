@@ -1,14 +1,14 @@
 # SQL limits {#concept_yjp_crl_vdb .concept}
 
-Some users may fail to notice specific limits and find the service has stopped.  The limits for MaxCompute SQL include the following:
+Some users may fail to notice specific limits and find the service has stopped. The limits for MaxCompute SQL include the following:
 
 |Boundary name|Maximum value/Limit|Class|Description|
 |:------------|:------------------|:----|:----------|
-|Length of table name|128 bytes|Length limit|Table names and column names cannot contain special characters. It must start with a letter and can contain only English letters \(a-z, A-Z\), numbers, and underscores.|
-|Annotation length|1,024 bytes|Length limit|The annotation can contain valid strings of up to 1,024 bytes.|
+|Length of table name|128 bytes|Length limit|Table names and column names cannot contain special characters. It must start with a letter and can contain only English letters \(a-z, A-Z\), numbers, and underscores \(\_\).|
+|Annotation length|1,024 bytes|Length limit|The annotation can contain valid strings for up to 1,024 bytes.|
 |Column definitions|1,200| Quantity limit|One table can contain a maximum of 1,200 column definitions.|
 |Partitions |60,000| Quantity limit|One table can contain a maximum of 60,000 partitions.|
-|Partition levels of a table|6 levels| Quantity limit| A table can contain a maximum of six levels of partition.|
+|Partition levels of a table|6 levels| Quantity limit|A table can contain a maximum of six levels of partition.|
 |Statistical definitions|100| Quantity limit|One table can contain a maximum of 100 statistical definitions.|
 |Statistical definitions| 64,000|Length limit|A statistical definition can contain a maximum of 64,000 bytes.|
 |Screen display|10,000 rows| Quantity limit|The screen display of a SELECT statement outputs a maximum of 10,000 rows.|

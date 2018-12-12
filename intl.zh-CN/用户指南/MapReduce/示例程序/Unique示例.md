@@ -2,8 +2,8 @@
 
 ## 测试准备 {#section_e3n_syg_vdb .section}
 
-1.  准备好测试程序的 Jar 包，假设名字为 mapreduce-examples.jar，本地存放路径为data\\resources。
-2.  准备好 Unique 的测试表和资源。
+1.  准备好测试程序的Jar包，假设名字为mapreduce-examples.jar，本地存放路径为data\\resources。
+2.  准备好Unique的测试表和资源。
     -   创建测试表。
 
         ```
@@ -17,13 +17,13 @@
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  使用 tunnel 导入数据。
+3.  使用tunnel导入数据。
 
     ```
     tunnel upload data ss_in;
     ```
 
-    导入 ss\_in 表的数据文件 data 的内容，如下所示：
+    导入ss\_in表的数据文件data的内容，如下所示：
 
     ```
      1,1
@@ -35,7 +35,7 @@
 
 ## 测试步骤 {#section_rlv_bzg_vdb .section}
 
-在 odpscmd 中执行 Unique，如下所示：
+在odpscmd中执行Unique，如下所示：
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
@@ -44,7 +44,7 @@ com.aliyun.odps.mapred.open.example.Unique ss_in ss_out key;
 
 ## 预期结果 {#section_hzz_dzg_vdb .section}
 
-作业成功结束后，输出表 ss\_out 中的内容，如下所示：
+作业成功结束后，输出表ss\_out中的内容，如下所示：
 
 ```
 +------------+------------+

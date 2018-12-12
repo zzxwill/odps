@@ -1,5 +1,7 @@
 # Lateral View {#concept_sqj_zhk_52b .concept}
 
+Lateral view is used in conjunction with UDTF such as split, explode, etc. It can split a row of data into multiple rows, and aggregate the split data on this basis. The lateral view first calls UDTF for each row of the original table. UTDF splits a row into one or more rows. The lateral view combines the results to produce a virtual table that supports the alias table.
+
 ## Single Lateral View statement {#section_ih1_33k_52b .section}
 
 Syntax:
@@ -10,8 +12,6 @@ lateralView: LATERAL VIEW [OUTER] udtf(expression) tableAlias AS columnAlias (',
 
 Notes:
 
--   Lateral view is typically encapsulated with UDTF including split, explode, and so on.It can split one row of data into multiple rows and then aggregate them.
--   Lateral view first calls UDTF for each row of the original table, then split a row into one or more rows.Finally,Lateral view aggregate the rows to generate a virtual table that supports alias.
 -   Lateral view outer: When the table function does not output any rows, the corresponding Input rows remain in the Lateral View results, and all table function output lists are null.
 
 Example:

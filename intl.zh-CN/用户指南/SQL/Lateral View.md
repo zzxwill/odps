@@ -1,5 +1,7 @@
 # Lateral View {#concept_sqj_zhk_52b .concept}
 
+lateral view用于和split, explode等UDTF一起使用，它能够将一行数据拆成多行数据，在此基础上可以对拆分后的数据进行聚合。lateral view首先为原始表的每行调用UDTF，UTDF会把一行拆分成一或者多行，lateral view再把结果组合，产生一个支持别名表的虚拟表。
+
 ## 单个Lateral View语句 {#section_ih1_33k_52b .section}
 
 语法定义如下：
@@ -10,8 +12,6 @@ lateralView: LATERAL VIEW [OUTER] udtf(expression) tableAlias AS columnAlias (',
 
 说明如下：
 
--   Lateral view通常和split、explode等UDTF一起封装使用，它能够将一行数据拆成多行数据，在此基础上可以对拆分后的数据进行聚合。
--   Lateral view首先为原始表的每行调用UDTF，UDTF会把一行拆分成一行或者多行，Lateral view再把结果聚合，产生一个支持别名表的虚拟表。
 -   Lateral view outer：当table function不输出任何一行时，对应的输入行在Lateral view结果中依然保留，且所有table function输出列为null。
 
 示例如下：

@@ -2,8 +2,8 @@
 
 ## 测试准备 {#section_e3n_syg_vdb .section}
 
-1.  准备好测试程序的 Jar 包，假设名字为 mapreduce-examples.jar，本地存放路径为data\\resources。
-2.  准备好 UserDefinedCounters 测试表和资源。
+1.  准备好测试程序的Jar包，假设名字为mapreduce-examples.jar，本地存放路径为data\\resources。
+2.  准备好UserDefinedCounters测试表和资源。
     -   创建测试表。
 
         ```
@@ -17,13 +17,13 @@
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  使用 tunnel 导入数据。
+3.  使用tunnel导入数据。
 
     ```
     tunnel upload data wc_in;
     ```
 
-    导入 wc\_in 表的数据文件 data 的内容，如下所示：
+    导入wc\_in表的数据文件data的内容，如下所示：
 
     ```
     hello,odps
@@ -32,7 +32,7 @@
 
 ## 测试步骤 {#section_rlv_bzg_vdb .section}
 
-在 odpscmd 中执行 UserDefinedCounters，如下所示：
+在odpscmd中执行UserDefinedCounters，如下所示：
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
@@ -41,7 +41,7 @@ com.aliyun.odps.mapred.open.example.UserDefinedCounters wc_in wc_out
 
 ## 预期结果 {#section_hzz_dzg_vdb .section}
 
-作业成功结束后，可以看到 Counters 的输出，如下所示：
+作业成功结束后，可以看到Counters的输出，如下所示：
 
 ```
 Counters: 3
@@ -51,7 +51,7 @@ REDUCE_TASKS=1
 TOTAL_TASKS=2
 ```
 
-输出表 wc\_out 中的内容，如下所示：
+输出表wc\_out中的内容，如下所示：
 
 ```
 +------------+------------+
@@ -149,7 +149,7 @@ TOTAL_TASKS=2
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
         RunningJob rJob = JobClient.runJob(job);
-        // 在作业成功结束后，可以获取到job里面的自定义counter的值
+        //在作业成功结束后，可以获取到job里面的自定义counter的值
         Counters counters = rJob.getCounters();
         long m = counters.findCounter(MyCounter.MAP_TASKS).getValue();
         long r = counters.findCounter(MyCounter.REDUCE_TASKS).getValue();

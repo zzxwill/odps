@@ -1,5 +1,7 @@
 # SQL reference {#concept_yxk_f35_z2b .concept}
 
+Based on the official PostgreSQL function, MaxCompute Lightning adds the following built-in functions.
+
 ## Query syntax {#section_lb3_wjh_1fb .section}
 
 The MaxCompute Lightning query engine is based on PostgreSQL 8.2 and currently only supports SELECT queries for existing MaxCompute tables. For more information about the query syntax, see [PostgreSQL documentation](https://www.postgresql.org/docs/8.2/static/queries.html).

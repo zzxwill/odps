@@ -36,7 +36,7 @@ This indicates that the Alibaba Cloud account odps\_test\_user@aliyun.com and th
 
 The two ways to add a RAM sub-account are as follows:
 
--   By using DataWorks, for more information, see [Prepare a RAM account](https://www.alibabacloud.com/help/doc-detail/30264.htm).
+-   By using DataWorks, for more information, see [Prepare a RAM account](../../../../reseller.en-US/Preparation/Administrator operations/Create a sub-account.md#).
 -   By using MaxCompute client commands as described in this document.
 
     **Note:** 
@@ -59,14 +59,14 @@ The two ways to add a RAM sub-account are as follows:
     OK
     ```
 
-    The user will still not be able to operate MaxCompute successfully. This is because, the user must be granted certain permissions to operate MaxCompute within the permissive limits. For more information, see  [Authorization](reseller.en-US/User Guide/Security/Authorization.md).
+    The user will still not be able to operate MaxCompute successfully. This is because, the user must be granted certain permissions to operate MaxCompute within the permissive limits. For more information, see [Authorization](reseller.en-US/User Guide/Security/Authorization.md#).
 
 
 ## User Authorization {#section_ncq_jvz_vdb .section}
 
 Once the user is added, the project owner or project administrator must authorize the user. The user can perform the operations only after obtaining the permissions.
 
-MaxCompute provides ACL authorization, cross-project resource sharing, and project resource protection. The following are two common scenarios, for more information, see  [ACL Authorization](reseller.en-US/User Guide/Security/Authorization.md).
+MaxCompute provides ACL authorization, cross-project resource sharing, and project resource protection. The following are two common scenarios, for more information, see [ACL Authorization](reseller.en-US/User Guide/Security/Authorization.md#)  .
 
 **Scenario 1**
 
@@ -134,8 +134,8 @@ remove user
 **Note:** 
 
 -   A user removed from a project immediately loses an authority to access resources of the project.
--   Revoke all the roles of the user, before removing a user whom the roles are assigned. For more information about roles, see  [Role Management](reseller.en-US/User Guide/Security/Role management.md).
--   After a user is removed, all [ACL Authorization](reseller.en-US/User Guide/Security/Authorization.md) data related to the user is retained. After a user is added to a project again, the ACL Authorization of this user is enabled again.
+-   Revoke all the roles of the user, before removing a user whom the roles are assigned. For more information about roles, see [Role Management](reseller.en-US/User Guide/Security/Role management.md#).
+-   After a user is removed, all[ACL Authorization](reseller.en-US/User Guide/Security/Authorization.md#) data related to the user is retained. After a user is added to a project again, the ACL Authorization of this user is enabled again.
 -   MaxCompute does not support complete removal of a user and all permission data from a project.
 
 To remove corresponding users, Alice can run the following commands:

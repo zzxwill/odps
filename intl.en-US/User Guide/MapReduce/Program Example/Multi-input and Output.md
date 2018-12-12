@@ -2,7 +2,7 @@
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare a Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isThe local storage path is data\\resources.
+1.  Prepare a Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path is data\\resources.
 2.  Prepare tables and resources for testing the multi-input and output operations.
     -   Create tables:
 
@@ -138,7 +138,7 @@ The content of ‘mr\_multiinout\_out2’ is as follows:
           if (mod == 0) {
             result.set(0, key.get(0));
             result.set(1, count);
-            //No label is specified. Default output is adopted.
+            // No label is specified. Default output is adopted.
             context.write(result);
           } else if (mod == 1) {
             result1.set(0, key.get(0));
@@ -198,7 +198,7 @@ The content of ‘mr\_multiinout\_out2’ is as follows:
         job.setReducerClass(SumReducer.class);
         job.setMapOutputKeySchema(SchemaUtils.fromString("word:string"));
         job.setMapOutputValueSchema(SchemaUtils.fromString("count:bigint"));
-         //Parse the user input table strings.
+        // Parse the user input table strings.
         for (String in : inputs) {
           String[] ss = in.split("\\|");
           if (ss.length == 1) {
@@ -211,7 +211,7 @@ The content of ‘mr\_multiinout\_out2’ is as follows:
             System.exit(1);
           }
         }
-        //Parse the user output table strings.
+        // Parse the user output table strings.
         for (String out : outputs) {
           String[] ss = out.split("\\|");
           if (ss.length == 1) {

@@ -7,7 +7,6 @@
 |ODPS-0110021:Invalid parameters|The parameter is invalid.|
 |ODPS-0110031:Invalid object type|The object type is invalid.|
 |ODPS-0110041:Invalid meta operation - AlreadyExistsException\(message:Partition already exists, existed values|Currently, MaxCompute does not lock the operated table. This error is caused by competition between META tags, that is, multiple read/write actions on the same partition at the same time.  We recommend that you do not perform multiple actions on the same table at the same time when the lock mechanism of MaxCompute is not enabled.|
-|ODPS-0110041:Invalid meta operation - No value returned from meta UDF|The meta action is invalid.|
 |ODPS-0110061: Failed to run ddltask - AlreadyExistsException\(message:Partition already exists, existed values\).|Currently, MaxCompute does not lock the operated table. This error is caused by competition between META tags, that is, multiple read/write actions on the same partition at the same time.  We recommend that you do not perform multiple actions on the same table at the same time when the lock mechanism of MaxCompute is not enabled.|
 |ODPS-0110061: Failed to run ddltask - SimpleLock conflict failure, add partition is already on-going|This error occurs when you add the same partition in batches.  MaxCompute runs only the first command to add a partition and ignores the subsequent ones.|
 |ODPS-0110071：OTS initialization exception|Table Store initialization is abnormal.|
@@ -23,10 +22,10 @@
 |ODPS-0120011:Authorization exception|You are unauthorized.|
 |ODPS-0120021:the delimitor must be the same in wm\_concat|The separators in the same group are different.|
 |ODPS-0120031: Instance has been canceled|The instance is canceled for multiple times.|
-|ODPS-0121011:Invalid regular expression pattern|The regular expression processing function of the [built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md) receive an unrecognizable regular expression.|
+|ODPS-0121011:Invalid regular expression pattern|The regular expression processing function of the [built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md) receive an unrecognizable regular expression.|
 |ODPS-0121021:Regexec call failed|An error occurs when the regular expression is matched.|
 |ODPS-0120031：Instance has been cancelled| The instance is canceled for multiple times.|
-|ODPS-0121035:Illegal implicit type cast|The type conversion is invalid. Generally, the error is caused by implicit conversions of unsupported types,   which is against the rules of [implicit type conversion](../../../../reseller.en-US/User Guide/SQL/SQL Summary.md). [Built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md) also have different implicit conversion rules.|
+|ODPS-0121035:Illegal implicit type cast|The type conversion is invalid. Generally, the error is caused by implicit conversions of unsupported types,   which is against the rules of [implicit type conversion](../../../../reseller.en-US/User Guide/SQL/SQL summary.md). [Built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md) also have different implicit conversion rules.|
 |ODPS-0121045:Unsupported return type|The return value is unsupported.|
 |ODPS-0121055:Empty argument value|The parameter value is an empty string or null.|
 |ODPS-0121065:Argument value out of range|The parameter value is out of the range.|
@@ -37,7 +36,7 @@
 |ODPS-0121115:Column reference expected|Column names must be input, but constants are input.|
 |ODPS-0121125:Unsupported function or operation|The UDF or other action is unsupported.|
 |ODPS-0121135:Malloc memory failed| The memory allocation is abnormal.|
-|ODPS-0121145:Data overflow|The data overflows. The value is out of the [value range of the data type](../../../../reseller.en-US/Product Introduction/Definition/Data type.md).  This error is often caused by a division by zero or aggregate function. For example, sum causes data overflow.|
+|ODPS-0121145:Data overflow|The data overflows. The value is out of the [value range of the data type](../../../../reseller.en-US/User Guide/Definition/Data types.md).  This error is often caused by a division by zero or aggregate function. For example, sum causes data overflow.|
 |ODPS-0123019:Distributed file operation exception|The disk read/write operation is abnormal.|
 |ODPS-0123023:Unsupported reduce type|The reduce type is unsupported.|
 |ODPS-0123031:Partition exception|A partition exception occurs.|
@@ -46,9 +45,9 @@
 |ODPS-0123065:Join exception|A Join exception occurs.|
 |ODPS-0123075:Hash exception|A hash exception occurs.|
 |ODPS-0123081:Invalid datetime string|The datetime string is abnormal.|
-|ODPS-0123091:Illegal type cast|The type conversion is invalid.  This error is often caused by [explicit conversions](../../../../reseller.en-US/User Guide/SQL/SQL Summary.md).|
+|ODPS-0123091:Illegal type cast|The type conversion is invalid.  This error is often caused by [explicit conversions](../../../../reseller.en-US/User Guide/SQL/SQL summary.md).|
 |ODPS-0123105： Job got killed|The job is killed.|
-|ODPS-0123111:Format string does not match datetime string|The format string does not match the date string.  The format of the date manually input in the SQL statement does not meet the MaxCompute format requirements, or DataTime built-in functions are improperly used.  For the display formats of the DateTime type in MaxCompute,  see examples in [Data types](../../../../reseller.en-US/Product Introduction/Definition/Data type.md) or introduction on date functions in [Built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).|
+|ODPS-0123111:Format string does not match datetime string|The format string does not match the date string.  The format of the date manually input in the SQL statement does not meet the MaxCompute format requirements, or DataTime built-in functions are improperly used.  For the display formats of the DateTime type in MaxCompute,  see examples in [Data types](../../../../reseller.en-US/User Guide/Definition/Data types.md) or introduction on date functions in [Built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md).|
 |ODPS-0123121:Mapjoin exception|A MapJoin exception occurs.  This error often appears because the size of the MapJoin small table exceeds the upper limit, which is 512 MB.|
 |ODPS-0123131:User defined function exception|The UDF is abnormal.|
 |ODPS-0123141： Exstore exception|The extreme storage is abnormal.|
@@ -66,11 +65,16 @@
 |ODPS-0130071:Semantic analysis exception - SELECT DISTINCT and GROUP BY can not be in the same query|Distinct and Group By cannot be used in the same Select clause.|
 |ODPS-0130071:Semantic analysis exception - Cannot insert into target table because column number/types are different|The number of type of the columns in the source table and target table is different when you insert data to the target table.|
 |ODPS-0130071:Semantic analysis exception - physical plan generation failed: java.lang.RuntimeException: Table\(xxxx\) is full scan with all partitions, please specify partition predicates.|The project to which the table belongs forbids full table scan on the partition table. You must specify the partition conditions.|
+|ODPS-0130071:Semantic analysis exception - xxxx type is not enabled in current mode|The new data type setting is not turned on. To use the new data types \(TINYINT, SMALLINT integer, float, VARCHAR TIMESTAMP, and BINARY\), you need to add a setting statement before the table statement.Session level:`set odps.sql.type.system.odps2=true;`
+
+project level:`setproject odps.sql.type.system.odps2=true;`
+
+|
 |ODPS-0130081:Invalid UDF reference|UDF method signature.|
 |ODPS-0130091:Invalid parameters|The UDF parameter is invalid.|
 |ODPS-0130101:Ambiguous data type|The data type is invalid.|
 |ODPS-0130111:Subquery partition pruning exception|The dynamic partition optimization is abnormal in the subquery in the IN condition determine statement.|
-|ODPS-0130121:Invalid argument type|The parameter type is invalid.  This error is often caused by incorrect parameter type received by the [built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).|
+|ODPS-0130121:Invalid argument type|The parameter type is invalid.  This error is often caused by incorrect parameter type received by the [built-in functions](../../../../reseller.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md).|
 |ODPS-0130131:Table not found|The table does not exist.  When you run the DDL or DML statements, the operated table does not exist.|
 |ODPS-0130141:Illegal implicit type cast|The implicit type conversion is not allowed.|
 |ODPS-0130151:Illegal data type|The data type is invalid.|

@@ -7,7 +7,6 @@
 |ODPS-0110021:Invalid parameters|参数有误|
 |ODPS-0110031:Invalid object type|非法对象类型|
 |ODPS-0110041:Invalid meta operation - AlreadyExistsException\(message:Partition already exists, existed values|目前MaxCompute对操作的表没有加锁，这个错误是由Meta产生竞争导致，即向同一个分区同时多次操作读写操作容易产生此类错误。因此建议用户在MaxCompute还没有锁机制的情况下，先不要同时对一个表做操作。|
-|ODPS-0110041:Invalid meta operation - No value returned from meta UDF| |
 |ODPS-0110061: Failed to run ddltask - AlreadyExistsException\(message:Partition already exists, existed values:\)|目前MaxCompute对操作的表没有加锁，这个错误是由Meta产生竞争导致，即向同一个分区同时多次操作读写操作容易产生此类错误。因此建议用户在MaxCompute还没有锁机制的情况下，先不要同时对一个表做操作。|
 |ODPS-0110061: Failed to run ddltask - SimpleLock conflict failure, add partition is already on-going|当用户批量添加统一分区时，会出现此错误。MaxCompute仅会执行接收到的第一个添加分区命令，并忽略后续请求。|
 |ODPS-0110071：OTS initialization exception|OTS初始化异常|
@@ -66,6 +65,11 @@
 |ODPS-0130071:Semantic analysis exception - SELECT DISTINCT and GROUP BY can not be in the same query|Distinct和Group By不能出现在同一个Select子句中。|
 |ODPS-0130071:Semantic analysis exception - Cannot insert into target table because column number/types are different|向目标表插入数据时，源表和目标表的列数量或类型不匹配。|
 |ODPS-0130071:Semantic analysis exception - physical plan generation failed: java.lang.RuntimeException: Table\(xxxx\) is full scan with all partitions, please specify partition predicates.|表所属项目禁止了分区表全表扫描，需要指定分区条件|
+|ODPS-0130071:Semantic analysis exception - xxxx type is not enabled in current mode|没有开启新数据类型设置。要使用新数据类型（Tinyint、Smallint、Int、Float、Varchar、TIMESTAMP和BINARY）需在建表语句前加上set语句。session级别：`set odps.sql.type.system.odps2=true;`
+
+project级别：`setproject odps.sql.type.system.odps2=true;`
+
+|
 |ODPS-0130081:Invalid UDF reference|UDF方法签名|
 |ODPS-0130091:Invalid parameters|UDF参数不合法|
 |ODPS-0130101:Ambiguous data type|数据类型不合法|

@@ -2,7 +2,7 @@
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
+1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path is data\\resources.
 2.  Prepare tables and resources for testing the MultiJobs operation.
     -   Create tables:
 
@@ -75,7 +75,7 @@ The output table ‘mr\_multijobs\_out’  is as follows:
       public static class DecreaseMapper extends MapperBase {
         @Override
         public void cleanup(TaskContext context) throws IOException {
-           //Obtain the variable values defined by the main function from JobConf.
+          // Obtain the variable values defined by the main function from JobConf.
           long expect = context.getJobConf().getLong("multijobs.expect.value", -1);
           long v = -1;
           int count = 0;

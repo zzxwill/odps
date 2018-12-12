@@ -2,8 +2,8 @@
 
 ## 测试准备 {#section_e3n_syg_vdb .section}
 
-1.  准备好测试程序的 Jar 包，假设名字为 mapreduce-examples.jar，本地存放路径为data\\resources。
-2.  准备好 Sort 的测试表和资源。
+1.  准备好测试程序的Jar包，假设名字为mapreduce-examples.jar，本地存放路径为data\\resources。
+2.  准备好Sort的测试表和资源。
     -   创建测试表。
 
         ```
@@ -17,13 +17,13 @@
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-3.  使用 tunnel 导入数据。
+3.  使用tunnel导入数据。
 
     ```
     tunnel upload data ss_in;
     ```
 
-    导入 ss\_in 表的数据文件 data 的内容，如下所示：
+    导入ss\_in表的数据文件data的内容，如下所示：
 
     ```
      2,1
@@ -34,7 +34,7 @@
 
 ## 测试步骤 {#section_rlv_bzg_vdb .section}
 
-在 odpscmd 中执行 Sort，如下所示：
+在odpscmd中执行Sort，如下所示：
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
@@ -43,7 +43,7 @@ com.aliyun.odps.mapred.open.example.Sort ss_in ss_out;
 
 ## 预期结果 {#section_hzz_dzg_vdb .section}
 
-作业成功结束后，输出表 ss\_out 中的内容，如下所示：
+作业成功结束后，输出表ss\_out中的内容，如下所示：
 
 ```
 +------------+------------+
@@ -112,8 +112,8 @@ com.aliyun.odps.mapred.open.example.Sort ss_in ss_out;
         JobConf jobConf = new JobConf();
         jobConf.setMapperClass(IdentityMapper.class);
         jobConf.setReducerClass(IdentityReducer.class);
-        // 为了全局有序，这里设置了reducer的个数为1，所有的数据都会集中到一个reducer上面
-        // 只能用于小数据量，大数据量需要考虑其他的方式，比如TeraSort
+        //为了全局有序，这里设置了reducer的个数为1，所有的数据都会集中到一个reducer上面
+        //只能用于小数据量，大数据量需要考虑其他的方式，比如TeraSort
         jobConf.setNumReduceTasks(1);
         jobConf.setMapOutputKeySchema(SchemaUtils.fromString("key:bigint"));
         jobConf.setMapOutputValueSchema(SchemaUtils.fromString("value:bigint"));

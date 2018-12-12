@@ -2,7 +2,7 @@
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
+1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path is data\\resources.
 2.  Prepare tables and resources for testing the SORT operation.
     -   Create tables:
 

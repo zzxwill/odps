@@ -119,22 +119,22 @@ After the job is completed successfully, the contents of the table maid are outp
         public void setup(TaskContext context) throws IOException{
           result = context.createOutputRecord();
         }
-        // Reduce function all records for each input will be the same key
+        //Reduce function all records for each input will be the same key
         @Override
         public void reduce(Record key,Iterator<Record>values,TaskContext context)
             Throws ioexception {
           long k = key.getBigint(0);
           List<Object[]> leftValues = new ArrayList<Object[]>();
-          // Is a key + tag combination because it is set up, this ensures that record data in the left table is in front of the input record for the reduce function.
+          //Is a key + tag combination because it is set up, this ensures that record data in the left table is in front of the input record for the reduce function.
           while(values.hasNext()) {
             Record value = values.next();
             long tag = (Long)key.get(1);
-            // The data for the left table is first cached into memory
+            //The data for the left table is first cached into memory
             if (tag == 0) {
               leftValues.add(value.toArray().clone());
             }else {
-              // The data that touches the right table is output by a join with all the data on the left table, the data for the left table is all in memory.
-// This implementation is just a functional display with relatively low performance and is not recommended for practical production.
+              //The data that touches the right table is output by a join with all the data on the left table, the data for the left table is all in memory.
+//This implementation is just a functional display with relatively low performance and is not recommended for practical production.
               for (Object[] leftValue :leftValues) {
                 int index = 0;
                 result.set(index++,k);

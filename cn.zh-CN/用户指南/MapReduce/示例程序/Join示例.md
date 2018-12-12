@@ -2,7 +2,7 @@
 
 MaxCompute MapReduce框架自身并不支持Join逻辑，但您可以在自己的Map/Reduce函数中实现数据的Join，当然这需要您做一些额外的工作。
 
-假设需要Join两张表mr\_Join\_src1\(key bigint, value string\) 和mr\_Join\_src2\(key bigint, value string\)，输出表是 mr\_Join\_out\(key bigint, value1 string, value2 string\)，其中value1是mr\_Join\_src1的value值，value2是 mr\_Join\_src2的value 值。
+假设需要Join两张表mr\_Join\_src1\(key bigint, value string\) 和mr\_Join\_src2\(key bigint, value string\)，输出表是mr\_Join\_out\(key bigint, value1 string, value2 string\)，其中value1是mr\_Join\_src1的value值，value2是 mr\_Join\_src2的value 值。
 
 ## 测试准备 {#section_e3n_syg_vdb .section}
 
@@ -119,22 +119,22 @@ com.aliyun.odps.mapred.open.example.Join mr_Join_src1 mr_Join_src2 mr_Join_out;
         public void setup(TaskContext context) throws IOException {
           result = context.createOutputRecord();
         }
-        // reduce函数每次的输入会是key相同的所有record
+        //reduce函数每次的输入会是key相同的所有record
         @Override
         public void reduce(Record key, Iterator<Record> values, TaskContext context)
             throws IOException {
           long k = key.getBigint(0);
           List<Object[]> leftValues = new ArrayList<Object[]>();
-          // 由于设置了outputKeySortColumn是key + tag组合，这样可以保证reduce函数的输入record中，left表的record数据在前面
+          //由于设置了outputKeySortColumn是key + tag组合，这样可以保证reduce函数的输入record中，left表的record数据在前面
           while (values.hasNext()) {
             Record value = values.next();
             long tag = (Long) key.get(1);
-            // 左表的数据会先缓存到内存中
+            //左表的数据会先缓存到内存中
             if (tag == 0) {
               leftValues.add(value.toArray().clone());
             } else {
-              // 碰到右表的数据，会与所有左表的数据进行join输出，此时左表的数据已经全部在内存里了
-         // 这个实现只是一个功能展示，性能比较低，不建议用于实际生产
+              //碰到右表的数据，会与所有左表的数据进行join输出，此时左表的数据已经全部在内存里了
+         //这个实现只是一个功能展示，性能比较低，不建议用于实际生产
               for (Object[] leftValue : leftValues) {
                 int index = 0;
                 result.set(index++, k);

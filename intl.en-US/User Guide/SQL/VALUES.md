@@ -1,5 +1,7 @@
 # VALUES {#concept_uhn_rdb_wdb .concept}
 
+This article introduces you to `INSERT … VALUES` command operation.
+
 In the test phase, prepare some basic data for a small data table. You can quickly write some test data to the test table by using the  `INSERT … VALUES` statement.
 
 **Note:** 

@@ -1,12 +1,14 @@
 # VALUES {#concept_uhn_rdb_wdb .concept}
 
+本文向您介绍`INSERT … VALUES`命令操作。
+
 通常在业务测试阶段，需要给一个小数据表准备些基本数据，您可以通过`INSERT … VALUES`的方法快速对测试表写入一些测试数据。
 
 **说明：** 
 
 目前INSERT OVERWRITE还不支持这种指定插入列的功能，暂时只能用`INSERT INTO`。
 
-**命令格式如下**：
+命令格式如下：
 
 ```
 INSERT  INTO  TABLE  tablename 
@@ -14,7 +16,7 @@ INSERT  INTO  TABLE  tablename
 [VALUES (col1_value,col2_value,...),(col1_value,col2_value,...),...]
 ```
 
-**示例一**：
+示例一：
 
 ```
 drop table if exists srcp;
@@ -36,7 +38,7 @@ insert into table srcp partition (p='abc') values ('a',1),('b',2),('c',3);
 
 当表有很多列，而准备数据的时候希望只插入部分列的数据，此时可以使用插入列表功能。
 
-**示例二：**
+示例二：
 
 ```
 drop table if exists srcp;
@@ -62,7 +64,7 @@ insert into table srcp partition (p)(key,p) values ('d','20170101'),('e','201701
 
 `INSERT … VALUES`有一个限制：values必须是常量，但是有时候希望在插入的数据中进行一些简单的运算，此时可以使用MaxCompute的values table功能，详情见示例三。
 
-**示例三：**
+示例三：
 
 ```
 drop table if exists srcp;

@@ -2,7 +2,7 @@
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
-1.  Prepare a Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path isdata\\resources.
+1.  Prepare a Jar package of the test program. Assume the package is named mapreduce-examples.jar, and the local storage path is data\\resources.
 2.  Prepare the test table and the resource.
     -   Create the tables:
 
@@ -125,6 +125,6 @@ The content in the output table “mr\_upload\_src” is as follows:
 
 A user can set up JobConf through the following methods:
 
--   T Use JobConf interface in SDK. This method is used is the preceding example. Moreover, this is the most recommended method and is given the highest priority.
+-   Use JobConf interface in SDK. This method is used is the preceding example. Moreover, this is the most recommended method and is given the highest priority.
 -   In jar command lines, specify new JobConf file through the parameter -conf. This method is of the lowest priority.
 

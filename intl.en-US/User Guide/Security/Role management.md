@@ -17,7 +17,7 @@ Role management related commands include the following:
 **Note:** 
 
 -   One role can be assigned to multiple users at the same time, and one user can be assigned multiple roles.
--   For more information about the mapping between the roles in DataWorks and in MaxCompute, and the platform permissions of these roles, see the project member management module in [Project Management](https://www.alibabacloud.com/help/doc-detail/47736.htm).
+-   For more information about the mapping between the roles in DataWorks and in MaxCompute, and the platform permissions of these roles, see the project member management module in [Project Management](../../../../reseller.en-US/User Guide/Project management/Project configuration.md#).
 
 ## Create a role {#section_ntz_y11_wdb .section}
 
@@ -35,7 +35,7 @@ To create a role player, enter the following command on the client:
 create role player;
 ```
 
-**Note:** The role permissions you create can view the specified user permissions through[Permission check](intl.en-US/User Guide/Security/Permission check.md#).
+**Note:** The role permissions you create can view the specified user permissions through [Permission check](reseller.en-US/User Guide/Security/Permission check.md#section_rhj_fg1_wdb).
 
 ## Add a user to the role {#section_ytl_bb1_wdb .section}
 
@@ -55,7 +55,7 @@ grant player to bob@aliyun.com;
 
 ## Authorize role {#section_cvd_hb1_wdb .section}
 
-The authorization statement for the role is similar to the authorization for the user. For more information, see [User authorization](intl.en-US/User Guide/Security/Authorization.md).
+The authorization statement for the role is similar to the authorization for the user. For more information, see [User authorization](reseller.en-US/User Guide/Security/Authorization.md#).
 
 **Note:** After role authorization is complete, all users under this role have the same permissions.
 
@@ -63,7 +63,7 @@ Example:
 
 Jack is the administrator of project prj1. Three new data auditors, Alice, Bob, and Charlie, are added to the project team. They must apply for the following permissions: view the table lists, submit the jobs, and read the table userprofile.
 
-In this scenario, the project administrator can perform authorization by using the object-based [ACL Authorization](intl.en-US/User Guide/Security/Authorization.md).
+In this scenario, the project administrator can perform authorization by using the object-based [ACL Authorization](reseller.en-US/User Guide/Security/Authorization.md#).
 
 The commands are as follows:
 

@@ -1,10 +1,10 @@
 # Authorization {#concept_ubm_4yz_vdb .concept}
 
-Authorization allows a user to perform operations including read, write, and view on tables, tasks, resources, and other objects of the MaxCompute. After the [user](reseller.en-US/User Guide/Security/User management.md) is added, the project owner or the project administrator must authorize the user. The user can perform operations only after obtaining the permission. 
+Authorization allows a user to perform operations including read, write, and view on tables, tasks, resources, and other objects of the MaxCompute. After the [user](reseller.en-US/User Guide/Security/User management.md#) is added, the project owner or the project administrator must authorize the user. The user can perform operations only after obtaining the permission. 
 
 MaxCompute provides Access Control List \(ACL\)  authorization, cross-project resource sharing, and project resource protection. Authorization typically includes three elements: subject, object, and action. In MaxCompute, the subject refers to a user or a role and the object refers to various types of objects in a project.
 
-ACL authorization includes following MaxCompute objects: [Project](../../../../reseller.en-US/User Guide/Definition/Projects.md), [Table](../../../../reseller.en-US/User Guide/Definition/Table.md), [Function](../../../../reseller.en-US/User Guide/Definition/Function.md), [Resource](../../../../reseller.en-US/User Guide/Definition/Resource.md), and [Instance](../../../../reseller.en-US/User Guide/Definition/Instance.md). Operations are related to specific object types, therefore different types of objects support different types of actions.
+ACL authorization includes following MaxCompute objects: [Project](reseller.en-US/User Guide/Definition/Project.md#),[Table](reseller.en-US/User Guide/Definition/Table.md#) ,[Function](reseller.en-US/User Guide/Definition/Function.md#) , [Resource](../../../../reseller.en-US/User Guide/Definition/Resource.md), and [Instance](reseller.en-US/User Guide/Definition/Instance.md#). Operations are related to specific object types, therefore different types of objects support different types of actions.
 
 MaxCompute projects support the following object types and actions:
 

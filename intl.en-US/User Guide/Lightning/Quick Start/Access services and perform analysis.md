@@ -1,5 +1,7 @@
 # Access services and perform analysis {#concept_znk_gyt_z2b .concept}
 
+After the connection service is successful, you can view the data table under the specified MaxCompute project for BI analysis.
+
 1.  Select PostgreSQL when establishing a connection to a server.
 
     Start Tableau Desktop. In the left-side navigation pane, select **Connection** \> **To Servers** \> **More** \> **PostgreSQL**.

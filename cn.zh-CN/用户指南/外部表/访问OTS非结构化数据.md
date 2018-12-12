@@ -67,9 +67,9 @@ MaxCompute计算服务访问Table Store数据需要有一个安全的授权通�
 
         **说明：** 您可单击右上角的登录账号，进入账号管理页面查看云账号的UID。
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438451032844_zh-CN.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15445997052844_zh-CN.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438451032845_zh-CN.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15445997052845_zh-CN.jpg)
 
     3.  编辑该角色的授权策略AliyunODPSRolePolicy，如下所示：
 
@@ -180,6 +180,16 @@ WHERE odps_orderkey > 5000 ;
 INSERT OVERWRITE TABLE ots_table_external
 SELECT odps_orderkey, odps_orderdate, odps_custkey, CONCAT(odps_custkey, 'SHIPPED'), CEIL(odps_totalprice)
 FROM internal_orders;
+```
+
+**说明：** 
+
+如果ODPS表内数据本身有一定的顺序，比如已经按照Primary Key做过一次排序，那么在写入到OTS表时，会导致压力集中在一个OTS分区上面，无法充分利用分布式写入的特点。因此，当出现这种情况时，我们建议通过distribute by rand\(\)先将数据打散。
+
+```
+INSERT OVERWRITE TABLE ots_table_external
+SELECT odps_orderkey, odps_orderdate, odps_custkey, CONCAT(odps_custkey, 'SHIPPED'), CEIL(odps_totalprice)
+FROM (SELECT * FROM internal_orders DISTRIBUTE BY rand()) t;
 ```
 
 对于Table Store这种KV数据的NoSQL存储介质，从MaxCompute的输出将只影响相对应主键所在的行，比如示例中只影响所有odps\_orderkey + odps\_orderdate这两个主键值能对应行上的数据。而且在这些Tabele Store行上面，也只会去更新在创建External Table（ots\_table\_external）时指定的属性列，而不会去修改未在External Table中出现的数据列。

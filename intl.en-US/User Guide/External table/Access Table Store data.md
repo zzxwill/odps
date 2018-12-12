@@ -67,9 +67,9 @@ You can authorize permissions in the following two ways:
 
         **Note:** On the upper-right corner, click the avatar to open the Billing Management page, and then check the account UID.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438903932844_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15445997092844_en-US.png)
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15438903932845_en-US.jpg)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12076/15445997092845_en-US.jpg)
 
     3.  Edit this role’s authorization policy AliyunODPSRolePolicy:
 
@@ -180,6 +180,14 @@ In the preceding operations, the external table ots\_table\_external has been cr
 INSERT OVERWRITE TABLE ots_table_external
 SELECT odps_orderkey, odps_orderdate, odps_custkey, CONCAT(odps_custkey, 'SHIPPED'), CEIL(odps_totalprice)
 FROM internal_orders;
+```
+
+**Note:** If the data in the ODPS table itself has a certain order, such as sorting once according to Primary Key, then when writing to the OTS table, the pressure will be concentrated on an OTS partition, which can not make full use of the characteristics of distributed writing. Therefore, when this happens, we recommend that we first scatter the data through distribute by Rand \(\).
+
+```
+INSERT OVERWRITE TABLE ots_table_external
+SELECT odps_orderkey, odps_orderdate, odps_custkey, CONCAT(odps_custkey, 'SHIPPED'), CEIL(odps_totalprice)
+FROM (SELECT * FROM internal_orders DISTRIBUTE BY rand()) t;
 ```
 
 Because Table Store is a KV data NoSQL storage medium, the data output from MaxCompute only affects the rows with the corresponding primary keys. In this example, the output only affects data in rows with corresponding dps\_orderkey + odps\_orderdate primary key values. In addition, in the Table Store rows, only the attribute columns specified during External Table\(ots\_table\_external\) creation are updated. Data columns that do not appear in the External Table are not modified.

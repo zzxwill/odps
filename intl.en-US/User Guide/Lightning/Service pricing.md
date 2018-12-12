@@ -1,5 +1,7 @@
 # Service pricing {#concept_vsd_d5t_z2b .concept}
 
+This article introduces you to an overview of the MaxCompute Lightning service charges.
+
 **Note:** 
 
 -   The MaxCompute Lightning service is currently in the beta phase and is available for free.

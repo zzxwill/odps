@@ -1,6 +1,6 @@
 # MapOnly samples {#concept_wz1_4yg_vdb .concept}
 
-For MapOnly jobs, Map directly sends < Key, Value \> pairs to tables on MaxCompute. You only need to specify the output table.However, you can skip specifying the Key/Value metadata to be output by Map.
+For MapOnly jobs, Map directly sends <Key,Value\> pairs to tables on MaxCompute. You only need to specify the output table. However, you can skip specifying the Key/Value metadata to be output by Map.
 
 ## Prerequisites {#section_e3n_syg_vdb .section}
 
@@ -84,7 +84,7 @@ The content of output table wc\_out  is as follows:
         @Override
         public void map(long key, Record record, TaskContext context) throws IOException {
           boolean is = context.getJobConf().getBoolean("option.mapper.map", false);
-          //The Main function sets option.mapper.map to true in jobconf to execute the following logic.
+          // The Main function sets option.mapper.map to true in jobconf to execute the following logic.
           if (is) {
             Record result = context.createOutputRecord();
             result.set(0, record.get(0));
@@ -95,7 +95,7 @@ The content of output table wc\_out  is as follows:
         @Override
         public void cleanup(TaskContext context) throws IOException {
           boolean is = context.getJobConf().getBoolean("option.mapper.cleanup", false);
-           //The Main function sets option.mapper.cleanup to true in jobconf to execute the following logic.
+          // The Main function sets option.mapper.cleanup to true in jobconf to execute the following logic.
           if (is) {
             Record result = context.createOutputRecord();
             result.set(0, "cleanup");
@@ -113,12 +113,12 @@ The content of output table wc\_out  is as follows:
         job.setMapperClass(MapperClass.class);
         // For maponly jobs, the number of reducers must be explicitly set to 0
         job.setNumReduceTasks(0);
-        //Set table information for Input Output
+        // Set table information for Input Output
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
         if (args.length == 3) {
           String options = new String(args[2]);
-        //Jobconf can set custom key, value, and getJobConf can get relevant settings in mapper through getJobConf of context.
+        // Jobconf can set custom key, value, and getJobConf can get relevant settings in mapper through getJobConf of context.
           if (options.contains("setup")) {
             job.setBoolean("option.mapper.setup", true);
           }

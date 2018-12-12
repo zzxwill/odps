@@ -2,7 +2,7 @@
 
 ## 测试准备 {#section_bjk_nxg_vdb .section}
 
-1.  准备好测试程序的 Jar 包，假设名字为 mapreduce-examples.jar，本地存放路径为 data\\resources。
+1.  准备好测试程序的Jar包，假设名字为mapreduce-examples.jar，本地存放路径为data\\resources。
     -   创建测试表。
 
         ```
@@ -16,14 +16,14 @@
         add jar data\resources\mapreduce-examples.jar -f;
         ```
 
-2.  准备好 WordCount 测试表和资源。
-3.  使用 tunnel 导入数据。
+2.  准备好WordCount测试表和资源。
+3.  使用tunnel导入数据。
 
     ```
     tunnel upload data wc_in;
     ```
 
-    导入 wc\_in 表的数据文件 data 的内容，如下所示：
+    导入wc\_in表的数据文件data的内容，如下所示：
 
     ```
     hello,odps
@@ -32,7 +32,7 @@
 
 ## 测试步骤 {#section_bhf_1yg_vdb .section}
 
-在 odpscmd 中执行 WordCount，如下所示：
+在odpscmd中执行WordCount，如下所示：
 
 ```
 jar -resources mapreduce-examples.jar -classpath data\resources\mapreduce-examples.jar
@@ -41,7 +41,7 @@ com.aliyun.odps.mapred.open.example.WordCount wc_in wc_out
 
 ## 预期结果 {#section_nvs_dyg_vdb .section}
 
-作业成功结束后，输出表 wc\_out 中的内容，如下所示：
+作业成功结束后，输出表wc\_out中的内容，如下所示：
 
 ```
 +------------+------------+
@@ -97,7 +97,7 @@ com.aliyun.odps.mapred.open.example.WordCount wc_in wc_out
         public void setup(TaskContext context) throws IOException {
           count = context.createMapOutputValueRecord();
         }
-        // combiner实现的接口和reducer一样，可以立即为在mapper本地执行的一个reduce，作用是减少mapper的输出量
+        //combiner实现的接口和reducer一样，可以立即为在mapper本地执行的一个reduce，作用是减少mapper的输出量
         @Override
         public void reduce(Record key, Iterator<Record> values, TaskContext context)
             throws IOException {
@@ -141,10 +141,10 @@ com.aliyun.odps.mapred.open.example.WordCount wc_in wc_out
         job.setMapperClass(TokenizerMapper.class);
         job.setCombinerClass(SumCombiner.class);
         job.setReducerClass(SumReducer.class);
-       // 设置mapper中间结果的key和value的schema, mapper的中间结果输出也是record的形式
+       //设置mapper中间结果的key和value的schema, mapper的中间结果输出也是record的形式
         job.setMapOutputKeySchema(SchemaUtils.fromString("word:string"));
         job.setMapOutputValueSchema(SchemaUtils.fromString("count:bigint"));
-        // 设置输入和输出的表信息
+        //设置输入和输出的表信息
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
         JobClient.runJob(job);

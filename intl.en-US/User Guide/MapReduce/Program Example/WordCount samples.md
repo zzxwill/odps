@@ -2,7 +2,7 @@
 
 ## Prerequisites {#section_bjk_nxg_vdb .section}
 
-1.  Prepare the Jar package of the test program. Assume the package is named mapreduce-examples.jar. The local storage path is data\\resources.
+1.  Prepare a Jar package of the test program. Assume the package is named mapreduce-examples.jar,and the local storage path is data\\resources.
     -   Create tables:
 
         ```
@@ -141,10 +141,10 @@ The content of output table wc\_out  is as follows:
         job.setMapperClass(TokenizerMapper.class);
         job.setCombinerClass(SumCombiner.class);
         job.setReducerClass(SumReducer.class);
-//The schema that sets the key and value of the mapper's intermediate result, the mapper's intermediate output is also the form of a record.
+// The schema that sets the key and value of the mapper's intermediate result, the mapper's intermediate output is also the form of a record.
         job.setMapOutputKeySchema(SchemaUtils.fromString("word:string"));
         job.setMapOutputValueSchema(SchemaUtils.fromString("count:bigint"));
-        //Set input and output table information
+        // Set input and output table information
         InputUtils.addTable(TableInfo.builder().tableName(args[0]).build(), job);
         OutputUtils.addTable(TableInfo.builder().tableName(args[1]).build(), job);
         Jobclient. runjob (job );

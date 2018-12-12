@@ -5,7 +5,7 @@ You can use MaxCompute services once they are added to a project, and granted th
 You can create or delete tables using the following methods:
 
 -   MaxCompute Studio. For more information, see Visualization of operating the tables. see [Visualization of operating the tables](../../../../reseller.en-US/Tools and Downloads/MaxCompute Studio/Manage data and resources/Visualization of operating the tables.md).
--   With dataworks, see [creating tables](https://www.alibabacloud.com/help/doc-detail/30291.html) and [deleting tables](https://www.alibabacloud.com/help/doc-detail/30290.html) for details.
+-   DataWorks. For more information, see [Create a Table](../../../../reseller.en-US/User Guide/Data management/Create a table.md#) and [Delete a Table](../../../../reseller.en-US/User Guide/Data management/Introduction.md#).
 -   Common client commands.
 
 The following section explains how to create, view, and delete tables using commands through the DTplus console. For more information about console installation, see [Console](../../../../reseller.en-US/Prepare/Install and configure a client.md).
@@ -39,7 +39,7 @@ Command descriptions:
     **Note:** 
 
     -   For more information about creating a table, see[Table Operations](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Table Operations.md#).
-    -   For more information about the partition operation, see [Add/Remove Partition](https://www.alibabacloud.com/help/doc-detail/73771.html).
+    -   For more information about the partition operation, see [Add/Remove Partition](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Column and Partition operation.md#).
     -   For more information about the lifecycle operation, see [Modify Lifecycle for a Table](../../../../reseller.en-US/User Guide/SQL/DDL SQL/Lifecycle of table.md#).
 
 The following example shows how to create a table:

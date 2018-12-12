@@ -1,5 +1,7 @@
 # Mathematical functions {#concept_ubn_3kb_5db .concept}
 
+This article introduces you to the mathematical function commands and instructions supported by MaxCompute SQL.
+
 ## ABS {#section_i1v_5lm_vdb .section}
 
 Function definition:

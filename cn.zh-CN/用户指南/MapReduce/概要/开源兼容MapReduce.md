@@ -1,12 +1,14 @@
 # 开源兼容MapReduce {#concept_yc2_cyf_vdb .concept}
 
+本文为您介绍开源兼容MapReduce的应用背景，以及HadoopMR插件的基本使用方式。
+
 MaxCompute（原ODPS）有一套原生的MapReduce编程模型和接口，简单来说，这套接口的输入输出都是MaxCompute中的Table，处理的数据以Record为组织形式，它可以很好地描述Table中的数据处理过程。
 
-但是与社区的Hadoop相比，编程接口差异较大。Hadoop用户如果要将原来的Hadoop MR作业迁移到MaxCompute的MR中执行，需要重写MR的代码，使用MaxCompute的接口进行编译和调试，运行正常后再打成一个Jar包才能放到MaxCompute的平台来运行。这个过程十分繁琐，需要耗费很多的开发和测试人力。如果能够完全不改或者少量地修改原来的Hadoop MapReduce代码，便可在MaxCompute平台上运行，将会比较理想。
+但是与社区的Hadoop相比，二者的编程接口差异较大。Hadoop用户如果要将原来的Hadoop MR作业迁移到MaxCompute的MR中执行，需要重写MR的代码，使用MaxCompute的接口进行编译和调试，运行正常后再打成一个Jar包才能放到MaxCompute的平台来运行。这个过程十分繁琐，需要耗费很多的开发和测试人力。如果能够完全不改或者少量地修改原来的Hadoop MapReduce代码，便可在MaxCompute平台上运行，将会比较理想。
 
-现在MaxCompute平台提供了一个Hadoop MapReduce到MaxCompute MR的适配工具，已经在一定程度上实现了Hadoop MapReduce作业的二进制级别的兼容，即您可以在不改代码的情况下通过指定一些配置，便可将原来在Hadoop上运行的MapReduce Jar包拿过来直接运行在MaxCompute上。您可通过[此处](http://repo.aliyun.com/download/hadoop2openmr-1.0.jar)下载开发插件。目前该插件处于测试阶段，暂时还不能支持您自定义comparator和自定义key类型。
+现在MaxCompute平台提供了一个Hadoop MapReduce到MaxCompute MR的适配工具，已经在一定程度上实现了Hadoop MapReduce作业的二进制级别的兼容，即您可以在不改代码的情况下通过指定一些配置，便可将原来在Hadoop上运行的MapReduce Jar包拿过来直接运行在MaxCompute上。您可通过单击[此处](http://repo.aliyun.com/download/hadoop2openmr-1.0.jar)下载开发插件。目前该插件处于测试阶段，暂时还不能支持您自定义comparator和自定义key类型。
 
-下文将以WordCount程序为例，为您介绍HadoopMR插件的基本使用方式。
+下文以WordCount程序为例，为您介绍HadoopMR插件的基本使用方式。
 
 ## 下载HadoopMR插件 {#section_cb2_l1g_vdb .section}
 
@@ -159,23 +161,23 @@ public class WordCount {
 使用MaxCompute命令行工具odpscmd提交作业。MaxCompute命令行工具的安装和配置方法请参见[客户端用户手册](../../../../intl.zh-CN/工具及下载/客户端.md#)。在odpscmd运行如下命令：
 
 ```
-jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2openmr-1.0.jar,wordcount_test.jar com.aliyun.odps.mapred.example.hadoop.WordCount /foo /bar;
+jar -DODPS_HADOOPMR_TABLE_RES_CONF=./wordcount-table-res.conf -classpath hadoop2openmr-1.0.jar,wordcount_test.jar com.aliyun.odps.mapred.example.hadoop.WordCount /foo/bar;
 ```
 
 **说明：** 
 
--   wordcount-table-res.conf是配置了/foo /bar的映射。
+-   wordcount-table-res.conf是配置了/foo/bar的映射。
 -   wordcount\_test.jar包是您的Hadoop MapReduce的jar包。
 -   com.aliyun.odps.mapred.example.hadoop.WordCount是您要运行的作业类名。
--   /foo /bar是指在HDFS上的路径，在JSON配置文件中映射成了wc\_in和wc\_out。
+-   /foo/bar是指在HDFS上的路径，在JSON配置文件中映射成了wc\_in和wc\_out。
 -   配置好映射后，您需要通过datax或DataWorks数据集成功能，手动导入Hadoop HDFS的输入文件到wc\_in进行MR计算，并手动导出结果数据wc\_out到您的HDFS输出目录/bar。
 -   此处假设已经将hadoop2openmr-1.0.jar、wordcount\_test.jar和wordcount-table-res.conf放置到odpscmd的当前目录，否则在指定配置和-classpath的路径时需要做相应的修改。
 
 运行过程如下图所示：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15445112681957_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15446177821957_zh-CN.jpg)
 
 当作业运行完成后，便可查看结果表wc\_out的内容，验证作业是否成功结束，结果是否符合预期。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15445112681959_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12015/15446177821959_zh-CN.jpg)
 

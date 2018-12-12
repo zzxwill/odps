@@ -1,5 +1,7 @@
 # Extended MapReduce {#concept_ngt_sxf_vdb .concept}
 
+Compared with the traditional MapRudece, the extended MapReduce model provided by MaxCompute changes the underlying scheduling and I/O model, and avoids redundant I/O operations during the performance.
+
 The traditional MapReduce model requires that the data must be loaded to the distributed file system \(such as HDFS or MaxCompute table\) after each round of MapReduce operation. However, a general  MapReduce application usually consists of multiple MapReduce jobs, and each job output must be written to the disk. The following Map task is an example of a task used only to read the data, prepared for the subsequent Shuffle stage, but which actually results in redundant I/O operations.
 
 The calculation scheduling logic of MaxCompute supports more complex programming paradigm. In the preceding scenario, the next Reduce operation can be executed after the Reduce operation and inserting a Map operation is not necessary.  In this way, MaxCompute provides an extensional MapReduce model, that is, numerous Reduce operations can follow a Map operation, such as Map\>Reduce\> Reduce.

@@ -14,7 +14,7 @@ UDT的常用场景如下：
 
 MaxCompute中的UDT功能允许在SQL中直接引用第三方语言的类或者对象，获取其数据内容或者调用其方法。
 
-在其他的SQL引擎中也有UDT的概念，但是和MaxCompute的概念有许多差异。很多SQL引擎中的概念比较像MaxCompute的struct复杂类型。而某些语言提供了调用第三方库的功能，如Oracle 的 CREATE TYPE。相比之下，MaxCompute的UDT更像CREATE TYPE的概念，Type中不仅仅包含数据域，还包含方法。而且MaxCompute不需要用特殊的DDL语法来定义类型的映射，而是在SQL中直接使用。
+在其他的SQL引擎中也有UDT的概念，但是和MaxCompute的概念有许多差异。很多SQL引擎中的概念比较像MaxCompute的struct复杂类型。而某些语言提供了调用第三方库的功能，如Oracle的CREATE TYPE。相比之下，MaxCompute的UDT更像CREATE TYPE的概念，Type中不仅仅包含数据域，还包含方法。而且MaxCompute不需要用特殊的DDL语法来定义类型的映射，而是在SQL中直接使用。
 
 示例如下：
 
@@ -94,7 +94,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
 
 上述示例还表现了一种用UDF比较不好实现的功能：子查询的结果允许UDT类型的列。如上面变量a的x列是java.math.BigInteger类型，而不是内置类型。UDT类型的数据可以被带到下一个operator中再调用其他方法，甚至能参与数据shuffle。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154324352713239_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/22183/154459547713239_zh-CN.png)
 
 如上图可知，该UDT共有三个STAGE：M1、R2和J3。如果您熟悉MapReduce原理便会知道，由于join的存在需要做数据reshuffle，所以会出现多个stage。一般情况下，不同stage不仅是在不同进程，甚至是在不同物理机器上运行的。
 
@@ -117,7 +117,7 @@ select /*+mapjoin(b)*/ x.add(y).toString() from @a a join @b b;   -- 实例方�
         select new com.aliyun.odps.test.IntegerMaxValue().evaluate();
         ```
 
-    -   odps.sql.session.java.imports指定默认的Java package，可以指定多个，用逗号隔开。和Java的import语句类似，可以提供完整类路径，如`java.math.BigInteger`，也可以使用`*`。暂不支持`static import`。
+    -   odps.sql.session.java.imports指定默认的Java package，可以指定多个，用逗号隔开。和Java的import语句类似，可以提供完整类路径，如java.math.BigInteger，也可以使用`*`。暂不支持`static import`。
 
         如UDT概述中UDF的Jar包，用UDT来使用还可有如下写法：
 

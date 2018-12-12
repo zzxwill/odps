@@ -33,7 +33,7 @@ MaxCompute Lightning provides a method of connecting endpoints, clients, or appl
 
 Query tasks, connected and submitted by JDBC or ODBC interfaces, use serverless computing resources of MaxCompute Lightning to ensure query service quality.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20113/153812943511152_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/20113/154461684811152_en-US.jpg)
 
 ## Scenarios {#section_vdv_zjj_z2b .section}
 

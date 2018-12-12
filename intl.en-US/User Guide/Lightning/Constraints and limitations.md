@@ -1,5 +1,7 @@
 # Constraints and limitations {#concept_gjk_x35_z2b .concept}
 
+This article introduces you to the constraints and limitations of using the MaxCompute Lightning service.
+
 ## DDL/DML constraints and limitations {#section_rzb_tdl_z2b .section}
 
 MaxCompute Lightning only supports Select queries for MaxCompute tables and does not support UPDATE, CREATE, DELETE, and INSERT operations on MaxCompute tables.

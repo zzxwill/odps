@@ -1,15 +1,15 @@
 # K-均值聚类 {#concept_svw_slm_vdb .concept}
 
-k-均值聚类（Kmeans） 算法是非常基础并大量使用的聚类算法。
+k-均值聚类（Kmeans）算法是非常基础并大量使用的聚类算法。
 
-算法基本原理：以空间中 k 个点为中心进行聚类，对最靠近它们的点进行归类。通过迭代的方法，逐次更新各聚类中心的值，直至得到最好的聚类结果。
+算法基本原理：以空间中k个点为中心进行聚类，对最靠近它们的点进行归类。通过迭代的方法，逐次更新各聚类中心的值，直至得到最好的聚类结果。
 
-假设要把样本集分为 k 个类别，算法描述如下：
+假设要把样本集分为k个类别，算法描述如下：
 
-1.  适当选择 k 个类的初始中心。
-2.  在第 i 次迭代中，对任意一个样本，求其到 k 个中心的距离，将该样本归到距离最短的中心所在的类。
+1.  适当选择k个类的初始中心。
+2.  在第i次迭代中，对任意一个样本，求其到k个中心的距离，将该样本归到距离最短的中心所在的类。
 3.  利用均值等方法更新该类的中心值。
-4.  对于所有的 k 个聚类中心，如果利用上两步的迭代法更新后，值保持不变或者小于某个阈值，则迭代结束，否则继续迭代。
+4.  对于所有的k个聚类中心，如果利用上两步的迭代法更新后，值保持不变或者小于某个阈值，则迭代结束，否则继续迭代。
 
 ## 代码示例 {#section_zmw_pxm_vdb .section}
 
@@ -279,13 +279,13 @@ public class Kmeans {
 
 上述代码，说明如下：
 
--   第 26 行：定义 KmeansVertex，compute\(\) 方法非常简单，只是调用上下文对象的 aggregate 方法，传入当前点的取值（Tuple 类型，向量表示）。
--   第 38 行：定义 KmeansVertexReader 类，加载图，将表中每一条记录解析为一个点，点标识无关紧要，这里取传入的 recordNum 序号作为标识，点值为记录的所有列组成的 Tuple。
--   第 83 行：定义 KmeansAggregator，这个类封装了 Kmeans 算法的主要逻辑，其中：
-    -   createInitialValue 为每一轮迭代创建初始值（k 类中心点），若是第一轮迭代（superstep=0），该取值为初始中心点，否则取值为上一轮结束时的新中心点。
-    -   aggregate 方法为每个点计算其到各个类中心的距离，并归为距离最短的类，并更新该类的 sum 和 count。
-    -   merge 方法合并来自各个 worker 收集的 sum 和 count。
-    -   terminate 方法根据各个类的 sum 和 count 计算新的中心点，若新中心点与之前的中心点距离小于某个阈值或者迭代次数到达最大迭代次数设置，则终止迭代（返回 false），写最终的中心点到结果表。
--   第 236 行：主程序（main 函数），定义 GraphJob，指定 Vertex/GraphLoader/Aggregator 等的实现，以及最大迭代次数（默认 30），并指定输入输出表。
--   第 243 行：job.setRuntimePartitioning\(false\)，对于 Kmeans 算法，加载图是不需要进行点的分发，设置 RuntimePartitioning 为 false，以提升加载图时的性能。
+-   第26行：定义KmeansVertex，compute\(\)方法非常简单，只是调用上下文对象的aggregate方法，传入当前点的取值（Tuple类型，向量表示）。
+-   第38行：定义KmeansVertexReader类，加载图，将表中每一条记录解析为一个点，点标识无关紧要，这里取传入的recordNum序号作为标识，点值为记录的所有列组成的Tuple。
+-   第83行：定义KmeansAggregator，这个类封装了Kmeans算法的主要逻辑，其中：
+    -   createInitialValue为每一轮迭代创建初始值（k类中心点），若是第一轮迭代（superstep=0），该取值为初始中心点，否则取值为上一轮结束时的新中心点。
+    -   aggregate方法为每个点计算其到各个类中心的距离，并归为距离最短的类，并更新该类的sum和count。
+    -   merge方法合并来自各个worker收集的sum和count。
+    -   terminate方法根据各个类的sum和count计算新的中心点，若新中心点与之前的中心点距离小于某个阈值或者迭代次数到达最大迭代次数设置，则终止迭代（返回false），写最终的中心点到结果表。
+-   第236行：主程序（main函数），定义GraphJob，指定Vertex/GraphLoader/Aggregator等的实现，以及最大迭代次数（默认30），并指定输入输出表。
+-   第243行：job.setRuntimePartitioning\(false\)，对于Kmeans算法，加载图是不需要进行点的分发，设置RuntimePartitioning为false，以提升加载图时的性能。
 

@@ -8,11 +8,11 @@ After the [Create MaxCompute Java Module](reseller.en-US/Tools and Downloads/Max
 
 2.  Create Driver, Mapper, and Reducer.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444363231997_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826521997_en-US.png)
 
 3.  Set the input/output table and Mapper/Reducer class. The framework code is automatically filled in the template.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444363241998_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826521998_en-US.png)
 
 
 For details of developing MR, see [To write MapReduce](../../../../reseller.en-US/Quick Start/MapReduce.md#).
@@ -23,7 +23,7 @@ After the MR program is developed, test your code and check whether it meets the
 
 **Unit test \(UT\)**: There are WordCount UT examples in the examples directory. You can refer to them to compile your UT.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444363241999_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826531999_en-US.png)
 
 **Local MR running**: During local running, the running data source must be specified. The following two methods are provided to set the test data source:
 
@@ -34,11 +34,11 @@ After the MR program is developed, test your code and check whether it meets the
 
 1.  Run the MR program. Right-click the Driver class and select **Run**.  In the displayed Run Configuration dialog box, configure the MaxCompute project on which the MR program runs.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444363242001_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826532001_en-US.png)
 
 2.  Click **OK**. If table data of the specified MaxCompute  project is not downloaded to warehouse, download data first. If a mock project is used or the MaxCompute project table data is downloaded, skip this step.  Then, the MR local  run framework reads specified table data in warehouse as the MR input and runs the MR program locally. You can view log output and result display on the console.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444363242002_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826532002_en-US.png)
 
 
 ## Run the MR program in the production environment {#section_or4_mgg_vdb .section}

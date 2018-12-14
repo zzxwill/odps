@@ -7,11 +7,11 @@
 1.  在module的源码目录即**src** \> **main**上右键**new** \> **java**，选择**MaxCompute Java**。
 2.  分别创建Driver，Mapper，Reducer。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444361661997_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826441997_zh-CN.png)
 
 3.  模板已自动填充框架代码，只需要设置输入/输出表，Mapper/Reducer类等即可。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444361661998_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826441998_zh-CN.png)
 
 
 开发MR详情请参见[编写MapReduce](../../../../intl.zh-CN/快速入门/编写MapReduce.md#)。
@@ -22,7 +22,7 @@ MR开发好后，下一步就是要测试自己的代码，看是否符合预期
 
 单元测试：在examples目录下有WordCount的单测实例，可参考例子编写自己的UT。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444361661999_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826441999_zh-CN.png)
 
 本地运行MR：本地运行时，需要指定运行数据源，有两种方式设定测试数据源：
 
@@ -31,11 +31,11 @@ MR开发好后，下一步就是要测试自己的代码，看是否符合预期
 
 1.  运行MR: 在Driver类上右键，点击**运行**菜单，弹出run configuration对话框，配置MR需要在哪个MaxCompute Project上运行即可。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444361662001_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826442001_zh-CN.png)
 
-2.  点击**OK**，如果指定MaxCompute project的表数据未被下载到warehouse中，则首先下载数据；如果采用mock项目或已被下载则跳过。接下来，MR local run框架会读取warehouse中指定表的数据作为MR的输入，开始本地运行MR，用户可以在控制台看到日志输出和结果打印。
+2.  单击**OK**，如果指定MaxCompute project的表数据未被下载到warehouse中，则首先下载数据；如果采用mock项目或已被下载则跳过。接下来，MR local run框架会读取warehouse中指定表的数据作为MR的输入，开始本地运行MR，用户可以在控制台看到日志输出和结果打印。
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15444361662002_zh-CN.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12131/15447826442002_zh-CN.png)
 
 
 ## 生产运行MR {#section_or4_mgg_vdb .section}

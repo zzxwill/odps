@@ -8,13 +8,13 @@ To display Tool Windows of IntelliJ IDEA, you must open an IntelliJ IDEA project
 
 Open IntelliJ IDEA, click **New** \> **Project**, select **MaxCompute Studio** on the displayed page, and click **Next**.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15440927131596_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15447824391596_en-US.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15440927131597_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15447824401597_en-US.png)
 
 Enter the project name, and click **Finish**.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15440927131598_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15447824401598_en-US.png)
 
 ## Create a MaxCompute Project Connection {#section_sbf_dkz_5db .section}
 
@@ -25,11 +25,11 @@ We recommend that you configure the MaxCompute project connection according to y
 1.  Click **view**, select **Tool Windows**.
 2.  Click **Project Explorer**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15440927131599_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15447824401599_en-US.png)
 
 3.  Click plus sign **+** at the upper left corner to add a MaxCompute project.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15440927131600_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15447824401600_en-US.png)
 
 4.  In the Add MaxCompute Project dialog box, set configuration options.
 
@@ -39,14 +39,14 @@ We recommend that you configure the MaxCompute project connection according to y
     -   If the synchronization times out, you can consider increasing the time-out duration for synchronizing metadata to the local host on the Setting tab.
 5.  After the preceding settings, click **OK**. Information about the MaxCompute project is displayed on the left of MaxCompute Project Explorer. You can click Tables, Views, Functions, and Resources to view tables, views, functions, and resources of the project. 
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15440927131602_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15447824401602_en-US.png)
 
 
 ## View and modify a MaxCompute connection {#section_zbf_dkz_5db .section}
 
 In MaxCompute Project Explorer, right-click a MaxCompupte project and select **Show|Modify project properties**.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15440927131603_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12119/15447824401603_en-US.png)
 
 In the displayed dialog box, you can view or modify connections and settings of the MaxCompute project. 
 

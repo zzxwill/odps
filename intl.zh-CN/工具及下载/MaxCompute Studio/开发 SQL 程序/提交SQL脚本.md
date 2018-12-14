@@ -4,7 +4,7 @@ MaxCompute Studio可直接将MaxCompute SQL提交到服务端运行，并显示�
 
 ## 前提条件 {#section_zrx_zsf_vdb .section}
 
--   首先 [创建MaxCompute项目连接](intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)，并绑定目标项目。
+-   首先[创建MaxCompute项目连接](intl.zh-CN/工具及下载/MaxCompute Studio/项目空间连接管理.md)，并绑定目标项目。
 -   创建[MaxCompute Studio Module](intl.zh-CN/工具及下载/MaxCompute Studio/开发 SQL 程序/创建MaxCompute Script Module.md)。
 -   在提交前需根据自身需求进行相关设置。MaxCompute Studio提供了丰富的设置功能，可在Editor编辑页面上方的Tool Bar工具栏中快速设置。设置主要分为以下三种：
     -   **编辑器模式**：编译器模式设定包括两种模式，脚本模式和单步模式。
@@ -14,7 +14,7 @@ MaxCompute Studio可直接将MaxCompute SQL提交到服务端运行，并显示�
         -   旧有类型系统：原有 MaxCompute 的类型系统。
         -   MaxCompute 类型系统：MaxCompute 2.0 引入的新的类型系统。
         -   Hive 类型系统：MaxCompute 2.0 引入的 Hive 兼容模式下的类型系统。
-    -   **编译器版本**：MaxCompute Studio 提供稳定版编译器和实验性编译器两种模式：
+    -   **编译器版本**：MaxCompute Studio提供稳定版编译器和实验性编译器两种模式：
 
         -   默认编译器：稳定版本。
         -   实验性编译器：包含编译器最新特性。

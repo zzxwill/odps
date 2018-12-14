@@ -10,7 +10,7 @@ Studio supports the following two ways to view MaxCompute job instances:
 
     In the menu bar, select MaxCompute \> Open  Logview. Valid Logview URLs in the Clipboard are automatically copied to the dialog box displayed. Alternatively, you can select to export the local offline Logview file.
 
-2.  In [Job Explorer](intl.en-US/Tools and Downloads/MaxCompute Studio/Manage MaxCompute jobs/Job viewing.md), double-click a MaxCompute instance to view its details. You can also right-click the instance and select Open.
+2.  In [Job Explorer](reseller.en-US/Tools and Downloads/MaxCompute Studio/Manage MaxCompute jobs/Job viewing.md), double-click a MaxCompute instance to view its details. You can also right-click the instance and select Open.
 
 ## Job details view {#section_mrj_zsn_vdb .section}
 
@@ -24,45 +24,45 @@ The job details view page comprises a toolbar at the top, a properties bar on th
 -   **Result**: Displays the running results of a job.
 -   **Analysis**: Provides scatter plots, long tail distributions, and skewed data charts to show the results of a job execution.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2388_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013752388_en-US.png)
 
 ## Toolbar {#section_sff_zwn_vdb .section}
 
 **Collapse pages on left/right**
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2391_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013752391_en-US.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2392_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013752392_en-US.png)
 
 Used to expand or collapse views on the left and right, allowing you to focus on a particular view.
 
 **Stop a job**
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2393_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013762393_en-US.png)
 
 Used to stop a job that is being executed. You need permission \(owner or administrator\) to do so.
 
 **Refresh details**
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2394_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013762394_en-US.png)
 
 The basic information of a running job, such as its status and quota, is refreshed automatically, but the detailed view on the right is not. If you want the most up-to-date details, you have to refresh them manually.
 
 **Copy Logview**
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2395_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013762395_en-US.png)
 
 Copies the corresponding Logview of a job to the Clipboard.
 
 **Open job details in a browser**
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2396_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013762396_en-US.png)
 
 Generates a Logview  URL and opens it in a browser.
 
 ## Store job details locally {#section_asj_zsn_vdb .section}
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/2397_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12138/15448013762397_en-US.png)
 
 Stores the job details as a local file.
 

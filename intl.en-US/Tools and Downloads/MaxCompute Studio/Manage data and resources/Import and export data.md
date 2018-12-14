@@ -11,11 +11,11 @@ MaxCompute Studio can import local data files in CSV or TSV format to MaxCompute
 
 1.  Open the Project Explorer window, right-click a table name or a field attribute in Data preview of Table details and select **Import Data Into Table**.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15440928241637_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15447825271637_en-US.png)
 
 2.  In the Import Data dialog box that appears, select the path of the imported data file, column separator, size limitation, and number of lines for an error tolerance, and click **OK** .
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15440928241638_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15447825271638_en-US.png)
 
 3.  If **Import Data Success** is displayed, data import is successful and imported data can be viewed in the table.
 
@@ -25,22 +25,22 @@ MaxCompute Studio can import local data files in CSV or TSV format to MaxCompute
 1.  Two methods are provided for table data export.
     -   Right-click a table name and select **Export Data From Table**.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15440928241640_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15447825271640_en-US.png)
 
     -   Right-click a field attribute in **Data Preview** of Table details and select **Export Data From Table**.
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15440928241641_en-US.png)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15447825271641_en-US.png)
 
 2.  In the Export Data dialog box that appears, select the path for saving the exported data file, column separator, size limitation, and number of lines for an error tolerance, and click OK.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15440928241642_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15447825271642_en-US.png)
 
 3.  If **Export Data Success** is displayed, data export is successful and exported data can be viewed in the target file.
 
 
 You can also right-click Data Preview of Table and choose **Export Grid Data** to export data.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15440928241643_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12122/15447825271643_en-US.png)
 
 **Note:** The Data Preview function in Data preview is used only to export data displayed in Data sample instead of all data in the table.
 

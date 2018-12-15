@@ -5,7 +5,7 @@ This article describes how to use the basic functions of the MaxCompute using cl
 **Note:** 
 
 -   Do not perform the analysis operation based on the output format of the client.  The output format of the client is not ensured for forward compatibility. Clients of different versions are different in their command formats and behaviors.
--   For more information about basic commands of the client, see [Basic commands](../../../../reseller.en-US/User Guide/Common commands/Overview of Common commands.md). 
+-   For more information about basic commands of the client, see [Basic commands](../../../../reseller.en-US/User Guide/Common commands/List of common commands.md). 
 -   Download [MaxCompute console](http://repo.aliyun.com/download/odpscmd/latest/odpscmd_public.zip)
 -   The client supports JDK 1.9 from the 0.28.0 version, and the previous version can only use JDK 1.8.
 -   The client supports MaxCompute 2.0 from the 0.27.0 version [New data type](../../../../reseller.en-US/User Guide/Definition/Data types.md#).

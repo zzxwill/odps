@@ -8,7 +8,7 @@ As a MaxCompute Project Space Administrator, do you have similar security requir
 
 For example, when the owner of Project Space prj1 encounters this situation as shown in the following figure, are you worried that user Alice will transfer the data that she can access to prm9, only because she has access to prj2. prj2. and prj2?
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12100/15356271422795_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12100/15450208062795_en-US.png)
 
 More specifically, assume that Alice has been granted access to myprj, which is the Select permission for Table1, and then she is also granted create table permission by the administrator of prj2.
 
@@ -65,7 +65,7 @@ Moreover, user review confirms that this table does not contain sensitive data. 
 
 -   **Resource sharing and data protection**
 
-    In MaxCompute, the [package-based resource sharing](reseller.en-US/User Guide/Security/Security Command List/Package-based resource sharing.md) feature and the project protection data protection feature are orthogonal, but they are similar to each other in terms of functions.
+    In MaxCompute, the [package-based resource sharing](reseller.en-US/User Guide/Security/Resource share across project space/Resource sharing across projects based on package.md#) feature and the project protection data protection feature are orthogonal, but they are similar to each other in terms of functions.
 
     MaxCompute rules **give priority to resource sharing over data protection**. Therefore, if a data object allows access by users from other projects through resource sharing, the ProjectProtection rules will not apply to this data object.
 

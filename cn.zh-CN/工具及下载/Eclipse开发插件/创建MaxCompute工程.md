@@ -1,32 +1,32 @@
 # 创建MaxCompute工程 {#concept_t1c_31d_wdb .concept}
 
-创建MaxCompute工程有两种方式。
+本文向您介绍Eclipse创建MaxCompute工程的两种方式。
 
 ## 方式一 {#section_otx_41d_wdb .section}
 
-在左上角选择**文件\(File\)** \> **新建\(New\)** \> **Project** \> **ODPS** \> **ODPS Project**，创建工程\(示例中使用ODPS作为工程名\)：
+在左上角选择**文件\(File\)** \> **新建\(New\)** \> **Project** \> **ODPS** \> **ODPS Project**，创建工程\(示例中使用ODPS作为工程名\)，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15332671542937_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15450226772937_zh-CN.png)
 
-创建MaxCompute工程后会出现如下对话框。输入Project name，选择MaxCompute客户端路径\(客户端需要提前下载\)，并确认\(点击**Finish**\)：
+创建MaxCompute工程后会出现如下对话框。输入Project name，选择MaxCompute客户端路径\(客户端需要提前下载\)，并确认\(点击**Finish**\)，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15332671542938_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15450226772938_zh-CN.png)
 
 **说明：** 关于MaxCompute客户端的介绍请参考 [客户端](intl.zh-CN/工具及下载/客户端.md) 。
 
-创建好工程后，在左侧包资源管理器\(Package Explorer\)中可以看到如下目录结构：
+创建好工程后，在左侧包资源管理器\(Package Explorer\)中可以看到目录结构，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15332671552939_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15450226772939_zh-CN.png)
 
 ## 方式二 {#section_ttx_41d_wdb .section}
 
-直接点击左上角的**新建**:
+直接点击左上角的**新建**，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15332671552940_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15450226772940_zh-CN.png)
 
-弹出对话框后，选择**ODPS Project**，点击**下一步**:
+弹出对话框后，选择**ODPS Project**，单击**下一步**，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15332671552941_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12151/15450226772941_zh-CN.png)
 
 后续操作同方式一。
 

@@ -1,32 +1,34 @@
 # MapReduce {#concept_vwz_lcd_wdb .concept}
 
-Select WordCount example in MaxCompute project:
+This article shows you how to use Eclipse to develop and run MapReduce programs.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3125_en-US.png)
+Select WordCount example in MaxCompute project,as follows.
 
-Right-click **WordCount.java** and choose **Run As** -\> **ODPS  MapReduce**, as follows:
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226343125_en-US.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3127_en-US.png)
+Right-click **WordCount.java** and choose **Run As** -\> **ODPS  MapReduce**, as follows.
 
-After the dialog box is popped up, select **example\_project** and click Finish:
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226343127_en-US.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3128_en-US.png)
+After the dialog box is popped up, select **example\_project** and click Finish。As follows.
 
-After running is completed, the following result is displayed:
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226343128_en-US.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3129_en-US.png)
+After running is completed, the following result is displayed,as follows.
+
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226343129_en-US.png)
 
 ## Run User-defined MapReduce Program {#section_v3b_ydx_wdb .section}
 
-Right-click src directory. Select **New -\> ** \> **Mapper:** 
+Right-click src directory. Select **New -\> ** \> **Mapper**,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3162_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226343162_en-US.png)
 
-After selecting Mapper, the following dialog box is displayed.  Input the name of Mapper class and click Finish:
+After selecting Mapper, the following dialog box is displayed.  Input the name of Mapper class and click Finish.as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3163_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226343163_en-US.png)
 
-The file UserMapper.java is generated in the src directory in Package Explorer.  The content of this file is a template of Mapper class:
+The file UserMapper.java is generated in the src directory in Package Explorer.  The content of this file is a template of Mapper class,as follows.
 
 ```
 package odps;
@@ -47,7 +49,7 @@ public class UserMapper extends MapperBase {
 
 ```
 
-In the template, the configured package name defaults to odps. You can modify it according to your actual requirement.  Write the template content as follows:
+In the template, the configured package name defaults to odps. You can modify it according to your actual requirement.  Write the template content as follows,as follows.
 
 ```
 package odps;
@@ -86,13 +88,13 @@ public class UserMapper extends MapperBase {
 
 ```
 
-Similarly, right-click src directory and select **New -\> ** \> **Reduce:**
+Similarly, right-click src directory and select **New -\> ** \> **Reduce:**,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3164_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226343164_en-US.png)
 
 Input the name of Reduce class. \(In this example, use UserReduce as the class name.\)
 
-In Package Explorer, a file name UserReduce.java is generated in the src directory.  This file content is a template of Reduce class.  Edit the template:
+In Package Explorer, a file name UserReduce.java is generated in the src directory.  This file content is a template of Reduce class.  Edit the template,as follows.
 
 ```
 package odps;
@@ -130,11 +132,11 @@ public class UserReduce extends ReducerBase {
 
 ```
 
-Create main function: right-click src and select **New -\> ** \> **MapReduce Driver**.  Enter Driver  Name \(in this example, use UserDriver as the name\), Mapper and Reduce \(in this example use UserMapper and UserReduce as corresponding names\) and click Finish.  The file MyDriver.java is also displayed in src directory:
+Create main function: right-click src and select **New -\> ** \> **MapReduce Driver**.  Enter Driver  Name \(in this example, use UserDriver as the name\), Mapper and Reduce \(in this example use UserMapper and UserReduce as corresponding names\) and click Finish.  The file MyDriver.java is also displayed in src directory,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3167_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226353167_en-US.png)
 
-Edit the driver content:
+Edit the driver content,as follows.
 
 ```
 package odps;
@@ -167,35 +169,35 @@ public class UserDriver {
 
 ```
 
-Run MapReduce program. Right-click **UserDriver.java** and select **Run As -\> ** \> **ODPS MapReduce, **   the following dialog box is displayed:
+Run MapReduce program. Right-click **UserDriver.java** and select **Run As -\> ** \> **ODPS MapReduce, **   the following dialog box is displayed,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3168_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226353168_en-US.png)
 
-Select example\_project as the MaxCompute Project and  click **Finish** to run MapReduce program in the local:
+Select example\_project as the MaxCompute Project and  click **Finish** to run MapReduce program in the local,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3170_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226353170_en-US.png)
 
-If the output is the same as in the preceding figure, it indicates that local operation runs successfully.  The output result is saved in the warehouse directory.   Refresh MaxCompute project:
+If the output is the same as in the preceding figure, it indicates that local operation runs successfully.  The output result is saved in the warehouse directory.   Refresh MaxCompute project,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3172_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226353172_en-US.png)
 
-wc\_out is the output directory and R\_000000 is the result file. By local debugging, the result is confirmed to be correct and you can package MapReduce program using Eclipse export function.  After it is packaged, upload the jar package to MaxCompute. For more information how to run MapReduce in distributed environment, see [Quick Start](../../../../intl.en-US/Quick Start/MapReduce.md).
+wc\_out is the output directory and R\_000000 is the result file. By local debugging, the result is confirmed to be correct and you can package MapReduce program using Eclipse export function.  After it is packaged, upload the jar package to MaxCompute. For more information how to run MapReduce in distributed environment, see [Quick Start](../../../../reseller.en-US/Quick Start/MapReduce.md).
 
-After the local debugging is completed, you can package the codes in jar package using Eclipse Export function, provided for subsequent distributed environment. In this example, the package name is mr-examples.jar. Select the src directory and click **Export**:
+After the local debugging is completed, you can package the codes in jar package using Eclipse Export function, provided for subsequent distributed environment. In this example, the package name is mr-examples.jar. Select the src directory and click **Export**,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3180_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226353180_en-US.png)
 
-Select Jar File as an export mode:
+Select Jar File as an export mode,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3181_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226353181_en-US.jpg)
 
-You must only export the package in src. The Jar  File name must be specified as mr-examples.jar:
+You must only export the package in src. The Jar  File name must be specified as mr-examples.jar,as follows.
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3183_en-US.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226353183_en-US.jpg)
 
 Click Next to export the jar file.
 
-If you want to simulate new Project creation in the local, you can create a subdirectory \(has same level with example\_project\) in the warehouse directory. The directory hierarchy structure is shown as follows:
+If you want to simulate new Project creation in the local, you can create a subdirectory \(has same level with example\_project\) in the warehouse directory. The directory hierarchy structure is shown as follows.
 
 ```
 <warehouse>
@@ -220,7 +222,7 @@ If you want to simulate new Project creation in the local, you can create a subd
                   |___ file_resource_name(file resource)
 ```
 
-**schema** Example:
+**schema** Example,as follows.
 
 ```
 Non-partiton table:
@@ -236,7 +238,7 @@ Note:
 Currently, the following five data formats are supported: bigint,double,boolean,datetime,string, which correspond to the data types in java: -long,double,boolean,java.util.Date,java.lang.String.
 ```
 
-data Example:
+data Example,as follows.
 
 ```
 1,1.1,true,2015-06-04 11:22:42 896,hello world

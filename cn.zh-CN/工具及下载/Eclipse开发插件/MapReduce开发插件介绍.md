@@ -1,32 +1,34 @@
 # MapReduce开发插件介绍 {#concept_vwz_lcd_wdb .concept}
 
-选择ODPS项目中的WordCount示例:
+本文向您介绍如何使用Eclipse开发和运行MapReduce程序。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3125_zh-CN.png)
+选择ODPS项目中的WordCount示例，如下图。
 
-右键**WordCount.java**，依次点击**Run As**，**ODPS MapReduce**：
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253125_zh-CN.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3127_zh-CN.png)
+右键单击**WordCount.java**，依次单击**Run As** \> **ODPS MapReduce**，如下图。
 
-弹出对话框后，选择**example\_project**，点击确认：
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253127_zh-CN.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3128_zh-CN.png)
+弹出对话框后，选择**example\_project**，单击确认，如下图。
 
-运行成功后，会出现以下结果提示：
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253128_zh-CN.png)
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3129_zh-CN.png)
+运行成功后，会出现结果提示，如下图。
+
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253129_zh-CN.png)
 
 ## 运行自定义MapReduce程序 {#section_v3b_ydx_wdb .section}
 
-右键选择src目录，选择**新建\(New\)** \> **Mapper** :
+右键选择src目录，选择**新建\(New\)** \> **Mapper** ，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3162_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253162_zh-CN.png)
 
-选择Mapper后出现下面的对话框。输入Mapper类的名字，并确认：
+选择Mapper后出现下面的对话框。输入Mapper类的名字，并确认。如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3163_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253163_zh-CN.png)
 
-会看到在左侧包资源管理器\(Package Explorer\)中，src目录下生成文件UserMapper.java。该文件的内容即是一个Mapper类的模板：
+会看到在左侧包资源管理器\(Package Explorer\)中，src目录下生成文件UserMapper.java。该文件的内容即是一个Mapper类的模板，如下图。
 
 ```
 package odps;
@@ -47,7 +49,7 @@ public class UserMapper extends MapperBase {
 }
 ```
 
-模板中，将package名称默认配置为“odps”，用户可以根据自己的需求进行修改。编写模板内容：
+模板中，将package名称默认配置为“odps”，用户可以根据自己的需求进行修改。编写模板内容，如下图。
 
 ```
 package odps;
@@ -86,13 +88,13 @@ public class UserMapper extends MapperBase {
 }
 ```
 
-同理，右键选择src目录，选择**新建\(New\)** \> **Reduce**:
+同理，右键选择src目录，选择**新建\(New\)** \> **Reduce**，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3164_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253164_zh-CN.png)
 
 输入Reduce类的名字\(本示例使用UserReduce\):
 
-同样在包资源管理器\(Package Explorer\)中，src目录下生成文件UserReduce.java。该文件的内容即是一个Reduce类的模板。编辑模板：
+同样在包资源管理器\(Package Explorer\)中，src目录下生成文件UserReduce.java。该文件的内容即是一个Reduce类的模板。编辑模板，如下图。
 
 ```
 package odps;
@@ -130,11 +132,11 @@ public class UserReduce extends ReducerBase {
 }
 ```
 
-创建main函数: 右键选择src目录，选择**新建\(New\)** \> **MapReduce Driver**。填写Driver Name\(示例中是UserDriver\)，Mapper及Recduce类\(示例中是UserMapper及UserReduce\)，并确认。同样会在src目录下看到MyDriver.java文件：
+创建main函数: 右键选择src目录，选择**新建\(New\)** \> **MapReduce Driver**。填写Driver Name\(示例中是UserDriver\)，Mapper及Recduce类\(示例中是UserMapper及UserReduce\)，并确认。同样会在src目录下看到MyDriver.java文件，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3167_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226253167_zh-CN.png)
 
-编辑driver内容：
+编辑driver内容，如下图。
 
 ```
 package odps;
@@ -167,35 +169,35 @@ public class UserDriver {
 }
 ```
 
-运行MapReduce程序，选中**UserDriver.java**，右键选择**Run As** \> **ODPS MapReduce** ，点击确认。出现如下对话框：
+运行MapReduce程序，选中**UserDriver.java**，右键选择**Run As** \> **ODPS MapReduce** ，点击确认。出现对话框，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3168_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226263168_zh-CN.png)
 
-选择ODPS Project为：example\_project，点击**Finish**按钮开始本地运行MapReduce程序：
+选择ODPS Project为：example\_project，单击**Finish**按钮开始本地运行MapReduce程序，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3170_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226263170_zh-CN.png)
 
-有如上输出信息，说明本地运行成功。运行的输出结果在warehouse目录下。关于warehouse的说明请参考 本地运行 。刷新ODPS工程：
+有如上输出信息，说明本地运行成功。运行的输出结果在warehouse目录下。关于warehouse的说明请参考本地运行 。刷新ODPS工程，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3172_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226263172_zh-CN.png)
 
 wc\_out即是输出目录，R\_000000即是结果文件。通过本地调试，确定输出结果正确后，可以通过Eclipse导出\(Export\)功能将MapReduce打包。打包后将jar包上传到ODPS中。在分布式环境下执行MapReduce，详情请参考[快速入门](../../../../intl.zh-CN/快速入门/编写MapReduce.md) 。
 
-本地调试通过后，用户可以通过Eclipse的Export功能将代码打成jar包，供后续分布式环境使用。在本示例中，我们将程序包命名为mr-examples.jar。选择src目录，点击**Export**：
+本地调试通过后，用户可以通过Eclipse的Export功能将代码打成jar包，供后续分布式环境使用。在本示例中，我们将程序包命名为mr-examples.jar。选择src目录，单击**Export**，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3180_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226263180_zh-CN.png)
 
-选择导出模式为Jar File：
+选择导出模式为Jar File，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3181_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226263181_zh-CN.jpg)
 
-仅需要导出src目录下package\(com.aliyun.odps.mapred.open.example\)，Jar File名称指定为“mr-examples.jar”：
+仅需要导出src目录下package\(com.aliyun.odps.mapred.open.example\)，Jar File名称指定为mr-examples.jar，如下图。
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/3183_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12152/15450226263183_zh-CN.jpg)
 
 确认后，导出成功。
 
-如果用户想在本地模拟新建Project，可以在warehouse下面，创建一个新的子目录\(与example\_project平级的目录\)，目录层次结构为：
+如果用户想在本地模拟新建Project，可以在warehouse下面，创建一个新的子目录\(与example\_project平级的目录\)，目录层次结构，如下图。
 
 ```
 <warehouse>
@@ -220,7 +222,7 @@ wc\_out即是输出目录，R\_000000即是结果文件。通过本地调试，�
                   |___ file_resource_name（文件资源）
 ```
 
-**schema**文件示例：
+**schema**文件示例，如下图。
 
 ```
 非分区表:
@@ -235,7 +237,7 @@ partitions=col1:BIGINT,col2:DOUBLE,col3:BOOLEAN,col4:DATETIME,col5:STRING
 注：当前支持5种数据格式:bigint,double,boolean,datetime,string， 对应到java中的数据类型-long,double,boolean,java.util.Date,java.lang.String。
 ```
 
-data文件示例：
+data文件示例，如下图。
 
 ```
 1,1.1,true,2015-06-04 11:22:42 896,hello world

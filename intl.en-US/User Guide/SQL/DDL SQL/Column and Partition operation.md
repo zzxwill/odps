@@ -61,6 +61,10 @@ Statement format:
 ALTER TABLE table_name ADD COLUMNS (col_name1 type1, col_name2 type2...)
 ```
 
+```
+ALTER TABLE table_name ADD COLUMNS (col_name1 type1 comment 'XXX',col_name2 type2 comment 'XXX');
+```
+
 **Note:** You cannot specify order for a new column. By default, a new column is placed in the last column.
 
 ## Modify column name {#section_k3x_qbb_wdb .section}

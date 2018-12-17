@@ -1,5 +1,7 @@
 # Operators {#concept_bll_pfl_vdb .concept}
 
+Operators are used to perform program code operations. This article introduces four types of operators: relational operator, arithmetic operator, bit operator and logical operator.
+
 ## Relational operators {#section_dlk_lgl_vdb .section}
 
 |Operator|Description|
@@ -50,7 +52,7 @@ abs(0.9999999999 - 1.0000000000) < 0.000000001
 
 **Note:** 
 
--   ABS is a built-in function provided by MaxCompute to take absolute value. For more information, see [ABS](reseller.en-US/User Guide/SQL/Builtin Function/Mathematical Functions.md).
+-   ABS is a built-in function provided by MaxCompute to take absolute value. For more information, see [ABS](intl.en-US/User Guide/SQL/Builtin functions/Mathematical functions.md).
 -   In general, the Double type in MaxCompute can retain 14-bit decimal.
 
 ## Arithmetic operators {#section_ycc_chl_vdb .section}

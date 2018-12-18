@@ -4,21 +4,21 @@ MaxCompute的UDF包括UDF，UDAF 和UDTF三种函数，本文将重点介绍如�
 
 ## 参数与返回值类型 {#section_uhs_43f_vdb .section}
 
-MaxCompute 2.0版本升级后，Java UDF支持的数据类型从原来的Bigint，String，Double，Boolean扩展了更多基本的数据类型，同时还扩展支持了ARRAY，MAP，STRUCT 等复杂类型。
+MaxCompute 2.0版本升级后，Java UDF支持的数据类型从原来的Bigint，String，Double，Boolean扩展了更多基本的数据类型，同时还扩展支持了ARRAY，MAP，STRUCT等复杂类型。
 
 -   Java UDF使用新基本类型的方法，如下所示：
     -   UDTF通过@Resolve注解来获取signature，如：`@Resolve("smallint->varchar(10)")`。
     -   UDF通过反射分析evaluate来获取signature，此时MaxCompute内置类型与 Java类型符合一一映射关系。
     -   UDAF通过@Resolve注解来获取signature，MaxCompute2.0支持在注解中使用新类型，如：`@Resolve("smallint->varchar(10)")`。
 -   Java UDF使用复杂类型的方法，如下所示：
-    -   UDTF 通过 @Resolve annotation 来指定 signature，如：`@Resolve("array<string>,struct<a1:bigint,b1:string>,string->map<string,bigint>,struct<b1:bigint>")`。
-    -   UDF通过evaluate方法的signature来映射UDF的输入输出类型，此时参考 MaxCompute类型与Java类型的映射关系。其中array对应java.util.List，map对应 java.util.Map，struct对应com.aliyun.odps.data.Struct。
+    -   UDTF通过@Resolve annotation来指定signature，如：`@Resolve("array<string>,struct<a1:bigint,b1:string>,string->map<string,bigint>,struct<b1:bigint>")`。
+    -   UDF通过evaluate方法的signature来映射UDF的输入输出类型，此时参考 MaxCompute类型与Java类型的映射关系。其中array对应java.util.List，map对应java.util.Map，struct对应com.aliyun.odps.data.Struct。
     -   UDAF通过@Resolve注解来获取signature，MaxCompute2.0支持在注解中使用新类型，如： `@Resolve("smallint->varchar(10)")`。
 
         **说明：** 
 
         -   您可以使用`type,*`实现任意个数的传参，例如@resolve\("string,\*-\>array<string\>"\)，请注意此处array后需要加subtype。
-        -   com.aliyun.odps.data.Struct从反射看不出field name和field type，所以需要用@Resolve annotation来辅助。即如果需要在UDF中使用 struct，要求在UDF class上也标注上@Resolve注解，这个注解只会影响参数或返回值中包含com.aliyun.odps.data.Struct的重载。
+        -   `com.aliyun.odps.data.Struct`从反射看不出field name和field type，所以需要用@Resolve annotation来辅助。即如果需要在UDF中使用 struct，要求在UDF class上也标注上@Resolve注解，这个注解只会影响参数或返回值中包含`com.aliyun.odps.data.Struct`的重载。
         -   目前class上只能提供一个@Resolve annotation，因此一个UDF中带有struct参数或返回值的重载只能有一个。
 
 MaxCompute数据类型与Java类型的对应关系，如下所示：
@@ -75,30 +75,7 @@ public final class Lower extends UDF {
 
 UDF的使用方式与MaxCompute SQL中普通的内建函数相同，详情请参见 [内建函数](intl.zh-CN/用户指南/SQL/内建函数/数学函数.md)。
 
-新版的MaxCompute支持定义Java UDF时，使用Writable类型作为参数和返回值。下面为MaxCompute类型和Java Writable类型的映射关系。
-
-|MaxCompute Type|Java Writable Type|
-|---------------|------------------|
-|tinyint|ByteWritable|
-|smallint|ShortWritable|
-|int|IntWritable|
-|bigint|LongWritable|
-|float|FloatWritable|
-|double|DoubleWritable|
-|decimal|BigDecimalWritable|
-|boolean|BooleanWritable|
-|string|Text|
-|varchar|VarcharWritable|
-|binary|BytesWritable|
-|datetime|DatetimeWritable|
-|timestamp|TimestampWritable|
-|interval\_year\_month|IntervalYearMonthWritable|
-|interval\_day\_time|IntervalDayTimeWritable|
-|array|暂不支持|
-|map|暂不支持|
-|struct|暂不支持|
-
-## 其他 UDF 示例 {#section_kb5_v44_k2b .section}
+## 其他UDF示例 {#section_kb5_v44_k2b .section}
 
 如以下代码，定义了一个有三个overloads的UDF，其中第一个用了array作为参数，第二个用了map作为参数，第三个用了struct。由于第三个overloads了struct作为参数或者返回值，因此要求必须要对UDF class打上`@Resolve` annotation，来指定 struct的具体类型。
 
@@ -162,16 +139,14 @@ public abstract class Aggregator implements ContextFunction {
 
 以实现求平均值avg为例，下图简要说明了在MaxCompute UDAF中这一函数的实现逻辑及计算流程：
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15422752871855_zh-CN.jpg)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12003/15451121611855_zh-CN.jpg)
 
-在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个 worker 在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
+在上图中，输入数据被按照一定的大小进行分片（有关分片的描述请参见 [MapReduce](intl.zh-CN/用户指南/MapReduce/概要/MapReduce概述.md)），每片的大小适合一个worker在适当的时间内完成。这个分片大小的设置需要您手动配置完成。
 
 UDAF的计算过程分为两个阶段：
 
 -   第一阶段：每个worker统计分片内数据的个数及汇总值，您可以将每个分片内的数据个数及汇总值视为一个中间结果。
-
 -   第二阶段：worker汇总上一个阶段中每个分片内的信息。在最终输出时，r.sum / r.count即是所有输入数据的平均值。
-
 
 计算平均值的UDAF的代码示例，如下所示：
 
@@ -343,7 +318,7 @@ select reduce_udtf(col0, col1, col2) as (c0, c1) from (select col0, col1, col2 f
 
 ## 其他UDTF示例 {#section_h4k_ppf_vdb .section}
 
-在UDTF中，您可以读取MaxCompute的 [资源](../../../../intl.zh-CN/用户指南/基本概念/资源.md)。利用UDTF读取 MaxCompute 资源的示例，如下所示。
+在UDTF中，您可以读取MaxCompute的 [资源](../../../../intl.zh-CN/用户指南/基本概念/资源.md)。利用UDTF读取MaxCompute资源的示例，如下所示。
 
 1.  编写UDTF程序，编译成功后导出jar包（udtfexample1.jar）。
 

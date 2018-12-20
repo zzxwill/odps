@@ -2,6 +2,8 @@
 
 本文从实例、资源、表、函数等几个方面为您介绍Java SDK。
 
+**说明：** 使用SDK调用MaxCompute产生的计算、存储等费用与直接使用MaxCompute产生的费用一致，详情请参见[计量计费说明](../../../../intl.zh-CN/产品定价/计量计费说明.md#)。
+
 本文将为您介绍较为常用的 MaxCompute 核心接口，更多详情请参见 [SDK Java Doc](http://www.javadoc.io/doc/com.aliyun.odps/odps-sdk-core/)。
 
 您可以通过 Maven 管理配置新 SDK 的版本。Maven 的配置信息如下（最新版本可以随时到 [search.maven.org](http://search.maven.org/?spm=5176.doc27991.2.1.BgYcC5) 搜索 odps-sdk-core 获取）：

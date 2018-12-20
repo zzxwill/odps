@@ -66,16 +66,16 @@ MaxCompute projects support the following object types and actions:
 
     In the following scenario, the Alibaba Cloud account user alice@aliyun.com is a newly added member to the project test\_project\_a,  and Allen is a RAM-sub account added to bob@aliyun.com. In test\_project\_a,  they both must submit jobs, create tables, and view existing objects in the project.
 
-    The project administrator performs the following authorization operations:
+    The project administrator bob performs the following authorization operations:
 
     ```
-        use test_project; --Open the project
-        add user aliyun$alice@aliyun.com; --Add the user
-        add user aliyun$alice@aliyun.com; --Add the user
-        create role worker; --Create a role
-        grant worker TO aliyun$alice@aliyun.com; --Grant the role
-        grant worker TO aliyun$bob@aliyun.com; --Grant the role
-        grant CreateInstance, CreateResource, CreateFunction, CreateTable, List ON PROJECT test_project_a TO ROLE worker; --Authorize the role
+        use test_project_a;
+        add user aliyun$alice@aliyun.com;
+        add user ram$bob@aliyun.com:Allen; 
+        create role worker;
+        grant worker TO aliyun$alice@aliyun.com; 
+        grant worker TO ram$bob@aliyun.com:Allen; 
+        grant CreateInstance, CreateResource, CreateFunction, CreateTable, List ON PROJECT test_project_a TO ROLE worker; 
     ```
 
 -   **Cross-project Table/Resource/Function sharing**

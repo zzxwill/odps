@@ -516,7 +516,7 @@ DataFrame API提供了value\_counts方法来快速达到同样的目的。如下
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623912854_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15452952982854_zh-CN.png)
 
 将年龄分成30组，查看各年龄分布的直方图，如下所示：
 
@@ -524,7 +524,7 @@ ylabel='prefession')
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623912855_zh-CN.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15452952982855_zh-CN.png)
 
 使用join把这三张表进行联合后，把它保存成一张新的表。如下所示：
 

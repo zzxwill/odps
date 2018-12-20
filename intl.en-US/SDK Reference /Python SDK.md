@@ -204,7 +204,7 @@ A table object can also perform the `open_writer` action to open the writer and 
 >>> writer.close() # You must close the writer. Otherwise, the written data may be incomplete.
 ```
 
-Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](reseller.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
+Similarly, writing data into the table is encapsulated in the Tunnel API. For more information, see [data upload and download channel](intl.en-US/User Guide/Data upload and download/Tunnel SDK/Summary.md).
 
 ## Delete a table {#section_ayt_mzb_wdb .section}
 
@@ -534,7 +534,7 @@ Use a horizontal bar chart to visualize data, as shown in the following code:
 ylabel='prefession')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623972854_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15452953002854_en-US.png)
 
 Divide ages into 30 groups and view the histogram of age distribution, as shown in the following code:
 
@@ -542,7 +542,7 @@ Divide ages into 30 groups and view the histogram of age distribution, as shown 
 >>> users.age.hist(bins=30, title="Distribution of users' ages", xlabel='age', ylabel='count of users')
 ```
 
-![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15440623972855_en-US.png)
+![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/12065/15452953002855_en-US.png)
 
 Use JOIN to join the three tables and save the joined tables as a new table. 
 

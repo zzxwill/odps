@@ -41,7 +41,7 @@ For data export, see commands about downloading in [Tunnel commands](../../../..
 
 4.  After the command has run successfully, check the records in the table wc\_in.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468518111484_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468524781484_en-US.png)
 
     **Note:** 
 
@@ -65,7 +65,7 @@ Follow the steps below to import data using MaxCompute Studio. Before using MaxC
 
     To import the data created in the preceding step, a MaxCompute table must be created first. Right-click **tables&views** in the project and operate as follows:
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468518111490_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468524781490_en-US.png)
 
     If the statement is executed successfully, then the table has been created.
 
@@ -75,7 +75,7 @@ Follow the steps below to import data using MaxCompute Studio. Before using MaxC
 
     **Note:** If the table name does not appear in the list, click the **refresh** button.
 
-    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468518111522_en-US.png)
+    ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468524781522_en-US.png)
 
 
 ## Tunnel SDK {#section_gdq_z4y_5db .section}
@@ -252,11 +252,11 @@ Upload data into MaxCompute, where the project is odps\_public\_dev, the table n
 
     1.  Right-click on the **Java program** and click**Import \>** \> **Maven \> ** \> **Existing Maven Projects**, The settings are as follows:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468518121545_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468524781545_en-US.PNG)
 
     2.  Right-click on **UploadSample.java** and click**Run As** \> **Run Configurations**, as follows:
 
-        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468518121547_en-US.PNG)
+        ![](http://static-aliyun-doc.oss-cn-hangzhou.aliyuncs.com/assets/img/11951/15468524781547_en-US.PNG)
 
     3.  Click **Run**After running successfully, the console shows as follows:
 
@@ -294,8 +294,8 @@ Upload data into MaxCompute, where the project is odps\_public\_dev, the table n
 
     **Note:** 
 
-    -   As an independent service in MaxCompute, Tunnel has an exclusive access port provided for users. When you download data with MaxCompute Tunnel over the Alibaba Cloud intranet, MaxCompute does not bill you for the traffic produced by this operation. The Intranet address is only valid for cloud products in the Shanghai region.
-    -   For more information about MaxCompute Alibaba Intranet and public network access addresses, see [Access domains and data centers](../../../../../reseller.en-US/Prepare/Configure Endpoint.md).
+    -   As an independent service in MaxCompute, Tunnel has an exclusive access port provided for users. When you download data with MaxCompute Tunnel over the Alibaba Cloud intranet, MaxCompute does not bill you for the traffic produced by this operation. The intranet address is only valid for cloud products in the Shanghai region.
+    -   For more information about MaxCompute Alibaba intranet and public network access addresses, see [Access domains and data centers](../../../../../reseller.en-US/Prepare/Configure Endpoint.md).
 
 ## Other import methods {#section_vcl_r5y_5db .section}
 
